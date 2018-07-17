@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Card, Icon } from "semantic-ui-react";
-import Properties_Edit from "./Properties_Edit";
+import PropertiesEdit from "./PropertiesEdit";
 
 class Properties extends Component {
   constructor() {
     super();
     this.state = {
-      list_of_properties: [
+      listOfProperties: [
         {
           description: this.desc(),
         },
@@ -59,7 +59,7 @@ class Properties extends Component {
   render() {
     return (
       <div>
-        <Card.Group items={this.state.list_of_properties} itemsPerRow="3" />
+        <Card.Group items={this.state.listOfProperties} itemsPerRow="3" />
       </div>
     );
   }
