@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.status(200).json({ status: "it works, admin api" });
+  res.status(200).json([{ status: "it works, admin api" }]);
 });
 
 // return all the properties for property cards screen

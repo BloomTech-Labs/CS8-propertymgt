@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/Lambda-School-Labs/CS8-propertymgt#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
     "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",

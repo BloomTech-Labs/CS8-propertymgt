@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import "./Properties.css";
 import PropTypes from "prop-types";
 import { Card, Icon } from "semantic-ui-react";
 import PropertiesEdit from "./PropertiesEdit";
+import AddNewProperty from "./AddNewProperties";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Properties extends Component {
   constructor() {
@@ -9,42 +13,39 @@ class Properties extends Component {
     this.state = {
       listOfProperties: [
         {
-          description: this.desc(),
-        },
-        {
-          description: this.desc(),
-        },
-        {
-          description: this.desc(),
-        },
-        {
-          description: this.desc(),
+          description: this.addr(),
         },
       ],
-      propertyAddr: "my address",
+      propertyAddr: "",
       tenant: [
         {
-          nameT: "tenant1",
+          nameT: "",
         },
         {
-          nameT: "tenant2",
+          nameT: "",
         },
       ],
-      startEndDateT: "01/01/1000-06/01/1001",
+      startEndDateT: "",
       contract: false,
     };
     this.desc = this.desc.bind(this);
   }
 
+  render() {
+    return (
+      <div>
+        <Card.Group items={this.state.listOfProperties} itemsPerRow="3" />
+      </div>
+    );
+  }
+
   desc = () => {
     return (
       <div>
-        <a>
-          <Icon name="pencil" />
-        </a>
-        <a>
-          <Icon name="trash alternate outline" />
-        </a>
+        <div>
+          <Icon name="pencil" link />
+          <Icon name="trash alternate outline" link />
+        </div>
         <h4>
           <Icon name="home" /> 123 fake street <br />
           <Icon name="user" /> tenant1, tenant2
@@ -56,12 +57,31 @@ class Properties extends Component {
     );
   };
 
-  render() {
+  addr = () => {
     return (
       <div>
-        <Card.Group items={this.state.listOfProperties} itemsPerRow="3" />
+        <h4> Add a new Property </h4>
+        <Icon name="plus circle" size="massive" link />
       </div>
     );
+  };
+
+  // Gets data from server and adds it to state
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/api/admin/properties")
+      .then(function(response) {
+        response.data.map(property => {
+          tempArray = this.state.listOfProperties;
+          tempArray.unshift(property);
+          this.setState({
+            listOfProperties: tempArray,
+          });
+        });
+      })
+      .catch(error => {
+        console.log("In Properties component: ", error);
+      });
   }
 }
 
@@ -71,6 +91,10 @@ Properties.propTypes = {};
 
 // Get array of properties and set to state then display properties as cards
 
+// axios call to "/api/admin/properties"
+
+// Each property received from the axios.get call should be unshifted to component array to display properly
+
 // Use proptypes
 
-// use redux
+// use redux - no need
