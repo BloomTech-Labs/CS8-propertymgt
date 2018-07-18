@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "./Properties.css";
 import PropTypes from "prop-types";
 import { Card, Icon } from "semantic-ui-react";
-import PropertiesEdit from "./PropertiesEdit";
-import AddNewProperty from "./AddNewProperties";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -13,20 +11,12 @@ class Properties extends Component {
     this.state = {
       listOfProperties: [
         {
+          description: this.desc(),
+        },
+        {
           description: this.addr(),
         },
       ],
-      propertyAddr: "",
-      tenant: [
-        {
-          nameT: "",
-        },
-        {
-          nameT: "",
-        },
-      ],
-      startEndDateT: "",
-      contract: false,
     };
     this.desc = this.desc.bind(this);
   }
@@ -39,11 +29,14 @@ class Properties extends Component {
     );
   }
 
-  desc = () => {
+  // Populates each listOfProperties element with proper data field from database properties list, just refactor hardcoded template with real data
+  desc = property => {
     return (
       <div>
         <div>
-          <Icon name="pencil" link />
+          <Link to="/editproperty">
+            <Icon name="pencil" link />
+          </Link>
           <Icon name="trash alternate outline" link />
         </div>
         <h4>
@@ -57,11 +50,14 @@ class Properties extends Component {
     );
   };
 
+  // Directs to AddProperty page
   addr = () => {
     return (
       <div>
         <h4> Add a new Property </h4>
-        <Icon name="plus circle" size="massive" link />
+        <Link to="/addproperty">
+          <Icon name="plus circle" size="massive" link />{" "}
+        </Link>
       </div>
     );
   };
@@ -72,8 +68,8 @@ class Properties extends Component {
       .get("http://localhost:5000/api/admin/properties")
       .then(function(response) {
         response.data.map(property => {
-          tempArray = this.state.listOfProperties;
-          tempArray.unshift(property);
+          let tempArray = this.state.listOfProperties;
+          tempArray.unshift(this.desc(property));
           this.setState({
             listOfProperties: tempArray,
           });
