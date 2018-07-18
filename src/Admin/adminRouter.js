@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const dd = require('../Config/AwsConfig');
 
@@ -62,6 +62,5 @@ router.get('/settings', (req, res) => {
 router.get('/settingsupdate', (req, res) => {
     res.status(200).json({status: 'returns all properties for cards'});
 })
-
 
 module.exports = router;
