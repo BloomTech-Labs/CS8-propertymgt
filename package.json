@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged",
-    "pretty": "prettier --semi true --print-width 100 --double-quote --trailing-comma all --write \"**/*.js\""
+    "pretty": "prettier --semi true --print-width 100 --single-quote --trailing-comma all --write \"**/*.js\""
   },
   "lint-staged": {
     "*.js": [
