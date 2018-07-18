@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export class LandingCarousel extends Component {
   constructor(props) {

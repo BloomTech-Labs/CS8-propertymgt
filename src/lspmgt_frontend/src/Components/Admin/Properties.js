@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import "./Properties.css";
-import PropTypes from "prop-types";
-import { Card, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { Component } from 'react';
+import './Properties.css';
+import PropTypes from 'prop-types';
+import { Card, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class Properties extends Component {
   constructor() {
@@ -56,7 +56,7 @@ class Properties extends Component {
       <div>
         <h4> Add a new Property </h4>
         <Link to="/addproperty">
-          <Icon name="plus circle" size="massive" link />{" "}
+          <Icon name="plus circle" size="massive" link />{' '}
         </Link>
       </div>
     );
@@ -65,7 +65,7 @@ class Properties extends Component {
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/admin/properties")
+      .get('http://localhost:5000/api/admin/properties')
       .then(function(response) {
         response.data.map(property => {
           let tempArray = this.state.listOfProperties;
@@ -76,7 +76,7 @@ class Properties extends Component {
         });
       })
       .catch(error => {
-        console.log("In Properties component: ", error);
+        console.log('In Properties component: ', error);
       });
   }
 }

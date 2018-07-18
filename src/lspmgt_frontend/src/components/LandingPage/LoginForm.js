@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
+import React from 'react';
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 
 const LoginForm = () => (
   <div className="login-form">
@@ -10,7 +10,7 @@ const LoginForm = () => (
         height: 100%;
       }
     `}</style>
-    <Grid textAlign="center" style={{ height: "100%" }} verticalAlign="middle">
+    <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h1" color="blue" textAlign="center">
           PropertyMaxx
