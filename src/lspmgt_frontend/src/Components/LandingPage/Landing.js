@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import LandingCarousel from "./LandingCarousel";
 
-class Landing extends Component {
+export default class Landing extends Component {
   constructor(props) {
     super(props);
 
@@ -10,6 +11,10 @@ class Landing extends Component {
   }
 
   render() {
-    return <div />;
+    return (
+      <div>
+        <LandingCarousel />
+      </div>
+    );
   }
 }
