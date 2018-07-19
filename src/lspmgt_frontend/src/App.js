@@ -9,8 +9,8 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Landing />;
-        <LoginForm />;
+        <Landing />
+        <LoginForm />
       </Container>
     );
   }
