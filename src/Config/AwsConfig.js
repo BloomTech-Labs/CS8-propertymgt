@@ -1,6 +1,6 @@
 require('dotenv').config();
 const AWS = require('aws-sdk');
-const config = {
+config = {
   region: process.env.REGION,
   endpoint: process.env.ENDPOINT,
   accessKeyId: process.env.ACCESSKEYID,
