@@ -9,22 +9,22 @@
  */
 
 (function($, window, document, undefined) {
-  "use strict";
+  'use strict';
 
   window =
-    typeof window != "undefined" && window.Math == Math
+    typeof window != 'undefined' && window.Math == Math
       ? window
-      : typeof self != "undefined" && self.Math == Math
+      : typeof self != 'undefined' && self.Math == Math
         ? self
-        : Function("return this")();
+        : Function('return this')();
 
   $.fn.embed = function(parameters) {
     var $allModules = $(this),
-      moduleSelector = $allModules.selector || "",
+      moduleSelector = $allModules.selector || '',
       time = new Date().getTime(),
       performance = [],
       query = arguments[0],
-      methodInvoked = typeof query == "string",
+      methodInvoked = typeof query == 'string',
       queryArguments = [].slice.call(arguments, 1),
       returnedValue;
 
@@ -39,8 +39,8 @@
         metadata = settings.metadata,
         namespace = settings.namespace,
         templates = settings.templates,
-        eventNamespace = "." + namespace,
-        moduleNamespace = "module-" + namespace,
+        eventNamespace = '.' + namespace,
+        moduleNamespace = 'module-' + namespace,
         $window = $(window),
         $module = $(this),
         $placeholder = $module.find(selector.placeholder),
@@ -52,7 +52,7 @@
 
       module = {
         initialize: function() {
-          module.debug("Initializing embed");
+          module.debug('Initializing embed');
           module.determine.autoplay();
           module.create();
           module.bind.events();
@@ -60,19 +60,19 @@
         },
 
         instantiate: function() {
-          module.verbose("Storing instance of module", module);
+          module.verbose('Storing instance of module', module);
           instance = module;
           $module.data(moduleNamespace, module);
         },
 
         destroy: function() {
-          module.verbose("Destroying previous instance of embed");
+          module.verbose('Destroying previous instance of embed');
           module.reset();
           $module.removeData(moduleNamespace).off(eventNamespace);
         },
 
         refresh: function() {
-          module.verbose("Refreshing selector cache");
+          module.verbose('Refreshing selector cache');
           $placeholder = $module.find(selector.placeholder);
           $icon = $module.find(selector.icon);
           $embed = $module.find(selector.embed);
@@ -81,10 +81,10 @@
         bind: {
           events: function() {
             if (module.has.placeholder()) {
-              module.debug("Adding placeholder events");
+              module.debug('Adding placeholder events');
               $module
-                .on("click" + eventNamespace, selector.placeholder, module.createAndShow)
-                .on("click" + eventNamespace, selector.icon, module.createAndShow);
+                .on('click' + eventNamespace, selector.placeholder, module.createAndShow)
+                .on('click' + eventNamespace, selector.icon, module.createAndShow);
             }
           },
         },
@@ -104,18 +104,18 @@
             embed = module.generate.embed(url);
           placeholder = placeholder || module.get.placeholder();
           $module.html(templates.placeholder(placeholder, icon));
-          module.debug("Creating placeholder for embed", placeholder, icon);
+          module.debug('Creating placeholder for embed', placeholder, icon);
         },
 
         createEmbed: function(url) {
           module.refresh();
           url = url || module.get.url();
-          $embed = $("<div/>")
+          $embed = $('<div/>')
             .addClass(className.embed)
             .html(module.generate.embed(url))
             .appendTo($module);
           settings.onCreate.call(element, url);
-          module.debug("Creating embed object", $embed);
+          module.debug('Creating embed object', $embed);
         },
 
         changeEmbed: function(url) {
@@ -129,7 +129,7 @@
 
         // sets new embed
         change: function(source, id, url) {
-          module.debug("Changing video to ", source, id, url);
+          module.debug('Changing video to ', source, id, url);
           $module.data(metadata.source, source).data(metadata.id, id);
           if (url) {
             $module.data(metadata.url, url);
@@ -145,7 +145,7 @@
 
         // clears embed
         reset: function() {
-          module.debug("Clearing embed and showing placeholder");
+          module.debug('Clearing embed and showing placeholder');
           module.remove.active();
           module.remove.embed();
           module.showPlaceholder();
@@ -154,18 +154,18 @@
 
         // shows current embed
         show: function() {
-          module.debug("Showing embed");
+          module.debug('Showing embed');
           module.set.active();
           settings.onDisplay.call(element);
         },
 
         hide: function() {
-          module.debug("Hiding embed");
+          module.debug('Hiding embed');
           module.showPlaceholder();
         },
 
         showPlaceholder: function() {
-          module.debug("Showing placeholder image");
+          module.debug('Showing placeholder image');
           module.remove.active();
           settings.onPlaceholderDisplay.call(element);
         },
@@ -231,7 +231,7 @@
             var id = settings.id || $module.data(metadata.id),
               source = settings.source || $module.data(metadata.source),
               url;
-            url = sources[source] !== undefined ? sources[source].url.replace("{id}", id) : false;
+            url = sources[source] !== undefined ? sources[source].url.replace('{id}', id) : false;
             if (url) {
               $module.data(metadata.url, url);
             }
@@ -260,16 +260,16 @@
               index;
             for (index in parameters) {
               urlString.push(
-                encodeURIComponent(index) + "=" + encodeURIComponent(parameters[index]),
+                encodeURIComponent(index) + '=' + encodeURIComponent(parameters[index]),
               );
             }
-            return urlString.join("&amp;");
+            return urlString.join('&amp;');
           },
         },
 
         generate: {
           embed: function(url) {
-            module.debug("Generating embed html");
+            module.debug('Generating embed html');
             var source = module.get.source(),
               html,
               parameters;
@@ -307,7 +307,7 @@
 
         should: {
           autoplay: function() {
-            return settings.autoplay === "auto"
+            return settings.autoplay === 'auto'
               ? settings.placeholder || $module.data(metadata.placeholder) !== undefined
               : settings.autoplay;
           },
@@ -315,12 +315,12 @@
 
         is: {
           video: function() {
-            return module.get.type() == "video";
+            return module.get.type() == 'video';
           },
         },
 
         setting: function(name, value) {
-          module.debug("Changing setting", name, value);
+          module.debug('Changing setting', name, value);
           if ($.isPlainObject(name)) {
             $.extend(true, settings, name);
           } else if (value !== undefined) {
@@ -350,7 +350,7 @@
               module.debug = Function.prototype.bind.call(
                 console.info,
                 console,
-                settings.name + ":",
+                settings.name + ':',
               );
               module.debug.apply(console, arguments);
             }
@@ -364,7 +364,7 @@
               module.verbose = Function.prototype.bind.call(
                 console.info,
                 console,
-                settings.name + ":",
+                settings.name + ':',
               );
               module.verbose.apply(console, arguments);
             }
@@ -375,7 +375,7 @@
             module.error = Function.prototype.bind.call(
               console.error,
               console,
-              settings.name + ":",
+              settings.name + ':',
             );
             module.error.apply(console, arguments);
           }
@@ -390,28 +390,28 @@
               time = currentTime;
               performance.push({
                 Name: message[0],
-                Arguments: [].slice.call(message, 1) || "",
+                Arguments: [].slice.call(message, 1) || '',
                 Element: element,
-                "Execution Time": executionTime,
+                'Execution Time': executionTime,
               });
             }
             clearTimeout(module.performance.timer);
             module.performance.timer = setTimeout(module.performance.display, 500);
           },
           display: function() {
-            var title = settings.name + ":",
+            var title = settings.name + ':',
               totalTime = 0;
             time = false;
             clearTimeout(module.performance.timer);
             $.each(performance, function(index, data) {
-              totalTime += data["Execution Time"];
+              totalTime += data['Execution Time'];
             });
-            title += " " + totalTime + "ms";
+            title += ' ' + totalTime + 'ms';
             if (moduleSelector) {
               title += " '" + moduleSelector + "'";
             }
             if ($allModules.length > 1) {
-              title += " " + "(" + $allModules.length + ")";
+              title += ' ' + '(' + $allModules.length + ')';
             }
             if (
               (console.group !== undefined || console.table !== undefined) &&
@@ -422,7 +422,7 @@
                 console.table(performance);
               } else {
                 $.each(performance, function(index, data) {
-                  console.log(data["Name"] + ": " + data["Execution Time"] + "ms");
+                  console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
                 });
               }
               console.groupEnd();
@@ -437,7 +437,7 @@
             response;
           passedArguments = passedArguments || queryArguments;
           context = element || context;
-          if (typeof query == "string" && object !== undefined) {
+          if (typeof query == 'string' && object !== undefined) {
             query = query.split(/[\. ]/);
             maxDepth = query.length - 1;
             $.each(query, function(depth, value) {
@@ -484,7 +484,7 @@
         module.invoke(query);
       } else {
         if (instance !== undefined) {
-          instance.invoke("destroy");
+          instance.invoke('destroy');
         }
         module.initialize();
       }
@@ -493,8 +493,8 @@
   };
 
   $.fn.embed.settings = {
-    name: "Embed",
-    namespace: "embed",
+    name: 'Embed',
+    namespace: 'embed',
 
     silent: false,
     debug: false,
@@ -507,8 +507,8 @@
     id: false,
 
     // standard video settings
-    autoplay: "auto",
-    color: "#444444",
+    autoplay: 'auto',
+    color: '#444444',
     hd: true,
     brandedUI: false,
 
@@ -524,36 +524,36 @@
     },
 
     metadata: {
-      id: "id",
-      icon: "icon",
-      placeholder: "placeholder",
-      source: "source",
-      url: "url",
+      id: 'id',
+      icon: 'icon',
+      placeholder: 'placeholder',
+      source: 'source',
+      url: 'url',
     },
 
     error: {
-      noURL: "No URL specified",
-      method: "The method you called is not defined",
+      noURL: 'No URL specified',
+      method: 'The method you called is not defined',
     },
 
     className: {
-      active: "active",
-      embed: "embed",
+      active: 'active',
+      embed: 'embed',
     },
 
     selector: {
-      embed: ".embed",
-      placeholder: ".placeholder",
-      icon: ".icon",
+      embed: '.embed',
+      placeholder: '.placeholder',
+      icon: '.icon',
     },
 
     sources: {
       youtube: {
-        name: "youtube",
-        type: "video",
-        icon: "video play",
-        domain: "youtube.com",
-        url: "//www.youtube.com/embed/{id}",
+        name: 'youtube',
+        type: 'video',
+        icon: 'video play',
+        domain: 'youtube.com',
+        url: '//www.youtube.com/embed/{id}',
         parameters: function(settings) {
           return {
             autohide: !settings.brandedUI,
@@ -566,11 +566,11 @@
         },
       },
       vimeo: {
-        name: "vimeo",
-        type: "video",
-        icon: "video play",
-        domain: "vimeo.com",
-        url: "//player.vimeo.com/video/{id}",
+        name: 'vimeo',
+        type: 'video',
+        icon: 'video play',
+        domain: 'vimeo.com',
+        url: '//player.vimeo.com/video/{id}',
         parameters: function(settings) {
           return {
             api: settings.api,
@@ -588,10 +588,10 @@
       iframe: function(url, parameters) {
         var src = url;
         if (parameters) {
-          src += "?" + parameters;
+          src += '?' + parameters;
         }
         return (
-          "" +
+          '' +
           '<iframe src="' +
           src +
           '"' +
@@ -600,7 +600,7 @@
         );
       },
       placeholder: function(image, icon) {
-        var html = "";
+        var html = '';
         if (icon) {
           html += '<i class="' + icon + ' icon"></i>';
         }

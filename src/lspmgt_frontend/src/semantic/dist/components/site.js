@@ -13,15 +13,15 @@
     var time = new Date().getTime(),
       performance = [],
       query = arguments[0],
-      methodInvoked = typeof query == "string",
+      methodInvoked = typeof query == 'string',
       queryArguments = [].slice.call(arguments, 1),
       settings = $.isPlainObject(parameters)
         ? $.extend(true, {}, $.site.settings, parameters)
         : $.extend({}, $.site.settings),
       namespace = settings.namespace,
       error = settings.error,
-      eventNamespace = "." + namespace,
-      moduleNamespace = "module-" + namespace,
+      eventNamespace = '.' + namespace,
+      moduleNamespace = 'module-' + namespace,
       $document = $(document),
       $module = $document,
       element = this,
@@ -34,7 +34,7 @@
       },
 
       instantiate: function() {
-        module.verbose("Storing instance of site", module);
+        module.verbose('Storing instance of site', module);
         instance = module;
         $module.data(moduleNamespace, module);
       },
@@ -46,34 +46,34 @@
 
       fix: {
         console: function() {
-          module.debug("Normalizing window.console");
+          module.debug('Normalizing window.console');
           if (console === undefined || console.log === undefined) {
-            module.verbose("Console not available, normalizing events");
+            module.verbose('Console not available, normalizing events');
             module.disable.console();
           }
           if (
-            typeof console.group == "undefined" ||
-            typeof console.groupEnd == "undefined" ||
-            typeof console.groupCollapsed == "undefined"
+            typeof console.group == 'undefined' ||
+            typeof console.groupEnd == 'undefined' ||
+            typeof console.groupCollapsed == 'undefined'
           ) {
-            module.verbose("Console group not available, normalizing events");
+            module.verbose('Console group not available, normalizing events');
             window.console.group = function() {};
             window.console.groupEnd = function() {};
             window.console.groupCollapsed = function() {};
           }
-          if (typeof console.markTimeline == "undefined") {
-            module.verbose("Mark timeline not available, normalizing events");
+          if (typeof console.markTimeline == 'undefined') {
+            module.verbose('Mark timeline not available, normalizing events');
             window.console.markTimeline = function() {};
           }
         },
         consoleClear: function() {
-          module.debug("Disabling programmatic console clearing");
+          module.debug('Disabling programmatic console clearing');
           window.console.clear = function() {};
         },
         requestAnimationFrame: function() {
-          module.debug("Normalizing requestAnimationFrame");
+          module.debug('Normalizing requestAnimationFrame');
           if (window.requestAnimationFrame === undefined) {
-            module.debug("RequestAnimationFrame not available, normalizing event");
+            module.debug('RequestAnimationFrame not available, normalizing event');
             window.requestAnimationFrame =
               window.requestAnimationFrame ||
               window.mozRequestAnimationFrame ||
@@ -119,8 +119,8 @@
       change: {
         setting: function(setting, value, modules, modifyExisting) {
           modules =
-            typeof modules === "string"
-              ? modules === "all"
+            typeof modules === 'string'
+              ? modules === 'all'
                 ? settings.modules
                 : [modules]
               : modules || settings.modules;
@@ -131,31 +131,31 @@
                 : true,
               $existingModules;
             if (module.moduleExists(name)) {
-              module.verbose("Changing default setting", setting, value, name);
+              module.verbose('Changing default setting', setting, value, name);
               $.fn[name].settings[setting] = value;
               if (modifyExisting && namespace) {
-                $existingModules = $(":data(module-" + namespace + ")");
+                $existingModules = $(':data(module-' + namespace + ')');
                 if ($existingModules.length > 0) {
-                  module.verbose("Modifying existing settings", $existingModules);
-                  $existingModules[name]("setting", setting, value);
+                  module.verbose('Modifying existing settings', $existingModules);
+                  $existingModules[name]('setting', setting, value);
                 }
               }
             }
           });
         },
         settings: function(newSettings, modules, modifyExisting) {
-          modules = typeof modules === "string" ? [modules] : modules || settings.modules;
+          modules = typeof modules === 'string' ? [modules] : modules || settings.modules;
           modifyExisting = modifyExisting !== undefined ? modifyExisting : true;
           $.each(modules, function(index, name) {
             var $existingModules;
             if (module.moduleExists(name)) {
-              module.verbose("Changing default setting", newSettings, name);
+              module.verbose('Changing default setting', newSettings, name);
               $.extend(true, $.fn[name].settings, newSettings);
               if (modifyExisting && namespace) {
-                $existingModules = $(":data(module-" + namespace + ")");
+                $existingModules = $(':data(module-' + namespace + ')');
                 if ($existingModules.length > 0) {
-                  module.verbose("Modifying existing settings", $existingModules);
-                  $existingModules[name]("setting", newSettings);
+                  module.verbose('Modifying existing settings', $existingModules);
+                  $existingModules[name]('setting', newSettings);
                 }
               }
             }
@@ -169,13 +169,13 @@
         },
         debug: function(modules, modifyExisting) {
           modules = modules || settings.modules;
-          module.debug("Enabling debug for modules", modules);
-          module.change.setting("debug", true, modules, modifyExisting);
+          module.debug('Enabling debug for modules', modules);
+          module.change.setting('debug', true, modules, modifyExisting);
         },
         verbose: function(modules, modifyExisting) {
           modules = modules || settings.modules;
-          module.debug("Enabling verbose debug for modules", modules);
-          module.change.setting("verbose", true, modules, modifyExisting);
+          module.debug('Enabling verbose debug for modules', modules);
+          module.change.setting('verbose', true, modules, modifyExisting);
         },
       },
       disable: {
@@ -184,13 +184,13 @@
         },
         debug: function(modules, modifyExisting) {
           modules = modules || settings.modules;
-          module.debug("Disabling debug for modules", modules);
-          module.change.setting("debug", false, modules, modifyExisting);
+          module.debug('Disabling debug for modules', modules);
+          module.change.setting('debug', false, modules, modifyExisting);
         },
         verbose: function(modules, modifyExisting) {
           modules = modules || settings.modules;
-          module.debug("Disabling verbose debug for modules", modules);
-          module.change.setting("verbose", false, modules, modifyExisting);
+          module.debug('Disabling verbose debug for modules', modules);
+          module.change.setting('verbose', false, modules, modifyExisting);
         },
       },
 
@@ -200,10 +200,10 @@
             module.error(error.console);
             return;
           }
-          module.debug("Restoring console function");
+          module.debug('Restoring console function');
           window.console = instance.cache.console;
         } else {
-          module.debug("Disabling console function");
+          module.debug('Disabling console function');
           instance.cache.console = window.console;
           window.console = {
             clear: function() {},
@@ -220,7 +220,7 @@
       },
 
       destroy: function() {
-        module.verbose("Destroying previous site for", $module);
+        module.verbose('Destroying previous site for', $module);
         $module.removeData(moduleNamespace);
       },
 
@@ -249,7 +249,7 @@
           if (settings.performance) {
             module.performance.log(arguments);
           } else {
-            module.debug = Function.prototype.bind.call(console.info, console, settings.name + ":");
+            module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
             module.debug.apply(console, arguments);
           }
         }
@@ -262,14 +262,14 @@
             module.verbose = Function.prototype.bind.call(
               console.info,
               console,
-              settings.name + ":",
+              settings.name + ':',
             );
             module.verbose.apply(console, arguments);
           }
         }
       },
       error: function() {
-        module.error = Function.prototype.bind.call(console.error, console, settings.name + ":");
+        module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
         module.error.apply(console, arguments);
       },
       performance: {
@@ -283,22 +283,22 @@
             performance.push({
               Element: element,
               Name: message[0],
-              Arguments: [].slice.call(message, 1) || "",
-              "Execution Time": executionTime,
+              Arguments: [].slice.call(message, 1) || '',
+              'Execution Time': executionTime,
             });
           }
           clearTimeout(module.performance.timer);
           module.performance.timer = setTimeout(module.performance.display, 500);
         },
         display: function() {
-          var title = settings.name + ":",
+          var title = settings.name + ':',
             totalTime = 0;
           time = false;
           clearTimeout(module.performance.timer);
           $.each(performance, function(index, data) {
-            totalTime += data["Execution Time"];
+            totalTime += data['Execution Time'];
           });
-          title += " " + totalTime + "ms";
+          title += ' ' + totalTime + 'ms';
           if (
             (console.group !== undefined || console.table !== undefined) &&
             performance.length > 0
@@ -308,7 +308,7 @@
               console.table(performance);
             } else {
               $.each(performance, function(index, data) {
-                console.log(data["Name"] + ": " + data["Execution Time"] + "ms");
+                console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
               });
             }
             console.groupEnd();
@@ -323,7 +323,7 @@
           response;
         passedArguments = passedArguments || queryArguments;
         context = element || context;
-        if (typeof query == "string" && object !== undefined) {
+        if (typeof query == 'string' && object !== undefined) {
           query = query.split(/[\. ]/);
           maxDepth = query.length - 1;
           $.each(query, function(depth, value) {
@@ -378,12 +378,12 @@
   };
 
   $.site.settings = {
-    name: "Site",
-    namespace: "site",
+    name: 'Site',
+    namespace: 'site',
 
     error: {
-      console: "Console cannot be restored, most likely it was overwritten outside of module",
-      method: "The method you called is not defined.",
+      console: 'Console cannot be restored, most likely it was overwritten outside of module',
+      method: 'The method you called is not defined.',
     },
 
     debug: false,
@@ -391,28 +391,28 @@
     performance: true,
 
     modules: [
-      "accordion",
-      "api",
-      "checkbox",
-      "dimmer",
-      "dropdown",
-      "embed",
-      "form",
-      "modal",
-      "nag",
-      "popup",
-      "rating",
-      "shape",
-      "sidebar",
-      "state",
-      "sticky",
-      "tab",
-      "transition",
-      "visit",
-      "visibility",
+      'accordion',
+      'api',
+      'checkbox',
+      'dimmer',
+      'dropdown',
+      'embed',
+      'form',
+      'modal',
+      'nag',
+      'popup',
+      'rating',
+      'shape',
+      'sidebar',
+      'state',
+      'sticky',
+      'tab',
+      'transition',
+      'visit',
+      'visibility',
     ],
 
-    siteNamespace: "site",
+    siteNamespace: 'site',
     namespaceStub: {
       cache: {},
       config: {},
@@ -423,7 +423,7 @@
   };
 
   // allows for selection of elements with data attributes
-  $.extend($.expr[":"], {
+  $.extend($.expr[':'], {
     data: $.expr.createPseudo
       ? $.expr.createPseudo(function(dataName) {
           return function(elem) {
