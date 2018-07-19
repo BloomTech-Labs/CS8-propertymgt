@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import LandingCarousel from "./LandingCarousel";
+import React, { Component } from 'react';
+import LandingCarousel from './LandingCarousel';
 
 export default class Landing extends Component {
   constructor(props) {

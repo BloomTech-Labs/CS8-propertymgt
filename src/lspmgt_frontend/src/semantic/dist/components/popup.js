@@ -9,26 +9,26 @@
  */
 
 (function($, window, document, undefined) {
-  "use strict";
+  'use strict';
 
   window =
-    typeof window != "undefined" && window.Math == Math
+    typeof window != 'undefined' && window.Math == Math
       ? window
-      : typeof self != "undefined" && self.Math == Math
+      : typeof self != 'undefined' && self.Math == Math
         ? self
-        : Function("return this")();
+        : Function('return this')();
 
   $.fn.popup = function(parameters) {
     var $allModules = $(this),
       $document = $(document),
       $window = $(window),
-      $body = $("body"),
-      moduleSelector = $allModules.selector || "",
+      $body = $('body'),
+      moduleSelector = $allModules.selector || '',
       hasTouch = true,
       time = new Date().getTime(),
       performance = [],
       query = arguments[0],
-      methodInvoked = typeof query == "string",
+      methodInvoked = typeof query == 'string',
       queryArguments = [].slice.call(arguments, 1),
       returnedValue;
     $allModules.each(function() {
@@ -40,8 +40,8 @@
         error = settings.error,
         metadata = settings.metadata,
         namespace = settings.namespace,
-        eventNamespace = "." + settings.namespace,
-        moduleNamespace = "module-" + namespace,
+        eventNamespace = '.' + settings.namespace,
+        moduleNamespace = 'module-' + namespace,
         $module = $(this),
         $context = $(settings.context),
         $scrollContext = $(settings.scrollContext),
@@ -62,7 +62,7 @@
       module = {
         // binds events
         initialize: function() {
-          module.debug("Initializing", $module);
+          module.debug('Initializing', $module);
           module.createID();
           module.bind.events();
           if (!module.exists() && settings.preserve) {
@@ -75,19 +75,19 @@
         },
 
         instantiate: function() {
-          module.verbose("Storing instance", module);
+          module.verbose('Storing instance', module);
           instance = module;
           $module.data(moduleNamespace, instance);
         },
 
         observeChanges: function() {
-          if ("MutationObserver" in window) {
+          if ('MutationObserver' in window) {
             documentObserver = new MutationObserver(module.event.documentChanged);
             documentObserver.observe(document, {
               childList: true,
               subtree: true,
             });
-            module.debug("Setting up mutation observer", documentObserver);
+            module.debug('Setting up mutation observer', documentObserver);
           }
         },
 
@@ -109,7 +109,7 @@
               module.has.popup() &&
               module.get.offsetParent($popup)[0] !== $offsetParent[0]
             ) {
-              module.debug("Moving popup to the same offset parent as target");
+              module.debug('Moving popup to the same offset parent as target');
               $popup.detach().appendTo($offsetParent);
             }
           } else {
@@ -119,8 +119,8 @@
                 ? module.get.offsetParent($popup)
                 : $body;
           }
-          if ($offsetParent.is("html") && $offsetParent[0] !== $body[0]) {
-            module.debug("Setting page as offset parent");
+          if ($offsetParent.is('html') && $offsetParent[0] !== $body[0]) {
+            module.debug('Setting page as offset parent');
             $offsetParent = $body;
           }
           if (module.get.variation()) {
@@ -134,7 +134,7 @@
         },
 
         destroy: function() {
-          module.debug("Destroying previous module");
+          module.debug('Destroying previous module');
           if (documentObserver) {
             documentObserver.disconnect();
           }
@@ -178,7 +178,7 @@
               if (mutation.removedNodes) {
                 [].forEach.call(mutation.removedNodes, function(node) {
                   if (node == element || $(node).find(element).length > 0) {
-                    module.debug("Element removed from DOM, tearing down events");
+                    module.debug('Element removed from DOM, tearing down events');
                     module.destroy();
                   }
                 });
@@ -191,10 +191,10 @@
               inPopup = $target.closest(selector.popup).length > 0;
             // don't close on clicks inside popup
             if (event && !inPopup && isInDOM) {
-              module.debug("Click occurred outside popup hiding popup");
+              module.debug('Click occurred outside popup hiding popup');
               module.hide();
             } else {
-              module.debug("Click was inside popup, keeping popup open");
+              module.debug('Click was inside popup, keeping popup open');
             }
           },
         },
@@ -206,22 +206,22 @@
             content = module.get.content();
 
           if (html || content || title) {
-            module.debug("Creating pop-up html");
+            module.debug('Creating pop-up html');
             if (!html) {
               html = settings.templates.popup({
                 title: title,
                 content: content,
               });
             }
-            $popup = $("<div/>")
+            $popup = $('<div/>')
               .addClass(className.popup)
               .data(metadata.activator, $module)
               .html(html);
             if (settings.inline) {
-              module.verbose("Inserting popup element inline", $popup);
+              module.verbose('Inserting popup element inline', $popup);
               $popup.insertAfter($module);
             } else {
-              module.verbose("Appending popup element to body", $popup);
+              module.verbose('Appending popup element to body', $popup);
               $popup.appendTo($context);
             }
             module.refresh();
@@ -232,7 +232,7 @@
             }
             settings.onCreate.call($popup, element);
           } else if ($target.next(selector.popup).length !== 0) {
-            module.verbose("Pre-existing popup found");
+            module.verbose('Pre-existing popup found');
             settings.inline = true;
             settings.popup = $target.next(selector.popup).data(metadata.activator, $module);
             module.refresh();
@@ -241,44 +241,44 @@
             }
           } else if (settings.popup) {
             $(settings.popup).data(metadata.activator, $module);
-            module.verbose("Used popup specified in settings");
+            module.verbose('Used popup specified in settings');
             module.refresh();
             if (settings.hoverable) {
               module.bind.popup();
             }
           } else {
-            module.debug("No content specified skipping display", element);
+            module.debug('No content specified skipping display', element);
           }
         },
 
         createID: function() {
-          id = (Math.random().toString(16) + "000000000").substr(2, 8);
-          elementNamespace = "." + id;
-          module.verbose("Creating unique id for element", id);
+          id = (Math.random().toString(16) + '000000000').substr(2, 8);
+          elementNamespace = '.' + id;
+          module.verbose('Creating unique id for element', id);
         },
 
         // determines popup state
         toggle: function() {
-          module.debug("Toggling pop-up");
+          module.debug('Toggling pop-up');
           if (module.is.hidden()) {
-            module.debug("Popup is hidden, showing pop-up");
+            module.debug('Popup is hidden, showing pop-up');
             module.unbind.close();
             module.show();
           } else {
-            module.debug("Popup is visible, hiding pop-up");
+            module.debug('Popup is visible, hiding pop-up');
             module.hide();
           }
         },
 
         show: function(callback) {
           callback = callback || function() {};
-          module.debug("Showing pop-up", settings.transition);
+          module.debug('Showing pop-up', settings.transition);
           if (module.is.hidden() && !(module.is.active() && module.is.dropdown())) {
             if (!module.exists()) {
               module.create();
             }
             if (settings.onShow.call($popup, element) === false) {
-              module.debug("onShow callback returned false, cancelling popup animation");
+              module.debug('onShow callback returned false, cancelling popup animation');
               return;
             } else if (!settings.preserve && !settings.popup) {
               module.refresh();
@@ -297,7 +297,7 @@
           callback = callback || function() {};
           if (module.is.visible() || module.is.animating()) {
             if (settings.onHide.call($popup, element) === false) {
-              module.debug("onHide callback returned false, cancelling popup animation");
+              module.debug('onHide callback returned false, cancelling popup animation');
               return;
             }
             module.remove.visible();
@@ -309,11 +309,11 @@
 
         hideAll: function() {
           $(selector.popup)
-            .filter("." + className.popupVisible)
+            .filter('.' + className.popupVisible)
             .each(function() {
               $(this)
                 .data(metadata.activator)
-                .popup("hide");
+                .popup('hide');
             });
         },
         exists: function() {
@@ -329,7 +329,7 @@
 
         removePopup: function() {
           if (module.has.popup() && !settings.popup) {
-            module.debug("Removing popup", $popup);
+            module.debug('Removing popup', $popup);
             $popup.remove();
             $popup = undefined;
             settings.onRemove.call($popup, element);
@@ -339,26 +339,26 @@
         save: {
           conditions: function() {
             module.cache = {
-              title: $module.attr("title"),
+              title: $module.attr('title'),
             };
             if (module.cache.title) {
-              $module.removeAttr("title");
+              $module.removeAttr('title');
             }
-            module.verbose("Saving original attributes", module.cache.title);
+            module.verbose('Saving original attributes', module.cache.title);
           },
         },
         restore: {
           conditions: function() {
             if (module.cache && module.cache.title) {
-              $module.attr("title", module.cache.title);
-              module.verbose("Restoring original attributes", module.cache.title);
+              $module.attr('title', module.cache.title);
+              module.verbose('Restoring original attributes', module.cache.title);
             }
             return true;
           },
         },
         supports: {
           svg: function() {
-            return typeof SVGGraphicsElement === "undefined";
+            return typeof SVGGraphicsElement === 'undefined';
           },
         },
         animate: {
@@ -367,11 +367,11 @@
             if (
               settings.transition &&
               $.fn.transition !== undefined &&
-              $module.transition("is supported")
+              $module.transition('is supported')
             ) {
               module.set.visible();
               $popup.transition({
-                animation: settings.transition + " in",
+                animation: settings.transition + ' in',
                 queue: false,
                 debug: settings.debug,
                 verbose: settings.verbose,
@@ -388,18 +388,18 @@
           },
           hide: function(callback) {
             callback = $.isFunction(callback) ? callback : function() {};
-            module.debug("Hiding pop-up");
+            module.debug('Hiding pop-up');
             if (settings.onHide.call($popup, element) === false) {
-              module.debug("onHide callback returned false, cancelling popup animation");
+              module.debug('onHide callback returned false, cancelling popup animation');
               return;
             }
             if (
               settings.transition &&
               $.fn.transition !== undefined &&
-              $module.transition("is supported")
+              $module.transition('is supported')
             ) {
               $popup.transition({
-                animation: settings.transition + " out",
+                animation: settings.transition + ' out',
                 queue: false,
                 duration: settings.duration,
                 debug: settings.debug,
@@ -433,7 +433,7 @@
           },
           content: function() {
             $module.removeData(metadata.content);
-            return $module.data(metadata.content) || settings.content || $module.attr("title");
+            return $module.data(metadata.content) || settings.content || $module.attr('title');
           },
           variation: function() {
             $module.removeData(metadata.variation);
@@ -511,16 +511,16 @@
 
             // add in margins if inline
             calculations.target.margin.top = settings.inline
-              ? parseInt(window.getComputedStyle(targetElement).getPropertyValue("margin-top"), 10)
+              ? parseInt(window.getComputedStyle(targetElement).getPropertyValue('margin-top'), 10)
               : 0;
             calculations.target.margin.left = settings.inline
               ? module.is.rtl()
                 ? parseInt(
-                    window.getComputedStyle(targetElement).getPropertyValue("margin-right"),
+                    window.getComputedStyle(targetElement).getPropertyValue('margin-right'),
                     10,
                   )
                 : parseInt(
-                    window.getComputedStyle(targetElement).getPropertyValue("margin-left"),
+                    window.getComputedStyle(targetElement).getPropertyValue('margin-left'),
                     10,
                   )
               : 0;
@@ -538,21 +538,21 @@
             return id;
           },
           startEvent: function() {
-            if (settings.on == "hover") {
-              return "mouseenter";
-            } else if (settings.on == "focus") {
-              return "focus";
+            if (settings.on == 'hover') {
+              return 'mouseenter';
+            } else if (settings.on == 'focus') {
+              return 'focus';
             }
             return false;
           },
           scrollEvent: function() {
-            return "scroll";
+            return 'scroll';
           },
           endEvent: function() {
-            if (settings.on == "hover") {
-              return "mouseleave";
-            } else if (settings.on == "focus") {
-              return "blur";
+            if (settings.on == 'hover') {
+              return 'mouseleave';
+            } else if (settings.on == 'focus') {
+              return 'blur';
             }
             return false;
           },
@@ -573,7 +573,7 @@
                 right: boundary.right - (offset.left + popup.width),
                 bottom: boundary.bottom - (offset.top + popup.height),
               };
-              module.verbose("Distance from boundaries determined", offset, distanceFromBoundary);
+              module.verbose('Distance from boundaries determined', offset, distanceFromBoundary);
             }
             return distanceFromBoundary;
           },
@@ -582,82 +582,82 @@
               parentNode = element.parentNode,
               $node = $(parentNode);
             if (parentNode) {
-              var is2D = $node.css("transform") === "none",
-                isStatic = $node.css("position") === "static",
-                isBody = $node.is("body");
+              var is2D = $node.css('transform') === 'none',
+                isStatic = $node.css('position') === 'static',
+                isBody = $node.is('body');
               while (parentNode && !isBody && isStatic && is2D) {
                 parentNode = parentNode.parentNode;
                 $node = $(parentNode);
-                is2D = $node.css("transform") === "none";
-                isStatic = $node.css("position") === "static";
-                isBody = $node.is("body");
+                is2D = $node.css('transform') === 'none';
+                isStatic = $node.css('position') === 'static';
+                isBody = $node.is('body');
               }
             }
             return $node && $node.length > 0 ? $node : $();
           },
           positions: function() {
             return {
-              "top left": false,
-              "top center": false,
-              "top right": false,
-              "bottom left": false,
-              "bottom center": false,
-              "bottom right": false,
-              "left center": false,
-              "right center": false,
+              'top left': false,
+              'top center': false,
+              'top right': false,
+              'bottom left': false,
+              'bottom center': false,
+              'bottom right': false,
+              'left center': false,
+              'right center': false,
             };
           },
           nextPosition: function(position) {
-            var positions = position.split(" "),
+            var positions = position.split(' '),
               verticalPosition = positions[0],
               horizontalPosition = positions[1],
               opposite = {
-                top: "bottom",
-                bottom: "top",
-                left: "right",
-                right: "left",
+                top: 'bottom',
+                bottom: 'top',
+                left: 'right',
+                right: 'left',
               },
               adjacent = {
-                left: "center",
-                center: "right",
-                right: "left",
+                left: 'center',
+                center: 'right',
+                right: 'left',
               },
               backup = {
-                "top left": "top center",
-                "top center": "top right",
-                "top right": "right center",
-                "right center": "bottom right",
-                "bottom right": "bottom center",
-                "bottom center": "bottom left",
-                "bottom left": "left center",
-                "left center": "top left",
+                'top left': 'top center',
+                'top center': 'top right',
+                'top right': 'right center',
+                'right center': 'bottom right',
+                'bottom right': 'bottom center',
+                'bottom center': 'bottom left',
+                'bottom left': 'left center',
+                'left center': 'top left',
               },
-              adjacentsAvailable = verticalPosition == "top" || verticalPosition == "bottom",
+              adjacentsAvailable = verticalPosition == 'top' || verticalPosition == 'bottom',
               oppositeTried = false,
               adjacentTried = false,
               nextPosition = false;
             if (!triedPositions) {
-              module.verbose("All available positions available");
+              module.verbose('All available positions available');
               triedPositions = module.get.positions();
             }
 
-            module.debug("Recording last position tried", position);
+            module.debug('Recording last position tried', position);
             triedPositions[position] = true;
 
-            if (settings.prefer === "opposite") {
+            if (settings.prefer === 'opposite') {
               nextPosition = [opposite[verticalPosition], horizontalPosition];
-              nextPosition = nextPosition.join(" ");
+              nextPosition = nextPosition.join(' ');
               oppositeTried = triedPositions[nextPosition] === true;
-              module.debug("Trying opposite strategy", nextPosition);
+              module.debug('Trying opposite strategy', nextPosition);
             }
-            if (settings.prefer === "adjacent" && adjacentsAvailable) {
+            if (settings.prefer === 'adjacent' && adjacentsAvailable) {
               nextPosition = [verticalPosition, adjacent[horizontalPosition]];
-              nextPosition = nextPosition.join(" ");
+              nextPosition = nextPosition.join(' ');
               adjacentTried = triedPositions[nextPosition] === true;
-              module.debug("Trying adjacent strategy", nextPosition);
+              module.debug('Trying adjacent strategy', nextPosition);
             }
             if (adjacentTried || oppositeTried) {
-              module.debug("Using backup position", nextPosition);
+              module.debug('Using backup position', nextPosition);
               nextPosition = backup[position];
             }
             return nextPosition;
@@ -692,31 +692,31 @@
             parent = calculations.parent;
 
             if (module.should.centerArrow(calculations)) {
-              module.verbose("Adjusting offset to center arrow on small target element");
-              if (position == "top left" || position == "bottom left") {
+              module.verbose('Adjusting offset to center arrow on small target element');
+              if (position == 'top left' || position == 'bottom left') {
                 offset += target.width / 2;
                 offset -= settings.arrowPixelsFromEdge;
               }
-              if (position == "top right" || position == "bottom right") {
+              if (position == 'top right' || position == 'bottom right') {
                 offset -= target.width / 2;
                 offset += settings.arrowPixelsFromEdge;
               }
             }
 
             if (target.width === 0 && target.height === 0 && !module.is.svg(target.element)) {
-              module.debug("Popup target is hidden, no action taken");
+              module.debug('Popup target is hidden, no action taken');
               return false;
             }
 
             if (settings.inline) {
-              module.debug("Adding margin to calculation", target.margin);
-              if (position == "left center" || position == "right center") {
+              module.debug('Adding margin to calculation', target.margin);
+              if (position == 'left center' || position == 'right center') {
                 offset += target.margin.top;
                 distanceAway += -target.margin.left;
               } else if (
-                position == "top left" ||
-                position == "top center" ||
-                position == "top right"
+                position == 'top left' ||
+                position == 'top center' ||
+                position == 'top right'
               ) {
                 offset += target.margin.left;
                 distanceAway -= target.margin.top;
@@ -726,83 +726,83 @@
               }
             }
 
-            module.debug("Determining popup position from calculations", position, calculations);
+            module.debug('Determining popup position from calculations', position, calculations);
 
             if (module.is.rtl()) {
               position = position.replace(/left|right/g, function(match) {
-                return match == "left" ? "right" : "left";
+                return match == 'left' ? 'right' : 'left';
               });
-              module.debug("RTL: Popup position updated", position);
+              module.debug('RTL: Popup position updated', position);
             }
 
             // if last attempt use specified last resort position
-            if (searchDepth == settings.maxSearchDepth && typeof settings.lastResort === "string") {
+            if (searchDepth == settings.maxSearchDepth && typeof settings.lastResort === 'string') {
               position = settings.lastResort;
             }
 
             switch (position) {
-              case "top left":
+              case 'top left':
                 positioning = {
-                  top: "auto",
+                  top: 'auto',
                   bottom: parent.height - target.top + distanceAway,
                   left: target.left + offset,
-                  right: "auto",
+                  right: 'auto',
                 };
                 break;
-              case "top center":
+              case 'top center':
                 positioning = {
                   bottom: parent.height - target.top + distanceAway,
                   left: target.left + target.width / 2 - popup.width / 2 + offset,
-                  top: "auto",
-                  right: "auto",
+                  top: 'auto',
+                  right: 'auto',
                 };
                 break;
-              case "top right":
+              case 'top right':
                 positioning = {
                   bottom: parent.height - target.top + distanceAway,
                   right: parent.width - target.left - target.width - offset,
-                  top: "auto",
-                  left: "auto",
+                  top: 'auto',
+                  left: 'auto',
                 };
                 break;
-              case "left center":
+              case 'left center':
                 positioning = {
                   top: target.top + target.height / 2 - popup.height / 2 + offset,
                   right: parent.width - target.left + distanceAway,
-                  left: "auto",
-                  bottom: "auto",
+                  left: 'auto',
+                  bottom: 'auto',
                 };
                 break;
-              case "right center":
+              case 'right center':
                 positioning = {
                   top: target.top + target.height / 2 - popup.height / 2 + offset,
                   left: target.left + target.width + distanceAway,
-                  bottom: "auto",
-                  right: "auto",
+                  bottom: 'auto',
+                  right: 'auto',
                 };
                 break;
-              case "bottom left":
+              case 'bottom left':
                 positioning = {
                   top: target.top + target.height + distanceAway,
                   left: target.left + offset,
-                  bottom: "auto",
-                  right: "auto",
+                  bottom: 'auto',
+                  right: 'auto',
                 };
                 break;
-              case "bottom center":
+              case 'bottom center':
                 positioning = {
                   top: target.top + target.height + distanceAway,
                   left: target.left + target.width / 2 - popup.width / 2 + offset,
-                  bottom: "auto",
-                  right: "auto",
+                  bottom: 'auto',
+                  right: 'auto',
                 };
                 break;
-              case "bottom right":
+              case 'bottom right':
                 positioning = {
                   top: target.top + target.height + distanceAway,
                   right: parent.width - target.left - target.width - offset,
-                  left: "auto",
-                  bottom: "auto",
+                  left: 'auto',
+                  bottom: 'auto',
                 };
                 break;
             }
@@ -810,7 +810,7 @@
               module.error(error.invalidPosition, position);
             }
 
-            module.debug("Calculated popup positioning values", positioning);
+            module.debug('Calculated popup positioning values', positioning);
 
             // tentatively place on stage
             $popup
@@ -825,17 +825,17 @@
             distanceFromBoundary = module.get.distanceFromBoundary(popupOffset, calculations);
 
             if (module.is.offstage(distanceFromBoundary, position)) {
-              module.debug("Position is outside viewport", position);
+              module.debug('Position is outside viewport', position);
               if (searchDepth < settings.maxSearchDepth) {
                 searchDepth++;
                 position = module.get.nextPosition(position);
-                module.debug("Trying new position", position);
+                module.debug('Trying new position', position);
                 return $popup ? module.set.position(position, calculations) : false;
               } else {
                 if (settings.lastResort) {
-                  module.debug("No position found, showing with last position");
+                  module.debug('No position found, showing with last position');
                 } else {
-                  module.debug("Popup could not find a position to display", $popup);
+                  module.debug('Popup could not find a position to display', $popup);
                   module.error(error.cannotPlace, element);
                   module.remove.attempts();
                   module.remove.loading();
@@ -845,7 +845,7 @@
                 }
               }
             }
-            module.debug("Position is on stage", position);
+            module.debug('Position is on stage', position);
             module.remove.attempts();
             module.remove.loading();
             if (settings.setFluidWidth && module.is.fluid()) {
@@ -857,16 +857,16 @@
           fluidWidth: function(calculations) {
             calculations = calculations || module.get.calculations();
             module.debug(
-              "Automatically setting element width to parent width",
+              'Automatically setting element width to parent width',
               calculations.parent.width,
             );
-            $popup.css("width", calculations.container.width);
+            $popup.css('width', calculations.container.width);
           },
 
           variation: function(variation) {
             variation = variation || module.get.variation();
             if (variation && module.has.popup()) {
-              module.verbose("Adding variation to popup", variation);
+              module.verbose('Adding variation to popup', variation);
               $popup.addClass(variation);
             }
           },
@@ -883,7 +883,7 @@
           variation: function(variation) {
             variation = variation || module.get.variation();
             if (variation) {
-              module.verbose("Removing variation", variation);
+              module.verbose('Removing variation', variation);
               $popup.removeClass(variation);
             }
           },
@@ -891,7 +891,7 @@
             $module.removeClass(className.visible);
           },
           attempts: function() {
-            module.verbose("Resetting all searched positions");
+            module.verbose('Resetting all searched positions');
             searchDepth = 0;
             triedPositions = false;
           },
@@ -899,12 +899,12 @@
 
         bind: {
           events: function() {
-            module.debug("Binding popup events to module");
-            if (settings.on == "click") {
-              $module.on("click" + eventNamespace, module.toggle);
+            module.debug('Binding popup events to module');
+            if (settings.on == 'click') {
+              $module.on('click' + eventNamespace, module.toggle);
             }
-            if (settings.on == "hover" && hasTouch) {
-              $module.on("touchstart" + eventNamespace, module.event.touchstart);
+            if (settings.on == 'hover' && hasTouch) {
+              $module.on('touchstart' + eventNamespace, module.event.touchstart);
             }
             if (module.get.startEvent()) {
               $module
@@ -912,50 +912,50 @@
                 .on(module.get.endEvent() + eventNamespace, module.event.end);
             }
             if (settings.target) {
-              module.debug("Target set to element", $target);
+              module.debug('Target set to element', $target);
             }
-            $window.on("resize" + elementNamespace, module.event.resize);
+            $window.on('resize' + elementNamespace, module.event.resize);
           },
           popup: function() {
-            module.verbose("Allowing hover events on popup to prevent closing");
+            module.verbose('Allowing hover events on popup to prevent closing');
             if ($popup && module.has.popup()) {
               $popup
-                .on("mouseenter" + eventNamespace, module.event.start)
-                .on("mouseleave" + eventNamespace, module.event.end);
+                .on('mouseenter' + eventNamespace, module.event.start)
+                .on('mouseleave' + eventNamespace, module.event.end);
             }
           },
           close: function() {
             if (
               settings.hideOnScroll === true ||
-              (settings.hideOnScroll == "auto" && settings.on != "click")
+              (settings.hideOnScroll == 'auto' && settings.on != 'click')
             ) {
               module.bind.closeOnScroll();
             }
-            if (settings.on == "hover" && openedWithTouch) {
+            if (settings.on == 'hover' && openedWithTouch) {
               module.bind.touchClose();
             }
-            if (settings.on == "click" && settings.closable) {
+            if (settings.on == 'click' && settings.closable) {
               module.bind.clickaway();
             }
           },
           closeOnScroll: function() {
-            module.verbose("Binding scroll close event to document");
+            module.verbose('Binding scroll close event to document');
             $scrollContext.one(
               module.get.scrollEvent() + elementNamespace,
               module.event.hideGracefully,
             );
           },
           touchClose: function() {
-            module.verbose("Binding popup touchclose event to document");
-            $document.on("touchstart" + elementNamespace, function(event) {
-              module.verbose("Touched away from popup");
+            module.verbose('Binding popup touchclose event to document');
+            $document.on('touchstart' + elementNamespace, function(event) {
+              module.verbose('Touched away from popup');
               module.event.hideGracefully.call(element, event);
             });
           },
           clickaway: function() {
-            module.verbose("Binding popup close event to document");
-            $document.on("click" + elementNamespace, function(event) {
-              module.verbose("Clicked away from popup");
+            module.verbose('Binding popup close event to document');
+            $document.on('click' + elementNamespace, function(event) {
+              module.verbose('Clicked away from popup');
               module.event.hideGracefully.call(element, event);
             });
           },
@@ -993,7 +993,7 @@
             $.each(distanceFromBoundary, function(direction, distance) {
               if (distance < -settings.jitter) {
                 module.debug(
-                  "Position exceeds allowable distance from edge",
+                  'Position exceeds allowable distance from edge',
                   direction,
                   distance,
                   position,
@@ -1032,7 +1032,7 @@
             return !module.is.visible();
           },
           rtl: function() {
-            return $module.css("direction") == "rtl";
+            return $module.css('direction') == 'rtl';
           },
         },
 
@@ -1040,7 +1040,7 @@
           module.remove.visible();
           if (settings.preserve) {
             if ($.fn.transition !== undefined) {
-              $popup.transition("remove transition");
+              $popup.transition('remove transition');
             }
           } else {
             module.removePopup();
@@ -1073,7 +1073,7 @@
               module.debug = Function.prototype.bind.call(
                 console.info,
                 console,
-                settings.name + ":",
+                settings.name + ':',
               );
               module.debug.apply(console, arguments);
             }
@@ -1087,7 +1087,7 @@
               module.verbose = Function.prototype.bind.call(
                 console.info,
                 console,
-                settings.name + ":",
+                settings.name + ':',
               );
               module.verbose.apply(console, arguments);
             }
@@ -1098,7 +1098,7 @@
             module.error = Function.prototype.bind.call(
               console.error,
               console,
-              settings.name + ":",
+              settings.name + ':',
             );
             module.error.apply(console, arguments);
           }
@@ -1113,23 +1113,23 @@
               time = currentTime;
               performance.push({
                 Name: message[0],
-                Arguments: [].slice.call(message, 1) || "",
+                Arguments: [].slice.call(message, 1) || '',
                 Element: element,
-                "Execution Time": executionTime,
+                'Execution Time': executionTime,
               });
             }
             clearTimeout(module.performance.timer);
             module.performance.timer = setTimeout(module.performance.display, 500);
           },
           display: function() {
-            var title = settings.name + ":",
+            var title = settings.name + ':',
               totalTime = 0;
             time = false;
             clearTimeout(module.performance.timer);
             $.each(performance, function(index, data) {
-              totalTime += data["Execution Time"];
+              totalTime += data['Execution Time'];
             });
-            title += " " + totalTime + "ms";
+            title += ' ' + totalTime + 'ms';
             if (moduleSelector) {
               title += " '" + moduleSelector + "'";
             }
@@ -1142,7 +1142,7 @@
                 console.table(performance);
               } else {
                 $.each(performance, function(index, data) {
-                  console.log(data["Name"] + ": " + data["Execution Time"] + "ms");
+                  console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
                 });
               }
               console.groupEnd();
@@ -1157,7 +1157,7 @@
             response;
           passedArguments = passedArguments || queryArguments;
           context = element || context;
-          if (typeof query == "string" && object !== undefined) {
+          if (typeof query == 'string' && object !== undefined) {
             query = query.split(/[\. ]/);
             maxDepth = query.length - 1;
             $.each(query, function(depth, value) {
@@ -1203,7 +1203,7 @@
         module.invoke(query);
       } else {
         if (instance !== undefined) {
-          instance.invoke("destroy");
+          instance.invoke('destroy');
         }
         module.initialize();
       }
@@ -1213,14 +1213,14 @@
   };
 
   $.fn.popup.settings = {
-    name: "Popup",
+    name: 'Popup',
 
     // module settings
     silent: false,
     debug: false,
     verbose: false,
     performance: true,
-    namespace: "popup",
+    namespace: 'popup',
 
     // whether it should use dom mutation observers
     observeChanges: true,
@@ -1247,7 +1247,7 @@
     onHidden: function() {},
 
     // when to show popup
-    on: "hover",
+    on: 'hover',
 
     // element to use to determine if popup is out of boundary
     boundary: window,
@@ -1256,10 +1256,10 @@
     addTouchEvents: true,
 
     // default position relative to element
-    position: "top left",
+    position: 'top left',
 
     // name of variation to use
-    variation: "",
+    variation: '',
 
     // whether popup should be moved to context
     movePopup: true,
@@ -1292,19 +1292,19 @@
     closable: true,
 
     // automatically hide on scroll
-    hideOnScroll: "auto",
+    hideOnScroll: 'auto',
 
     // hide other popups on show
     exclusive: false,
 
     // context to attach popups
-    context: "body",
+    context: 'body',
 
     // context for binding scroll events
     scrollContext: window,
 
     // position to prefer when calculating new position
-    prefer: "opposite",
+    prefer: 'opposite',
 
     // specify position to appear even if it doesn't fit
     lastResort: false,
@@ -1323,7 +1323,7 @@
 
     // transition settings
     duration: 200,
-    transition: "scale",
+    transition: 'scale',
 
     // distance away from activating element in px
     distanceAway: 0,
@@ -1338,39 +1338,39 @@
     maxSearchDepth: 15,
 
     error: {
-      invalidPosition: "The position you specified is not a valid position",
-      cannotPlace: "Popup does not fit within the boundaries of the viewport",
-      method: "The method you called is not defined.",
+      invalidPosition: 'The position you specified is not a valid position',
+      cannotPlace: 'Popup does not fit within the boundaries of the viewport',
+      method: 'The method you called is not defined.',
       noTransition:
-        "This module requires ui transitions <https://github.com/Semantic-Org/UI-Transition>",
-      notFound: "The target or popup you specified does not exist on the page",
+        'This module requires ui transitions <https://github.com/Semantic-Org/UI-Transition>',
+      notFound: 'The target or popup you specified does not exist on the page',
     },
 
     metadata: {
-      activator: "activator",
-      content: "content",
-      html: "html",
-      offset: "offset",
-      position: "position",
-      title: "title",
-      variation: "variation",
+      activator: 'activator',
+      content: 'content',
+      html: 'html',
+      offset: 'offset',
+      position: 'position',
+      title: 'title',
+      variation: 'variation',
     },
 
     className: {
-      active: "active",
-      basic: "basic",
-      animating: "animating",
-      dropdown: "dropdown",
-      fluid: "fluid",
-      loading: "loading",
-      popup: "ui popup",
-      position: "top left center bottom right",
-      visible: "visible",
-      popupVisible: "visible",
+      active: 'active',
+      basic: 'basic',
+      animating: 'animating',
+      dropdown: 'dropdown',
+      fluid: 'fluid',
+      loading: 'loading',
+      popup: 'ui popup',
+      position: 'top left center bottom right',
+      visible: 'visible',
+      popupVisible: 'visible',
     },
 
     selector: {
-      popup: ".ui.popup",
+      popup: '.ui.popup',
     },
 
     templates: {
@@ -1378,12 +1378,12 @@
         var badChars = /[&<>"'`]/g,
           shouldEscape = /[&<>"'`]/,
           escape = {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#x27;",
-            "`": "&#x60;",
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#x27;',
+            '`': '&#x60;',
           },
           escapedChar = function(chr) {
             return escape[chr];
@@ -1394,16 +1394,16 @@
         return string;
       },
       popup: function(text) {
-        var html = "",
+        var html = '',
           escape = $.fn.popup.settings.templates.escape;
         if (typeof text !== undefined) {
           if (typeof text.title !== undefined && text.title) {
             text.title = escape(text.title);
-            html += '<div class="header">' + text.title + "</div>";
+            html += '<div class="header">' + text.title + '</div>';
           }
           if (typeof text.content !== undefined && text.content) {
             text.content = escape(text.content);
-            html += '<div class="content">' + text.content + "</div>";
+            html += '<div class="content">' + text.content + '</div>';
           }
         }
         return html;

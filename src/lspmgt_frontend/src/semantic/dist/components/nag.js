@@ -9,22 +9,22 @@
  */
 
 (function($, window, document, undefined) {
-  "use strict";
+  'use strict';
 
   window =
-    typeof window != "undefined" && window.Math == Math
+    typeof window != 'undefined' && window.Math == Math
       ? window
-      : typeof self != "undefined" && self.Math == Math
+      : typeof self != 'undefined' && self.Math == Math
         ? self
-        : Function("return this")();
+        : Function('return this')();
 
   $.fn.nag = function(parameters) {
     var $allModules = $(this),
-      moduleSelector = $allModules.selector || "",
+      moduleSelector = $allModules.selector || '',
       time = new Date().getTime(),
       performance = [],
       query = arguments[0],
-      methodInvoked = typeof query == "string",
+      methodInvoked = typeof query == 'string',
       queryArguments = [].slice.call(arguments, 1),
       returnedValue;
     $allModules.each(function() {
@@ -35,11 +35,11 @@
         selector = settings.selector,
         error = settings.error,
         namespace = settings.namespace,
-        eventNamespace = "." + namespace,
-        moduleNamespace = namespace + "-module",
+        eventNamespace = '.' + namespace,
+        moduleNamespace = namespace + '-module',
         $module = $(this),
         $close = $module.find(selector.close),
-        $context = settings.context ? $(settings.context) : $("body"),
+        $context = settings.context ? $(settings.context) : $('body'),
         element = this,
         instance = $module.data(moduleNamespace),
         moduleOffset,
@@ -61,10 +61,10 @@
           };
       module = {
         initialize: function() {
-          module.verbose("Initializing element");
+          module.verbose('Initializing element');
 
           $module
-            .on("click" + eventNamespace, selector.close, module.dismiss)
+            .on('click' + eventNamespace, selector.close, module.dismiss)
             .data(moduleNamespace, module);
 
           if (settings.detachable && $module.parent()[0] !== $context[0]) {
@@ -78,14 +78,14 @@
         },
 
         destroy: function() {
-          module.verbose("Destroying instance");
+          module.verbose('Destroying instance');
           $module.removeData(moduleNamespace).off(eventNamespace);
         },
 
         show: function() {
-          if (module.should.show() && !$module.is(":visible")) {
-            module.debug("Showing nag", settings.animation.show);
-            if (settings.animation.show == "fade") {
+          if (module.should.show() && !$module.is(':visible')) {
+            module.debug('Showing nag', settings.animation.show);
+            if (settings.animation.show == 'fade') {
               $module.fadeIn(settings.duration, settings.easing);
             } else {
               $module.slideDown(settings.duration, settings.easing);
@@ -94,8 +94,8 @@
         },
 
         hide: function() {
-          module.debug("Showing nag", settings.animation.hide);
-          if (settings.animation.show == "fade") {
+          module.debug('Showing nag', settings.animation.hide);
+          if (settings.animation.show == 'fade') {
             $module.fadeIn(settings.duration, settings.easing);
           } else {
             $module.slideUp(settings.duration, settings.easing);
@@ -103,7 +103,7 @@
         },
 
         onHide: function() {
-          module.debug("Removing nag", settings.animation.hide);
+          module.debug('Removing nag', settings.animation.hide);
           $module.remove();
           if (settings.onHide) {
             settings.onHide();
@@ -122,17 +122,17 @@
         should: {
           show: function() {
             if (settings.persist) {
-              module.debug("Persistent nag is set, can show nag");
+              module.debug('Persistent nag is set, can show nag');
               return true;
             }
             if (module.storage.get(settings.key) != settings.value.toString()) {
               module.debug(
-                "Stored value is not set, can show nag",
+                'Stored value is not set, can show nag',
                 module.storage.get(settings.key),
               );
               return true;
             }
-            module.debug("Stored value is set, cannot show nag", module.storage.get(settings.key));
+            module.debug('Stored value is set, cannot show nag', module.storage.get(settings.key));
             return false;
           },
         },
@@ -160,18 +160,18 @@
         storage: {
           set: function(key, value) {
             var options = module.get.storageOptions();
-            if (settings.storageMethod == "localstorage" && window.localStorage !== undefined) {
+            if (settings.storageMethod == 'localstorage' && window.localStorage !== undefined) {
               window.localStorage.setItem(key, value);
-              module.debug("Value stored using local storage", key, value);
+              module.debug('Value stored using local storage', key, value);
             } else if (
-              settings.storageMethod == "sessionstorage" &&
+              settings.storageMethod == 'sessionstorage' &&
               window.sessionStorage !== undefined
             ) {
               window.sessionStorage.setItem(key, value);
-              module.debug("Value stored using session storage", key, value);
+              module.debug('Value stored using session storage', key, value);
             } else if ($.cookie !== undefined) {
               $.cookie(key, value, options);
-              module.debug("Value stored using cookie", key, value, options);
+              module.debug('Value stored using cookie', key, value, options);
             } else {
               module.error(error.noCookieStorage);
               return;
@@ -179,10 +179,10 @@
           },
           get: function(key, value) {
             var storedValue;
-            if (settings.storageMethod == "localstorage" && window.localStorage !== undefined) {
+            if (settings.storageMethod == 'localstorage' && window.localStorage !== undefined) {
               storedValue = window.localStorage.getItem(key);
             } else if (
-              settings.storageMethod == "sessionstorage" &&
+              settings.storageMethod == 'sessionstorage' &&
               window.sessionStorage !== undefined
             ) {
               storedValue = window.sessionStorage.getItem(key);
@@ -194,8 +194,8 @@
               module.error(error.noCookieStorage);
             }
             if (
-              storedValue == "undefined" ||
-              storedValue == "null" ||
+              storedValue == 'undefined' ||
+              storedValue == 'null' ||
               storedValue === undefined ||
               storedValue === null
             ) {
@@ -205,10 +205,10 @@
           },
           remove: function(key) {
             var options = module.get.storageOptions();
-            if (settings.storageMethod == "localstorage" && window.localStorage !== undefined) {
+            if (settings.storageMethod == 'localstorage' && window.localStorage !== undefined) {
               window.localStorage.removeItem(key);
             } else if (
-              settings.storageMethod == "sessionstorage" &&
+              settings.storageMethod == 'sessionstorage' &&
               window.sessionStorage !== undefined
             ) {
               window.sessionStorage.removeItem(key);
@@ -223,7 +223,7 @@
         },
 
         setting: function(name, value) {
-          module.debug("Changing setting", name, value);
+          module.debug('Changing setting', name, value);
           if ($.isPlainObject(name)) {
             $.extend(true, settings, name);
           } else if (value !== undefined) {
@@ -253,7 +253,7 @@
               module.debug = Function.prototype.bind.call(
                 console.info,
                 console,
-                settings.name + ":",
+                settings.name + ':',
               );
               module.debug.apply(console, arguments);
             }
@@ -267,7 +267,7 @@
               module.verbose = Function.prototype.bind.call(
                 console.info,
                 console,
-                settings.name + ":",
+                settings.name + ':',
               );
               module.verbose.apply(console, arguments);
             }
@@ -278,7 +278,7 @@
             module.error = Function.prototype.bind.call(
               console.error,
               console,
-              settings.name + ":",
+              settings.name + ':',
             );
             module.error.apply(console, arguments);
           }
@@ -293,23 +293,23 @@
               time = currentTime;
               performance.push({
                 Name: message[0],
-                Arguments: [].slice.call(message, 1) || "",
+                Arguments: [].slice.call(message, 1) || '',
                 Element: element,
-                "Execution Time": executionTime,
+                'Execution Time': executionTime,
               });
             }
             clearTimeout(module.performance.timer);
             module.performance.timer = setTimeout(module.performance.display, 500);
           },
           display: function() {
-            var title = settings.name + ":",
+            var title = settings.name + ':',
               totalTime = 0;
             time = false;
             clearTimeout(module.performance.timer);
             $.each(performance, function(index, data) {
-              totalTime += data["Execution Time"];
+              totalTime += data['Execution Time'];
             });
-            title += " " + totalTime + "ms";
+            title += ' ' + totalTime + 'ms';
             if (moduleSelector) {
               title += " '" + moduleSelector + "'";
             }
@@ -322,7 +322,7 @@
                 console.table(performance);
               } else {
                 $.each(performance, function(index, data) {
-                  console.log(data["Name"] + ": " + data["Execution Time"] + "ms");
+                  console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
                 });
               }
               console.groupEnd();
@@ -337,7 +337,7 @@
             response;
           passedArguments = passedArguments || queryArguments;
           context = element || context;
-          if (typeof query == "string" && object !== undefined) {
+          if (typeof query == 'string' && object !== undefined) {
             query = query.split(/[\. ]/);
             maxDepth = query.length - 1;
             $.each(query, function(depth, value) {
@@ -384,7 +384,7 @@
         module.invoke(query);
       } else {
         if (instance !== undefined) {
-          instance.invoke("destroy");
+          instance.invoke('destroy');
         }
         module.initialize();
       }
@@ -394,14 +394,14 @@
   };
 
   $.fn.nag.settings = {
-    name: "Nag",
+    name: 'Nag',
 
     silent: false,
     debug: false,
     verbose: false,
     performance: true,
 
-    namespace: "Nag",
+    namespace: 'Nag',
 
     // allows cookie to be overridden
     persist: false,
@@ -410,8 +410,8 @@
     displayTime: 0,
 
     animation: {
-      show: "slide",
-      hide: "slide",
+      show: 'slide',
+      hide: 'slide',
     },
 
     context: false,
@@ -419,33 +419,33 @@
 
     expires: 30,
     domain: false,
-    path: "/",
+    path: '/',
 
     // type of storage to use
-    storageMethod: "cookie",
+    storageMethod: 'cookie',
 
     // value to store in dismissed localstorage/cookie
-    key: "nag",
-    value: "dismiss",
+    key: 'nag',
+    value: 'dismiss',
 
     error: {
-      noCookieStorage: "$.cookie is not included. A storage solution is required.",
+      noCookieStorage: '$.cookie is not included. A storage solution is required.',
       noStorage:
-        "Neither $.cookie or store is defined. A storage solution is required for storing state",
-      method: "The method you called is not defined.",
+        'Neither $.cookie or store is defined. A storage solution is required for storing state',
+      method: 'The method you called is not defined.',
     },
 
     className: {
-      bottom: "bottom",
-      fixed: "fixed",
+      bottom: 'bottom',
+      fixed: 'fixed',
     },
 
     selector: {
-      close: ".close.icon",
+      close: '.close.icon',
     },
 
     speed: 500,
-    easing: "easeOutQuad",
+    easing: 'easeOutQuad',
 
     onHide: function() {},
   };
