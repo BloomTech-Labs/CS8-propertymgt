@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import LandingCarousel from "./LandingCarousel";
-import { Button } from "semantic-ui-react";
+import React, { Component } from 'react';
+import LandingCarousel from './LandingCarousel';
+import { Button } from 'semantic-ui-react';
 
-import "./Landing.css";
+import './Landing.css';
 
 // const description = () => (
 
