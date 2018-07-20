@@ -6,12 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "lint-staged": {
-    "*.{js,jsx,json}": [
-      "prettier --semi true --print-width 100 --single-quote --trailing-comma all --write",
-      "git add"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lambda-School-Labs/CS8-propertymgt.git"
@@ -33,12 +27,8 @@
     "babel-eslint": "^8.2.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0",
-    "husky": "^1.0.0-rc.13",
-    "lint-staged": "^7.2.0",
-    "prettier": "^1.13.7"
+    "eslint-plugin-react": "^7.10.0"
   }
 }
