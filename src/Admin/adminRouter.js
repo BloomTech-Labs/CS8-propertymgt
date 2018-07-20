@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const dd = require('../Config/AwsConfig');
+const dbModel = require('../Config/DbModel');
+
+const GlobalParams = {
+  TableName: 'ls_property_mgt',
+};
 
 router.get('/', (req, res) => {
   const params = {
@@ -11,7 +16,7 @@ router.get('/', (req, res) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
     }
-    res.status(200).json({ status: 'success', data: data });
+    res.status(200).json({ status: 'success', data: data, dbModel });
   });
 });
 
@@ -26,9 +31,12 @@ router.get('/property', (req, res) => {
 
   dd.get(params, (err, data) => {
     if (err) {
+      console.log(err);
       res.status(200).json({ status: 'error', error: err });
+    } else {
+      console.log(data);
+      res.status(200).json({ status: 'success', data: data });
     }
-    res.status(200).json({ status: 'success', data: data });
   });
 });
 

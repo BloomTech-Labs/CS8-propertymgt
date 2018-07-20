@@ -26,6 +26,7 @@ class Properties extends Component {
           description: this.addr(),
         },
       ],
+      item: {},
     };
     this.desc = this.desc.bind(this);
   }
@@ -43,7 +44,7 @@ class Properties extends Component {
     return (
       <div>
         <div>
-          <Link to="/editproperty">
+          <Link to="/admin/editproperty">
             <Icon name="pencil" link />
           </Link>
           <Icon name="trash alternate outline" link />
@@ -64,7 +65,7 @@ class Properties extends Component {
     return (
       <div>
         <h4> Add a new Property </h4>
-        <Link to="/addproperty">
+        <Link to="/admin/addproperty">
           <Icon name="plus circle" size="massive" link />{' '}
         </Link>
       </div>
@@ -76,12 +77,15 @@ class Properties extends Component {
     axios
       .get('http://localhost:5000/api/admin/properties')
       .then(function(response) {
-        response.data.map(property => {
-          let tempArray = this.state.listOfProperties;
-          tempArray.unshift(this.desc(property));
-          this.setState({
-            listOfProperties: tempArray,
-          });
+        // response.data.map(property => {
+        //   let tempArray = this.state.listOfProperties;
+        //   tempArray.unshift(this.desc(property));
+        //   this.setState({
+        //     listOfProperties: tempArray
+        //   });
+        console.log(response);
+        this.setState({
+          item: response.data,
         });
       })
       .catch(error => {

@@ -8,8 +8,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(cors());
+
+// app.use(bodyParser.json());
+// app.use(cors());
+
 app.use('/users', userRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/tenant', tenantRouter);
