@@ -4,9 +4,11 @@ import { Button } from 'semantic-ui-react';
 
 import './Landing.css';
 
-// const description = () => (
-
-// );
+/* 
+ *  Option B is to add the ability to talk to the server here
+ *  and installing the proper depenpendencies so we can create
+ *  a new user from the landing page
+*/
 
 export default class Landing extends Component {
   constructor(props) {
