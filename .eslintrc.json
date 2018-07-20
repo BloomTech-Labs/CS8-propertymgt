@@ -11,6 +11,7 @@
   "rules": {
     "react/jsx-one-expression-per-line": 1,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": 0,
     "semi": "error",
     "quotes": ["error", "single"],
     "max-len": ["error", { "code": 100, "tabWidth": 2 }],
