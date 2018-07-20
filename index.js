@@ -14,5 +14,5 @@ app.use('/api/tenant', tenantRouter);
 
 // need to change and add process env instead hard coding the port
 app.listen(5000, () => {
-  console.log('app runnign on port 5000');
+  console.log('app running on port 5000');
 });
