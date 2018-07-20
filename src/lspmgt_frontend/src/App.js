@@ -10,8 +10,8 @@ import AdminNavigation from './Components/Admin/AdminNavigation';
 const LandingPage = () => {
   return (
     <Container>
-      <Landing />;
-      <LoginForm />;
+      <Landing />
+      {/* <LoginForm /> */}
     </Container>
   );
 };
@@ -21,6 +21,7 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" component={LandingPage} />
+        <Route path="/login" component={LoginForm} />
         <Route path="/admin/(.+)" component={AdminNavigation} />
       </div>
     );

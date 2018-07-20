@@ -15,11 +15,10 @@ const LoginForm = () => (
         <Header as="h1" color="blue" textAlign="center">
           PropertyMaxx
         </Header>
-        <Form size="large">
-          <Segment raised>
+        <Form size="large" style={{ maxWidth: '100%' }}>
+          <Segment raised style={{ maxWidth: '100%' }}>
             <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" />
             <Form.Input fluid icon="lock" iconPosition="left" placeholder="Password" />
-
             <Button color="blue" fluid size="large">
               Login
             </Button>
