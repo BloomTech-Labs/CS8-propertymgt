@@ -5,9 +5,7 @@ import { Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import LoginForm from './Components/LandingPage/LoginForm';
 import Landing from './Components/LandingPage/Landing';
-import Properties from './Components/Admin/Properties';
-import AddProperty from './Components/Admin/AddProperty';
-import EditProperty from './Components/Admin/EditProperty';
+import AdminNavigation from './Components/Admin/AdminNavigation';
 
 const LandingPage = () => {
   return (
@@ -23,9 +21,7 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" component={LandingPage} />
-        <Route path="/properties" component={Properties} />
-        <Route path="/addproperty" component={AddProperty} />
-        <Route path="/editproperty" component={EditProperty} />
+        <Route path="/admin/(.+)" component={AdminNavigation} />
       </div>
     );
   }

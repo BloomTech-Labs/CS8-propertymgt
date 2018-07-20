@@ -26,9 +26,12 @@ router.get('/property', (req, res) => {
 
   dd.get(params, (err, data) => {
     if (err) {
+      console.log(err);
       res.status(200).json({ status: 'error', error: err });
+    } else {
+      console.log(data);
+      res.status(200).json({ status: 'success', data: data });
     }
-    res.status(200).json({ status: 'success', data: data });
   });
 });
 
