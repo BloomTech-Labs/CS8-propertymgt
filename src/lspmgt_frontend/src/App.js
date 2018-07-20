@@ -20,7 +20,7 @@ const LandingPage = () => {
     </Container>
   );
 };
-
+// sample sign up flow for cognito using amplify library.
 const LoginTest = () => {
   Auth.signUp({
     username: 'lambdapropertymgt@gmail.com',
@@ -36,7 +36,9 @@ const LoginTest = () => {
 
 class App extends Component {
   render() {
-    console.log('This is amplify config -> ', AmplifyConfig);
+    // if you want to see it working, uncomment the line 42 below and replace the email above on line 26 on username field.
+    // bring up console on your browser and then save this file. Upon auto reload you should see your information on the browser console.
+
     // LoginTest();
     return (
       <div>
