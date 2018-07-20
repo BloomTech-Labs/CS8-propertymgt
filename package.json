@@ -4,13 +4,11 @@
   "description": "Property Management",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "lint-staged",
-    "pretty": "prettier --semi true --print-width 100 --single-quote --trailing-comma all --write \"**/*.js\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run pretty",
+    "*.{js,jsx,json}": [
+      "prettier --semi true --print-width 100 --single-quote --trailing-comma all --write",
       "git add"
     ]
   },
@@ -29,12 +27,17 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
-    "eslint": "^5.1.0",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
-    "express": "^4.16.3",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0-rc.13",
     "lint-staged": "^7.2.0",
     "prettier": "^1.13.7"
   }
