@@ -8,6 +8,7 @@ node_modules/
 
 # production
 /build
+Auth.js
 
 # misc
 .DS_Store
