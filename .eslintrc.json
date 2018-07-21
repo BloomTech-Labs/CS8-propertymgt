@@ -1,0 +1,20 @@
+{
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "extends": ["airbnb"],
+  "plugins": ["react", "jsx-a11y", "import"],
+  "rules": {
+    "react/jsx-one-expression-per-line": 1,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": 0,
+    "semi": "error",
+    "quotes": ["error", "single"],
+    "max-len": ["error", { "code": 100, "tabWidth": 2 }],
+    "comma-dangle": ["error", "always-multiline"]
+  }
+}
