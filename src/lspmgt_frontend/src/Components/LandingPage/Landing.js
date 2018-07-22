@@ -62,7 +62,7 @@ export default class Landing extends Component {
         <LandingCarousel />
         <div className="ui center aligned middle aligned grid">
           {/* Link "Buy Now!" button to signup page */}
-          <Link to="#">
+          <Link to="/admin/properties">
             <Button primary>Buy Now</Button>
           </Link>
           {/* Link "Log In" button to login page */}
