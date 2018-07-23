@@ -1,62 +1,51 @@
-import React, { Component } from 'react';
-import './Properties.css';
-import PropTypes from 'prop-types';
-import { Card, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from "react";
+import "./Properties.css";
+import { Card, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Properties extends Component {
   constructor() {
     super();
     this.state = {
-      listOfProperties: [
-        {
-          description: this.desc(),
-        },
-        {
-          description: this.desc(),
-        },
-        {
-          description: this.desc(),
-        },
-        {
-          description: this.desc(),
-        },
-        {
-          description: this.addr(),
-        },
-      ],
-      item: {},
+      list: []
     };
     this.desc = this.desc.bind(this);
+    this.addr = this.addr.bind(this);
   }
 
   render() {
     return (
-      <div>
-        <Card.Group items={this.state.listOfProperties} itemsPerRow="3" />
-      </div>
+      <Card.Group itemsPerRow="3">
+        {this.state.list.map(property => {
+          return this.desc(property);
+        })}
+        {this.addr()}
+      </Card.Group>
     );
   }
 
   // Populates each listOfProperties element with proper data field from database properties list, just refactor hardcoded template with real data
   desc = property => {
+    let obj = property;
+    const n = obj[Object.keys(obj)[6]];
     return (
-      <div>
-        <div>
+      <Card>
+        <Card.Content extra>
           <Link to="/admin/editproperty">
             <Icon name="pencil" link />
           </Link>
           <Icon name="trash alternate outline" link />
-        </div>
-        <h4>
-          <Icon name="home" /> 123 fake street <br />
-          <Icon name="user" /> tenant1, tenant2
-          <br />
-          <Icon name="calendar alternate" /> (a date range) <br />
-          <Icon name="check circle outline" /> Signed Contract
-        </h4>
-      </div>
+          <h4>
+            <Icon name="home" /> {n}
+            <br />
+            <Icon name="user" /> (tenant1, tenant2)
+            <br />
+            <Icon name="calendar alternate" /> (a date range) <br />
+            <Icon name="check circle outline" /> (Signed Contract)
+          </h4>
+        </Card.Content>
+      </Card>
     );
   };
 
@@ -66,7 +55,7 @@ class Properties extends Component {
       <div>
         <h4> Add a new Property </h4>
         <Link to="/admin/addproperty">
-          <Icon name="plus circle" size="massive" link />{' '}
+          <Icon name="plus circle" size="massive" link />{" "}
         </Link>
       </div>
     );
@@ -75,35 +64,16 @@ class Properties extends Component {
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/admin/properties')
-      .then(function(response) {
-        // response.data.map(property => {
-        //   let tempArray = this.state.listOfProperties;
-        //   tempArray.unshift(this.desc(property));
-        //   this.setState({
-        //     listOfProperties: tempArray
-        //   });
-        console.log(response);
+      .get("http://localhost:5000/api/admin/properties")
+      .then(response => {
         this.setState({
-          item: response.data,
+          list: response.data.data.Items
         });
       })
       .catch(error => {
-        console.log('In Properties component: ', error);
+        console.log("In Properties component: ", error);
       });
   }
 }
 
 export default Properties;
-
-Properties.propTypes = {};
-
-// Get array of properties and set to state then display properties as cards
-
-// axios call to "/api/admin/properties"
-
-// Each property received from the axios.get call should be unshifted to component array to display properly
-
-// Use proptypes
-
-// use redux - no need
