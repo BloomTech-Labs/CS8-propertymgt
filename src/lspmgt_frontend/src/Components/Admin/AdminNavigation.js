@@ -8,7 +8,7 @@ import AddProperty from './AddProperty';
 import EditProperty from './EditProperty';
 import WorkOrderA from './WorkOrderA';
 import AddTenant from './AddTenant';
-import Billing from './Billing';
+import Billing from './Billing/Billing';
 import SettingsA from './SettingsA';
 
 const TopBar = () => {

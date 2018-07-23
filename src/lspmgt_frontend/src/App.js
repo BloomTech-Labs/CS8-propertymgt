@@ -45,6 +45,7 @@ class App extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={LoginForm} />
         <Route path="/admin/(.+)" component={AdminNavigation} />
+        {/* <Route path="/payment" component={Payment} /> */}
       </div>
     );
   }
