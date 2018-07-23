@@ -1,7 +1,3 @@
-.forms {
+.formbox {
   display: flex;
-}
-
-.form {
-  width: 300px;
 }
