@@ -6,7 +6,7 @@ import { Container } from 'semantic-ui-react';
 import LoginForm from './Components/LandingPage/LoginForm';
 import Landing from './Components/LandingPage/Landing';
 import AdminNavigation from './Components/Admin/AdminNavigation';
-import Payment from './Components/Payment/Payment';
+// import Payment from './Components/Payment/Payment';
 
 // this is a test for aws cognito auth.
 import Amplify, { Auth } from 'aws-amplify';
@@ -46,7 +46,7 @@ class App extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={LoginForm} />
         <Route path="/admin/(.+)" component={AdminNavigation} />
-        <Route path="/payment" component={Payment} />
+        {/* <Route path="/payment" component={Payment} /> */}
       </div>
     );
   }

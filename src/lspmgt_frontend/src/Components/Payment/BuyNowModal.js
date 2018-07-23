@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react'
+import Checkout from './Checkout';
 
 
 class BuyNowModal extends Component {
@@ -18,6 +19,7 @@ class BuyNowModal extends Component {
         <Modal.Content>
           <Modal.Description>
             <Header>Credit Card</Header>
+            <Checkout />
           </Modal.Description>
         </Modal.Content>
       </Modal>
