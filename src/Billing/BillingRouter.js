@@ -14,8 +14,9 @@ router.get('/', (req, res) => {
 });
 
 // Stripe Charge Route
-router.post('/charge', (req, res) => {
+router.post('/testcharge', (req, res) => {
     const cost = 2500;
+    // Basic Charge -- WORKING
     stripe.charges.create({
         amount: cost,
         currency: 'cad',
@@ -25,6 +26,35 @@ router.post('/charge', (req, res) => {
         if (err) res.status(200).json({ status: 'error', error: err });
         res.status(200).json({ status: 'charge complete', data: charge });
     })
-})
+
+    // charge made with New Customer -- NOT WORKING
+    // stripe.customers.create({
+    //     email: req.body.stripeEmail,
+    //     source: req.body.stripeToken
+    // }).then(customer => stripe.charges.create({
+    //     amount,
+    //     description: 'test',
+    //     currency: 'usd',
+    //     customer: customer.id
+    // }))
+    // .then(charge => res.status(200).json({ status: 'success', }))
+});
+
+
+// Charge made with Async/Await
+// router.post('/testcharge', async (req, res) => {
+//     try {
+//         let status = await stripe.charges.create({
+//             amount: 2000,
+//             currency: "usd",
+//             description: "an aexample charge",
+//             source: req.body
+//         });
+
+//         res.json({status});
+//     } catch (err) {
+//         res.status(500).end();
+//     }
+// });
 
 module.exports = router;
