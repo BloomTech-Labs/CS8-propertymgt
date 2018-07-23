@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Modal } from 'semantic-ui-react'
+import { Button, Header, Modal } from 'semantic-ui-react';
 import Checkout from './Checkout';
 
 
