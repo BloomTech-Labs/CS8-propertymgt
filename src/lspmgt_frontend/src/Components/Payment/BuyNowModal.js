@@ -9,7 +9,7 @@ class BuyNowModal extends Component {
 
     this.state = {
 
-    }
+    };
   }
 
   render() {

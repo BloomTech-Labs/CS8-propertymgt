@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import SignUpModal from './SignUpModal';
@@ -13,7 +20,8 @@ const LoginForm = () => (
       body > div > div > div.login-form {
         height: 100%;
       }
-    `}</style>
+    `}
+    </style>
     <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h1" color="blue" textAlign="center">

@@ -7,8 +7,8 @@ class SignUpModal extends Component {
     super(props);
 
     this.state = {
-      
-    }
+
+    };
   }
 
   render() {
@@ -21,9 +21,9 @@ class SignUpModal extends Component {
           </Modal.Description>
         </Modal.Content>
       </Modal>
-    )
+    );
   }
 }
 
 
-export default SignUpModal
+export default SignUpModal;
