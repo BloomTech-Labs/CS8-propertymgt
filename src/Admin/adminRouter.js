@@ -17,10 +17,11 @@ const IncrementId = () => {
 
 // return all the properties for property cards screen
 router.get('/properties', (req, res) => {
-  dd.scan(GlobalParams, (err, data) => {
+  dd.scan(GlobalParams, (err, d) => {
+    // d => Data
     if (err) {
       res.status(200).json({ status: 'error', error: err });
-    } else res.status(200).json({ status: 'success', data: data });
+    } else res.status(200).json({ status: 'success', data: d });
   });
 });
 
@@ -33,12 +34,12 @@ router.get('/property/:id', (req, res) => {
     },
   };
 
-  dd.get(params, (err, data) => {
+  dd.get(params, (err, d) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
     } else {
-      console.log(typeof params.Key.propertyId);
-      res.status(200).json({ status: 'success', data: data });
+      // console.log(typeof params.Key.propertyId);
+      res.status(200).json({ status: 'success', data: d });
     }
   });
 });
