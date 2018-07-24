@@ -12,21 +12,21 @@ class AddProperty extends Component {
     this.hC = this.hC.bind(this);
   }
 
-  hC = event => {
+  hC = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
 
-  hS = event => {
+  hS = (event) => {
     event.preventDefault();
 
     axios
       .post('http://localhost:5000/api/admin/addproperty', this.state)
-      .then(res => {
+      .then((res) => {
         console.log(`Added ${this.state} to server`, res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
 
@@ -34,6 +34,19 @@ class AddProperty extends Component {
   };
 
   render() {
+    const {
+      NameOwner,
+      MobileOwner,
+      EmailOwner,
+      HomeOwnerAddr,
+      PropertyAddr,
+      Bedrooms,
+      MaxOccupants,
+      Bathrooms,
+      SqFootage,
+      YearBuilt,
+    } = this.state;
+
     return (
       <Form onSubmit={this.hS}>
         <div className="formbox">
@@ -44,14 +57,14 @@ class AddProperty extends Component {
                 placeholder="Name"
                 type="text"
                 name="NameOwner"
-                value={this.state.NameOwner}
+                value={NameOwner}
                 onChange={this.hC}
               />
               <Input
                 placeholder="Mobile #"
                 type="text"
                 name="MobileOwner"
-                value={this.state.MobileOwner}
+                value={MobileOwner}
                 onChange={this.hC}
               />
             </Form.Field>
@@ -60,14 +73,14 @@ class AddProperty extends Component {
                 placeholder="Email"
                 type="text"
                 name="EmailOwner"
-                value={this.state.EmailOwner}
+                value={EmailOwner}
                 onChange={this.hC}
               />
               <Input
                 placeholder="Home Address"
                 type="text"
                 name="HomeOwnerAddr"
-                value={this.state.HomeOwnerAddr}
+                value={HomeOwnerAddr}
                 onChange={this.hC}
               />
             </Form.Field>
@@ -79,14 +92,14 @@ class AddProperty extends Component {
                 placeholder="Address"
                 type="text"
                 name="PropertyAddr"
-                value={this.state.PropertyAddr}
+                value={PropertyAddr}
                 onChange={this.hC}
               />
               <Input
                 placeholder="# Bedroom"
                 type="text"
                 name="Bedrooms"
-                value={this.state.Bedrooms}
+                value={Bedrooms}
                 onChange={this.hC}
               />
             </Form.Field>
@@ -95,14 +108,14 @@ class AddProperty extends Component {
                 placeholder="Max Occupants"
                 type="text"
                 name="MaxOccupants"
-                value={this.state.MaxOccupants}
+                value={MaxOccupants}
                 onChange={this.hC}
               />
               <Input
                 placeholder="# Bathrooms"
                 type="text"
                 name="Bathrooms"
-                value={this.state.Bathrooms}
+                value={Bathrooms}
                 onChange={this.hC}
               />
             </Form.Field>
@@ -111,14 +124,14 @@ class AddProperty extends Component {
                 placeholder="Sqr Footage"
                 type="text"
                 name="SqFootage"
-                value={this.state.SqFootage}
+                value={SqFootage}
                 onChange={this.hC}
               />
               <Input
                 placeholder="Year Built"
                 type="text"
                 name="YearBuilt"
-                value={this.state.YearBuilt}
+                value={YearBuilt}
                 onChange={this.hC}
               />
             </Form.Field>

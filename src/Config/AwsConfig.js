@@ -1,6 +1,7 @@
 require('dotenv').config();
 const AWS = require('aws-sdk');
-config = {
+
+const config = {
   region: process.env.REGION,
   endpoint: process.env.ENDPOINT,
   accessKeyId: process.env.ACCESSKEYID,
@@ -10,6 +11,6 @@ config = {
 
 AWS.config.update(config);
 
-let dbDoc = new AWS.DynamoDB.DocumentClient();
+const dbDoc = new AWS.DynamoDB.DocumentClient();
 
 module.exports = dbDoc;
