@@ -21,6 +21,8 @@ class Billing extends React.Component {
   }
 
   render() {
+    const { currentProperty } = this.state;
+
     return (
       <div>
         <Grid celled>
@@ -29,7 +31,7 @@ class Billing extends React.Component {
               <Selector onChange={this.changeProperty} />
             </Grid.Column>
           </Grid.Row>
-          <BillingForm property={this.state.currentProperty} />
+          <BillingForm property={currentProperty} />
         </Grid>
       </div>
     );
