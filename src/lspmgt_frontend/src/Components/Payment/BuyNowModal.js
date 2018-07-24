@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
-import Checkout from './Checkout';
+import Checkout from '../Payment/checkout';
 
 class BuyNowModal extends Component {
   constructor(props) {
