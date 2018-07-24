@@ -10,12 +10,12 @@ export default class Login extends Component {
   };
 
   // handle all input field changes
-  handleInput = event => {
+  handleInput = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     // eslint suggests destructuring the next line
