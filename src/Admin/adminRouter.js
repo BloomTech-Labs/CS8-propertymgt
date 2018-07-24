@@ -16,6 +16,7 @@ const IncrementId = () => PROPERTY_ID++;
 // return all the properties for property cards screen
 router.get('/properties', (req, res) => {
   dd.scan(GlobalParams, (err, d) => {
+    // d => Data
     if (err) {
       res.status(200).json({ status: 'error', error: err });
     } else res.status(200).json({ status: 'success', data: d });
