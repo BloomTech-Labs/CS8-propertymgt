@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Selector extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class Selector extends React.Component {
 
   handleChange(e) {
     const property = e.target.value;
-    this.props.onChange(property);
+    const { onChange } = this.props;
+    onChange(property);
   }
 
   render() {
@@ -21,9 +23,12 @@ class Selector extends React.Component {
           <option value="3">property3</option>
         </select>
       </div>
-    )
+    );
   }
 }
 
+Selector.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Selector;
