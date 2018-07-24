@@ -1,6 +1,6 @@
 // Option A is that we can make User it's own model and route
-
 const express = require('express');
+
 const router = express.Router();
 const dd = require('../Config/AwsConfig');
 
@@ -25,12 +25,13 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
+  console.log(req.body);
   const params = {
     TableName: 'ls_property_mgt',
     Item: {
-      Name: req.Name,
-      Email: req.Email,
-      Phone: req.phoneNumber,
+      Name: req.body.Name,
+      Email: req.body.Email,
+      Phone: req.body.Phone,
     },
   };
 
