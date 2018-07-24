@@ -3,7 +3,7 @@ import "./semantic/dist/semantic.min.css";
 import "./App.css";
 import { Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
-import LoginForm from "./Components/LandingPage/LoginForm";
+import LoginForm from "./Components/UserAuth/LoginForm";
 import Landing from "./Components/LandingPage/Landing";
 import AdminNavigation from "./Components/Admin/AdminNavigation";
 
