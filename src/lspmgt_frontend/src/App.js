@@ -36,8 +36,10 @@ const LoginTest = () => {
 
 class App extends Component {
   render() {
-    // if you want to see it working, uncomment the line 42 below and replace the email above on line 26 on username field
-    // bring up console on your browser and then save this file. Upon auto reload you should see your information on the browser console
+    // If you want to see it working, uncomment the line 42...
+    //  below and replace the email above on line 26 on username field.
+    // Bring up console on your browser and then save this file...
+    //  Upon auto reload you should see your information on the browser console.
 
     LoginTest();
     return (
