@@ -19,8 +19,8 @@ class BillingForm extends React.Component {
   }
 }
 
-BillingForm.PropTypes = {
-  property: PropTypes.string,
+BillingForm.propTypes = {
+  property: PropTypes.string.isRequired,
 };
 
 export default BillingForm;
