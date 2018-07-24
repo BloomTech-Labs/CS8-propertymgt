@@ -5,8 +5,9 @@ import axios from 'axios';
 
 export default class SignUp extends Component {
   state = {
-    username: '',
-    password: '',
+    Name: '',
+    Email: '',
+    Phone: '',
   };
 
   // handle all input field changes
@@ -17,12 +18,13 @@ export default class SignUp extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const { Name, Email, Phone } = this.state;
 
     // eslint suggests destructuring the next line
-    if (this.state.username && this.state.password) {
+    if (Name && Email) {
       axios
         // /signup route via userRouter.js
-        .post('/signup')
+        .post('/user/signup', this.state)
         .then()
         .catch();
     }

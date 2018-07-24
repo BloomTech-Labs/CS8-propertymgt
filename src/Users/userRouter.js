@@ -35,13 +35,13 @@ router.post('/signup', (req, res) => {
     },
   };
 
-  dd.put(params, (err, data) => {
+  dd.put(params, (err, d) => {
     if (err) {
       console.log(err);
       res.status(200).json({ status: 'error', error: err });
     } else {
       console.log(d);
-      res.status(200).json({ status: 'success', data: data;
+      res.status(200).json({ status: 'success', data: d });
     }
   });
 });
