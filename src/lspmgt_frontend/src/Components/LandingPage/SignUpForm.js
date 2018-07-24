@@ -3,10 +3,11 @@ import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default class Login extends Component {
+export default class SignUp extends Component {
   state = {
-    username: '',
-    password: '',
+    Name: '',
+    Email: '',
+    Phone: '',
   };
 
   // handle all input field changes
@@ -17,13 +18,13 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const { Name, Email, Phone } = this.state;
 
     // eslint suggests destructuring the next line
-    const { username, password } = this.state;
-    if (username && password) {
+    if (Name && Email) {
       axios
-        // need /login route via userRouter.js, nonexistent
-        .post('/login', this.state)
+        // /signup route via userRouter.js
+        .post('/user/signup', this.state)
         .then()
         .catch();
     }
@@ -31,12 +32,12 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="login-form">
+      <div className="signup-form">
         <style>
           {`
             body > div,
             body > div > div,
-            body > div > div > div.login-form {
+            body > div > div > div.signup-form {
               height: 100%;
             }
           `}
@@ -50,16 +51,13 @@ export default class Login extends Component {
               <Segment raised style={{ maxWidth: '100%' }}>
                 <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" />
                 <Form.Input fluid icon="lock" iconPosition="left" placeholder="Password" />
+                <Form.Input fluid icon="lock" iconPosition="left" placeholder="Re-type Password" />
                 <Button color="blue" fluid size="large">
-                  Login
+                  Sign Up
                 </Button>
               </Segment>
             </Form>
-            <Message>
-              {/* link to /signup instead of /admin/properties */}
-              New to us? <a href="/admin/properties">Sign Up</a>
-            </Message>
-            <Link to="/">
+            <Link to="/login">
               <Button secondary>Back</Button>
             </Link>
           </Grid.Column>

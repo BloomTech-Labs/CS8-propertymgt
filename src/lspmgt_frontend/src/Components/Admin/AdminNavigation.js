@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './AdminNavigation.css';
 import { Link, Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
 import Properties from './Properties';
 import AddProperty from './AddProperty';
