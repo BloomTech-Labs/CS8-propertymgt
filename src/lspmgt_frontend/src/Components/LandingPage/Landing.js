@@ -6,21 +6,21 @@ import { Link } from 'react-router-dom';
 
 import './Landing.css';
 
-
 export default class Landing extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isOpen: true
+      isOpen: true,
     };
   }
 
   toggleModal = () => {
+    const { isOpen } = this.state;
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !isOpen,
     });
-  }
+  };
 
   render() {
     return (
@@ -47,8 +47,6 @@ export default class Landing extends Component {
       </div>
     );
   }
-
-  linkToLogin = () => {};
 }
 
 // export default Landing;
