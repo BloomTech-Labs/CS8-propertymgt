@@ -11,16 +11,14 @@ const GlobalParams = {
 
 let PROPERTY_ID = 1;
 
-const IncrementId = () => {
-  return PROPERTY_ID++;
-};
+const IncrementId = () => PROPERTY_ID++;
 
 // return all the properties for property cards screen
 router.get('/properties', (req, res) => {
-  dd.scan(GlobalParams, (err, data) => {
+  dd.scan(GlobalParams, (err, d) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
-    } else res.status(200).json({ status: 'success', data: data });
+    } else res.status(200).json({ status: 'success', data: d });
   });
 });
 
@@ -33,12 +31,12 @@ router.get('/property/:id', (req, res) => {
     },
   };
 
-  dd.get(params, (err, data) => {
+  dd.get(params, (err, d) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
     } else {
       console.log(typeof params.Key.propertyId);
-      res.status(200).json({ status: 'success', data: data });
+      res.status(200).json({ status: 'success', data: d });
     }
   });
 });
@@ -90,9 +88,9 @@ router.delete('/property', (req, res) => {
 
 // return all the work orders for cards screen
 router.get('/workorder', (req, res) => {
-  dd.scan(GlobalParams, (err, data) => {
+  dd.scan(GlobalParams, (err, d) => {
     if (err) res.status(200).json({ status: 'error', error: err });
-    else res.status(200).json({ status: 'success', data: data });
+    else res.status(200).json({ status: 'success', data: d });
   });
 });
 

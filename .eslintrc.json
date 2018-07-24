@@ -16,6 +16,8 @@
     "no-unused-vars": 1,
     "object-curly-newline": 0,
     "import/order": 0,
+    "no-plusplus": 0,
+    "no-console": 0,
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": 0,
