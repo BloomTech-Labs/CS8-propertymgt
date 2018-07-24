@@ -19,7 +19,8 @@ export default class Login extends Component {
     event.preventDefault();
 
     // eslint suggests destructuring the next line
-    if (this.state.username && this.state.password) {
+    const { username, password } = this.state;
+    if (username && password) {
       axios
         // need /login route via userRouter.js, nonexistent
         .post('/login')
