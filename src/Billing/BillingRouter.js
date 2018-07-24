@@ -7,9 +7,8 @@ const router = express.Router();
 
 const stripeKey = require('./StripeSK.js');
 
-const stripe = require('stripe')(stripeKey.Secret);
-
 // second attribute passed is the secret key
+const stripe = require('stripe')(stripeKey.SK);
 
 router.get('/', (req, res) => {
   res.status(200).json({ status: 'billing route connected' });
@@ -28,7 +27,6 @@ router.get('/', (req, res) => {
 //         if (err) res.status(200).json({ status: 'error', error: err });
 //         res.status(200).json({ status: 'charge complete', data: charge });
 //     })
-// });
 
 // charge made with New Customer -- NOT WORKING
 // stripe.customers.create({
@@ -43,10 +41,10 @@ router.get('/', (req, res) => {
 // .then(charge => res.status(200).json({ status: 'success', }))
 // });
 
-// Charge made with Async/Await NOT WORKING (?)
+// Charge made with Async/Await
 router.post('/testcharge', async (req, res) => {
   try {
-    const { status } = await stripe.charges.create({
+    const status = await stripe.charges.create({
       amount: 2000,
       currency: 'usd',
       description: 'an aexample charge',

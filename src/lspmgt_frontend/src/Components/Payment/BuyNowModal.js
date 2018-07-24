@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
+<<<<<<< HEAD
 import Checkout from './Checkout';
 
+=======
+import Checkout from '../Payment/Checkout';
+>>>>>>> 41497d2cb8e48592c49c6b2005ce8a3572d2d9a5
 
 class BuyNowModal extends Component {
   constructor(props) {
     super(props);
 
+<<<<<<< HEAD
     this.state = {
 
     };
+=======
+    this.state = {};
+>>>>>>> 41497d2cb8e48592c49c6b2005ce8a3572d2d9a5
   }
 
   render() {
@@ -28,7 +36,6 @@ class BuyNowModal extends Component {
 }
 
 export default BuyNowModal;
-
 
 // import React from 'react'
 // import { Button, Header, Image, Modal } from 'semantic-ui-react'

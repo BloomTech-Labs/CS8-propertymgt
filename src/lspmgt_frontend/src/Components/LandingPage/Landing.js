@@ -2,26 +2,25 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import LandingCarousel from './LandingCarousel';
-import BuyNowModal from '../Payment/BuyNowModal';
-
+import BuyNowModal from './BuyNowModal';
 
 import './Landing.css';
-
 
 export default class Landing extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-
+      isOpen: true,
     };
   }
 
-  // toggleModal = () => {
-  //   this.setState({
-  //     isOpen: !this.state.isOpen,
-  //   });
-  // }
+  toggleModal = () => {
+    const { isOpen } = this.state;
+    this.setState({
+      isOpen: !isOpen,
+    });
+  };
 
   render() {
     return (
@@ -32,9 +31,7 @@ export default class Landing extends Component {
           <BuyNowModal />
           {/* Link "Log In" button to login page */}
           <Link to="/login">
-            <Button secondary>
-              Log In
-            </Button>
+            <Button secondary>Log In</Button>
           </Link>
         </div>
         <div className="ui center aligned middle aligned grid">
