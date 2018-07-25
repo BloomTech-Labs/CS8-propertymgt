@@ -16,6 +16,7 @@ app.use(require('body-parser').text());
 // app.use(bodyParser.json());
 
 app.use(cors());
+// app.use('/users', userRouter);
 app.use('/users', UserRouter);
 app.use('/billing', billingRouter);
 app.use('/api/admin', adminRouter);
