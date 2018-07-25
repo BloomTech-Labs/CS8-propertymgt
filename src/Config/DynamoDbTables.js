@@ -4,8 +4,8 @@
 // Properties -> For Properties
 // Tenants -> Tenant info
 module.exports = tables = {
-  LS_DB,
-  Admins,
-  Properties,
-  Tenants,
+  LS_DB: 'LS_DB',
+  Admins: 'Admins',
+  Properties: 'Properties',
+  Tenants: 'Tenants',
 };
