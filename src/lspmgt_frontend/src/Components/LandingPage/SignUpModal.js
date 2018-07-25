@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
-
+import SignUpForm from './SignUpForm';
 
 class SignUpModal extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   render() {
@@ -18,12 +16,12 @@ class SignUpModal extends Component {
         <Modal.Content>
           <Modal.Description>
             <Header>Username</Header>
+            <SignUpForm />
           </Modal.Description>
         </Modal.Content>
       </Modal>
     );
   }
 }
-
 
 export default SignUpModal;
