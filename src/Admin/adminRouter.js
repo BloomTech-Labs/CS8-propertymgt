@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const dd = require('../Config/AwsConfig');
 const dbModel = require('../Config/DbModel');
+const hashingId = require('../Common/HashingId');
 
 // used for development only
 const faker = require('faker');
@@ -61,7 +62,7 @@ router.post('/addproperty', (req, res) => {
       Bedrooms: req.body.Bedrooms,
       Bathrooms: req.body.Bathrooms,
       YearBuilt: req.body.YearBuilt,
-      propertyId: IncrementId(),
+      propertyId: hashingId,
     },
   };
 
