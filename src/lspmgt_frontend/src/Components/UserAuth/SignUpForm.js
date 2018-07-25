@@ -38,6 +38,8 @@ export default class SignUp extends Component {
   };
 
   render() {
+    const { Name, Email, Phone } = this.state;
+
     return (
       <Form>
         <Form.Input
@@ -45,7 +47,7 @@ export default class SignUp extends Component {
           placeholder="Tenant name.."
           type="text"
           name="Name"
-          value={this.state.Name}
+          value={Name}
           onChange={this.handleInput}
         />
         <Form.Input
@@ -53,7 +55,7 @@ export default class SignUp extends Component {
           placeholder="Tenant email.."
           type="text"
           name="Email"
-          value={this.state.Email}
+          value={Email}
           onChange={this.handleInput}
         />
         <Form.Input
@@ -61,7 +63,7 @@ export default class SignUp extends Component {
           placeholder="Tenant phone.."
           type="text"
           name="Phone"
-          value={this.state.Phone}
+          value={Phone}
           onChange={this.handleInput}
         />
         <Button disabled={!this.canBeDisplayed()} type="Submit" onClick={this.handleSubmit}>
