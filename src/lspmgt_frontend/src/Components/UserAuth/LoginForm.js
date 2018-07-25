@@ -58,7 +58,6 @@ export default class Login extends Component {
               </Segment>
             </Form>
             <Message>
-              {/* link to /signup instead of /admin/properties */}
               New to us? <SignUpModal />
             </Message>
             <Link to="/">
