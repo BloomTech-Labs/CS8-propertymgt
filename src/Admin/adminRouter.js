@@ -1,9 +1,12 @@
 const express = require('express');
-
 const router = express.Router();
 const dd = require('../Config/AwsConfig');
-// const dbModel = require('../Config/DbModel');
-// const faker = require('faker');
+const dbModel = require('../Config/DbModel');
+const hashingId = require('../Common/HashingId');
+const { Admins } = require('../Config/DynamoDbTables');
+
+// used for development only
+const faker = require('faker');
 
 const GlobalParams = {
   TableName: 'ls_property_mgt',
@@ -59,7 +62,8 @@ router.post('/addproperty', (req, res) => {
       Bedrooms: req.body.Bedrooms,
       Bathrooms: req.body.Bathrooms,
       YearBuilt: req.body.YearBuilt,
-      propertyId: IncrementId(),
+      propertyId: hashingId,
+      aster,
     },
   };
 
