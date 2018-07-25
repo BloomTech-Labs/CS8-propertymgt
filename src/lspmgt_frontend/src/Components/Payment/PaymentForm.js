@@ -9,8 +9,9 @@ class PaymentForm extends Component {
 
   async submit(e) {
     // user clicked submit
-    let { token } = await this.props.stripe.createToken({ name: 'Name' });
-    let response = await fetch('/billing/testcharge', {
+    const { stripe } = this.props; // === this.props.stripe
+    const { token } = await stripe.createToken({ name: 'Name' });
+    const response = await fetch('/billing/testcharge', {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
       body: token.id,
@@ -24,7 +25,9 @@ class PaymentForm extends Component {
       <div className="checkout">
         <p>Complete Purchase?</p>
         <CardElement />
-        <button onClick={this.submit}>Confirm</button>
+        <button onClick={this.submit} type="button">
+          Confirm
+        </button>
       </div>
     );
   }
