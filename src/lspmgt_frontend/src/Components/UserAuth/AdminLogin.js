@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Modal, Header, Segment } from 'semantic-ui-react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class AdminLogin extends Component {
   constructor(props) {
@@ -45,9 +46,11 @@ class AdminLogin extends Component {
             <Segment raised style={{ maxWidth: '100%' }}>
               <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" />
               <Form.Input fluid icon="lock" iconPosition="left" placeholder="Password" />
-              <Button color="blue" fluid size="large">
-                Login
-              </Button>
+              <Link to="/admin/properties">
+                <Button color="blue" fluid size="large">
+                  Login
+                </Button>
+              </Link>
             </Segment>
           </Form>
         </Modal.Content>
