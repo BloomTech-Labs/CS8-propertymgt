@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
 import axios from 'axios';
 
-export default class SignUp extends Component {
+export default class AdminSignUp extends Component {
   state = {
     Name: '',
     Email: '',
     Phone: '',
+    Password: '',
+    RetypePassword: '',
   };
 
   // handle all input field changes
@@ -22,7 +24,7 @@ export default class SignUp extends Component {
     const temp = { User: this.state };
 
     axios
-      .post('http://localhost:5000/users/signup', temp)
+      .post('http://localhost:5000/users/admin/signup', temp)
       .then((res) => {
         console.log('Posted user..', res);
       })
@@ -38,13 +40,13 @@ export default class SignUp extends Component {
   };
 
   render() {
-    const { Name, Email, Phone } = this.state;
+    const { Name, Email, Phone, Password, RetypePassword } = this.state;
 
     return (
       <Form>
         <Form.Input
           label="Name"
-          placeholder="Tenant name.."
+          placeholder="Admin name.."
           type="text"
           name="Name"
           value={Name}
@@ -60,10 +62,26 @@ export default class SignUp extends Component {
         />
         <Form.Input
           label="Phone"
-          placeholder="Tenant phone.."
+          placeholder="Admin phone.."
           type="text"
           name="Phone"
           value={Phone}
+          onChange={this.handleInput}
+        />
+        <Form.Input
+          label="Password"
+          placeholder="Enter Password"
+          type="text"
+          name="Password"
+          value={Password}
+          onChange={this.handleInput}
+        />
+        <Form.Input
+          label="RetypePassword"
+          placeholder="Confirm your Password"
+          type="text"
+          name="RetypePassword"
+          value={RetypePassword}
           onChange={this.handleInput}
         />
         <Button disabled={!this.canBeDisplayed()} type="Submit" onClick={this.handleSubmit}>
