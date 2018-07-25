@@ -7,7 +7,7 @@ const router = express.Router();
 
 // global TableName in params is 'ls_property_mgt'
 
-router.get('/', (req, res) => {
+router.get('/list', (req, res) => {
   const params = {
     TableName: 'Admins',
     // temporary key, does not work yet
