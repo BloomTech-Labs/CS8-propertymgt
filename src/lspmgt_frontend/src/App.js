@@ -3,7 +3,7 @@ import './semantic/dist/semantic.min.css';
 import './App.css';
 import { Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
-import LoginForm from './Components/UserAuth/LoginForm';
+import Login from './Components/UserAuth/Login';
 import Landing from './Components/LandingPage/Landing';
 import AdminNavigation from './Components/Admin/AdminNavigation';
 import TenantNavigation from './Components/Tenant/Navigation/TenantNavigation';
@@ -47,7 +47,7 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" component={LandingPage} />
-        <Route path="/login" component={LoginForm} />
+        <Route path="/login" component={Login} />
         {/* <Route path="/signup" component={SignUpForm} /> */}
         <Route path="/admin/(.+)" component={AdminNavigation} />
         <Route path="/tenant/(.+)" component={TenantNavigation} />

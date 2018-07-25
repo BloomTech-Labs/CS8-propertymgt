@@ -3,8 +3,8 @@ import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import AdminSignUpModal from './AdminSignUpModal';
-import TenantSignUpModal from './TenantSignUpModal';
+import TenantLogin from './TenantLogin';
+import AdminLogin from './AdminLogin';
 
 export default class Login extends Component {
   state = {
@@ -49,7 +49,7 @@ export default class Login extends Component {
             <Header as="h1" color="blue" textAlign="center">
               PropertyMaxx
             </Header>
-            <Form size="large" style={{ maxWidth: '100%' }}>
+            {/* <Form size="large" style={{ maxWidth: '100%' }}>
               <Segment raised style={{ maxWidth: '100%' }}>
                 <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" />
                 <Form.Input fluid icon="lock" iconPosition="left" placeholder="Password" />
@@ -57,11 +57,10 @@ export default class Login extends Component {
                   Login
                 </Button>
               </Segment>
-            </Form>
-            <Message>
-              {/* link to /signup instead of /admin/properties */}
-              <AdminSignUpModal /> <TenantSignUpModal />
-            </Message>
+            </Form> */}
+            <Segment>
+              <AdminLogin /> <TenantLogin />
+            </Segment>
             <Link to="/">
               <Button secondary>Back</Button>
             </Link>
