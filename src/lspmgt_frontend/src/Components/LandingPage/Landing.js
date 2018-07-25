@@ -11,16 +11,16 @@ export default class Landing extends Component {
     super(props);
 
     this.state = {
-      isOpen: true,
+      // isOpen: true,
     };
   }
 
-  toggleModal = () => {
-    const { isOpen } = this.state;
-    this.setState({
-      isOpen: !isOpen,
-    });
-  };
+  // toggleModal = () => {
+  //   const { isOpen } = this.state;
+  //   this.setState({
+  //     isOpen: !isOpen,
+  //   });
+  // };
 
   render() {
     return (
