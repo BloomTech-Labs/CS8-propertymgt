@@ -12,24 +12,22 @@ export default class Login extends Component {
     password: '',
   };
 
-  // handle all input field changes
-  handleInput = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+  handleInput = (e) => {
+    this.setState({ [e.target.type]: e.target.value });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    // eslint suggests destructuring the next line
-    const { username, password } = this.state;
-    if (username && password) {
-      axios
-        // need /login route via userRouter.js, nonexistent
-        .post('/login', this.state)
-        .then()
-        .catch();
-    }
+    console.log('this is the submit -> ', this.state);
+    // // eslint suggests destructuring the next line
+    // const { username, password } = this.state;
+    // if (username && password) {
+    //   axios
+    //     // need /login route via userRouter.js, nonexistent
+    //     .post('/login', this.state)
+    //     .then()
+    //     .catch();
+    // }
   };
 
   render() {
@@ -49,10 +47,24 @@ export default class Login extends Component {
             <Header as="h1" color="blue" textAlign="center">
               PropertyMaxx
             </Header>
-            <Form size="large" style={{ maxWidth: '100%' }}>
+            <Form size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
               <Segment raised style={{ maxWidth: '100%' }}>
-                <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" />
-                <Form.Input fluid icon="lock" iconPosition="left" placeholder="Password" />
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  type="email"
+                  placeholder="E-mail address"
+                  onChange={this.handleInput}
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                  onChange={this.handleInput}
+                />
                 <Button color="blue" fluid size="large">
                   Login
                 </Button>
