@@ -26,12 +26,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
+  const user = req.body.User;
+
   const params = {
     TableName: 'ls_property_mgt',
     Item: {
-      Name: req.Name,
-      Email: req.Email,
-      Phone: req.phoneNumber,
+      propertyId: 1,
+      Name: user.Name,
+      Email: user.Email,
+      Phone: user.Phone,
+      Password: 'notapassword',
     },
   };
 

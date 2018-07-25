@@ -15,18 +15,18 @@ router.get('/', (req, res) => {
 });
 
 // Stripe Charge Route WORKING
-// router.post('/testcharge', (req, res) => {
-//     const cost = 2500;
-//     // Basic Charge -- WORKING
-//     stripe.charges.create({
-//         amount: cost,
-//         currency: 'cad',
-//         source: 'tok_amex',
-//         description: 'Hello Stripe World'
-//     }, function (err, charge) {
-//         if (err) res.status(200).json({ status: 'error', error: err });
-//         res.status(200).json({ status: 'charge complete', data: charge });
-//     })
+router.post('/testcharge', (req, res) => {
+    const cost = 2500;
+    // Basic Charge -- WORKING
+    stripe.charges.create({
+        amount: cost,
+        currency: 'cad',
+        source: 'tok_amex',
+        description: 'Hello Stripe World'
+    }, function (err, charge) {
+        if (err) res.status(200).json({ status: 'error', error: err });
+        res.status(200).json({ status: 'charge complete', data: charge });
+    })
 
 // charge made with New Customer -- NOT WORKING
 // stripe.customers.create({
