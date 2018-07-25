@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   const params = {
-    TableName: 'ls_property_mgt',
+    TableName: 'Admins',
     // temporary key, does not work yet
     // Key: {
     //   userId: 0,
@@ -26,12 +26,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
+  console.log(req.body);
+  const user = req.body;
   const params = {
-    TableName: 'ls_property_mgt',
+    TableName: 'Admins',
     Item: {
-      Name: req.Name,
-      Email: req.Email,
-      Phone: req.phoneNumber,
+      Name: user.Name,
+      Email: user.Email,
+      Phone: user.Phone,
+      Password: user.Password,
+      adminId: user.adminId,
     },
   };
 
