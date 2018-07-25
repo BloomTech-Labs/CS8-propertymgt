@@ -22,18 +22,18 @@ const LandingPage = () => {
   );
 };
 // sample sign up flow for cognito using amplify library.
-const LoginTest = () => {
-  Auth.signUp({
-    username: 'lambdapropertymgt@gmail.com',
-    password: '*.abcABC12345',
-  })
-    .then((data) => {
-      console.log('success, --> ', data);
-    })
-    .catch((err) => {
-      console.log('there was an error -> ', err);
-    });
-};
+// const LoginTest = () => {
+//   Auth.signUp({
+//     username: 'lambdapropertymgt@gmail.com',
+//     password: '*.abcABC12345',
+//   })
+//     .then((data) => {
+//       console.log('success, --> ', data);
+//     })
+//     .catch((err) => {
+//       console.log('there was an error -> ', err);
+//     });
+// };
 
 class App extends Component {
   render() {
@@ -42,7 +42,7 @@ class App extends Component {
     // Bring up console on your browser and then save this file...
     //  Upon auto reload you should see your information on the browser console.
 
-    LoginTest();
+    // LoginTest();
     return (
       <div>
         <Route exact path="/" component={LandingPage} />

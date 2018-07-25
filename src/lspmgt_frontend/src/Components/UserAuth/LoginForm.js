@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { Auth } from 'aws-amplify';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+// import AmplifyConfig from './Config/Auth';
+
+// Amplify.configure(AmplifyConfig);
 
 import AdminSignUpModal from './AdminSignUpModal';
 import TenantSignUpModal from './TenantSignUpModal';
@@ -13,22 +17,17 @@ export default class Login extends Component {
   };
 
   handleInput = (e) => {
-    this.setState({ [e.target.type]: e.target.value });
+    // this.setState({ [e.target.type]: e.target.value });
   };
 
   handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('this is the submit -> ', this.state);
-    // // eslint suggests destructuring the next line
-    // const { username, password } = this.state;
-    // if (username && password) {
-    //   axios
-    //     // need /login route via userRouter.js, nonexistent
-    //     .post('/login', this.state)
-    //     .then()
-    //     .catch();
-    // }
+    // event.preventDefault();
+    // console.log(Amplify);
   };
+
+  Auth.signIn(username, password)
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
 
   render() {
     return (
