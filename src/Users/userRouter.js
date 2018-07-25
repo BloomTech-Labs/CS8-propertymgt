@@ -26,16 +26,16 @@ router.get('/list', (req, res) => {
   // res.status(200).json({ status: 'userRouter connected properly' });
 });
 
-router.post('/signup', (req, res) => {
+router.post('/admin/signup', (req, res) => {
   console.log(req.body);
-  const user = req.body;
+  const { Name, Email, Phone, Password } = req.body;
   const params = {
     TableName: 'Admins',
     Item: {
-      Name: user.Name,
-      Email: user.Email,
-      Phone: user.Phone,
-      Password: user.Password,
+      Name,
+      Email,
+      Phone,
+      Password,
       adminId: hashingId,
     },
   };
