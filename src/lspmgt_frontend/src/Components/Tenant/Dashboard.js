@@ -7,3 +7,5 @@ class Dashboard extends Component {
     this.state = {};
   }
 }
+
+export default Dashboard;

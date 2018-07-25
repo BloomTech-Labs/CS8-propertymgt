@@ -6,6 +6,7 @@ import { Container } from 'semantic-ui-react';
 import LoginForm from './Components/UserAuth/LoginForm';
 import Landing from './Components/LandingPage/Landing';
 import AdminNavigation from './Components/Admin/AdminNavigation';
+import TenantNavigation from './Components/Tenant/Navigation/TenantNavigation';
 // import SignUpForm from './Components/UserAuth/SignUpForm';
 
 // this is a test for aws cognito auth.
@@ -49,6 +50,7 @@ class App extends Component {
         <Route path="/login" component={LoginForm} />
         {/* <Route path="/signup" component={SignUpForm} /> */}
         <Route path="/admin/(.+)" component={AdminNavigation} />
+        <Route path="/tenant/(.+)" component={TenantNavigation} />
         {/* <Route path="/payment" component={Payment} /> */}
       </div>
     );

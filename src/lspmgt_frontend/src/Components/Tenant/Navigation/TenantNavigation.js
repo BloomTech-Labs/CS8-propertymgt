@@ -3,7 +3,8 @@ import './TenantNavigation.css';
 import { Link, Route } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
-import Dashboard from '../Dashboard';
+import Dashboard from '../Dashboard.js';
+import Payments from '../Payments/Payments';
 import Settings from '../Settings/Settings';
 import WorkOrders from '../WorkOrders/WorkOrders';
 
@@ -28,11 +29,10 @@ const SideBar = () => {
         <Link to="/tenant/workorders">Work Orders</Link>
         <Link to="/tenant/settings">Settings</Link>
       </div>
-      <Route path="/admin/properties" component={Properties} />
       <Route path="/tenant/dashboard" component={Dashboard} />
       <Route path="/tenant/payments" component={Payments} />
       <Route path="/tenant/workorders" component={WorkOrders} />
-      <Route path="/tenant/"
+      <Route path="/tenant/settings" component={Settings} />
     </div>
   );
 };
