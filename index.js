@@ -7,14 +7,15 @@ const adminRouter = require('./src/Admin/adminRouter');
 const tenantRouter = require('./src/Tenant/tenantRouter');
 const billingRouter = require('./src/Billing/BillingRouter');
 // const bodyParser = require('body-parser');
-// const cors = require('cors');
+const cors = require('cors');
 
 app.use(express.json());
 app.use(require('body-parser').text());
 
 // app.use(bodyParser.json());
-// app.use(cors());
-// app.use('/users', userRouter);
+
+app.use(cors());
+app.use('/users', userRouter);
 app.use('/billing', billingRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/tenant', tenantRouter);

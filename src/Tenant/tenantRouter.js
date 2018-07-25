@@ -19,13 +19,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
+  console.log(req.body);
+  const user = req.body;
   const params = {
-    TableName: Tenant,
+    TableName: 'Admins',
     Item: {
-      TenantId: hashingId,
-      Name: req.Name,
-      Email: req.Email,
-      Phone: req.phoneNumber,
+      Name: user.Name,
+      Email: user.Email,
+      Phone: user.Phone,
+      Password: user.Password,
+      adminId: user.adminId,
     },
   };
 
@@ -39,5 +42,4 @@ router.post('/signup', (req, res) => {
     }
   });
 });
-
 module.exports = router;

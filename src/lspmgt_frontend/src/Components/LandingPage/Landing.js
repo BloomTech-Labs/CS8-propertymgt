@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import LandingCarousel from './LandingCarousel';
-import BuyNowModal from '../Payment/BuyNowModal';
 import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import LandingCarousel from './LandingCarousel';
+import BuyNowModal from '../Payment/BuyNowModal';
 
 import './Landing.css';
 
@@ -49,4 +49,4 @@ export default class Landing extends Component {
   }
 }
 
-// export default Landing;
+// export default Landing
