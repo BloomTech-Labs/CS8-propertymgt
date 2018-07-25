@@ -122,9 +122,6 @@ export default class SignUp extends Component {
                 </Button>
               </Segment>
             </Form>
-            <Link to="/login">
-              <Button secondary>Back</Button>
-            </Link>
           </Grid.Column>
         </Grid>
       </div>
