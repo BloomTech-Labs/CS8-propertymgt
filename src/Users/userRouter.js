@@ -51,4 +51,29 @@ router.post('/admin/signup', (req, res) => {
   });
 });
 
+router.post('/tenant/signup', (req, res) => {
+  console.log(req.body);
+  const { Name, Email, Phone, Password } = req.body;
+  const params = {
+    TableName: 'Tenants',
+    Item: {
+      Name,
+      Email,
+      Phone,
+      Password,
+      tenantId: hashingId,
+    },
+  };
+
+  dd.put(params, (err, d) => {
+    if (err) {
+      console.log(err);
+      res.status(200).json({ status: 'error', error: err });
+    } else {
+      console.log(d);
+      res.status(200).json({ status: 'success', data: d });
+    }
+  });
+});
+
 module.exports = router;

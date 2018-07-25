@@ -1,16 +1,17 @@
 // this file needs to be broken down into smaller parts
-const express = require('express');
+const express = require('../../.cache/typescript/2.9/node_modules/@types/express');
 const log = require('./src/Common/Show');
+
 const app = express();
 const UserRouter = require('./src/Users/userRouter');
 const adminRouter = require('./src/Admin/adminRouter');
 const tenantRouter = require('./src/Tenant/tenantRouter');
 const billingRouter = require('./src/Billing/BillingRouter');
 // const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('../../.cache/typescript/2.9/node_modules/@types/cors');
 
 app.use(express.json());
-app.use(require('body-parser').text());
+app.use(require('../../.cache/typescript/2.9/node_modules/@types/body-parser').text());
 
 // app.use(bodyParser.json());
 

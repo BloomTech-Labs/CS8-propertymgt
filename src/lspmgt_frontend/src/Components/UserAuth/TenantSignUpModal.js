@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
-import SignUpForm from './SignUpForm';
+import SignUpForm from './TenantSignUpForm';
 
 class TenantSignUpModal extends Component {
   constructor(props) {
