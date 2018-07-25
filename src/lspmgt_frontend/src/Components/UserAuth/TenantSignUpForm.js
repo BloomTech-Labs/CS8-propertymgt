@@ -7,6 +7,8 @@ export default class SignUp extends Component {
     Name: '',
     Email: '',
     Phone: '',
+    Password: '',
+    RetypePassword: '',
   };
 
   // handle all input field changes
@@ -22,7 +24,7 @@ export default class SignUp extends Component {
     const temp = { User: this.state };
 
     axios
-      .post('http://localhost:5000/users/signup', temp)
+      .post('http://localhost:5000/users/tenant/signup', temp)
       .then((res) => {
         console.log('Posted user..', res);
       })
@@ -38,7 +40,7 @@ export default class SignUp extends Component {
   };
 
   render() {
-    const { Name, Email, Phone } = this.state;
+    const { Name, Email, Phone, Password, RetypePassword } = this.state;
 
     return (
       <Form>
@@ -64,6 +66,22 @@ export default class SignUp extends Component {
           type="text"
           name="Phone"
           value={Phone}
+          onChange={this.handleInput}
+        />
+        <Form.Input
+          label="Password"
+          placeholder="Enter Password"
+          type="text"
+          name="Password"
+          value={Password}
+          onChange={this.handleInput}
+        />
+        <Form.Input
+          label="RetypePassword"
+          placeholder="Confirm your Password"
+          type="text"
+          name="RetypePassword"
+          value={RetypePassword}
           onChange={this.handleInput}
         />
         <Button disabled={!this.canBeDisplayed()} type="Submit" onClick={this.handleSubmit}>
