@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Form, Input, Button } from 'semantic-ui-react';
 import axios from 'axios';
 
 export default class SignUp extends Component {
@@ -16,53 +15,59 @@ export default class SignUp extends Component {
     this.setState({ [name]: value });
   };
 
+  // sends new user information to db
   handleSubmit = (event) => {
     event.preventDefault();
-    const { Name, Email, Phone } = this.state;
 
-    // eslint suggests destructuring the next line
-    if (Name && Email) {
-      axios
-        // /signup route via userRouter.js
-        .post('/user/signup', this.state)
-        .then()
-        .catch();
-    }
+    const temp = { User: this.state };
+
+    axios
+      .post('http://localhost:5000/users/signup', temp)
+      .then((res) => {
+        console.log('Posted user..', res);
+      })
+      .catch((err) => {
+        console.log('Error in SignUpForm', err);
+      });
+  };
+
+  // determines if submit button displays using boolean
+  canBeDisplayed = () => {
+    const { Name, Email, Phone } = this.state;
+    return Name.length > 0 && Email.length > 0 && Phone.length > 0;
   };
 
   render() {
     return (
-      <div className="signup-form">
-        <style>
-          {`
-            body > div,
-            body > div > div,
-            body > div > div > div.signup-form {
-              height: 100%;
-            }
-          `}
-        </style>
-        <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h1" color="blue" textAlign="center">
-              PropertyMaxx
-            </Header>
-            <Form size="large" style={{ maxWidth: '100%' }}>
-              <Segment raised style={{ maxWidth: '100%' }}>
-                <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" />
-                <Form.Input fluid icon="lock" iconPosition="left" placeholder="Password" />
-                <Form.Input fluid icon="lock" iconPosition="left" placeholder="Re-type Password" />
-                <Button color="blue" fluid size="large">
-                  Sign Up
-                </Button>
-              </Segment>
-            </Form>
-            <Link to="/login">
-              <Button secondary>Back</Button>
-            </Link>
-          </Grid.Column>
-        </Grid>
-      </div>
+      <Form>
+        <Form.Input
+          label="Name"
+          placeholder="Tenant name.."
+          type="text"
+          name="Name"
+          value={this.state.Name}
+          onChange={this.handleInput}
+        />
+        <Form.Input
+          label="Email"
+          placeholder="Tenant email.."
+          type="text"
+          name="Email"
+          value={this.state.Email}
+          onChange={this.handleInput}
+        />
+        <Form.Input
+          label="Phone"
+          placeholder="Tenant phone.."
+          type="text"
+          name="Phone"
+          value={this.state.Phone}
+          onChange={this.handleInput}
+        />
+        <Button disabled={!this.canBeDisplayed()} type="Submit" onClick={this.handleSubmit}>
+          Submit
+        </Button>
+      </Form>
     );
   }
 }
