@@ -1,0 +1,6 @@
+[Settings]
+ID = "d3c72336-7565-4e82-88a4-f1e8ffd041f8"
+
+[build]
+base = "lspmgt_frontend/"
+publish = "lspmgt_frontend/build"
