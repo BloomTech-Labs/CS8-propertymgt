@@ -57,7 +57,7 @@ export default class Login extends Component {
             </Form>
             <Message>
               {/* link to /signup instead of /admin/properties */}
-              New to us? <a href="/admin/properties">Sign Up</a>
+              New to us? <a href="/signup">Sign Up</a>
             </Message>
             <Link to="/">
               <Button secondary>Back</Button>
