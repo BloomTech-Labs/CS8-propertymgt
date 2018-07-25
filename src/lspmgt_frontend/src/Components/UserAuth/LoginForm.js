@@ -3,7 +3,8 @@ import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import SignUpModal from './SignUpModal';
+import AdminSignUpModal from './AdminSignUpModal';
+import TenantSignUpModal from './TenantSignUpModal';
 
 export default class Login extends Component {
   state = {
@@ -58,7 +59,8 @@ export default class Login extends Component {
               </Segment>
             </Form>
             <Message>
-              New to us? <SignUpModal />
+              {/* link to /signup instead of /admin/properties */}
+              <AdminSignUpModal /> <TenantSignUpModal />
             </Message>
             <Link to="/">
               <Button secondary>Back</Button>
