@@ -2,6 +2,7 @@
 
 const express = require('express');
 const dd = require('../Config/AwsConfig');
+const hashingId = require('../Common/HashingId');
 
 const router = express.Router();
 
@@ -35,7 +36,7 @@ router.post('/signup', (req, res) => {
       Email: user.Email,
       Phone: user.Phone,
       Password: user.Password,
-      adminId: user.adminId,
+      adminId: hashingId,
     },
   };
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
 import SignUpForm from './SignUpForm';
 
-class SignUpModal extends Component {
+class AdminSignUpModal extends Component {
   constructor(props) {
     super(props);
 
@@ -11,7 +11,7 @@ class SignUpModal extends Component {
 
   render() {
     return (
-      <Modal trigger={<a href="#">Sign Up</a>}>
+      <Modal trigger={<Button secondary>New Admin</Button>}>
         <Modal.Header>Create New User</Modal.Header>
         <Modal.Content>
           <Modal.Description>
@@ -24,4 +24,4 @@ class SignUpModal extends Component {
   }
 }
 
-export default SignUpModal;
+export default AdminSignUpModal;
