@@ -1,20 +1,13 @@
 import React from 'react';
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment,
-} from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import SignUpModal from './SignUpModal';
 
-
 const LoginForm = () => (
   <div className="login-form">
-    <style>{`
+    <style>
+      {`
       body > div,
       body > div > div,
       body > div > div > div.login-form {
@@ -39,9 +32,9 @@ const LoginForm = () => (
         <Message>
           New to us? <SignUpModal />
         </Message>
-        <Link to="/">
+        {/* <Link to="/">
           <Button secondary>Back</Button>
-        </Link>
+        </Link> */}
       </Grid.Column>
     </Grid>
   </div>

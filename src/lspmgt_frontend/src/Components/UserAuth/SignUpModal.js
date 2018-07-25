@@ -11,7 +11,7 @@ class SignUpModal extends Component {
 
   render() {
     return (
-      <Modal trigger={<Button secondary>Sign Up</Button>}>
+      <Modal trigger={<a href="#">Sign Up</a>}>
         <Modal.Header>Create New User</Modal.Header>
         <Modal.Content>
           <Modal.Description>
