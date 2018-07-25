@@ -3,6 +3,7 @@ const router = express.Router();
 const dd = require('../Config/AwsConfig');
 const dbModel = require('../Config/DbModel');
 const hashingId = require('../Common/HashingId');
+const { Admins } = require('../Config/DynamoDbTables');
 
 // used for development only
 const faker = require('faker');
