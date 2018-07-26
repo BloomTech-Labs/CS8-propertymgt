@@ -30,7 +30,7 @@ class AddTenant extends Component {
     e.preventDefault();
 
     axios
-      .post('http://localhost:5000/api/admin/addproperty', this.state)
+      .post('http://localhost:5000/api/admin/addTenant', this.state)
       .then((res) => {
         console.log(`Added ${this.state} to server`, res);
       })
@@ -75,7 +75,7 @@ class AddTenant extends Component {
                   onChange={this.handleInput}
                   placeholder="Email"
                 />
-                <Button type="submit" onClick={this.hS} primary>
+                <Button type="submit" onClick={this.handleSubmit} primary>
                   Submit
                 </Button>
               </Form>
@@ -103,7 +103,7 @@ class AddTenant extends Component {
                   onChange={this.handleInput}
                   placeholder="Email"
                 />
-                <Button type="submit" onClick={this.hS} primary>
+                <Button type="submit" onClick={this.handleSubmit} primary>
                   Submit
                 </Button>
               </Form>

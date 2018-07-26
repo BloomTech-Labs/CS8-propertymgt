@@ -7,6 +7,7 @@ const hashingId = require('../Common/HashingId');
 
 const router = express.Router();
 
+// Gets all tenants
 router.get('/', (req, res) => {
   dd.scan(Admins, (err, d) => {
     if (err) {
@@ -15,7 +16,6 @@ router.get('/', (req, res) => {
       res.status(200).json({ status: 'success', data: d });
     }
   });
-  // res.status(200).json({ status: 'userRouter connected properly' });
 });
 
 router.post('/signup', (req, res) => {

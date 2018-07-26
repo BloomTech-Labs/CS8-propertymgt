@@ -6,17 +6,6 @@ const dbModel = require('../Config/DbModel');
 const hashingId = require('../Common/HashingId');
 const { Admins } = require('../Config/DynamoDbTables');
 
-// used for development only
-// const faker = require('faker');
-
-const GlobalParams = {
-  TableName: 'ls_property_mgt',
-};
-
-// Below commented due to implementation of hashId
-// let PROPERTY_ID = 1;
-// const IncrementId = () => PROPERTY_ID++;
-
 // return all the properties for property cards screen
 router.get('/property', (req, res) => {
   console.log(req.body);
@@ -124,6 +113,7 @@ router.get('/workorder', (req, res) => {
 
 // post, it adds a new tenant to the system
 router.post('/addtenant', (req, res) => {
+  console.log('addtenant POST method in admin triggered.. ');
   const { T1Name, T1Phone, T1Email, T2Name, T2Phone, T2Email } = req.body;
   const params = {
     TableName: 'Tenants',
@@ -173,8 +163,6 @@ router.patch('/settingsupdate/:id', (req, res) => {
     if (err) console.log(err);
     else console.log(data);
   });
-
-  res.status(200).json({ status: 'returns all properties for cards' });
 });
 
 // display admin settings
