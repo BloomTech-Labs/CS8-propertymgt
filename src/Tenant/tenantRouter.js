@@ -27,7 +27,7 @@ router.post('/signup', (req, res) => {
       Email: user.Email,
       Phone: user.Phone,
       Password: user.Password,
-      adminId: user.adminId,
+      adminId: hashingId,
     },
   };
 
@@ -56,6 +56,7 @@ router.post('/workorder', (req, res) => {
         Issue: wo.Issue,
         PhotoIssue: 'smiley_face',
         Permission: wo.Permission,
+        TenantPhone: wo.TenantPhone,
         Status: false,
       },
     },
