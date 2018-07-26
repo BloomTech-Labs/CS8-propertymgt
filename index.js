@@ -9,9 +9,15 @@ const tenantRouter = require('./src/Tenant/tenantRouter');
 const billingRouter = require('./src/Billing/BillingRouter');
 // const bodyParser = require('body-parser');
 const cors = require('cors');
+var path    = require("path");
 
 app.use(express.json());
 app.use(require('body-parser').text());
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname+ '/src/lspmgt_frontend/dist/index.html'));
+});
 
 // app.use(bodyParser.json());
 
