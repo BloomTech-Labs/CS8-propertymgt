@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Form, Input, Button, Message } from 'semantic-ui-react';
 import './AddProperty.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 // Takes Owner and Tenant info while displaying contract
 class AddProperty extends Component {
@@ -162,6 +163,9 @@ class AddProperty extends Component {
         <Button type="submit" onClick={this.hS} primary>
           Submit
         </Button>
+        <Link to="/admin/properties">
+          <Button secondary>Back</Button>
+        </Link>
       </Grid>
     );
   }

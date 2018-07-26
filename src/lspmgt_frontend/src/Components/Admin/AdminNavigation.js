@@ -3,7 +3,7 @@ import './AdminNavigation.css';
 import { Link, Route } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
-import Properties from './Properties';
+import Properties from './Properties/Properties';
 import AddProperty from './AddProperty/AddProperty';
 import EditProperty from './EditProperty';
 import WorkOrderA from './WorkOrderA';
@@ -18,7 +18,8 @@ const TopBar = () => {
         <Link to="/"> Home </Link>
         <Icon name="triangle right" />
       </div>
-      <div>Sign-out</div>
+
+      <Link to="/login">Sign-out</Link>
     </div>
   );
 };

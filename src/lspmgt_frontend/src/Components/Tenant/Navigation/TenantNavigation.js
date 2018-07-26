@@ -15,7 +15,7 @@ const TopBar = () => {
         <Link to="/"> Home </Link>
         <Icon name="triangle right" />
       </div>
-      <div>Sign-out</div>
+      <Link to="/login">Sign-out</Link>
     </div>
   );
 };

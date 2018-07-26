@@ -7,6 +7,7 @@ const hashingId = require('../Common/HashingId');
 
 const router = express.Router();
 
+// Gets all tenants
 router.get('/', (req, res) => {
   dd.scan(Admins, (err, d) => {
     if (err) {
@@ -15,7 +16,6 @@ router.get('/', (req, res) => {
       res.status(200).json({ status: 'success', data: d });
     }
   });
-  // res.status(200).json({ status: 'userRouter connected properly' });
 });
 
 router.post('/signup', (req, res) => {
@@ -27,7 +27,7 @@ router.post('/signup', (req, res) => {
       Email: user.Email,
       Phone: user.Phone,
       Password: user.Password,
-      adminId: user.adminId,
+      adminId: hashingId,
     },
   };
 
@@ -47,14 +47,16 @@ router.post('/workorder', (req, res) => {
   const params = {
     TableName: 'Tenants',
     Key: {
-      tenantId: '1',
+      tenantId: '9dd974cffa981a3e49af',
     },
-    Items: {
+    Item: {
+      tenantId: '9dd974cffa981a3e49af',
       WOrder: {
         PropertyAddr: wo.PropertyAddr,
         Issue: wo.Issue,
         PhotoIssue: 'smiley_face',
         Permission: wo.Permission,
+        TenantPhone: wo.TenantPhone,
         Status: false,
       },
     },
