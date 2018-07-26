@@ -17,7 +17,7 @@ class Properties extends Component {
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/admin/properties')
+      .get('http://localhost:5000/api/admin/property')
       .then((response) => {
         this.setState({
           list: response.data.data.Items,
