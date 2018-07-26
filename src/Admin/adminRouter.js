@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const dd = require('../Config/AwsConfig');
 const dbModel = require('../Config/DbModel');
@@ -6,22 +7,22 @@ const hashingId = require('../Common/HashingId');
 const { Admins } = require('../Config/DynamoDbTables');
 
 // used for development only
-const faker = require('faker');
+// const faker = require('faker');
 
 const GlobalParams = {
   TableName: 'ls_property_mgt',
 };
 
-let PROPERTY_ID = 1;
-
-const IncrementId = () => PROPERTY_ID++;
+// Below commented due to implementation of hashId
+// let PROPERTY_ID = 1;
+// const IncrementId = () => PROPERTY_ID++;
 
 // return all the properties for property cards screen
 router.get('/properties', (req, res) => {
   dd.scan(GlobalParams, (err, data) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
-    } else res.status(200).json({ status: 'success', data: data });
+    } else res.status(200).json({ status: 'success', data });
   });
 });
 
@@ -39,7 +40,7 @@ router.get('/property/:id', (req, res) => {
       res.status(200).json({ status: 'error', error: err });
     } else {
       console.log(typeof params.Key.propertyId);
-      res.status(200).json({ status: 'success', data: data });
+      res.status(200).json({ status: 'success', data });
     }
   });
 });

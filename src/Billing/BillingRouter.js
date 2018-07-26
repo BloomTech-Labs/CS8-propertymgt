@@ -1,5 +1,5 @@
 const express = require('express');
-.
+
 const router = express.Router();
 // const dd = require('../Config/AwsConfig');
 // const dbModel = require('../Config/Dbmodel');

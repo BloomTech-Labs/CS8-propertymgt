@@ -13,12 +13,14 @@ class AddProperty extends Component {
   }
 
   hC = (event) => {
+    // handles input
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
 
   hS = (event) => {
+    // handles submit
     event.preventDefault();
 
     axios
