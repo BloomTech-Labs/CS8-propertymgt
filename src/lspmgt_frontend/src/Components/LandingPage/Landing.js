@@ -84,7 +84,6 @@ export default class Landing extends Component {
     );
   }
 
-  linkToLogin = () => {};
-}
+
 
 // export default Landing;
