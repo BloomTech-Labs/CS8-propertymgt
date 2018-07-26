@@ -7,7 +7,7 @@ import Properties from './Properties';
 import AddProperty from './AddProperty/AddProperty';
 import EditProperty from './EditProperty';
 import WorkOrderA from './WorkOrderA';
-import AddTenant from './AddTenant';
+import AddTenant from './AddTenant/AddTenant';
 import Billing from './Billing/Billing';
 import SettingsA from './SettingsA';
 
