@@ -128,9 +128,10 @@ router.post('/addtenant', (req, res) => {
     TableName: 'Tenants',
     Item: {
       tenantId: hashingId,
-      T1Name,
-      T1Phone,
-      T1Email,
+      NameT: T1Name,
+      MobileT: T1Phone,
+      EmailT: T1Email,
+      WOrder: [],
       // T2Name,
       // T2Phone,
       // T2Email

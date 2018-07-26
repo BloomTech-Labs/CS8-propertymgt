@@ -36,7 +36,7 @@ router.post('/signup', (req, res) => {
       console.log(err);
       res.status(200).json({ status: 'error', error: err });
     } else {
-      console.log(d);
+      console.log(data);
       res.status(200).json({ status: 'success', data });
     }
   });
@@ -47,9 +47,10 @@ router.post('/workorder', (req, res) => {
   const params = {
     TableName: 'Tenants',
     Key: {
-      tenantId: '1',
+      tenantId: '9dd974cffa981a3e49af',
     },
-    Items: {
+    Item: {
+      tenantId: '9dd974cffa981a3e49af',
       WOrder: {
         PropertyAddr: wo.PropertyAddr,
         Issue: wo.Issue,
