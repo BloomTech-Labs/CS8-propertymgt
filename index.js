@@ -7,6 +7,8 @@ const UserRouter = require('./src/Users/userRouter');
 const adminRouter = require('./src/Admin/adminRouter');
 const tenantRouter = require('./src/Tenant/tenantRouter');
 const billingRouter = require('./src/Billing/BillingRouter');
+// var ReactDOMServer = require('react-dom/server');
+
 // const bodyParser = require('body-parser');
 const cors = require('cors');
 var path    = require("path");
@@ -14,9 +16,9 @@ var path    = require("path");
 app.use(express.json());
 app.use(require('body-parser').text());
 // app.use(express.static(path.join(__dirname, 'build')));
-
+app.use(express.static(path.join(__dirname, 'src/lspmgt_frontend/build')));
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname+ '/src/lspmgt_frontend/build/index.html'));
+  res.sendFile(path.join(__dirname, 'src/lspmgt_frontend/build', 'index.html'));
 });
 
 // app.use(bodyParser.json());
