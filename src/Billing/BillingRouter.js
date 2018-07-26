@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 // const dd = require('../Config/AwsConfig');
 // const dbModel = require('../Config/Dbmodel');
-const stripeKey = require('./StripeSK.js');
+// const stripeKey = require('./StripeSK.js');
 
-const stripe = require('stripe')(stripeKey.Secret);
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 // second attribute passed is the secret key
 // const stripe = require('stripe')(stripeKey.SK);
