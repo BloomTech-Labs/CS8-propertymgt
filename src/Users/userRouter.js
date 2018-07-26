@@ -8,7 +8,7 @@ const router = express.Router();
 
 // global TableName in params is 'ls_property_mgt'
 
-router.get('/listadmins', (req, res) => {
+router.get('/list', (req, res) => {
   const params = {
     TableName: 'Admins',
     // temporary key, does not work yet
@@ -28,25 +28,24 @@ router.get('/listadmins', (req, res) => {
 
 router.post('/admin/signup', (req, res) => {
   console.log(req.body);
-  const { Name, Email, Phone, Password } = req.body;
+  const { AdminName, AdminEmail, AdminPW } = req.body;
   const params = {
     TableName: 'Admins',
     Item: {
-      Name,
-      Email,
-      Phone,
-      Password,
+      AdminName,
+      AdminEmail,
+      AdminPW,
       adminId: hashingId,
     },
   };
 
-  dd.put(params, (err, d) => {
+  dd.put(params, (err, data) => {
     if (err) {
       console.log(err);
       res.status(200).json({ status: 'error', error: err });
     } else {
-      console.log(d);
-      res.status(200).json({ status: 'success', data: d });
+      console.log(data);
+      res.status(200).json({ status: 'success', data });
     }
   });
 });
