@@ -36,7 +36,7 @@ router.post('/signup', (req, res) => {
       console.log(err);
       res.status(200).json({ status: 'error', error: err });
     } else {
-      console.log(d);
+      console.log(data);
       res.status(200).json({ status: 'success', data });
     }
   });
