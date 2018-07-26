@@ -41,4 +41,31 @@ router.post('/signup', (req, res) => {
     }
   });
 });
+
+router.post('/workorder', (req, res) => {
+  const wo = req.body;
+  const params = {
+    TableName: 'Tenants',
+    Key: {
+      tenantId: '1',
+    },
+    Items: {
+      WOrder: {
+        PropertyAddr: wo.PropertyAddr,
+        Issue: wo.Issue,
+        PhotoIssue: 'smiley_face',
+        Permission: wo.Permission,
+        Status: false,
+      },
+    },
+  };
+
+  dd.put(params, (err, d) => {
+    if (err) {
+      res.status(200).json({ status: 'error', error: err });
+    }
+    res.status(200).json({ status: 'success', data: d });
+  });
+});
+
 module.exports = router;

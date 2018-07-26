@@ -50,7 +50,7 @@ router.get('/property/:id', (req, res) => {
   });
 });
 
-// **post, add a new property to database
+// post, add a new property to database
 router.post('/addproperty', (req, res) => {
   console.log(req);
   const {
@@ -109,17 +109,38 @@ router.delete('/property/:id', (req, res) => {
   });
 });
 
-// return all the work orders for cards screen
+// return all the tenant info to grab the work orders for cards screen
 router.get('/workorder', (req, res) => {
-  dd.scan(GlobalParams, (err, data) => {
+  const params = {
+    TableName: 'Tenants',
+  };
+
+  dd.scan(params, (err, data) => {
     if (err) res.status(200).json({ status: 'error', error: err });
     else res.status(200).json({ status: 'success', data });
   });
 });
 
-// **post, it adds a new tenant to the system
-router.get('/addtenant', (req, res) => {
-  res.status(200).json({ status: 'add a new tenant to the system' });
+// post, it adds a new tenant to the system
+router.post('/addtenant', (req, res) => {
+  const { T1Name, T1Phone, T1Email, T2Name, T2Phone, T2Email } = req.body;
+  const params = {
+    TableName: 'Tenants',
+    Item: {
+      tenantId: hashingId,
+      T1Name,
+      T1Phone,
+      T1Email,
+      // T2Name,
+      // T2Phone,
+      // T2Email
+    },
+  };
+
+  dd.put(params, (err, data) => {
+    if (err) res.status(400).json({ status: 'Error at addtenant', error: err });
+    else res.status(200).json({ status: 'Success', data });
+  });
 });
 
 // display the billing information
