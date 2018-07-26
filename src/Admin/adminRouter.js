@@ -18,11 +18,10 @@ const IncrementId = () => PROPERTY_ID++;
 
 // return all the properties for property cards screen
 router.get('/properties', (req, res) => {
-  dd.scan(GlobalParams, (err, d) => {
-    // d => Data
+  dd.scan(GlobalParams, (err, data) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
-    } else res.status(200).json({ status: 'success', data: d });
+    } else res.status(200).json({ status: 'success', data: data });
   });
 });
 
@@ -35,12 +34,12 @@ router.get('/property/:id', (req, res) => {
     },
   };
 
-  dd.get(params, (err, d) => {
+  dd.get(params, (err, data) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
     } else {
       console.log(typeof params.Key.propertyId);
-      res.status(200).json({ status: 'success', data: d });
+      res.status(200).json({ status: 'success', data: data });
     }
   });
 });
@@ -93,9 +92,9 @@ router.delete('/property', (req, res) => {
 
 // return all the work orders for cards screen
 router.get('/workorder', (req, res) => {
-  dd.scan(GlobalParams, (err, d) => {
+  dd.scan(GlobalParams, (err, data) => {
     if (err) res.status(200).json({ status: 'error', error: err });
-    else res.status(200).json({ status: 'success', data: d });
+    else res.status(200).json({ status: 'success', data: data });
   });
 });
 
@@ -109,14 +108,36 @@ router.get('/billing', (req, res) => {
   res.status(200).json({ status: 'returns billing information' });
 });
 
+// patch, update setting in admin settings
+router.patch('/settingsupdate/:id', (req, res) => {
+  const { Email, Phone, DisplayName, OldPassword, NewPassword } = req.body;
+  const id = req.params.id;
+  const params = {
+    TableName: 'Admins',
+    Key: {
+      adminId: id,
+    },
+    UpdateExpression: 'set #b = :DisplayName, #a = :Email, #c = :Phone',
+    ConditionExpression: '#b <> :DisplayName OR #a <> :Email OR #c <> :Phone',
+    ExpressionAttributeNames: { '#b': 'Name', '#a': 'Email', '#c': 'Phone' },
+    ExpressionAttributeValues: {
+      ':DisplayName': DisplayName,
+      ':Email': Email,
+      ':Phone': Phone,
+    },
+  };
+
+  dd.update(params, (err, data) => {
+    if (err) console.log(err);
+    else console.log(data);
+  });
+
+  res.status(200).json({ status: 'returns all properties for cards' });
+});
+
 // display admin settings
 router.get('/settings', (req, res) => {
   res.status(200).json({ status: 'display admin settings info' });
-});
-
-// **put, update setting in admin settings
-router.get('/settingsupdate', (req, res) => {
-  res.status(200).json({ status: 'returns all properties for cards' });
 });
 
 module.exports = router;

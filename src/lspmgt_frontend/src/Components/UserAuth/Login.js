@@ -8,8 +8,8 @@ import AmplifyConfig from '../../Config/Auth';
 
 Amplify.configure(AmplifyConfig);
 
-import AdminSignUpModal from './AdminSignUpModal';
-import TenantSignUpModal from './TenantSignUpModal';
+import TenantLogin from './TenantLogin';
+import AdminLogin from './AdminLogin';
 
 export default class Login extends Component {
   state = {
@@ -85,11 +85,10 @@ export default class Login extends Component {
                   Login
                 </Button>
               </Segment>
-            </Form>
-            <Message>
-              {/* link to /signup instead of /admin/properties */}
-              <AdminSignUpModal /> <TenantSignUpModal />
-            </Message>
+            </Form> */}
+            <Segment>
+              <AdminLogin /> <TenantLogin />
+            </Segment>
             <Link to="/">
               <Button secondary>Back</Button>
             </Link>
