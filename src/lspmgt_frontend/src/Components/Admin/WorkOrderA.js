@@ -13,8 +13,9 @@ class WorkOrderA extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/admin/workorder')
+      .get('http://localhost:5000/api/tenants/workorder')
       .then((res) => {
+        console.log(res.data);
         this.setState({
           list: res.data,
         });
