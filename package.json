@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "Property Management",
   "main": "index.js",
+  "engines": {
+    "node": "10.7.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "heroku-postbuild": "cd src/lspmgt_frontend && npm install && npm run build"
   },
   "repository": {
     "type": "git",
