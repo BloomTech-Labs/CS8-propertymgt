@@ -9,12 +9,22 @@
   "extends": ["airbnb"],
   "plugins": ["react", "jsx-a11y", "import"],
   "rules": {
-    "react/jsx-one-expression-per-line": 1,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/prefer-stateless-function": 0,
     "semi": "error",
     "quotes": ["error", "single"],
     "max-len": ["error", { "code": 100, "tabWidth": 2 }],
-    "comma-dangle": ["error", "always-multiline"]
+    "comma-dangle": ["error", "only-multiline"],
+    "no-unused-vars": 1,
+    "object-curly-newline": 0,
+    "import/order": 0,
+    "no-plusplus": 0,
+    "no-console": 0,
+    "import/no-unresolved": 0,
+    "arrow-body-style": 0,
+    "linebreak-style": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": 0,
+    "react/no-unused-state": 1,
+    "react/destructuring-assignment": 1
   }
 }
