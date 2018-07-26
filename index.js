@@ -21,8 +21,8 @@ app.use('/users', UserRouter);
 app.use('/billing', billingRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/tenant', tenantRouter);
-
+const port = process.env.PORT || 5000;
 // need to change and add process env instead hard coding the port
-app.listen(5000, () => {
-  log('app running on port:', 5000);
+app.listen(port, () => {
+  log('app running on port:', port);
 });
