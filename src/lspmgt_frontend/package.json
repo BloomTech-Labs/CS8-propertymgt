@@ -13,8 +13,6 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-stripe-elements": "^2.0.1",
-    "semantic-ui": "^2.3.3",
-    "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.0"
   },
   "scripts": {
