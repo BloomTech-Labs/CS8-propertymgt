@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Segment, Form } from 'semantic-ui-react';
+import { Grid, Form, Header, Message, Icon, Button } from 'semantic-ui-react';
 
 class WorkOrders extends Component {
   constructor(props) {
@@ -12,21 +12,33 @@ class WorkOrders extends Component {
     return (
       <Grid divided="vertically">
         <Grid.Row>
-          <Segment basic>Submit a Work Order</Segment>
+          <Header as="h1">Submit a Work Order </Header>
         </Grid.Row>
-        <Grid.Row column={2}>
+        <Message>
+          <Icon name="phone" />
+          <p>24/7 Maintenance</p>
+          <p>1-800-123-9876</p>
+        </Message>
+        <Grid.Row columns={2}>
           <Grid.Column>
-            <Segment basic>Address</Segment>
-            <Segment basic>Description of issue</Segment>
-            <Segment basic>Phone Number</Segment>
+            <Form>
+              <Form.Input fluid label="Address" placeholder="Address" />
+              <Form.TextArea
+                label="WorkOrder Desc"
+                placeholder="Enter Description of your Work Order"
+              />
+              <Form.Input fluid label="Phone Number" placeholder="Phone Number" />
+            </Form>
           </Grid.Column>
           <Grid.Column>
-            <Segment basic>Related Photo</Segment>
+            <Icon name="file image outline" size="massive" />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Segment basic>Permission to enter</Segment>
-          <Segment basic>Submit form</Segment>
+          <Form>
+            <Form.Checkbox label="Permission to Enter?" />
+            <Button type="submit">Submit</Button>
+          </Form>
         </Grid.Row>
       </Grid>
     );
