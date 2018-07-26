@@ -4,7 +4,9 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import Login from './Components/UserAuth/Login';
-import Landing from './Components/LandingPage/Landing';
+// import Landing from './Components/LandingPage/Landing';
+import LandingProto from './Components/LandingPage/LandingPrototype';
+
 import AdminNavigation from './Components/Admin/AdminNavigation';
 import TenantNavigation from './Components/Tenant/Navigation/TenantNavigation';
 // import SignUpForm from './Components/UserAuth/SignUpForm';
@@ -17,7 +19,7 @@ import TenantNavigation from './Components/Tenant/Navigation/TenantNavigation';
 const LandingPage = () => {
   return (
     <Container>
-      <Landing />
+      <LandingProto />
       {/* <LoginForm /> */}
     </Container>
   );
