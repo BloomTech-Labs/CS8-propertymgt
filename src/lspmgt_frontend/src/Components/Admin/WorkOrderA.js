@@ -6,24 +6,34 @@ class WorkOrderA extends Component {
   constructor() {
     super();
     this.state = {
-      list: [1, 2, 3, 4],
+      list: [],
     };
     this.desc = this.desc.bind(this);
+    this.returnWO = this.returnWO.bind(this);
   }
 
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/tenants/workorder')
+      .get('http://localhost:5000/api/admin/workorder')
       .then((res) => {
-        console.log(res.data);
+        const allTenants = res.data.data.Items;
         this.setState({
-          list: res.data,
+          list: this.returnWO(allTenants),
         });
       })
       .catch((err) => {
         console.log('Error displaying workorders: ', err);
       });
   }
+
+  // Return array of all work orders from array of tenants under the Tenants table in CDM
+  returnWO = (allTenants) => {
+    const tempArray = allTenants.map((tenant) => {
+      return tenant.WOrder;
+    });
+    console.log('TempArray is..', tempArray);
+    return tempArray;
+  };
 
   desc = (workorder, x) => {
     return (
@@ -54,15 +64,9 @@ class WorkOrderA extends Component {
     return (
       <Card.Group className="page" itemsPerRow="3">
         {list.map((workorder, index) => {
-          // hard data for testing
-          workorder = {
-            PropertyAddr: '123 fake str',
-            Issue: 'Mice neighbors',
-            Permission: true,
-            TenantPhone: '123 - 123 - 1234',
-          };
-
-          return this.desc(workorder, index);
+          if (workorder !== undefined) {
+            return this.desc(workorder, index);
+          }
         })}
       </Card.Group>
     );

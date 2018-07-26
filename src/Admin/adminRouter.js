@@ -111,6 +111,7 @@ router.delete('/property/:id', (req, res) => {
 
 // return all the tenant info to grab the work orders for cards screen
 router.get('/workorder', (req, res) => {
+  console.log('Workorder GET method triggered');
   const params = {
     TableName: 'Tenants',
   };
