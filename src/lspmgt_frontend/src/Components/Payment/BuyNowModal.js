@@ -1,23 +1,78 @@
 import React, { Component } from 'react';
-import { Button, Header, Modal } from 'semantic-ui-react';
+import { Button, Header, Modal, Form } from 'semantic-ui-react';
+import axios from 'axios';
 import Checkout from './Checkout';
 
 class BuyNowModal extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      AdminName: '',
+      AdminEmail: '',
+      AdminPW: '',
+    };
   }
+
+  handleInput = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post('http://localhost:5000/users/admin/signup', this.state)
+      .then((res) => {
+        console.log(`Added ${this.state} to server`, res);
+      })
+      .catch((err) => {
+        console(err);
+      });
+    this.setState({
+      AdminName: '',
+      AdminEmail: '',
+      AdminPW: '',
+    });
+  };
 
   render() {
     return (
       <Modal trigger={<Button primary>Buy Now!</Button>}>
-        <Modal.Header>Enter Payment Info</Modal.Header>
+        <Modal.Header>Enter New Account Info</Modal.Header>
         <Modal.Content>
-          <Modal.Description>
-            <Header>Credit Card</Header>
-            <Checkout />
-          </Modal.Description>
+          <Form>
+            <Form.Group widths="equal">
+              <Form.Input
+                fluid
+                label="First name"
+                placeholder="Prepare for Trouble"
+                name="AdminName"
+                onChange={this.handleInput}
+              />
+              <Form.Input
+                fluid
+                label="Email"
+                placeholder="And Make it Double"
+                name="AdminEmail"
+                onChange={this.handleInput}
+              />
+              <Form.Input
+                fluid
+                label="Password"
+                placeholder="Meeeowth Thats Right!"
+                type="password"
+                name="AdminPW"
+                onChange={this.handleInput}
+              />
+            </Form.Group>
+          </Form>
+          <Checkout />
+          <Button type="submit" onClick={this.handleSubmit} primary>
+            Create Account
+          </Button>
         </Modal.Content>
       </Modal>
     );

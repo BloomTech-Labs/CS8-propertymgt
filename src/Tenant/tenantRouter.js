@@ -7,6 +7,7 @@ const hashingId = require('../Common/HashingId');
 
 const router = express.Router();
 
+// Gets all tenants
 router.get('/', (req, res) => {
   dd.scan(Admins, (err, d) => {
     if (err) {
@@ -15,7 +16,6 @@ router.get('/', (req, res) => {
       res.status(200).json({ status: 'success', data: d });
     }
   });
-  // res.status(200).json({ status: 'userRouter connected properly' });
 });
 
 router.post('/signup', (req, res) => {
@@ -27,18 +27,47 @@ router.post('/signup', (req, res) => {
       Email: user.Email,
       Phone: user.Phone,
       Password: user.Password,
-      adminId: user.adminId,
+      adminId: hashingId,
+    },
+  };
+
+  dd.put(params, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(200).json({ status: 'error', error: err });
+    } else {
+      console.log(data);
+      res.status(200).json({ status: 'success', data });
+    }
+  });
+});
+
+router.post('/workorder', (req, res) => {
+  const wo = req.body;
+  const params = {
+    TableName: 'Tenants',
+    Key: {
+      tenantId: '9dd974cffa981a3e49af',
+    },
+    Item: {
+      tenantId: '9dd974cffa981a3e49af',
+      WOrder: {
+        PropertyAddr: wo.PropertyAddr,
+        Issue: wo.Issue,
+        PhotoIssue: 'smiley_face',
+        Permission: wo.Permission,
+        TenantPhone: wo.TenantPhone,
+        Status: false,
+      },
     },
   };
 
   dd.put(params, (err, d) => {
     if (err) {
-      console.log(err);
       res.status(200).json({ status: 'error', error: err });
-    } else {
-      console.log(d);
-      res.status(200).json({ status: 'success', data: d });
     }
+    res.status(200).json({ status: 'success', data: d });
   });
 });
+
 module.exports = router;

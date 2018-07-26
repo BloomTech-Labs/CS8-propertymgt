@@ -23,7 +23,7 @@ class PaymentForm extends Component {
   render() {
     return (
       <div className="checkout">
-        <p>Complete Purchase?</p>
+        <p>Complete Purchase</p>
         <CardElement />
         <button onClick={this.submit} type="button">
           Confirm

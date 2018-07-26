@@ -1,7 +1,12 @@
+/*eslint-disable import/first*/
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Amplify, { Auth } from 'aws-amplify'
+import AmplifyConfig from '../../Config/Auth';
+
+Amplify.configure(AmplifyConfig);
 
 import TenantLogin from './TenantLogin';
 import AdminLogin from './AdminLogin';
@@ -12,24 +17,31 @@ export default class Login extends Component {
     password: '',
   };
 
-  // handle all input field changes
-  handleInput = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+  componentDidMount() {
+    Auth.currentSession()
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => console.log(err))
+  }
+
+  handleSignin = () => {
+    console.log(this.state);
+    Auth.signIn(this.state.username, this.state.password)
+      .then((data) => {
+        console.log('Sign in sucess data -> ', data);
+      })
+      .catch((err) => console.log('THERE WAS AN ERROR -> ', err));
+    }
+
+  handleInput = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    // eslint suggests destructuring the next line
-    const { username, password } = this.state;
-    if (username && password) {
-      axios
-        // need /login route via userRouter.js, nonexistent
-        .post('/login', this.state)
-        .then()
-        .catch();
-    }
+    // console.log(Amplify);
+    this.handleSignin();
   };
 
   render() {
@@ -49,10 +61,26 @@ export default class Login extends Component {
             <Header as="h1" color="blue" textAlign="center">
               PropertyMaxx
             </Header>
-            {/* <Form size="large" style={{ maxWidth: '100%' }}>
+            <Form size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
               <Segment raised style={{ maxWidth: '100%' }}>
-                <Form.Input fluid icon="user" iconPosition="left" placeholder="E-mail address" />
-                <Form.Input fluid icon="lock" iconPosition="left" placeholder="Password" />
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  type="email"
+                  name="username"
+                  placeholder="E-mail address"
+                  onChange={this.handleInput}
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  onChange={this.handleInput}
+                />
                 <Button color="blue" fluid size="large">
                   Login
                 </Button>
