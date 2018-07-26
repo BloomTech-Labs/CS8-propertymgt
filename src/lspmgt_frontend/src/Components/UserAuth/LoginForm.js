@@ -1,11 +1,12 @@
+/*eslint-disable import/first*/
 import React, { Component } from 'react';
-import { Auth } from 'aws-amplify';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import AmplifyConfig from './Config/Auth';
+import Amplify, { Auth } from 'aws-amplify'
+import AmplifyConfig from '../../Config/Auth';
 
-// Amplify.configure(AmplifyConfig);
+Amplify.configure(AmplifyConfig);
 
 import AdminSignUpModal from './AdminSignUpModal';
 import TenantSignUpModal from './TenantSignUpModal';
@@ -16,18 +17,32 @@ export default class Login extends Component {
     password: '',
   };
 
+  componentDidMount() {
+    Auth.currentSession()
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => console.log(err))
+  }
+
+  handleSignin = () => {
+    console.log(this.state);
+    Auth.signIn(this.state.username, this.state.password)
+      .then((data) => {
+        console.log('Sign in sucess data -> ', data);
+      })
+      .catch((err) => console.log('THERE WAS AN ERROR -> ', err));
+    }
+
   handleInput = (e) => {
-    // this.setState({ [e.target.type]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleSubmit = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     // console.log(Amplify);
+    this.handleSignin();
   };
-
-  Auth.signIn(username, password)
-  .then(user => console.log(user))
-  .catch(err => console.log(err));
 
   render() {
     return (
@@ -53,6 +68,7 @@ export default class Login extends Component {
                   icon="user"
                   iconPosition="left"
                   type="email"
+                  name="username"
                   placeholder="E-mail address"
                   onChange={this.handleInput}
                 />
@@ -62,6 +78,7 @@ export default class Login extends Component {
                   iconPosition="left"
                   placeholder="Password"
                   type="password"
+                  name="password"
                   onChange={this.handleInput}
                 />
                 <Button color="blue" fluid size="large">
