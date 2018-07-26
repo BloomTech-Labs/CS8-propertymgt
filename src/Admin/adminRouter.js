@@ -18,8 +18,13 @@ const GlobalParams = {
 // const IncrementId = () => PROPERTY_ID++;
 
 // return all the properties for property cards screen
-router.get('/properties', (req, res) => {
-  dd.scan(GlobalParams, (err, data) => {
+router.get('/property', (req, res) => {
+  console.log(req.body);
+  const params = {
+    TableName: 'Properties',
+  };
+
+  dd.scan(params, (err, data) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
     } else res.status(200).json({ status: 'success', data });
@@ -48,35 +53,48 @@ router.get('/property/:id', (req, res) => {
 // **post, add a new property to database
 router.post('/addproperty', (req, res) => {
   console.log(req);
+  const {
+    NameOwner,
+    EmailOwner,
+    MobileOwner,
+    HomeOwnerAddr,
+    PropertyAddr,
+    MaxOccupants,
+    SqFootage,
+    Bedrooms,
+    Bathrooms,
+    YearBuilt,
+    Contract,
+  } = req.body;
 
   const params = {
-    TableName: 'ls_property_mgt',
+    TableName: 'Properties',
     Item: {
-      NameOwner: req.body.NameOwner,
-      EmailOwner: req.body.EmailOwner,
-      MobileOwner: req.body.MobileOwner,
-      HomeOwnerAddr: req.body.HomeOwnerAddr,
-      PropertyAddr: req.body.PropertyAddr,
-      MaxOccupants: req.body.MaxOccupants,
-      SqFootage: req.body.SqFootage,
-      Bedrooms: req.body.Bedrooms,
-      Bathrooms: req.body.Bathrooms,
-      YearBuilt: req.body.YearBuilt,
+      NameOwner,
+      EmailOwner,
+      MobileOwner,
+      HomeOwnerAddr,
       propertyId: hashingId,
-      aster,
+      PropertyAddr,
+      MaxOccupants,
+      SqFootage,
+      Bedrooms,
+      Bathrooms,
+      YearBuilt,
+      // Contract,
     },
   };
 
   console.log('params in server ', params);
 
-  dd.put(params, (err, data) => {
+  dd.put(params, (err) => {
     if (err) console.log('Error trying to POST', err);
   });
   res.status(200).json({ status: 'added property' });
 });
 
 // deletes a single property with the given property id
-router.delete('/property', (req, res) => {
+router.delete('/property/:id', (req, res) => {
   const params = {
     TableName: 'ls_property_mgt',
     Key: {
@@ -95,7 +113,7 @@ router.delete('/property', (req, res) => {
 router.get('/workorder', (req, res) => {
   dd.scan(GlobalParams, (err, data) => {
     if (err) res.status(200).json({ status: 'error', error: err });
-    else res.status(200).json({ status: 'success', data: data });
+    else res.status(200).json({ status: 'success', data });
   });
 });
 

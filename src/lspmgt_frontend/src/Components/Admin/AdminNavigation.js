@@ -4,7 +4,7 @@ import { Link, Route } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
 import Properties from './Properties';
-import AddProperty from './AddProperty';
+import AddProperty from './AddProperty/AddProperty';
 import EditProperty from './EditProperty';
 import WorkOrderA from './WorkOrderA';
 import AddTenant from './AddTenant';
