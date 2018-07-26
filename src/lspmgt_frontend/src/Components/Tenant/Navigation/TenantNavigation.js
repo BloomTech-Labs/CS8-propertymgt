@@ -3,7 +3,7 @@ import './TenantNavigation.css';
 import { Link, Route } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
-import Dashboard from '../Dashboard';
+import Dashboard from '../Dashboard/Dashboard';
 import Payments from '../Payments/Payments';
 import Settings from '../Settings/Settings';
 import WorkOrders from '../WorkOrders/WorkOrders';
