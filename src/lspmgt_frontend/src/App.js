@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './semantic/dist/semantic.min.css';
+// import './semantic/dist/semantic.min.css';
 import './App.css';
 import { Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
