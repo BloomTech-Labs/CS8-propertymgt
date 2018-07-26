@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Properties.css';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Icon, Feed } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -47,19 +47,45 @@ class Properties extends Component {
     const n = obj[Object.keys(obj)[6]];
     return (
       <Card>
-        <Card.Content extra>
+        <Card.Content textAlign="right">
           <Link to="/admin/editproperty">
-            <Icon name="pencil" link />
+            <Icon name="pencil" fitted />
           </Link>
           <Icon name="trash alternate outline" link />
-          <h4>
-            <Icon name="home" /> {n}
-            <br />
-            <Icon name="user" /> (tenant1, tenant2)
-            <br />
-            <Icon name="calendar alternate" /> (a date range) <br />
-            <Icon name="check circle outline" /> (Signed Contract)
-          </h4>
+        </Card.Content>
+        <Card.Content>
+          <Feed>
+            <Feed.Event>
+              <Feed.Label>
+                <Icon name="home" />
+              </Feed.Label>
+              <Feed.Content>{n}</Feed.Content>
+            </Feed.Event>
+          </Feed>
+          <Feed>
+            <Feed.Event>
+              <Feed.Label>
+                <Icon name="user" />
+              </Feed.Label>
+              <Feed.Content>Tenants</Feed.Content>
+            </Feed.Event>
+          </Feed>
+          <Feed>
+            <Feed.Event>
+              <Feed.Label>
+                <Icon name="calendar alternate outline" />
+              </Feed.Label>
+              <Feed.Content>Least Start/End</Feed.Content>
+            </Feed.Event>
+          </Feed>
+          <Feed>
+            <Feed.Event>
+              <Feed.Label>
+                <Icon name="check" />
+              </Feed.Label>
+              <Feed.Content>Contract Signed</Feed.Content>
+            </Feed.Event>
+          </Feed>
         </Card.Content>
       </Card>
     );
