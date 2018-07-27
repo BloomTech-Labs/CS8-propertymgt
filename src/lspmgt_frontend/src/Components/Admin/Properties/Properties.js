@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './Properties.css';
 import { Card, Icon, Feed } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './Properties.css';
 
 class Properties extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class Properties extends Component {
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get('api/admin/property')
+      .get('http://localhost:5000/api/admin/properties')
       .then((response) => {
         this.setState({
           list: response.data.data.Items,

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Grid, Form, Input, Button, Message } from 'semantic-ui-react';
-import './AddProperty.css';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import './AddProperty.css';
 
 // Takes Owner and Tenant info while displaying contract
 class AddProperty extends Component {
@@ -19,20 +19,20 @@ class AddProperty extends Component {
       Bedrooms: '',
       Bathrooms: '',
       YearBuilt: '',
-      Contract: '',
+      // Contract: '',
     };
-    this.hS = this.hS.bind(this);
-    this.hC = this.hC.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  hC = (event) => {
+  handleChange = (event) => {
     // handles input
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
 
-  hS = (event) => {
+  handleSubmit = (event) => {
     // handles submit
     event.preventDefault();
 
@@ -45,7 +45,19 @@ class AddProperty extends Component {
         console.log(err);
       });
 
-    this.setState({});
+    this.setState({
+      NameOwner: '',
+      EmailOwner: '',
+      MobileOwner: '',
+      HomeOwnerAddr: '',
+      PropertyAddr: '',
+      MaxOccupants: '',
+      SqFootage: '',
+      Bedrooms: '',
+      Bathrooms: '',
+      YearBuilt: '',
+      // Contract: '',
+    });
   };
 
   render() {
@@ -60,7 +72,7 @@ class AddProperty extends Component {
       Bathrooms,
       SqFootage,
       YearBuilt,
-      Contract,
+      // Contract,
     } = this.state;
 
     return (
@@ -74,13 +86,13 @@ class AddProperty extends Component {
                   <Form.Input
                     name="NameOwner"
                     value={NameOwner}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Name"
                   />
                   <Form.Input
                     name="MobileOwner"
                     value={MobileOwner}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Phone Number"
                   />
                 </Form.Group>
@@ -88,13 +100,13 @@ class AddProperty extends Component {
                   <Form.Input
                     name="EmailOwner"
                     value={EmailOwner}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Email"
                   />
                   <Form.Input
                     name="HomeOwnerAddr"
                     value={HomeOwnerAddr}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Owner Address"
                   />
                 </Form.Group>
@@ -109,13 +121,13 @@ class AddProperty extends Component {
                   <Form.Input
                     name="PropertyAddr"
                     value={PropertyAddr}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Property Address"
                   />
                   <Form.Input
                     name="Bedrooms"
                     value={Bedrooms}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Number of Bedrooms"
                   />
                 </Form.Group>
@@ -123,13 +135,13 @@ class AddProperty extends Component {
                   <Form.Input
                     name="MaxOccupants"
                     value={MaxOccupants}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Max Occupation number"
                   />
                   <Form.Input
                     name="Bathrooms"
                     value={Bathrooms}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Number of Bathrooms"
                   />
                 </Form.Group>
@@ -137,13 +149,13 @@ class AddProperty extends Component {
                   <Form.Input
                     name="SqFootage"
                     value={SqFootage}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Property Square Footage"
                   />
                   <Form.Input
                     name="YearBuilt"
                     value={YearBuilt}
-                    onChange={this.hC}
+                    onChange={this.handleChange}
                     placeholder="Enter Year Property was Built"
                   />
                 </Form.Group>
@@ -155,12 +167,12 @@ class AddProperty extends Component {
           <Form.Field
             label="Property Contract"
             value={Contract}
-            onChange={this.hC}
+            onChange={this.handleChange}
             control="textarea"
             rows="3"
           />
         </Grid.Row> */}
-        <Button type="submit" onClick={this.hS} primary>
+        <Button type="submit" onClick={this.handleSubmit} primary>
           Submit
         </Button>
         <Link to="/admin/properties">

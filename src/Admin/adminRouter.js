@@ -6,21 +6,16 @@ const dbModel = require('../Config/DbModel');
 const hashingId = require('../Common/HashingId');
 const { Admins } = require('../Config/DynamoDbTables');
 
-
-
-// saves property manager 
-
-
-// return all the properties for property cards screen
-router.get('/property', (req, res) => {
+// Returns all the properties for property cards screen
+router.get('/properties', (req, res) => {
   console.log(req.body);
   const params = {
     TableName: 'Properties',
   };
 
-  dd.scan(params, (err, data) => {
-    if (err) {
-      res.status(200).json({ status: 'error', error: err });
+  dd.scan(params, (error, data) => {
+    if (error) {
+      res.status(404).json({ error });
     } else res.status(200).json({ status: 'success', data });
   });
 });
@@ -44,7 +39,7 @@ router.get('/property/:id', (req, res) => {
   });
 });
 
-// post, add a new property to database
+// Add a new property to dynamoDB
 router.post('/addproperty', (req, res) => {
   console.log(req);
   const {
@@ -87,7 +82,7 @@ router.post('/addproperty', (req, res) => {
   res.status(200).json({ status: 'added property' });
 });
 
-// deletes a single property with the given property id
+// Select a property with an id from the url
 router.delete('/property/:id', (req, res) => {
   const params = {
     TableName: 'ls_property_mgt',
@@ -103,7 +98,7 @@ router.delete('/property/:id', (req, res) => {
   });
 });
 
-// return all the tenant info to grab the work orders for cards screen
+// Returns tenants to grab work orders from for cards screen
 router.get('/workorder', (req, res) => {
   console.log('Workorder GET method triggered');
   const params = {
@@ -116,7 +111,7 @@ router.get('/workorder', (req, res) => {
   });
 });
 
-// post, it adds a new tenant to the system
+// Add a new tenant to the system
 router.post('/addtenant', (req, res) => {
   console.log('addtenant POST method in admin triggered.. ');
   const { T1Name, T1Phone, T1Email, T2Name, T2Phone, T2Email } = req.body;
@@ -134,9 +129,9 @@ router.post('/addtenant', (req, res) => {
     },
   };
 
-  dd.put(params, (err, data) => {
-    if (err) res.status(400).json({ status: 'Error at addtenant', error: err });
-    else res.status(200).json({ status: 'Success', data });
+  dd.put(params, (error, data) => {
+    if (error) res.status(400).json({ error });
+    else res.status(200).json({ status: 'Success..', data });
   });
 });
 
