@@ -19,7 +19,7 @@ class BuyNowModal extends Component {
   }
 
   componentDidMount() {
-    console.log(AuthSettings);
+    
   }
 
   handleInput = (e) => {

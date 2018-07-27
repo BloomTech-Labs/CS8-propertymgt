@@ -11,11 +11,11 @@ import AdminNavigation from './Components/Admin/AdminNavigation';
 import TenantNavigation from './Components/Tenant/Navigation/TenantNavigation';
 // import SignUpForm from './Components/UserAuth/SignUpForm';
 
-// this is a test for aws cognito auth.
-// import Amplify, { Auth } from 'aws-amplify';
-// import AmplifyConfig from './Config/Auth';
+import Amplify, { Auth } from 'aws-amplify';
+import AmplifyConfig from './Config/Auth';
 
-// Amplify.configure(AmplifyConfig);
+Amplify.configure(AmplifyConfig);
+
 const LandingPage = () => {
   return (
     <Container>
@@ -26,6 +26,14 @@ const LandingPage = () => {
 };
 
 class App extends Component {
+  componentDidMount() {
+    console.log('App did mount');
+    Auth.currentSession()
+      .then(data => {
+        console.log('this is current session ', data);
+
+      }).catch(err => console.log(err))
+  }
   render() {
     return (
       <div>
