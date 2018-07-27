@@ -17,7 +17,7 @@ class Properties extends Component {
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/admin/property')
+      .get('api/admin/property')
       .then((response) => {
         this.setState({
           list: response.data.data.Items,
@@ -33,7 +33,7 @@ class Properties extends Component {
     return (
       <div>
         <h4> Add a new Property </h4>
-        <Link to="/admin/addproperty">
+        <Link to="admin/addproperty">
           <Icon name="plus circle" size="massive" link />{' '}
         </Link>
       </div>
@@ -48,7 +48,7 @@ class Properties extends Component {
     return (
       <Card>
         <Card.Content textAlign="right">
-          <Link to="/admin/editproperty">
+          <Link to="admin/editproperty">
             <Icon name="pencil" fitted />
           </Link>
           <Icon name="trash alternate outline" link />
