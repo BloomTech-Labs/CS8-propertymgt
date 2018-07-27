@@ -1,3 +1,5 @@
+import AuthDetails from '../awsconfig';
+let AWS_Auth;
 const AmplifyConfig = {
   Auth: {
     // REQUIRED - Amazon Cognito Identity Pool ID
@@ -11,4 +13,14 @@ const AmplifyConfig = {
   },
 };
 
-export default AmplifyConfig;
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  // dev code
+  AWS_Auth = AuthDetails;
+} else {
+  // production code
+  AWS_Auth = AmplifyConfig;
+}
+
+export default AWS_Auth;
+

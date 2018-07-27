@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Button, Header, Modal, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import Checkout from './Checkout';
+import Amplify, { Auth } from 'aws-amplify';
+import AuthSettings from '../../Config/Auth';
+
+Amplify.configure(AuthSettings);
 
 class BuyNowModal extends Component {
   constructor(props) {
@@ -14,6 +18,10 @@ class BuyNowModal extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log(AuthSettings);
+  }
+
   handleInput = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -22,15 +30,31 @@ class BuyNowModal extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    axios
-      .post('http://localhost:5000/users/admin/signup', this.state)
-      .then((res) => {
-        console.log(`Added ${this.state} to server`, res);
+    
+    Auth.signUp({
+      'username': 'lambdapropertymgt@gmail.com', 
+      'password': '!2345Abc',
+      'attributes': {
+        'custom:access_level': 'admin'
+      }
+    })
+      .then(data => {
+        alert('you have been sign up');
+        console.log('user has signed up');
       })
-      .catch((err) => {
-        console(err);
-      });
+      .catch(err => {
+        alert('There was an error signing up');
+        console.log('There was an error signing up ---> ', err);
+      })
+
+    // axios
+    //   .post('http://localhost:5000/users/admin/signup', this.state)
+    //   .then((res) => {
+    //     console.log(`Added ${this.state} to server`, res);
+    //   })
+    //   .catch((err) => {
+    //     console(err);
+    //   });
     this.setState({
       AdminName: '',
       AdminEmail: '',
