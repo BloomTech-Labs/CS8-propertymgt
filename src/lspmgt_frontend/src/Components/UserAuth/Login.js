@@ -18,9 +18,11 @@ export default class Login extends Component {
   };
 
   componentDidMount() {
+
     Auth.currentSession()
     .then(data => {
       console.log(data)
+      this.props.history.push("/tenant/dashboard")
     })
     .catch(err => console.log(err))
   }

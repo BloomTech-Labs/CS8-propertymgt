@@ -6,6 +6,11 @@ const dbModel = require('../Config/DbModel');
 const hashingId = require('../Common/HashingId');
 const { Admins } = require('../Config/DynamoDbTables');
 
+
+
+// saves property manager 
+
+
 // return all the properties for property cards screen
 router.get('/property', (req, res) => {
   console.log(req.body);
