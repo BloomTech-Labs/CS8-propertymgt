@@ -3,23 +3,35 @@ const express = require('express');
 const router = express.Router();
 // const dd = require('../Config/AwsConfig');
 // const dbModel = require('../Config/Dbmodel');
-// const stripeKey = require('./StripeSK.js');
+const { Secret } = require('../Config/StripeKey');
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const stripe = require('stripe')(Secret); // Deployed Stripe Key link = process.env.STRIPE_SECRET
 
 // second attribute passed is the secret key
 // const stripe = require('stripe')(stripeKey.SK);
 
-router.get('/', (req, res) => {
+// for testing
+// TO DELETE TEST DATA, MUST DELETE FROM STRIPE DASHBOARD
+
+// GET request to retrieve all TRANSACTIONS in Stripe account
+router.get('/transactionlist', (req, res) => {
   stripe.balance.listTransactions({ limit: 10 }, (err, transactions) => {
-    if (err) res.status(500).json({ status: 'error', error: err });
-    res.status(200).json({ status: 'display transaction history', data: transactions });
+    if (err) res.status(500).json({ status: 'error', err });
+    res.status(200).json({ status: 'display transaction history', transactions });
+  });
+});
+
+// GET request to retrieve all CUSTOMERS in Stripe account
+router.get('/customerlist', (req, res) => {
+  stripe.customers.list({ limit: 5 }, (err, customers) => {
+    if (err) res.status(500).json({ status: 'error', err });
+    res.status(200).json({ status: 'display customer list', customers });
   });
 });
 
 // // Stripe Charge Route WORKING
 router.post('/testcharge', (req, res) => {
-  const cost = 2500;
+  console.log(req.body);
   const { amount, currency, source, description } = req.body;
   // Basic Charge -- WORKING
   stripe.charges.create(
@@ -34,6 +46,34 @@ router.post('/testcharge', (req, res) => {
       res.status(200).json({ status: 'charge complete', data: charge });
     }
   );
+});
+
+router.post('/charge/newadmin', (req, res) => {
+  // Admin "BuyNow" Links to this route
+  const amount = 2500; // Price set for App Purchase
+  const { AdminName, AdminEmail, AdminPW } = this.state;
+
+  stripe.customers
+    .create({
+      // This customers.create function will return a promise
+      AdminName,
+      AdminEmail,
+      AdminPW,
+    })
+    .then((customer) => {
+      stripe.charges.create(
+        {
+          amount,
+          description: 'Property Maxx App Purchase',
+          currency: 'usd',
+          customer: customer.id,
+        },
+        (err, charge) => {
+          if (err) res.status(500).json({ status: 'error', err });
+          res.status(200).json({ status: 'Purchase Complete', charge });
+        }
+      );
+    });
 });
 
 // charge made with New Customer -- NOT WORKING
