@@ -1,13 +1,13 @@
 const AmplifyConfig = {
   Auth: {
     // REQUIRED - Amazon Cognito Identity Pool ID
-    identityPoolId: process.env.idpid, 
+    identityPoolId: process.env.IDPID, 
     // REQUIRED - Amazon Cognito Region
-    region: process.env.region,
+    region: process.env.REGION_AUTH,
     // OPTIONAL - Amazon Cognito User Pool ID
-    userPoolId: process.env.upid,
+    userPoolId: process.env.UPID,
     // OPTIONAL - Amazon Cognito Web Client ID
-    userPoolWebClientId: process.env.upwcid,
+    userPoolWebClientId: process.env.UPWCID,
   },
 };
 

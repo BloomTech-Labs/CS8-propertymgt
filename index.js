@@ -7,7 +7,7 @@ const UserRouter = require('./src/Users/userRouter');
 const adminRouter = require('./src/Admin/adminRouter');
 const tenantRouter = require('./src/Tenant/tenantRouter');
 const billingRouter = require('./src/Billing/BillingRouter');
-const home = require('./src/Home/Home');
+const home = require('./src/Home/HomeRouter');
 // var ReactDOMServer = require('react-dom/server');
 
 // const bodyParser = require('body-parser');
