@@ -3,11 +3,11 @@ import { Grid, Message, Form, Input, Button } from 'semantic-ui-react';
 import axios from 'axios';
 
 class AddTenant extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
+    // T represents Tenant
     this.state = {
-      // T represents Tenant
       T1Name: '',
       T1Phone: '',
       T1Email: '',
@@ -15,28 +15,23 @@ class AddTenant extends Component {
       T2Phone: '',
       T2Email: '',
     };
-
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Sets input from form to state
   handleInput = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
 
+  // Sends state to backend using express
   handleSubmit = (e) => {
     e.preventDefault();
-
-    axios
-      .post('http://localhost:5000/api/admin/addTenant', this.state)
-      .then((res) => {
-        console.log(`Added ${this.state} to server`, res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.post('http://localhost:5000/api/admin/addTenant', this.state).catch((err) => {
+      console.los('Error in AddTenant..', err);
+    });
     this.setState({
       T1Name: '',
       T1Phone: '',
@@ -49,7 +44,6 @@ class AddTenant extends Component {
 
   render() {
     const { T1Name, T1Phone, T1Email, T2Name, T2Phone, T2Email } = this.state;
-
     return (
       <Grid>
         <Grid.Row columns={2}>

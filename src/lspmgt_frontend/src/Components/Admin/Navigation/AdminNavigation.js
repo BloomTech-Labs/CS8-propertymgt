@@ -1,15 +1,14 @@
 import React from 'react';
 import './AdminNavigation.css';
 import { Link, Route } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
-import Properties from './Properties/Properties';
-import AddProperty from './AddProperty/AddProperty';
-import EditProperty from './EditProperty';
-import WorkOrderA from './WorkOrderA';
-import AddTenant from './AddTenant/AddTenant';
-import Billing from './Billing/Billing';
-import SettingsA from './SettingsA';
+import Properties from '../Properties/Properties';
+import AddProperty from '../Properties/AddProperty';
+import EditProperty from '../Properties/EditProperty';
+import WorkOrderA from '../WorkOrder/WorkOrderA';
+import AddTenant from '../AddTenant/AddTenant';
+import Billing from '../Billing/Billing';
+import SettingsA from '../Settings/SettingsA';
 
 const TopBar = () => {
   return (
