@@ -77,6 +77,7 @@ router.delete('/deleteproperty/:id', (req, res) => {
 });
 
 // Update property
+// IMPORTANT: Only nine conditional expressions can be made (06.27.18)
 router.patch('/updateproperty/:id', (req, res) => {
   const {
     NameOwner,
@@ -91,33 +92,48 @@ router.patch('/updateproperty/:id', (req, res) => {
     YearBuilt,
   } = req.body;
   const id = req.params.id;
-  console.log(`id ${id}, id ${typeof id}, req.body.<attributevalue> ${req.body.YearBuilt}`);
+
   const params = {
     TableName: 'Properties',
     Key: {
       propertyId: id,
     },
     UpdateExpression:
-      'set #a = :NameOwner, #b = :EmailOwner, #c = :MobileOwner, #j = :HomeOwnerAddr, #d = :PropertyAddr, #e = :MaxOccupants, #k = :SqFootage, #f = :Bedrooms, #g = :Bathrooms, #h = YearBuilt',
+      'set #a = :NameOwner, #b = :EmailOwner, #c = :MobileOwner, #d = :HomeOwnerAddr',
     ConditionExpression:
-      '#a <> :NameOwner OR #b <> :EmailOwner OR #c <> :MobileOwner OR #j <> :HomeOwnerAddr OR #d <> :PropertyAddr OR #e <> :MaxOccupants OR #k <> :SqFootage OR #f <> :Bedrooms OR #g <> :Bathrooms OR #h <> YearBuilt',
+      '#a <> :NameOwner OR #b <> :EmailOwner OR #c <> :MobileOwner OR #d <> :HomeOwnerAddr',
     ExpressionAttributeNames: {
       '#a': 'NameOwner',
       '#b': 'EmailOwner',
       '#c': 'MobileOwner',
-      '#j': 'HomeOwnerAddr',
-      '#d': 'PropertyAddr',
-      '#e': 'MaxOccupants',
-      '#k': 'SqFootage',
-      '#f': 'Bedrooms',
-      '#g': 'Bathrooms',
-      '#h': 'YearBuilt',
+      '#d': 'HomeOwnerAddr',
     },
     ExpressionAttributeValues: {
       ':NameOwner': NameOwner,
       ':EmailOwner': EmailOwner,
       ':MobileOwner': MobileOwner,
       ':HomeOwnerAddr': HomeOwnerAddr,
+    },
+  };
+
+  const params2 = {
+    TableName: 'Properties',
+    Key: {
+      propertyId: id,
+    },
+    UpdateExpression:
+      'set #e = :PropertyAddr, #f = :MaxOccupants, #g = :SqFootage, #h = :Bedrooms, #j = :Bathrooms, #z = :YearBuilt',
+    ConditionExpression:
+      '#e <> :PropertyAddr OR #f <> :MaxOccupants OR #g <> :SqFootage OR #h <> :Bedrooms OR #j <> :Bathrooms OR #z <> :YearBuilt',
+    ExpressionAttributeNames: {
+      '#e': 'PropertyAddr',
+      '#f': 'MaxOccupants',
+      '#g': 'SqFootage',
+      '#h': 'Bedrooms',
+      '#j': 'Bathrooms',
+      '#z': 'YearBuilt',
+    },
+    ExpressionAttributeValues: {
       ':PropertyAddr': PropertyAddr,
       ':MaxOccupants': MaxOccupants,
       ':SqFootage': SqFootage,
@@ -127,10 +143,15 @@ router.patch('/updateproperty/:id', (req, res) => {
     },
   };
 
-  dd.update(params, (error, data) => {
+  dd.update((params, params2), (error, data) => {
     if (error) res.status(400).json({ error });
     else res.status(200).json({ message: 'Success' });
   });
+
+  // dd.update(params2, (error, data) => {
+  //   if (error) res.status(400).json({ error });
+  //   else res.status(200).json({ message: 'Success' });
+  // });
 });
 
 // patch, update setting in admin settings
