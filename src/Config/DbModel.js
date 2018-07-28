@@ -1,6 +1,6 @@
 const T = {
   Tinfo: [],
-  Quantity: 0,
+  Quantity: 0, // Tinfo.length
 };
 
 const Tinfo = {
@@ -19,6 +19,7 @@ const Tinfo = {
   WOrder: [],
 };
 
+// sign up fields
 const Admin = {
   Name: '',
   Email: '',
@@ -35,11 +36,11 @@ const WOrder = {
 };
 
 const PropertyInfo = {
+  propertyId: '',
   NameOwner: '',
   EmailOwner: '',
   MobileOwner: '',
   HomeOwnerAddr: '',
-  PropertyID: '',
   PropertyAddr: '',
   MaxOccupants: '',
   SqFootage: '',
@@ -47,7 +48,8 @@ const PropertyInfo = {
   Bathrooms: '',
   YearBuilt: '',
   Contract: '',
-  Tenant: [T],
-  AdminInfo: Admin,
+  Tenant: [],
+  Admin: '',
 };
+
 module.exports = PropertyInfo;

@@ -1,24 +1,23 @@
 const express = require('express');
-
 const router = express.Router();
 const dd = require('../Config/AwsConfig');
 const dbModel = require('../Config/DbModel');
 const hashingId = require('../Common/HashingId');
 const { Admins } = require('../Config/DynamoDbTables');
 
-// Returns all the properties for property cards screen
-router.get('/properties', (req, res) => {
-  console.log(req.body);
-  const params = {
-    TableName: 'Properties',
-  };
+// // Returns all the properties for property cards screen
+// router.get('/properties', (req, res) => {
+//   console.log(req.body);
+//   const params = {
+//     TableName: 'Properties',
+//   };
 
-  dd.scan(params, (error, data) => {
-    if (error) {
-      res.status(404).json({ error });
-    } else res.status(200).json({ status: 'success', data });
-  });
-});
+//   dd.scan(params, (error, data) => {
+//     if (error) {
+//       res.status(404).json({ error });
+//     } else res.status(200).json({ status: 'success', data });
+//   });
+// });
 
 // return a single property using the id parameter
 router.get('/property/:id', (req, res) => {
@@ -39,64 +38,64 @@ router.get('/property/:id', (req, res) => {
   });
 });
 
-// Add a new property to dynamoDB
-router.post('/addproperty', (req, res) => {
-  console.log(req);
-  const {
-    NameOwner,
-    EmailOwner,
-    MobileOwner,
-    HomeOwnerAddr,
-    PropertyAddr,
-    MaxOccupants,
-    SqFootage,
-    Bedrooms,
-    Bathrooms,
-    YearBuilt,
-    Contract,
-  } = req.body;
+// // Add a new property to dynamoDB
+// router.post('/addproperty', (req, res) => {
+//   console.log(req);
+//   const {
+//     NameOwner,
+//     EmailOwner,
+//     MobileOwner,
+//     HomeOwnerAddr,
+//     PropertyAddr,
+//     MaxOccupants,
+//     SqFootage,
+//     Bedrooms,
+//     Bathrooms,
+//     YearBuilt,
+//     Contract,
+//   } = req.body;
 
-  const params = {
-    TableName: 'Properties',
-    Item: {
-      NameOwner,
-      EmailOwner,
-      MobileOwner,
-      HomeOwnerAddr,
-      propertyId: hashingId,
-      PropertyAddr,
-      MaxOccupants,
-      SqFootage,
-      Bedrooms,
-      Bathrooms,
-      YearBuilt,
-      // Contract,
-    },
-  };
+//   const params = {
+//     TableName: 'Properties',
+//     Item: {
+//       NameOwner,
+//       EmailOwner,
+//       MobileOwner,
+//       HomeOwnerAddr,
+//       propertyId: hashingId,
+//       PropertyAddr,
+//       MaxOccupants,
+//       SqFootage,
+//       Bedrooms,
+//       Bathrooms,
+//       YearBuilt,
+//       // Contract,
+//     },
+//   };
 
-  console.log('params in server ', params);
+//   console.log('params in server ', params);
 
-  dd.put(params, (err) => {
-    if (err) console.log('Error trying to POST', err);
-  });
-  res.status(200).json({ status: 'added property' });
-});
+//   dd.put(params, (err) => {
+//     if (err) console.log('Error trying to POST', err);
+//   });
+//   res.status(200).json({ status: 'added property' });
+// });
 
 // Select a property with an id from the url
-router.delete('/property/:id', (req, res) => {
-  const params = {
-    TableName: 'ls_property_mgt',
-    Key: {
-      propertyId: Number(req.params.id),
-    },
-  };
+// router.delete('/property/:id', (req, res) => {
+//   const params = {
+//     TableName: 'ls_property_mgt',
+//     Key: {
+//       propertyId: Number(req.params.id),
+//     },
+//   };
 
-  dd.delete(params, (err, data) => {
-    if (err) console.log(err);
-    else console.log(data);
-    res.status(200).json({ status: 'deleted property' });
-  });
-});
+//   dd.delete(params, (err, data) => {
+//     if (err) console.log(err);
+//     else console.log(data);
+//     res.status(200).json({ status: 'deleted property' });
+//   });
+// });
 
 // Returns tenants to grab work orders from for cards screen
 router.get('/workorder', (req, res) => {
@@ -136,38 +135,56 @@ router.post('/addtenant', (req, res) => {
 });
 
 // display the billing information
-router.get('/billing', (req, res) => {
-  res.status(200).json({ status: 'returns billing information' });
-});
+// router.get('/billing', (req, res) => {
+//   res.status(200).json({ status: 'returns billing information' });
+// });
 
 // patch, update setting in admin settings
-router.patch('/settingsupdate/:id', (req, res) => {
-  const { Email, Phone, DisplayName, OldPassword, NewPassword } = req.body;
-  const id = req.params.id;
+// router.patch('/settingsupdate/:id', (req, res) => {
+//   const { Email, Phone, DisplayName, OldPassword, NewPassword } = req.body;
+//   const id = req.params.id;
+//   const params = {
+//     TableName: 'Admins',
+//     Key: {
+//       adminId: id,
+//     },
+//     UpdateExpression: 'set #b = :DisplayName, #a = :Email, #c = :Phone',
+//     ConditionExpression: '#b <> :DisplayName OR #a <> :Email OR #c <> :Phone',
+//     ExpressionAttributeNames: { '#b': 'Name', '#a': 'Email', '#c': 'Phone' },
+//     ExpressionAttributeValues: {
+//       ':DisplayName': DisplayName,
+//       ':Email': Email,
+//       ':Phone': Phone,
+//     },
+//   };
+
+//   dd.update(params, (err, data) => {
+//     if (err) console.log(err);
+//     else console.log(data);
+//   });
+// });
+
+// Adds new admin to Admins dynamoDB table
+router.post('/signup', (req, res) => {
+  console.log(req.body);
+  const { AdminName, AdminEmail, AdminPW } = req.body;
   const params = {
     TableName: 'Admins',
-    Key: {
-      adminId: id,
-    },
-    UpdateExpression: 'set #b = :DisplayName, #a = :Email, #c = :Phone',
-    ConditionExpression: '#b <> :DisplayName OR #a <> :Email OR #c <> :Phone',
-    ExpressionAttributeNames: { '#b': 'Name', '#a': 'Email', '#c': 'Phone' },
-    ExpressionAttributeValues: {
-      ':DisplayName': DisplayName,
-      ':Email': Email,
-      ':Phone': Phone,
+    Item: {
+      Name: AdminName,
+      Email: AdminEmail,
+      Phone: 'AdminPhone',
+      adminId: hashingId,
     },
   };
 
-  dd.update(params, (err, data) => {
-    if (err) console.log(err);
-    else console.log(data);
+  dd.put(params, (error, data) => {
+    if (error) {
+      res.status(400).json({ error });
+    } else {
+      res.status(200).json({ data });
+    }
   });
-});
-
-// display admin settings
-router.get('/settings', (req, res) => {
-  res.status(200).json({ status: 'display admin settings info' });
 });
 
 module.exports = router;

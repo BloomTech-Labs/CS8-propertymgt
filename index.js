@@ -4,7 +4,8 @@ const log = require('./src/Common/Show');
 
 const app = express();
 const UserRouter = require('./src/Users/userRouter');
-const adminRouter = require('./src/Admin/adminRouter');
+// const adminRouter = require('./src/Admin/adminRouter');
+const propertiesRouter = require('./src/Admin/Properties/propertiesRouter');
 const tenantRouter = require('./src/Tenant/tenantRouter');
 const billingRouter = require('./src/Billing/BillingRouter');
 const home = require('./src/Home/HomeRouter');
@@ -12,7 +13,7 @@ const home = require('./src/Home/HomeRouter');
 
 // const bodyParser = require('body-parser');
 const cors = require('cors');
-var path    = require("path");
+var path = require('path');
 
 app.use(express.static(path.join(__dirname, 'src/lspmgt_frontend/build')));
 app.use(express.json());
@@ -24,7 +25,8 @@ app.use(require('body-parser').text());
 app.use(cors());
 // app.use('/users', userRouter);
 app.use('/', home);
-app.use('/api/admin', adminRouter);
+// app.use('/api/admin', adminRouter);
+app.use('/api/admin', propertiesRouter);
 app.use('/api/tenant', tenantRouter);
 app.use('/users', UserRouter);
 app.use('/billing', billingRouter);
