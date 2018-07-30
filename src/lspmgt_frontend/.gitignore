@@ -9,6 +9,7 @@ node_modules/
 # production
 /build
 # misc
+awsconfig.js
 .env
 .DS_Store
 .env.local

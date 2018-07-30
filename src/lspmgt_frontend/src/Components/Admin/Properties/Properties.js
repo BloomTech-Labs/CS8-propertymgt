@@ -33,7 +33,7 @@ class Properties extends Component {
     return (
       <div>
         <h4> Add a new Property </h4>
-        <Link to="/admin/addproperty">
+        <Link to="admin/addproperty">
           <Icon name="plus circle" size="massive" link />{' '}
         </Link>
       </div>
@@ -47,7 +47,7 @@ class Properties extends Component {
     return (
       <Card>
         <Card.Content textAlign="right">
-          <Link to="/admin/editproperty">
+          <Link to="admin/editproperty">
             <Icon name="pencil" fitted />
           </Link>
           <Icon name="trash alternate outline" link />
