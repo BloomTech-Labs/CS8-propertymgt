@@ -45,14 +45,14 @@ class Properties extends Component {
   // Populates each listOfProperties element with proper data field from database properties list,
   // just refactor hardcoded template with real data
   desc = (property) => {
-    const address = property[Object.keys(property)[6]];
-    const id = property[Object.keys(property)[3]];
-    // console.log(address);
-    // console.log(id);
-    // console.log(property);
-    // for (let i = 0; i < 10; i++) {
-    //   console.log(property[Object.keys(property)[i]]);
-    // }
+    const array = Object.keys(property);
+    let x = array.indexOf('propertyId');
+    // console.log('My property id is located at..', x);
+    const id = property[Object.keys(property)[x]];
+    console.log('My id in properties component is..', id);
+    x = array.indexOf('PropertyAddr');
+    // console.log('My property address is located at..', x);
+    const address = property[Object.keys(property)[x]];
     return (
       <Card>
         <Card.Content textAlign="right">

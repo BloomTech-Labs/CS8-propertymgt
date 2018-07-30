@@ -40,7 +40,7 @@ class EditProperty extends Component {
         basic
         size="small"
       >
-        <Header content="Edit Property Card" />
+        <Header content="Edit Property" />
         <Modal.Content>Form goes here to edit card</Modal.Content>
         <Modal.Actions>
           <Button color="blue" inverted onClick={this.handleSubmit}>

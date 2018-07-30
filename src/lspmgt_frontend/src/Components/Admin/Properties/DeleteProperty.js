@@ -3,11 +3,12 @@ import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const handleClick = (props) => {
+const handleClick = (id) => {
+  console.log('delete fired.. id before params..', id);
   axios
-    .delete(`http://localhost:5000/api/admin/deleteproperty/${props.id}`)
+    .delete(`http://localhost:5000/api/admin/deleteproperty/${id}`)
     .then((res) => {
-      console.log('Deleted property..', props.id);
+      console.log('Deleted property..', res);
     })
     .catch((error) => {
       console.log('Error in DeleteProperty..', error);
@@ -15,11 +16,34 @@ const handleClick = (props) => {
 };
 
 const DeleteProperty = (props) => {
+  console.log('dp props..', props);
   return (
-    <a onClick={handleClick(props)}>
-      <Icon name="trash alternate outline" />
-    </a>
+    <Modal
+      trigger={
+        <a>
+          <Icon name="trash alternate outline" />
+        </a>
+      }
+      basic
+      size="small"
+    >
+      <Header content="Delete Property" />
+      <Modal.Content>
+        <span color="red">
+          <h4>Are you sure?</h4>
+        </span>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color="blue" type="submit" inverted onClick={handleClick(props)}>
+          <Icon name="checkmark" />Delete
+        </Button>
+      </Modal.Actions>
+    </Modal>
   );
 };
 
 export default DeleteProperty;
+
+DeleteProperty.propTypes = {
+  id: PropTypes.string,
+};
