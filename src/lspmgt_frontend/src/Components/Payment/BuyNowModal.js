@@ -69,7 +69,7 @@ class BuyNowModal extends Component {
               />
             </Form.Group>
           </Form>
-          <Checkout />
+          {/* <Checkout /> */}
           <Button type="submit" onClick={this.handleSubmit} primary>
             Create Account
           </Button>

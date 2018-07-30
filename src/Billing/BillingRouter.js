@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const dd = require('../Config/AwsConfig');
+const db = require('../Config/AwsConfig');
 const hashingId = require('../Common/HashingId');
 // const dbModel = require('../Config/Dbmodel');
 const { Secret } = require('../Config/StripeKey');
@@ -49,6 +49,7 @@ router.post('/testcharge', (req, res) => {
   );
 });
 
+// example stripe customer creation alongside new admin creation
 router.post('/charge/newadmin', (req, res) => {
   // Admin "BuyNow" Links to this route
   const amount = 2500; // Price set for App Purchase
@@ -66,57 +67,35 @@ router.post('/charge/newadmin', (req, res) => {
     },
   };
 
-  stripe.customers
-    .create({
+  stripe.customers.create(
+    {
       // This customers.create function will return a promise
-      AdminName,
-      AdminEmail,
-      AdminPhone,
+      description: 'New Admin App Purchase',
+      email: AdminEmail,
+
       // "default_source" null by default, need to add manually
-      default_source: AdminId,
-    })
-    .then((customer) => {
-      stripe.charges.create(
-        {
-          amount,
-          description: 'Property Maxx App Purchase',
-          currency: 'usd',
-          customer: customer.id,
-        },
-        (err, charge) => {
-          if (err) res.status(500).json({ status: 'error', err });
-          res.status(200).json({ status: 'Purchase Complete', charge });
-        }
-      );
-    });
+      // default_source: AdminId,
+    },
+    (err, customer) => {
+      if (err) res.status(500).json({ status: 'error', err });
+      res.status(200).json({ status: 'success', customer });
+    }
+  );
+  // testing adding charge on customer creation
+  // .then((customer) => {
+  //   stripe.charges.create(
+  //     {
+  //       amount,
+  //       description: 'Property Maxx App Purchase',
+  //       currency: 'usd',
+  //       customer: customer.id,
+  //     },
+  //     (err, charge) => {
+  //       if (err) res.status(500).json({ status: 'error', err });
+  //       res.status(200).json({ status: 'Purchase Complete', charge });
+  //     }
+  //   );
+  // });
 });
-
-// charge made with New Customer -- NOT WORKING
-// stripe.customers.create({
-//     email: req.body.stripeEmail,
-//     source: req.body.stripeToken
-// }).then(customer => stripe.charges.create({
-//     amount,
-//     description: 'test',
-//     currency: 'usd',
-//     customer: customer.id
-// }))
-// .then(charge => res.status(200).json({ status: 'success', }))
-// });
-
-// Charge made with Async/Await
-// router.post('/testcharge', async (req, res) => {
-//   try {
-//     const status = await stripe.charges.create({
-//       amount: 2000,
-//       currency: 'usd',
-//       description: 'an aexample charge',
-//       source: req.body,
-//     });
-//     res.json({ status });
-//   } catch (err) {
-//     res.status(500).end();
-//   }
-// });
 
 module.exports = router;
