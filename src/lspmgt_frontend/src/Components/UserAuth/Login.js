@@ -32,7 +32,7 @@ export default class Login extends Component {
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
         console.log('Sign in sucess data -> ', data);
-        this.props.history.push("/");
+        this.props.history.push("/tenant/dashboard");
       })
       .catch((err) => console.log('THERE WAS AN ERROR -> ', err));
     }

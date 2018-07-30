@@ -41,6 +41,7 @@ class BuyNowModal extends Component {
       .then(data => {
         alert('you have been sign up');
         console.log('user has signed up');
+        this.props.history.push('/');
       })
       .catch(err => {
         alert('There was an error signing up');

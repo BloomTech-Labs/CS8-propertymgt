@@ -2,11 +2,16 @@ import React from 'react';
 import './TenantNavigation.css';
 import { Link, Route } from 'react-router-dom';
 // import PropTypes from 'prop-types';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Button } from 'semantic-ui-react';
 import Dashboard from '../Dashboard/Dashboard';
 import Payments from '../Payments/Payments';
 import Settings from '../Settings/Settings';
 import WorkOrders from '../WorkOrders/WorkOrders';
+
+import Amplify, { Auth } from 'aws-amplify'
+import AmplifyConfig from '../../../Config/Auth';
+
+Amplify.configure(AmplifyConfig);
 
 const TopBar = () => {
   return (
@@ -15,7 +20,24 @@ const TopBar = () => {
         <Link to="/"> Home </Link>
         <Icon name="triangle right" />
       </div>
-      <Link to="/login">Sign-out</Link>
+      {/* <Link to="/login">Sign-out</Link> */}
+      <Button
+      content='Sign Out'
+      basic
+      onClick={
+        () => {
+
+          Auth.signOut()
+          .then(data => {
+            console.log('user signed out', data);
+            // this.props.remove('/')
+            this.props.history.push('/');
+          })
+          .catch(err => console.log('could not sign out'))
+        }
+
+      }
+      />
     </div>
   );
 };
