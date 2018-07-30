@@ -1,7 +1,7 @@
-const T = {
-  Tinfo: [],
-  Quantity: 0, // Tinfo.length
-};
+// const T = {
+//   Tinfo: [],
+//   Quantity: 0, // Tinfo.length
+// };
 
 const Tinfo = {
   NameT: '',
@@ -47,8 +47,8 @@ const PropertyInfo = {
   Bedrooms: '',
   Bathrooms: '',
   YearBuilt: '',
-  Contract: '',
-  Tenant: [],
+  Contract: '', // boolean
+  Tenants: [], // holds tenantId for each tenant
   Admin: '',
 };
 

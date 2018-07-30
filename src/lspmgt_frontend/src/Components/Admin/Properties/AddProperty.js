@@ -40,9 +40,14 @@ class AddProperty extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({ Contract: true });
-    axios.post('http://localhost:5000/api/admin/addproperty', this.state).catch((error) => {
-      console.log(error);
-    });
+    axios
+      .post('http://localhost:5000/api/admin/addproperty', this.state)
+      .then((res) => {
+        console.log('Added property..');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     this.setState({
       NameOwner: '',
       EmailOwner: '',

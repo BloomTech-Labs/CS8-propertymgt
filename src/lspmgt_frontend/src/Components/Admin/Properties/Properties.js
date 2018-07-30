@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Card, Icon, Feed } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import EditProperty from './EditProperty';
+import DeleteProperty from './DeleteProperty';
 import './Properties.css';
 
 class Properties extends Component {
@@ -43,14 +45,19 @@ class Properties extends Component {
   // Populates each listOfProperties element with proper data field from database properties list,
   // just refactor hardcoded template with real data
   desc = (property) => {
-    const n = property[Object.keys(property)[6]];
+    const address = property[Object.keys(property)[6]];
+    const id = property[Object.keys(property)[3]];
+    // console.log(address);
+    // console.log(id);
+    // console.log(property);
+    // for (let i = 0; i < 10; i++) {
+    //   console.log(property[Object.keys(property)[i]]);
+    // }
     return (
       <Card>
         <Card.Content textAlign="right">
-          <Link to="/admin/editproperty">
-            <Icon name="pencil" fitted />
-          </Link>
-          <Icon name="trash alternate outline" link />
+          <EditProperty property={property} />
+          <DeleteProperty propertyId={id} />
         </Card.Content>
         <Card.Content>
           <Feed>
@@ -58,7 +65,7 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="home" />
               </Feed.Label>
-              <Feed.Content>{n}</Feed.Content>
+              <Feed.Content>{address}</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
