@@ -1,5 +1,4 @@
 import React from 'react';
-import './AdminNavigation.css';
 import { Link, Route } from 'react-router-dom';
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
 import Properties from '../Properties/Properties';
@@ -9,6 +8,7 @@ import WorkOrderA from '../WorkOrder/WorkOrderA';
 import AddTenant from '../AddTenant/AddTenant';
 import Billing from '../Billing/Billing';
 import SettingsA from '../Settings/SettingsA';
+import './AdminNavigation.css';
 
 const TopBar = () => {
   return (
@@ -46,7 +46,7 @@ const SideBar = () => {
 
 const AdminNavigation = () => {
   return (
-    <div className="nav">
+    <div className="admin_navigation">
       <TopBar />
       <SideBar />
     </div>

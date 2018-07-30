@@ -1,3 +1,7 @@
 .formbox {
   display: flex;
 }
+
+.add-property {
+  margin: 10px;
+}

@@ -43,8 +43,7 @@ class Properties extends Component {
   // Populates each listOfProperties element with proper data field from database properties list,
   // just refactor hardcoded template with real data
   desc = (property) => {
-    const obj = property;
-    const n = obj[Object.keys(obj)[6]];
+    const n = property[Object.keys(property)[6]];
     return (
       <Card>
         <Card.Content textAlign="right">
@@ -95,12 +94,14 @@ class Properties extends Component {
     const { list } = this.state;
 
     return (
-      <Card.Group itemsPerRow="3">
-        {list.map((property) => {
-          return this.desc(property);
-        })}
-        {this.addr()}
-      </Card.Group>
+      <div className="admin-router">
+        <Card.Group itemsPerRow="3">
+          {list.map((property) => {
+            return this.desc(property);
+          })}
+          <div className="addr-function">{this.addr()}</div>
+        </Card.Group>
+      </div>
     );
   }
 }

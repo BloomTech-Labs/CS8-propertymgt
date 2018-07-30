@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Amplify, { Auth } from 'aws-amplify'
+import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 
 Amplify.configure(AmplifyConfig);
@@ -34,8 +34,10 @@ export default class Login extends Component {
         console.log('Sign in sucess data -> ', data);
         this.props.history.push("/tenant/dashboard");
       })
-      .catch((err) => console.log('THERE WAS AN ERROR -> ', err));
-    }
+      .catch((err) => {
+        console.log('THERE WAS AN ERROR -> ', err);
+      });
+  };
 
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -88,7 +90,7 @@ export default class Login extends Component {
                   Login
                 </Button>
               </Segment>
-            </Form> */}
+            </Form>
             <Segment>
               <AdminLogin /> <TenantLogin />
             </Segment>
