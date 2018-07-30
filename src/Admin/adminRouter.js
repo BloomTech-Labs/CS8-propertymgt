@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const dd = require('../Config/AwsConfig');
 const dbModel = require('../Config/DbModel');
 const hashingId = require('../Common/HashingId');
 const { Admins } = require('../Config/DynamoDbTables');
+
+const router = express.Router();
 
 // // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {

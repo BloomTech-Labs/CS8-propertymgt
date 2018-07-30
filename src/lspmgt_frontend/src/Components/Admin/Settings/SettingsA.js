@@ -27,7 +27,7 @@ class SettingsA extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { id } = this.state.id;
+    const { id } = this.state; // id currently not in use
     axios
       .patch('http://localhost:5000/api/admin/settingsupdate/1', this.state)
       .then((res) => {
@@ -51,6 +51,7 @@ class SettingsA extends Component {
             value={DisplayName}
             onChange={this.handleChange}
           />
+          {/* do away with OldPassword and NewPassword */}
           <Form.Input
             label="OldPassword: "
             name="OldPassword"

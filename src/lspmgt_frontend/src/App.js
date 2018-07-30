@@ -24,10 +24,12 @@ class App extends Component {
   componentDidMount() {
     console.log('App did mount');
     Auth.currentSession()
-      .then(data => {
+      .then((data) => {
         console.log('this is current session ', data);
-
-      }).catch(err => console.log(err))
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   render() {
     return (

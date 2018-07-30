@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const dd = require('../../Config/AwsConfig');
 const dbModel = require('../../Config/DbModel');
 const { Admin } = require('../../Config/DynamoDbTables');
 const hashingId = require('../../Common/HashingId');
+
+const router = express.Router();
 
 // Returns all the properties for property cards screen
 router.get('/properties', (req, res) => {
@@ -62,7 +63,7 @@ router.post('/addproperty', (req, res) => {
 
 // Deletes property
 router.delete('/deleteproperty/:id', (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const params = {
     TableName: 'Properties',
     Key: {
@@ -72,7 +73,7 @@ router.delete('/deleteproperty/:id', (req, res) => {
 
   dd.delete(params, (error, data) => {
     if (error) res.status(404).json({ error });
-    else res.status(200).json({ status: 'deleted property' });
+    else res.status(200).json({ status: 'deleted property', data });
   });
 });
 
@@ -91,7 +92,7 @@ router.patch('/updateproperty/:id', (req, res) => {
     Bathrooms,
     YearBuilt,
   } = req.body;
-  const id = req.params.id;
+  const { id } = req.params;
 
   const params = {
     TableName: 'Properties',
@@ -145,14 +146,14 @@ router.patch('/updateproperty/:id', (req, res) => {
 
   dd.update((params, params2), (error, data) => {
     if (error) res.status(400).json({ error });
-    else res.status(200).json({ message: 'Success' });
+    else res.status(200).json({ message: 'Success', data });
   });
 });
 
 // Update admin settings
 router.patch('/settingsupdate/:id', (req, res) => {
-  const { Email, Phone, DisplayName, OldPassword, NewPassword } = req.body;
-  const id = req.params.id;
+  const { Email, Phone, DisplayName } = req.body;
+  const { id } = req.params;
   const params = {
     TableName: 'Admins',
     Key: {
@@ -170,7 +171,7 @@ router.patch('/settingsupdate/:id', (req, res) => {
 
   dd.update(params, (error, data) => {
     if (error) res.status(400).json({ error });
-    else res.status(200);
+    else res.status(200).json({ message: 'Success', data });
   });
 });
 
