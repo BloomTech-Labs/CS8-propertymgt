@@ -1,7 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
-// const dd = require('../Config/AwsConfig');
+const dd = require('../Config/AwsConfig');
+const hashingId = require('../Common/HashingId');
 // const dbModel = require('../Config/Dbmodel');
 const { Secret } = require('../Config/StripeKey');
 
@@ -51,14 +52,28 @@ router.post('/testcharge', (req, res) => {
 router.post('/charge/newadmin', (req, res) => {
   // Admin "BuyNow" Links to this route
   const amount = 2500; // Price set for App Purchase
-  const { AdminName, AdminEmail, AdminPW } = this.state;
+  const { AdminName, AdminEmail, AdminPhone } = req.body;
+  // Create AdminId here so we can pass it to admin object
+  // as well as the stripe customer object as "default_source": adminId
+  const AdminId = hashingId;
+  const params = {
+    TableName: 'Admins',
+    Item: {
+      AdminName,
+      AdminEmail,
+      AdminPhone,
+      AdminId,
+    },
+  };
 
   stripe.customers
     .create({
       // This customers.create function will return a promise
       AdminName,
       AdminEmail,
-      AdminPW,
+      AdminPhone,
+      // "default_source" null by default, need to add manually
+      default_source: AdminId,
     })
     .then((customer) => {
       stripe.charges.create(
