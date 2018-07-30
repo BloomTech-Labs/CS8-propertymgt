@@ -1,7 +1,7 @@
 /*eslint-disable import/first*/
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
@@ -21,10 +21,9 @@ export default class Login extends Component {
     Auth.currentSession()
       .then((data) => {
         console.log(data);
+        this.props.history.push('/tenant/dashboard');
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }
 
   handleSignin = () => {
@@ -32,6 +31,7 @@ export default class Login extends Component {
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
         console.log('Sign in sucess data -> ', data);
+        this.props.history.push('/tenant/dashboard');
       })
       .catch((err) => {
         console.log('THERE WAS AN ERROR -> ', err);
