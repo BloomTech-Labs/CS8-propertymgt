@@ -147,14 +147,9 @@ router.patch('/updateproperty/:id', (req, res) => {
     if (error) res.status(400).json({ error });
     else res.status(200).json({ message: 'Success' });
   });
-
-  // dd.update(params2, (error, data) => {
-  //   if (error) res.status(400).json({ error });
-  //   else res.status(200).json({ message: 'Success' });
-  // });
 });
 
-// patch, update setting in admin settings
+// Update admin settings
 router.patch('/settingsupdate/:id', (req, res) => {
   const { Email, Phone, DisplayName, OldPassword, NewPassword } = req.body;
   const id = req.params.id;
