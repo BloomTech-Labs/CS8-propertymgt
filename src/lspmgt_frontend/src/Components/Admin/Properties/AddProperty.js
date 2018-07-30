@@ -43,10 +43,10 @@ class AddProperty extends Component {
     axios
       .post('http://localhost:5000/api/admin/addproperty', this.state)
       .then((res) => {
-        console.log('Added property..');
+        console.log('Added property..', res);
       })
       .catch((error) => {
-        console.log(error);
+        console.log('Error in addproperty..', error);
       });
     this.setState({
       NameOwner: '',
