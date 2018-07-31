@@ -83,6 +83,7 @@ router.post('/tenant/signup', (req, res) => {
   };
 
   dd.put(params, (err, d) => {
+    console.log(d);
     if (err) {
       console.log(err);
       res.status(200).json({ status: 'error', error: err });

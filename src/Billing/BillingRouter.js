@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const db = require('../Config/AwsConfig');
+const dd = require('../Config/AwsConfig');
 const hashingId = require('../Common/HashingId');
 // const dbModel = require('../Config/Dbmodel');
 const { Secret } = require('../Config/StripeKey');
@@ -49,53 +49,144 @@ router.post('/testcharge', (req, res) => {
   );
 });
 
-// example stripe customer creation alongside new admin creation
-router.post('/charge/newadmin', (req, res) => {
-  // Admin "BuyNow" Links to this route
-  const amount = 2500; // Price set for App Purchase
-  const { AdminName, AdminEmail, AdminPhone } = req.body;
-  // Create AdminId here so we can pass it to admin object
-  // as well as the stripe customer object as "default_source": adminId
-  const AdminId = hashingId;
+// STRIPE CUSTOMER CREATE INTEGRATED WITH ADMIN SIGN UP
+
+router.post('/new_admin', (req, res) => {
+  console.log(req.body);
+  const { Name, Email, Phone } = req.body;
   const params = {
     TableName: 'Admins',
     Item: {
-      AdminName,
-      AdminEmail,
-      AdminPhone,
-      AdminId,
+      Name,
+      Email,
+      Phone,
+      adminId: hashingId,
     },
   };
 
-  stripe.customers.create(
-    {
-      // This customers.create function will return a promise
-      description: 'New Admin App Purchase',
-      email: AdminEmail,
-
-      // "default_source" null by default, need to add manually
-      // default_source: AdminId,
-    },
-    (err, customer) => {
-      if (err) res.status(500).json({ status: 'error', err });
-      res.status(200).json({ status: 'success', customer });
+  dd.put(params, (err, data) => {
+    console.log(params);
+    if (err) res.status(500).json({ status: 'db error', err });
+    // res.status(200).json({ status: 'db success', data });
+    else {
+      console.log(data);
+      stripe.customers.create(
+        {
+          description: params.Item.adminId,
+          email: params.Item.Email,
+        },
+        (stripeErr, customer) => {
+          if (stripeErr) res.status(500).json({ status: 'stripe error', stripeErr });
+          res.status(200).json({ status: 'all success', data, customer });
+        }
+      );
     }
-  );
-  // testing adding charge on customer creation
-  // .then((customer) => {
-  //   stripe.charges.create(
-  //     {
-  //       amount,
-  //       description: 'Property Maxx App Purchase',
-  //       currency: 'usd',
-  //       customer: customer.id,
-  //     },
-  //     (err, charge) => {
-  //       if (err) res.status(500).json({ status: 'error', err });
-  //       res.status(200).json({ status: 'Purchase Complete', charge });
-  //     }
-  //   );
-  // });
+  });
 });
+
+// router.post('/admin_billing', (req, res) => {
+
+// });
+
+// example stripe customer creation alongside new admin creation
+// router.post('/charge/newadmin', (req, res) => {
+//   // Admin "BuyNow" Links to this route
+//   const amount = 2500; // Price set for App Purchase
+//   const { AdminName, AdminEmail, AdminPhone } = req.body;
+//   // Create AdminId here so we can pass it to admin object
+//   // as well as the stripe customer object as "default_source": adminId
+//   const AdminId = hashingId;
+//   const params = {
+//     TableName: 'Admins',
+//     Item: {
+//       AdminName,
+//       AdminEmail,
+//       AdminPhone,
+//       AdminId,
+//     },
+//   };
+
+//   db.put(params, (err, data) => {
+//     if (err) res.status(500).json({ status: 'error', err });
+//     res.status(200).json({ status: 'success', data });
+//   }).then((Admin) => {
+//     stripe.customers.create(
+//       {
+//         // This customers.create function will return a promise
+//         description: 'New Admin App Purchase',
+//         email: Admin.AdminEmail,
+//         // "default_source" null by default, need to add manually
+//         default_source: Admin.AdminId,
+//       },
+//       (err, customer) => {
+//         if (err) res.status(500).json({ status: 'error', err });
+//         res.status(200).json({ status: 'success', customer });
+//       }
+//     );
+//   });
+// });
+
+//   // Stripe First Method
+//   stripe.customers.create({
+//     // This customers.create function will return a promise
+//     description: 'New Admin App Purchase',
+//     email: AdminEmail,
+//     // "default_source" null by default, need to add manually
+//     default_source: AdminId,
+//   });
+//   db.put(params, (err, data) => {
+//     if (err) res.status(500).json({ status: 'error', err });
+//     res.status(200).json({ status: 'success', data });
+//   });
+// });
+
+// DB First Method
+// db.put(params, (err, data) => {
+//   if (err) res.status(500).json({ status: 'error', err });
+//   res.status(200).json({ status: 'success', data });
+// }).then((Admin) => {
+//   stripe.customers.create(
+//     {
+//       // This customers.create function will return a promise
+//       description: 'New Admin App Purchase',
+//       email: Admin.AdminEmail,
+//       // "default_source" null by default, need to add manually
+//       default_source: Admin.AdminId,
+//     },
+//     (err, customer) => {
+//       if (err) res.status(500).json({ status: 'error', err });
+//       res.status(200).json({ status: 'success', customer });
+//     }
+//   );
+// });
+// stripe.customers.create(
+//   {
+//     // This customers.create function will return a promise
+//     description: 'New Admin App Purchase',
+//     email: AdminEmail,
+//     // "default_source" null by default, need to add manually
+//     default_source: AdminId,
+//   },
+//   (err, customer) => {
+//     if (err) res.status(500).json({ status: 'error', err });
+//     res.status(200).json({ status: 'success', customer });
+//   }
+// );
+// testing adding charge on customer creation
+// .then((customer) => {
+//   stripe.charges.create(
+//     {
+//       amount,
+//       description: 'Property Maxx App Purchase',
+//       currency: 'usd',
+//       customer: customer.id,
+//     },
+//     (err, charge) => {
+//       if (err) res.status(500).json({ status: 'error', err });
+//       res.status(200).json({ status: 'Purchase Complete', charge });
+//     }
+//   );
+// });
+// });
 
 module.exports = router;

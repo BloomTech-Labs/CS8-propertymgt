@@ -8,9 +8,9 @@ class BuyNowModal extends Component {
     super(props);
 
     this.state = {
-      AdminName: '',
-      AdminEmail: '',
-      AdminPW: '',
+      Name: '',
+      Email: '',
+      Phone: '',
     };
   }
 
@@ -24,7 +24,7 @@ class BuyNowModal extends Component {
     e.preventDefault();
 
     axios
-      .post('http://localhost:5000/users/admin/signup', this.state)
+      .post('http://localhost:5000/billing/new_admin', this.state)
       .then((res) => {
         console.log(`Added ${this.state} to server`, res);
       })
@@ -32,10 +32,23 @@ class BuyNowModal extends Component {
         console(err);
       });
     this.setState({
-      AdminName: '',
-      AdminEmail: '',
-      AdminPW: '',
+      Name: '',
+      Email: '',
+      Phone: '',
     });
+    // axios
+    //   .post('http://localhost:5000/billing/admin_billing', this.state)
+    //   .then((res) => {
+    //     console.log(`Added ${this.state} to server`, res);
+    //   })
+    //   .catch((err) => {
+    //     console(err);
+    //   });
+    // this.setState({
+    //   AdminName: '',
+    //   AdminEmail: '',
+    //   AdminPW: '',
+    // });
   };
 
   render() {
@@ -49,22 +62,22 @@ class BuyNowModal extends Component {
                 fluid
                 label="First name"
                 placeholder="Prepare for Trouble"
-                name="AdminName"
+                name="Name"
                 onChange={this.handleInput}
               />
               <Form.Input
                 fluid
                 label="Email"
                 placeholder="And Make it Double"
-                name="AdminEmail"
+                name="Email"
                 onChange={this.handleInput}
               />
               <Form.Input
                 fluid
                 label="Password"
                 placeholder="Meeeowth Thats Right!"
-                type="password"
-                name="AdminPW"
+                type="test"
+                name="Phone"
                 onChange={this.handleInput}
               />
             </Form.Group>
