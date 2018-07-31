@@ -16,11 +16,9 @@ class EditProperty extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { propertyId } = this.props.property;
     axios
-      .patch(
-        `http://localhost:5000/api/admin/updateproperty/${this.props.property.propertyId}`,
-        this.state
-      )
+      .patch(`http://localhost:5000/api/admin/updateproperty/${propertyId}`, this.state)
       .then((res) => {
         console.log('Updated property card..', res);
       })
@@ -58,4 +56,5 @@ EditProperty.propTypes = {
   PropertyAddr: PropTypes.string,
   Tenants: PropTypes.array,
   Contract: PropTypes.bool,
+  propertyId: PropTypes.string,
 };
