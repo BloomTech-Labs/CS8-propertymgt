@@ -95,7 +95,7 @@ router.post('/new_admin', (req, res) => {
               (chargeErr, charge) => {
                 if (chargeErr) res.status(500).json({ status: 'error', chargeErr });
                 else {
-                  console.log('charge complete');
+                  console.log('charge complete', charge);
                   res.status(200).json({ status: 'Charge Complete', charge });
                 }
               }
