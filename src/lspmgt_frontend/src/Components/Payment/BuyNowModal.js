@@ -29,6 +29,8 @@ class BuyNowModal extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
+    // this.props.stripe.createToken().then(())
+
     Auth.signUp({
       username: 'lambdapropertymgt@gmail.com',
       password: '!2345Abc',
