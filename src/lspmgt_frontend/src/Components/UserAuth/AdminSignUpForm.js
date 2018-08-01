@@ -27,19 +27,17 @@ export default class AdminSignUp extends Component {
 
     const temp = { User: this.state };
 
-
     Auth.signUp({
-        'username': this.state.Email, 
-        'password': this.state.Password,
-        'attributes': {
-          'custom:access_level': 'admin'
-        }
-      })
-      .then(data => {
+      username: this.state.Email,
+      password: this.state.Password,
+      attributes: {
+        'custom:access_level': 'admin',
+      },
+    })
+      .then((data) => {
         console.log('user signed up -> ', data);
       })
-      .catch(err => console.log('there was an error -> '), err)
-
+      .catch((err) => console.log('there was an error -> '), err);
 
     // axios
     //   .post('http://localhost:5000/users/admin/signup', temp)

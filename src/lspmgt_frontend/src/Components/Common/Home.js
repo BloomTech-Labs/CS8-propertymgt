@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LandingPage, Dashboard } from './Components';
+import { LandingPage, Dashboard, SignUp } from './Components';
 import { Container, Grid, GridColumn, Gr } from 'semantic-ui-react';
 import { Route } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ export default class Home extends Component {
     return (
       <div>
         <Dashboard />
-        {/* <Route path="/login" compon{} /> */}
+        <Route path="/SignUp" component={SignUp} />
       </div>
     );
   }
