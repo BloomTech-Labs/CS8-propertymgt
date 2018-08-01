@@ -7,7 +7,6 @@
   width: 100vw;
   overflow: hidden;
   z-index: -100;
-  background-color: aqua
 }
 
 .video-container video {

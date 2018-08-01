@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 export default class NavBar extends Component {
 
     render() {
-        
-
+    
         return (
             <Menu stackable fluid inverted >
                 <Menu.Item>
@@ -20,9 +19,11 @@ export default class NavBar extends Component {
                     Signup 
                 </Menu.Item>
                 </Link>
+                <Link to='/login'>
                 <Menu.Item>
-                   Signin 
+                    Signin 
                 </Menu.Item>
+                </Link>
 
                 {/* <Menu.Item
                     name='sign-in'
