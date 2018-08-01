@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Message, Form, Input, Button } from 'semantic-ui-react';
+import { Grid, Message, Form, Input, Checkbox, Button } from 'semantic-ui-react';
 import axios from 'axios';
 
 class AddTenant extends Component {
@@ -11,67 +11,193 @@ class AddTenant extends Component {
       T1Name: '',
       T1Phone: '',
       T1Email: '',
+      T1NotiP: false,
+      T1NotiE: false,
       T2Name: '',
       T2Phone: '',
       T2Email: '',
+      T2NotiP: false,
+      T2NotiE: false,
+      StartD: '',
+      EndD: '',
+      PropertyAddr: '', // selected property address from dropdown menu
+      Contract: false, // Always initially false?
+      LoP: [],
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Gets available properties without a contract
+  componentDidMount() {
+    axios
+      .get('api/admin/properties')
+      .then((res) => {
+        this.setState({
+          LoP: res.data.data.Items,
+        });
+      })
+      .catch((error) => {
+        console.log('Error in AddTenant GET..', error);
+      });
+  }
+
   // Sets input from form to state
   handleInput = (e) => {
+    const { name, value } = e.target;
     this.setState({
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
   // Sends state to backend using express
   handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/admin/addTenant', this.state).catch((err) => {
-      console.los('Error in AddTenant..', err);
-    });
+
+    // Send Tenant object, send PropertyAddr and Contract
+    const {
+      T1Name,
+      T1Phone,
+      T1Email,
+      T1NotiP,
+      T1NotiE,
+      T2Name,
+      T2Phone,
+      T2Email,
+      T2NotiP,
+      T2NotiE,
+      StartD,
+      EndD,
+      PropertyAddr,
+      Contract,
+    } = this.state;
+
+    const x = {
+      T1Name,
+      T1Phone,
+      T1Email,
+      T1NotiP,
+      T1NotiE,
+      T2Name,
+      T2Phone,
+      T2Email,
+      T2NotiP,
+      T2NotiE,
+      StartD,
+      EndD,
+      PropertyAddr,
+      Contract,
+    };
+
+    axios
+      .post('api/admin/addtenant', x)
+      .then()
+      .catch((error) => {
+        console.log('Error in AddTenant POST..', error);
+      });
     this.setState({
       T1Name: '',
       T1Phone: '',
       T1Email: '',
+      T1NotiP: false,
+      T1NotiE: false,
       T2Name: '',
       T2Phone: '',
       T2Email: '',
+      T2NotiP: false,
+      T2NotiE: false,
+      StartD: '',
+      EndD: '',
+      PropertyAddr: '',
+      Contract: false,
     });
   };
 
+  handleCheck = (e) => {
+    console.log(e.target);
+
+    const { target } = e;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
+
+    console.log('before handleClick setState..', name, value);
+    this.setState({
+      [name]: value,
+    });
+    console.log('after handleClick..', name, value);
+  };
+
   render() {
-    const { T1Name, T1Phone, T1Email, T2Name, T2Phone, T2Email } = this.state;
+    const {
+      T1Name,
+      T1Phone,
+      T1Email,
+      T1NotiP,
+      T1NotiE,
+      T2Name,
+      T2Phone,
+      T2Email,
+      T2NotiP,
+      T2NotiE,
+      StartD,
+      EndD,
+      PropertyAddr,
+      Contract,
+    } = this.state;
+
     return (
       <Grid>
         <Grid.Row columns={2}>
           <Grid.Column>
             <Message>
               <Message.Header>Tenant #1</Message.Header>
-              <Form>
-                <Form.Input
-                  name="T1Name"
-                  value={T1Name}
-                  onChange={this.handleInput}
-                  placeholder="Name"
-                />
-                <Form.Input
-                  name="T1Phone"
-                  value={T1Phone}
-                  onChange={this.handleInput}
-                  placeholder="Phone"
-                />
-                <Form.Input
-                  name="T1Email"
-                  value={T1Email}
-                  onChange={this.handleInput}
-                  placeholder="Email"
-                />
-                <Button type="submit" onClick={this.handleSubmit} primary>
-                  Submit
-                </Button>
+              <Form className="form1">
+                <div>
+                  <div>
+                    <Form.Input
+                      name="T1Name"
+                      value={T1Name}
+                      onChange={this.handleInput}
+                      placeholder="Name"
+                    />
+                  </div>
+                  <Form.Input
+                    name="T1Phone"
+                    value={T1Phone}
+                    onChange={this.handleInput}
+                    placeholder="Phone"
+                  />
+                  <Form.Input
+                    name="T1Email"
+                    value={T1Email}
+                    onChange={this.handleInput}
+                    placeholder="Email"
+                  />
+                </div>
+                <div>
+                  <Form.Field>
+                    <label>
+                      Email?
+                      <input
+                        name="T1NotiE"
+                        type="checkbox"
+                        checked={T1NotiE}
+                        onChange={this.handleCheck}
+                      />
+                    </label>
+                  </Form.Field>
+                  <Form.Field>
+                    <label>
+                      Text?
+                      <input
+                        name="T1NotiP"
+                        type="checkbox"
+                        checked={T1NotiP}
+                        onChange={this.handleCheck}
+                      />
+                    </label>
+                  </Form.Field>
+                </div>
               </Form>
             </Message>
           </Grid.Column>
@@ -80,30 +206,54 @@ class AddTenant extends Component {
               <Message.Header>Tenant #2</Message.Header>
               <Form>
                 <Form.Input
-                  name="T1Name"
+                  name="T2Name"
                   value={T2Name}
                   onChange={this.handleInput}
                   placeholder="Name"
                 />
                 <Form.Input
-                  name="T1Phone"
+                  name="T2Phone"
                   value={T2Phone}
                   onChange={this.handleInput}
                   placeholder="Phone"
                 />
                 <Form.Input
-                  name="T1Email"
+                  name="T2Email"
                   value={T2Email}
                   onChange={this.handleInput}
                   placeholder="Email"
                 />
-                <Button type="submit" onClick={this.handleSubmit} primary>
-                  Submit
-                </Button>
+                <div>
+                  <Form.Field>
+                    <label>
+                      Email?
+                      <input
+                        name="T2NotiE"
+                        type="checkbox"
+                        checked={T2NotiE}
+                        onChange={this.handleCheck}
+                      />
+                    </label>
+                  </Form.Field>
+                  <Form.Field>
+                    <label>
+                      Text?
+                      <input
+                        name="T2NotiP"
+                        type="checkbox"
+                        checked={T2NotiP}
+                        onChange={this.handleCheck}
+                      />
+                    </label>
+                  </Form.Field>
+                </div>
               </Form>
             </Message>
           </Grid.Column>
         </Grid.Row>
+        <Button type="submit" onClick={this.handleSubmit} primary>
+          Save
+        </Button>
       </Grid>
     );
   }

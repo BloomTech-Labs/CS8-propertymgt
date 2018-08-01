@@ -14,12 +14,13 @@ class Properties extends Component {
     };
     this.desc = this.desc.bind(this);
     this.addr = this.addr.bind(this);
+    this.checkForContract = this.checkForContract.bind(this);
   }
 
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/admin/properties')
+      .get('http://localhost:5000/api/admin/propertieslsdb')
       .then((response) => {
         this.setState({
           list: response.data.data.Items,
@@ -42,17 +43,45 @@ class Properties extends Component {
     );
   };
 
+  checkForContract = (y) => {
+    return y ? (
+      <span style={{ color: 'green' }}>ContractSigned</span>
+    ) : (
+      <span style={{ color: 'red' }}>Contract Not Signed</span>
+    );
+  };
+
   // Populates each listOfProperties element with proper data field from database properties list,
   // just refactor hardcoded template with real data
   desc = (property) => {
     const array = Object.keys(property);
+
+    // Get propertyId
     let x = array.indexOf('propertyId');
-    // console.log('My property id is located at..', x);
     const id = property[Object.keys(property)[x]];
-    console.log('My id in properties component is..', id);
+    // console.log('My id in properties component is..', id);
+
+    // Get PropertyAddr
     x = array.indexOf('PropertyAddr');
     // console.log('My property address is located at..', x);
     const address = property[Object.keys(property)[x]];
+
+    // Get Tenants array
+    x = array.indexOf('Tenants');
+    console.log('My tenants are located at..', x);
+    const tenants = property[Object.keys(property)[x]];
+    // console.log('My tenants are..', tenants);
+
+    // Get Start/ End dates
+    x = array.indexOf('StartD');
+    const startD = property[Object.keys(property)[x]];
+    x = array.indexOf('EndD');
+    const endD = property[Object.keys(property)[x]];
+
+    // Get Contract
+    x = array.indexOf('Contract');
+    const contract = property[Object.keys(property)[x]];
+
     return (
       <Card>
         <Card.Content textAlign="right">
@@ -73,7 +102,9 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="user" />
               </Feed.Label>
-              <Feed.Content>Tenants</Feed.Content>
+              <Feed.Content>
+                {tenants[0].NameT}, {tenants[1].NameT}
+              </Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
@@ -81,7 +112,9 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="calendar alternate outline" />
               </Feed.Label>
-              <Feed.Content>Least Start/End</Feed.Content>
+              <Feed.Content>
+                {startD} - {endD}
+              </Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
@@ -89,9 +122,9 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="check" />
               </Feed.Label>
-              <Feed.Content>Contract Signed</Feed.Content>
+              <Feed.Content>{this.checkForContract(contract)}</Feed.Content>
             </Feed.Event>
-          </Feed>
+          </Feed>`
         </Card.Content>
       </Card>
     );
@@ -99,7 +132,7 @@ class Properties extends Component {
 
   render() {
     const { list } = this.state;
-
+    console.log(list);
     return (
       <div className="admin-router">
         <Card.Group itemsPerRow="3">
