@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link, Route, withRouter } from 'react-router-dom';
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
 import Properties from '../Properties/Properties';
 import AddProperty from '../Properties/AddProperty';
@@ -10,6 +10,12 @@ import Billing from '../Billing/Billing';
 import SettingsA from '../Settings/SettingsA';
 import './AdminNavigation.css';
 
+import Amplify, { Auth } from 'aws-amplify'
+import AmplifyConfig from '../../../Config/Auth';
+
+Amplify.configure(AmplifyConfig);
+
+
 const TopBar = () => {
   return (
     <div className="topbar">
@@ -18,7 +24,24 @@ const TopBar = () => {
         <Icon name="triangle right" />
       </div>
 
-      <Link to="/login">Sign-out</Link>
+      <Button
+      content='Sign Out'
+      basic
+      onClick={
+        () => {
+
+          Auth.signOut()
+          .then(data => {
+            console.log('user signed out', data);
+            // this.props.remove('/')
+            this.props.history.push('/');
+          })
+          .catch(err => console.log('could not sign out'))
+          // this.props.history.push('/');
+        }
+
+      }
+      />
     </div>
   );
 };
@@ -44,13 +67,16 @@ const SideBar = () => {
   );
 };
 
-const AdminNavigation = () => {
+// const AdminNavigation = (withRouter) => {
+  class AdminNavigation extends Component {
+    render() {
   return (
     <div className="admin_navigation">
       <TopBar />
       <SideBar />
     </div>
   );
+}
 };
 
 export default AdminNavigation;

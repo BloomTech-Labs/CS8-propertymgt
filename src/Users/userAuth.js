@@ -83,11 +83,6 @@ const tenantSignup = (req, res) => {
     });
 }
 
-
-
-
-
-
 module.exports = {
     signup,
     signin,

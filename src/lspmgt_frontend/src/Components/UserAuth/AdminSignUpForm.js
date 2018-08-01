@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
 import axios from 'axios';
+import Amplify, { Auth } from 'aws-amplify';
+import AmplifyConfig from '../../Config/Auth';
+
+Amplify.configure(AmplifyConfig);
 
 export default class AdminSignUp extends Component {
   state = {
@@ -23,14 +27,28 @@ export default class AdminSignUp extends Component {
 
     const temp = { User: this.state };
 
-    axios
-      .post('http://localhost:5000/users/admin/signup', temp)
-      .then((res) => {
-        console.log('Posted user..', res);
+
+    Auth.signUp({
+        'username': this.state.Email, 
+        'password': this.state.Password,
+        'attributes': {
+          'custom:access_level': 'admin'
+        }
       })
-      .catch((err) => {
-        console.log('Error in SignUpForm', err);
-      });
+      .then(data => {
+        console.log('user signed up -> ', data);
+      })
+      .catch(err => console.log('there was an error -> '), err)
+
+
+    // axios
+    //   .post('http://localhost:5000/users/admin/signup', temp)
+    //   .then((res) => {
+    //     console.log('Posted user..', res);
+    //   })
+    //   .catch((err) => {
+    //     console.log('Error in SignUpForm', err);
+    //   });
   };
 
   // determines if submit button displays using boolean

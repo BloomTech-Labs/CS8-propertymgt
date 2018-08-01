@@ -4,6 +4,7 @@ import axios from 'axios';
 import Checkout from './Checkout';
 import Amplify, { Auth } from 'aws-amplify';
 import AuthSettings from '../../Config/Auth';
+import { Redirect } from 'react-router-dom';
 
 Amplify.configure(AuthSettings);
 
@@ -32,16 +33,25 @@ class BuyNowModal extends Component {
     // this.props.stripe.createToken().then(())
 
     Auth.signUp({
+<<<<<<< HEAD
       username: 'lambdapropertymgt@gmail.com',
       password: '!2345Abc',
       attributes: {
         'custom:access_level': 'admin',
       },
+=======
+      'username': this.state.AdminEmail, 
+      'password': this.state.AdminPW,
+      'attributes': {
+        'custom:access_level': 'admin'
+      }
+>>>>>>> c132d5ad4e6135165a2d66d99aa0d65f25b3988b
     })
       .then((data) => {
         alert('you have been sign up');
         console.log('user has signed up');
-        this.props.history.push('/');
+        this.props.history.push('/admin/dashboard');
+        // <Redirect to='/'/>
       })
       .catch((err) => {
         alert('There was an error signing up');
