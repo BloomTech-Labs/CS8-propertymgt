@@ -33,19 +33,11 @@ class BuyNowModal extends Component {
     // this.props.stripe.createToken().then(())
 
     Auth.signUp({
-<<<<<<< HEAD
-      username: 'lambdapropertymgt@gmail.com',
-      password: '!2345Abc',
+      username: this.state.AdminEmail,
+      password: this.state.AdminPW,
       attributes: {
         'custom:access_level': 'admin',
       },
-=======
-      'username': this.state.AdminEmail, 
-      'password': this.state.AdminPW,
-      'attributes': {
-        'custom:access_level': 'admin'
-      }
->>>>>>> c132d5ad4e6135165a2d66d99aa0d65f25b3988b
     })
       .then((data) => {
         alert('you have been sign up');
