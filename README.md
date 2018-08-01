@@ -27,3 +27,19 @@
 | GET    | /admin/list           | --          |
 | GET    | /tenant/list          | --          |
 | GET    | /tenant/signup        | --          |
+
+## Property Endpoints
+
+| Method | Endpoint (/api/property) | Description |
+| ------ | ------------------------ | ----------- |
+| GET    | /all                     | --          |
+| POST   | /add                     | --          |
+| DELETE | /delete/:id              | --          |
+| PATCH  | /update/:id              | --          |
+| PATCH  | /settings/update/:id     | --          |
+
+## Billing Endpoints
+
+| Method | Endpoint (/billing) | Description |
+| ------ | ------------------- | ----------- |
+
