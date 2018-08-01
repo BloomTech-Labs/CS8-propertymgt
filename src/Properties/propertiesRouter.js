@@ -1,12 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const dd = require('../../Config/AwsConfig');
-const dbModel = require('../../Config/DbModel');
-const { Admin } = require('../../Config/DynamoDbTables');
-const hashingId = require('../../Common/HashingId');
+// const express = require('express');
+// const router = express.Router();
+const dd = require('../Config/AwsConfig');
+const dbModel = require('../Config/DbModel');
+const { Admin } = require('../Config/DynamoDbTables');
+const hashingId = require('../Common/HashingId');
 
 // Returns all the properties for property cards screen
-router.get('/properties', (req, res) => {
+// router.get('/properties', (req, res) => {
+const properties = (req, res) => {
   console.log(req.body);
   const params = {
     TableName: 'Properties',
@@ -17,10 +18,10 @@ router.get('/properties', (req, res) => {
       res.status(404).json({ error });
     } else res.status(200).json({ status: 'success', data });
   });
-});
+};
 
 // Add a new property to dynamoDB
-router.post('/addproperty', (req, res) => {
+const addProperty = (req, res) => {
   const {
     NameOwner,
     EmailOwner,
@@ -58,10 +59,10 @@ router.post('/addproperty', (req, res) => {
   dd.put(params, (error) => {
     if (error) res.status(404).json({ error });
   });
-});
+};
 
 // Deletes property
-router.delete('/deleteproperty/:id', (req, res) => {
+const deleteProperty = (req, res) => {
   const id = req.params.id;
   const params = {
     TableName: 'Properties',
@@ -74,11 +75,11 @@ router.delete('/deleteproperty/:id', (req, res) => {
     if (error) res.status(404).json({ error });
     else res.status(200).json({ status: 'deleted property' });
   });
-});
+};
 
 // Update property
 // IMPORTANT: Only nine conditional expressions can be made (06.27.18)
-router.patch('/updateproperty/:id', (req, res) => {
+const updateProperty = (req, res) => {
   const {
     NameOwner,
     EmailOwner,
@@ -147,10 +148,10 @@ router.patch('/updateproperty/:id', (req, res) => {
     if (error) res.status(400).json({ error });
     else res.status(200).json({ message: 'Success' });
   });
-});
+};
 
 // Update admin settings
-router.patch('/settingsupdate/:id', (req, res) => {
+const settingsUpdate = (req, res) => {
   const { Email, Phone, DisplayName, OldPassword, NewPassword } = req.body;
   const id = req.params.id;
   const params = {
@@ -172,6 +173,12 @@ router.patch('/settingsupdate/:id', (req, res) => {
     if (error) res.status(400).json({ error });
     else res.status(200);
   });
-});
+};
 
-module.exports = router;
+module.exports = {
+  properties,
+  addProperty,
+  deleteProperty,
+  updateProperty,
+  settingsUpdate
+};
