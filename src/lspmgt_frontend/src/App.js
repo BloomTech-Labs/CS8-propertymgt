@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import { NavBar, Home } from './Components/Common/Components'
+import { NavBar, Home } from './Components/Common/Components';
 import { Container } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
     return (
       <Container>
-        <NavBar/>
-        <Home/>
+        <NavBar />
+        <Home />
       </Container>
-    )
+    );
   }
 }
 
@@ -77,7 +77,6 @@ class App extends Component {
 //   }
 // }
 
-
 // // const Routes = (props) => (
 // //     <Switch>
 // //       <Route exact path="/" component={LandingPage} />
@@ -91,12 +90,11 @@ class App extends Component {
 
 // // export default Routes
 
-
 // const AuthCheck =  => {
 //   // return await Auth.currentAuthenticatedUser()
 //   // .then(user => {
 //   //   return user
-//   // })      
+//   // })
 //   // .catch(err =>{
 //   //   return err
 //   // });
@@ -124,6 +122,5 @@ class App extends Component {
 //     }
 //   />
 // );
-
 
 export default App;
