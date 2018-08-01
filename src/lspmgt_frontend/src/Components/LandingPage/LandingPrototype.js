@@ -39,23 +39,6 @@ export default class LandingProto extends Component {
           onBottomPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
         >
-          <Segment textAlign="center" vertical>
-            <Menu fixed={fixed ? 'top' : null} secondary={!fixed} size="large">
-              <Container>
-                <Header as="h1" color="blue">
-                  PropertyMaxx
-                </Header>
-                <Menu.Item position="right">
-                  <Link to="/login">
-                    <Button as="a">Log in</Button>
-                  </Link>
-                  <BuyNowModal as="a" primary={!fixed} style={{ marginLeft: '0.5em' }} />
-                </Menu.Item>
-              </Container>
-            </Menu>
-            {/* <Landing /> */}
-            {/* <HomepageHeading /> */}
-          </Segment>
           <div className="video-container fuild">
             <video autoPlay="true" loop="true">
               <source src={video} type="video/mp4" /> Your browser does not support the video.
