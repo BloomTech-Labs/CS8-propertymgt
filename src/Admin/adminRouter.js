@@ -1,10 +1,9 @@
-const express = require('express');
+// const express = require('express');
+// const router = express.Router();
 const dd = require('../Config/AwsConfig');
 const dbModel = require('../Config/DbModel');
 const hashingId = require('../Common/HashingId');
 const { Admins } = require('../Config/DynamoDbTables');
-
-const router = express.Router();
 
 // // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {
@@ -21,7 +20,7 @@ const router = express.Router();
 // });
 
 // return a single property using the id parameter
-router.get('/property/:id', (req, res) => {
+const propertyId = (req, res) => {
   const params = {
     TableName: 'ls_property_mgt',
     Key: {
@@ -37,7 +36,7 @@ router.get('/property/:id', (req, res) => {
       res.status(200).json({ status: 'success', data });
     }
   });
-});
+};
 
 // // Add a new property to dynamoDB
 // router.post('/addproperty', (req, res) => {
@@ -99,7 +98,7 @@ router.get('/property/:id', (req, res) => {
 // });
 
 // Returns tenants to grab work orders from for cards screen
-router.get('/workorder', (req, res) => {
+const workorder = (req, res) => {
   console.log('Workorder GET method triggered');
   const params = {
     TableName: 'Tenants',
@@ -109,10 +108,10 @@ router.get('/workorder', (req, res) => {
     if (err) res.status(200).json({ status: 'error', error: err });
     else res.status(200).json({ status: 'success', data });
   });
-});
+};
 
 // Add a new tenant to the system
-router.post('/addtenant', (req, res) => {
+const addTenant = (req, res) => {
   console.log('addtenant POST method in admin triggered.. ');
   const { T1Name, T1Phone, T1Email, T2Name, T2Phone, T2Email } = req.body;
   const params = {
@@ -133,7 +132,7 @@ router.post('/addtenant', (req, res) => {
     if (error) res.status(400).json({ error });
     else res.status(200).json({ status: 'Success..', data });
   });
-});
+};
 
 // display the billing information
 // router.get('/billing', (req, res) => {
@@ -165,27 +164,34 @@ router.post('/addtenant', (req, res) => {
 //   });
 // });
 
+// ***IMPORTANT THIS CODE BELOW HAS BEEN MOVED TO USER/USERAUTH FOLDER
+// ANY API CALLING THIS END POINT SHOULD BE CALLING THE NEW END POINT
+
 // Adds new admin to Admins dynamoDB table
-router.post('/signup', (req, res) => {
-  console.log(req.body);
-  const { AdminName, AdminEmail, AdminPW } = req.body;
-  const params = {
-    TableName: 'Admins',
-    Item: {
-      Name: AdminName,
-      Email: AdminEmail,
-      Phone: 'AdminPhone',
-      adminId: hashingId,
-    },
-  };
+// router.post('/signup', (req, res) => {
+//   console.log(req.body);
+//   const { AdminName, AdminEmail, AdminPW } = req.body;
+//   const params = {
+//     TableName: 'Admins',
+//     Item: {
+//       Name: AdminName,
+//       Email: AdminEmail,
+//       Phone: 'AdminPhone',
+//       adminId: hashingId,
+//     },
+//   };
 
-  dd.put(params, (error, data) => {
-    if (error) {
-      res.status(400).json({ error });
-    } else {
-      res.status(200).json({ data });
-    }
-  });
-});
+//   dd.put(params, (error, data) => {
+//     if (error) {
+//       res.status(400).json({ error });
+//     } else {
+//       res.status(200).json({ data });
+//     }
+//   });
+// });
 
-module.exports = router;
+module.exports = {
+  propertyId,
+  workorder,
+  addTenant,
+};
