@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Header, Modal, Form } from 'semantic-ui-react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Checkout from './Checkout';
 
 class BuyNowModal extends Component {
@@ -11,6 +12,10 @@ class BuyNowModal extends Component {
       Name: '',
       Email: '',
       Phone: '',
+      stripeToken: '',
+      CardNumber: '',
+      CardExpiration: '',
+      CardCVC: '',
     };
   }
 
@@ -56,37 +61,11 @@ class BuyNowModal extends Component {
       <Modal trigger={<Button primary>Buy Now!</Button>}>
         <Modal.Header>Enter New Account Info</Modal.Header>
         <Modal.Content>
-          <Form>
-            <Form.Group widths="equal">
-              <Form.Input
-                fluid
-                label="First name"
-                placeholder="Prepare for Trouble"
-                name="Name"
-                onChange={this.handleInput}
-              />
-              <Form.Input
-                fluid
-                label="Email"
-                placeholder="And Make it Double"
-                name="Email"
-                onChange={this.handleInput}
-              />
-              <Form.Input
-                fluid
-                label="Password"
-                placeholder="Meeeowth Thats Right!"
-                type="test"
-                name="Phone"
-                onChange={this.handleInput}
-              />
-            </Form.Group>
-          </Form>
-          {/* <Checkout /> */}
-          <Button type="submit" onClick={this.handleSubmit} primary>
-            Create Account
-          </Button>
+          <Checkout />
         </Modal.Content>
+        <Link to="/payment">
+          <Button secondary>payments</Button>
+        </Link>
       </Modal>
     );
   }

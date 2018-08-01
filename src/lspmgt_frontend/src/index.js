@@ -8,7 +8,7 @@ import { StripeProvider } from 'react-stripe-elements';
 
 ReactDOM.render(
   <Router>
-    <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
+    <StripeProvider apiKey="pk_test_zouhM74e22FwAz2fdQpwdqfu">
       <App />
     </StripeProvider>
   </Router>,

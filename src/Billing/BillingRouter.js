@@ -49,11 +49,14 @@ router.post('/testcharge', (req, res) => {
   );
 });
 
+// ****************************************************
 // STRIPE CUSTOMER CREATE INTEGRATED WITH ADMIN SIGN UP
-
+// ****************************************************
 router.post('/new_admin', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { Name, Email, Phone } = req.body;
+  const token = req.body.stripeToken.token;
+  // console.log(token);
   const params = {
     TableName: 'Admins',
     Item: {
@@ -65,22 +68,57 @@ router.post('/new_admin', (req, res) => {
   };
 
   dd.put(params, (err, data) => {
-    console.log(params);
-    if (err) res.status(500).json({ status: 'db error', err });
+    // console.log(params);
+    if (err) res.status(300).json({ status: 'db error', err });
     // res.status(200).json({ status: 'db success', data });
     else {
-      console.log(data);
+      // console.log(data);
       stripe.customers.create(
         {
           description: params.Item.adminId,
           email: params.Item.Email,
+          source: token.id,
         },
         (stripeErr, customer) => {
-          if (stripeErr) res.status(500).json({ status: 'stripe error', stripeErr });
-          res.status(200).json({ status: 'all success', data, customer });
+          // console.log(customer);
+          if (stripeErr) {
+            // console.log(stripeErr);
+            res.status(400).json({ status: 'error', stripeErr });
+          } else {
+            stripe.charges.create(
+              {
+                amount: 25000000,
+                description: 'App Purchase',
+                currency: 'usd',
+                customer: customer.id,
+              },
+              (chargeErr, charge) => {
+                if (chargeErr) res.status(500).json({ status: 'error', chargeErr });
+                else {
+                  console.log('charge complete');
+                  res.status(200).json({ status: 'Charge Complete', charge });
+                }
+              }
+            );
+          }
         }
       );
     }
+  });
+});
+
+// ****************************************************
+// STRIPE CUSTOMER CREATE INTEGRATED WITH ADMIN SIGN UP
+// ****************************************************
+router.post('/buy_now', (req, res) => {
+  const { number, expMonth, expYear, cvc } = req.body;
+  stripe.tokens.create({
+    card: {
+      number,
+      exp_month: expMonth,
+      exp_year: expYear,
+      cvc,
+    },
   });
 });
 

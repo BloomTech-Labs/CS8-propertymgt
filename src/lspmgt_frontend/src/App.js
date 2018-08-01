@@ -3,6 +3,7 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import Login from './Components/UserAuth/Login';
+import Payment from './Components/Payment/Payment';
 import LandingProto from './Components/LandingPage/LandingPrototype';
 import AdminNavigation from './Components/Admin/Navigation/AdminNavigation';
 import TenantNavigation from './Components/Tenant/Navigation/TenantNavigation';
@@ -26,6 +27,7 @@ class App extends Component {
       <div>
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
+        <Route path="/payment" component={Payment} />
         <Route path="/admin/(.+)" component={AdminNavigation} />
         <Route path="/tenant/(.+)" component={TenantNavigation} />
       </div>

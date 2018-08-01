@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Elements } from 'react-stripe-elements';
-import PaymentForm from './PaymentForm';
+import InjectedPaymentForm from './PaymentForm';
 
 class Checkout extends Component {
   render() {
     return (
       <Elements>
-        <PaymentForm />
+        <InjectedPaymentForm />
       </Elements>
     );
   }
