@@ -13,6 +13,8 @@ class Home extends Component {
         isLoggedIn: true
     }
 
+
+
     // componentDidMount() {
 
     //     Auth.currentSession()
@@ -27,13 +29,13 @@ class Home extends Component {
     // }
 
     render() {
-        // console.log(this.state.isLoggedIn)
-    let status = this.isLoggedIn ? (<Dashboard />) : (<LandingPage />)
-        console.log('rendering dashsboard from home')
+
         return (
             <Container>
-                {/* { this.isLoggedIn ? (<Dashboard />) : (<LandingPage />) } */}
-                {status}
+                {this.state.isLoggedIn ? (<Dashboard />
+                ) : (<LandingPage />
+                ) }
+
                 <Switch>
                     <Route path='/login' component={LoginForm} />
                 </Switch>

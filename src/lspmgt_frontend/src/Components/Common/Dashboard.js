@@ -27,11 +27,11 @@ export default class Dashboard extends Component {
     render() {
         let display = this.state.isAdmin 
         return (
-            <div>
-            {display ? (<SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
-            ) : (<SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
-            ) }
-            </div>
+            <Container>
+                {display ? (<SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+                ) : (<SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+                ) }
+            </Container>
         )
     }
 }
@@ -41,7 +41,7 @@ const SideBarAdmin = (props) => {
     return (
         <Grid container>
                 <Grid.Column width={4}>
-                    <Menu  pointing vertical stackable>
+                    <Menu inverted pointing vertical stackable>
                         {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
                     
                         <Link to="/admin/properties">
@@ -118,7 +118,7 @@ const SideBarTenant = (props) => {
 
             <Grid container>
                 <Grid.Column width={4}>
-                    <Menu  pointing vertical stackable>
+                    <Menu inverted  pointing vertical stackable>
                         {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
                     
                         <Link to="/tenant/dashboard">
