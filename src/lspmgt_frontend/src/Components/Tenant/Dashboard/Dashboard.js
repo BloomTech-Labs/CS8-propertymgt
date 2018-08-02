@@ -70,7 +70,7 @@ class Dashboard extends Component {
             </Label>
           </Segment>
           <Segment className="maintenanceNumber" basic style={segmentStyles}>
-            <Icon name="phone" size="large" circular inverted />
+            <Icon name="wrench" size="large" circular inverted />
             <Label basic style={officeLabelStyles} pointing="left">
               Contact 24/7 Maintenance <br /> 1-800-123-9876
             </Label>
