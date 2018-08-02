@@ -1,6 +1,6 @@
 import React from 'react';
 import './TenantNavigation.css';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Icon, Button } from 'semantic-ui-react';
 import Dashboard from '../Dashboard/Dashboard';
@@ -68,4 +68,4 @@ const AdminNavigation = () => {
   );
 };
 
-export default AdminNavigation;
+export default withRouter(AdminNavigation);
