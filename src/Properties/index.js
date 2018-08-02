@@ -5,10 +5,10 @@ const router = express.Router();
 // import route modules
 const {
   // propertieslsdb,
-  lsdb,
+  // lsdb,
   properties,
   addProperty,
-  addTenant,
+  // addTenant,
   deleteProperty,
   updateProperty,
 } = require('./propertiesRouter');
@@ -16,8 +16,8 @@ const {
 // router.get('/lsdb', propertieslsdb);
 router.get('/all', properties);
 router.post('/add', addProperty);
-router.post('/addtenant/', addTenant);
-router.post('/lsdb', lsdb);
+// router.post('/addtenant/', addTenant);
+// router.post('/lsdb', lsdb);
 router.delete('/delete/:id', deleteProperty);
 router.patch('/update/:id', updateProperty);
 

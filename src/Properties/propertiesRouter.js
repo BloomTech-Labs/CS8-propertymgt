@@ -1,8 +1,8 @@
 // const express = require('express');
 // const router = express.Router();
 const dd = require('../Config/AwsConfig');
-const dbModel = require('../Config/DbModel');
-const { Admin } = require('../Config/DynamoDbTables');
+// const dbModel = require('../Config/DbModel');
+// const { Admin } = require('../Config/DynamoDbTables');
 const hashingId = require('../Common/HashingId');
 const hashingId2 = require('../Common/HashingId2');
 
@@ -39,54 +39,55 @@ const hashingId2 = require('../Common/HashingId2');
 //   });
 // };
 
-// Get list of tenants with specified admin Id to filter with
-const scanForTenants = (req, res) => {
-  const { myTableName, myAdminId, p } = req.body;
-  const params = {
-    TableName: myTableName,
-    FilterExpression: 'Admin = :this_admin',
-    ExpressionAttributeValues: { ':this_admin': myAdminId },
-  };
+// // Get list of tenants with specified admin Id to filter with
+// const scanForTenants = (req, res) => {
+//   const { myTableName, myAdminId, p } = req.body;
+//   const params = {
+//     TableName: myTableName,
+//     FilterExpression: 'Admin = :this_admin',
+//     ExpressionAttributeValues: { ':this_admin': myAdminId },
+//   };
 
-  dd.scan(params, (err, data) => {
-    if (err) console.log(err);
-    else console.log(data);
-  });
-};
+//   dd.scan(params, (err, data) => {
+//     if (err) console.log(err);
+//     else console.log(data);
+//   });
+// };
 
-// Post all id's to LSDB
-const lsdb = (req, res) => {
-  const { propertyId, arrayOfTenantIds } = req.body;
+// // Post all id's to LSDB
+// const lsdb = (req, res) => {
+//   const { propertyId, arrayOfTenantIds } = req.body;
 
-  // Get all tenantId's and add them to an array of tenantId's
-  // Populate a var called id1 and id2
+//   // Get all tenantId's and add them to an array of tenantId's
+//   // Populate a var called id1 and id2
 
-  const T = [];
-  // T.push(id1);
-  // T.push(id2);
+//   const T = [];
+//   // T.push(id1);
+//   // T.push(id2);
 
-  const params = {
-    TableName: 'LS_DB',
-    Item: {
-      Admin: '123',
-      Property: propertyId,
-      Tenants: T,
-    },
-  };
-};
+//   const params = {
+//     TableName: 'LS_DB',
+//     Item: {
+//       Admin: '123',
+//       Property: propertyId,
+//       Tenants: T,
+//     },
+//   };
+// };
 
-// Gets info from LS_DB for property cards
-const propertieslsdb = (req, res) => {
-  const params = {
-    TableName: 'LS_DB',
-  };
+// // Gets info from LS_DB for property cards
+// const propertieslsdb = (req, res) => {
+//   const params = {
+//     TableName: 'LS_DB',
+//   };
 
-  dd.scan(params, (error, data) => {
-    if (error) res.status(404).json({ error });
-    else res.status(200).json({ status: 'success', data });
-  });
-};
+//   dd.scan(params, (error, data) => {
+//     if (error) res.status(404).json({ error });
+//     else res.status(200).json({ status: 'success', data });
+//   });
+// };
 
+// TODO: BROKEN UNTIL addTenant and addProperty are fully featured
 // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {
 const properties = (req, res) => {
@@ -101,7 +102,7 @@ const properties = (req, res) => {
   });
 };
 
-// Add a new property to dynamoDB
+// Add a new property
 const addProperty = (req, res) => {
   const {
     NameOwner,
@@ -126,7 +127,6 @@ const addProperty = (req, res) => {
   const params = {
     TableName: 'Properties',
     Item: {
-      Admin: '123',
       propertyId: hashingId,
       NameOwner,
       EmailOwner,
@@ -140,6 +140,7 @@ const addProperty = (req, res) => {
       YearBuilt,
       Contract,
       Tenant: [],
+      Admin: '123',
     },
   };
 
@@ -324,11 +325,11 @@ const addTenant = (req, res) => {
 };
 
 module.exports = {
-  lsdb,
-  propertieslsdb,
+  // lsdb,
+  // propertieslsdb,
   properties,
   addProperty,
-  addTenant,
+  // addTenant,
   deleteProperty,
   updateProperty,
 };
