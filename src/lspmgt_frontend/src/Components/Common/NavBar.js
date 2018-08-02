@@ -8,7 +8,7 @@ export default class NavBar extends Component {
         <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
 
         <Menu.Menu position="right">
-          <Link to="/login">
+          <Link to="/signup">
             <Menu.Item>Signup</Menu.Item>
           </Link>
           <Link to="/login">

@@ -9,7 +9,7 @@ export default class Home extends Component {
     return (
       <div>
         <Dashboard />
-        <Route path="/SignUp" component={AdminSignUp} />
+        <Route path="/signup" component={AdminSignUp} />
       </div>
     );
   }

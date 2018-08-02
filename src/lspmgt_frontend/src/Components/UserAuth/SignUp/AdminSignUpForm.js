@@ -14,6 +14,7 @@ class AdminSignUp extends Component {
     Phone: '',
     Password: '',
     RetypePassword: '',
+    stripeToken: {},
   };
 
   // handle all input field changes
@@ -27,6 +28,12 @@ class AdminSignUp extends Component {
     event.preventDefault();
 
     const temp = { User: this.state };
+
+    this.props.stripe.createToken().then((token) => {
+      this.setState({
+        stripeToken: token,
+      });
+    });
 
     Auth.signUp({
       username: this.state.Email,
@@ -60,46 +67,49 @@ class AdminSignUp extends Component {
 
     return (
       <Form>
-        <Form.Input
-          label="Name"
-          placeholder="Admin name.."
-          type="text"
-          name="Name"
-          value={Name}
-          onChange={this.handleInput}
-        />
-        <Form.Input
-          label="Email"
-          placeholder="Tenant email.."
-          type="text"
-          name="Email"
-          value={Email}
-          onChange={this.handleInput}
-        />
-        <Form.Input
-          label="Phone"
-          placeholder="Admin phone.."
-          type="text"
-          name="Phone"
-          value={Phone}
-          onChange={this.handleInput}
-        />
-        <Form.Input
-          label="Password"
-          placeholder="Enter Password"
-          type="text"
-          name="Password"
-          value={Password}
-          onChange={this.handleInput}
-        />
-        <Form.Input
-          label="RetypePassword"
-          placeholder="Confirm your Password"
-          type="text"
-          name="RetypePassword"
-          value={RetypePassword}
-          onChange={this.handleInput}
-        />
+        <Form.Group widths="equal">
+          <Form.Input
+            label="Name"
+            placeholder="Admin name.."
+            type="text"
+            name="Name"
+            value={Name}
+            onChange={this.handleInput}
+          />
+          <Form.Input
+            label="Email"
+            placeholder="Tenant email.."
+            type="text"
+            name="Email"
+            value={Email}
+            onChange={this.handleInput}
+          />
+          <Form.Input
+            label="Phone"
+            placeholder="Admin phone.."
+            type="text"
+            name="Phone"
+            value={Phone}
+            onChange={this.handleInput}
+          />
+          <Form.Input
+            label="Password"
+            placeholder="Enter Password"
+            type="text"
+            name="Password"
+            value={Password}
+            onChange={this.handleInput}
+          />
+          <Form.Input
+            label="RetypePassword"
+            placeholder="Confirm your Password"
+            type="text"
+            name="RetypePassword"
+            value={RetypePassword}
+            onChange={this.handleInput}
+          />
+        </Form.Group>
+        <CardElement />
         <Button disabled={!this.canBeDisplayed()} type="Submit" onClick={this.handleSubmit}>
           Submit
         </Button>
