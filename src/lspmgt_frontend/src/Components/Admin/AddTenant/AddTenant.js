@@ -18,18 +18,11 @@ class AddTenant extends Component {
 
     // T represents Tenant
     this.state = {
-<<<<<<< HEAD
-      Name: '',
-      Phone: '',
-      Email: '',
-      PropAddress: '',
-=======
       T1Name: '',
       T1Phone: '',
       T1Email: '',
       T1NotiP: false,
       T1NotiE: false,
->>>>>>> b878aeb0a48eee8798b5639b132ad3a21b6207d7
       T2Name: '',
       T2Phone: '',
       T2Email: '',
@@ -165,18 +158,11 @@ class AddTenant extends Component {
     //   });
 
     this.setState({
-<<<<<<< HEAD
-      Name: '',
-      Phone: '',
-      Email: '',
-      PropAddress: '',
-=======
       T1Name: '',
       T1Phone: '',
       T1Email: '',
       T1NotiP: false,
       T1NotiE: false,
->>>>>>> b878aeb0a48eee8798b5639b132ad3a21b6207d7
       T2Name: '',
       T2Phone: '',
       T2Email: '',
@@ -208,9 +194,6 @@ class AddTenant extends Component {
   };
 
   render() {
-<<<<<<< HEAD
-    const { Name, Phone, Email, PropAddress, T2Name, T2Phone, T2Email } = this.state;
-=======
     const {
       T1Name,
       T1Phone,
@@ -230,7 +213,6 @@ class AddTenant extends Component {
     const testArr = this.getLoP();
     console.log('testArr..', testArr);
 
->>>>>>> b878aeb0a48eee8798b5639b132ad3a21b6207d7
     return (
       <Grid>
         <Grid.Row columns={2}>
@@ -240,33 +222,22 @@ class AddTenant extends Component {
               <Form className="form1">
                 <Form.Input
                   name="Name"
-                  value={Name}
+                  value={T1Name}
                   onChange={this.handleInput}
                   placeholder="Name"
                 />
                 <Form.Input
                   name="T1Phone"
-                  value={Phone}
+                  value={T1Phone}
                   onChange={this.handleInput}
                   placeholder="Phone"
                 />
                 <Form.Input
                   name="Email"
-                  value={Email}
+                  value={T1Email}
                   onChange={this.handleInput}
                   placeholder="Email"
                 />
-<<<<<<< HEAD
-                <Form.Input
-                  name="PropAddress"
-                  value={PropAddress}
-                  onChange={this.handleInput}
-                  placeholder="Property Address"
-                />
-                <Button type="submit" onClick={this.handleSubmit} primary>
-                  Submit
-                </Button>
-=======
                 <Form.Field>
                   <label>
                     Email?
@@ -289,7 +260,6 @@ class AddTenant extends Component {
                     />
                   </label>
                 </Form.Field>
->>>>>>> b878aeb0a48eee8798b5639b132ad3a21b6207d7
               </Form>
             </Message>
           </Grid.Column>
