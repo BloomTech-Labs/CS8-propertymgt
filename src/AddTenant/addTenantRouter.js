@@ -55,6 +55,54 @@ const addTenant = (req, res) => {
 
   console.log('Hiyoo', params);
 
+  // STRIPE FIRST METHOD
+
+  stripe.customer.create(
+    {
+      description: params.Item.tenantId,
+      email: params.Item.EmailT,
+    },
+    (customerErr, customer) => {
+      const params = {
+        TableName: 'Tenants',
+        Item: {
+          tenantId: hashingId,
+          propertyId,
+          stripeId: customer.id,
+          NameT: T1Name,
+          MobileT: T1Phone,
+          EmailT: T1Email,
+          GetTextsT: T1NotiP,
+          GetEmailT: T1NotiE,
+          StartD,
+          EndD,
+          WOrder: [],
+          T2,
+          Admin: '123',
+        },
+      };
+
+      if (customerErr) res.status(500).json({ status: 'stripe customer error', customerErr });
+      else {
+        dd.put(params, (dbError) => {
+          if (dbError) res.status(300).json({ status: 'db Error', dbError });
+          else {
+            stripe.subscriptions.create({
+              customer: customer.id,
+              items: [
+                {
+                  plan: '123 fake st',
+                },
+              ],
+            });
+          }
+        });
+      }
+    }
+  );
+
+  // DB FIRST METHOD
+
   dd.put(params, (error) => {
     if (error) res.status(400).json({ error });
     // else res.status(200).json({ status: 'Success..' });
@@ -63,7 +111,7 @@ const addTenant = (req, res) => {
       stripe.customer.create(
         {
           description: params.Item.tenantId,
-          email: params.Item.tenantId,
+          email: params.Item.EmailT,
         },
         (stripeCustErr, customer) => {
           if (stripeCustErr) {
