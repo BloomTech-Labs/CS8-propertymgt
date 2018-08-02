@@ -3,6 +3,9 @@ import { Grid, Segment, Header, Button, Message, Icon, Label } from 'semantic-ui
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 
+// const styles = {
+//   buttonStyles =
+// }
 const buttonStyles = {
   margin: '1rem 0',
   marginRight: '1rem',
@@ -34,7 +37,7 @@ class Dashboard extends Component {
   render() {
     return (
       <Grid columns={2} relaxed style={{ maxWidth: '100%' }}>
-        <Grid.Column>
+        <Grid.Column mobile={16} computer={8}>
           <Header as="h1">Outstanding Balance</Header>
           <Message style={alertStyles}>
             <Message.Header style={alertTitleStyles}>Alerts</Message.Header>
@@ -50,7 +53,7 @@ class Dashboard extends Component {
             <Button secondary>Submit Work Order</Button>
           </Link>
         </Grid.Column>
-        <Grid.Column>
+        <Grid.Column mobile={16} computer={8}>
           <Segment className="address" basic style={segmentStyles}>
             <Icon name="building" size="large" circular inverted />
             <Label basic style={officeLabelStyles} pointing="left">
