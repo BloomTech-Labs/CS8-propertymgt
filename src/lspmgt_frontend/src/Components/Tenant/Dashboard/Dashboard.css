@@ -1,0 +1,16 @@
+.address {
+  display: flex;
+  align-items: center;
+}
+.officeNumber {
+  display: flex;
+  align-items: center;
+}
+.email {
+  display: flex;
+  align-items: center;
+}
+.maintenanceNumber {
+  display: flex;
+  align-items: center;
+}
