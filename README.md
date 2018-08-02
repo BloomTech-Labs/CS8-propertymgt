@@ -1,17 +1,45 @@
-"# CS8-propertymgt"
+# Lambda Labs: CS8-propertymgt
 
-## Navigating the APP
+## [Heroku Deployment](https://lsmgt.herokuapp.com/)
 
-1.  The login button brings up a modal to input your email and password
+# API Endpoints
 
-1.a) A sign up button is available where and admin can enter his user and credit card information
+## Admin Endpoints
 
-2.  Authentication comes in, verifies if you are either an admin or a tenant
+| Method | Endpoint (/api/admin) | Description                                       |
+| ------ | --------------------- | ------------------------------------------------- |
+| GET    | /property/:id         | Returns a _Property_ object from the database     |
+| GET    | /workorder            | Returns a list (array?) of workorders             |
+| POST   | /tenant/add           | Creates a new _Tenant_ object, sent w/in req.body |
 
-2.a) If admin? admin landing page (View all properties)
+## Tenant Endpoints
 
-2.b) if tenant? tenant landing page (Dashboard)
+| Method | Endpoint (/api/tenant) | Description |
+| ------ | ---------------------- | ----------- |
 
-## Navigating ADMIN
 
-## Navigating TENANT
+## User Endpoints (auth)
+
+| Method | Endpoint (/api/users) | Description |
+| ------ | --------------------- | ----------- |
+| GET    | /signup               | --          |
+| GET    | /signin               | --          |
+| GET    | /admin/list           | --          |
+| GET    | /tenant/list          | --          |
+| GET    | /tenant/signup        | --          |
+
+## Property Endpoints
+
+| Method | Endpoint (/api/property) | Description |
+| ------ | ------------------------ | ----------- |
+| GET    | /all                     | --          |
+| POST   | /add                     | --          |
+| DELETE | /delete/:id              | --          |
+| PATCH  | /update/:id              | --          |
+| PATCH  | /settings/update/:id     | --          |
+
+## Billing Endpoints
+
+| Method | Endpoint (/billing) | Description |
+| ------ | ------------------- | ----------- |
+
