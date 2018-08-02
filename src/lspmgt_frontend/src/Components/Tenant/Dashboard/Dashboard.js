@@ -2,6 +2,21 @@ import React, { Component } from 'react';
 import { Grid, Segment, Header, Button, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+const buttonStyles = {
+  margin: '.2rem 0',
+};
+
+const alertStyles = {
+  marginTop: '.8rem',
+};
+
+const segmentStyles = {
+  margin: '0',
+};
+
+const alertTitleStyles = {
+  paddingBottom: '.8rem',
+};
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -15,32 +30,36 @@ class Dashboard extends Component {
         <Grid.Column>
           <Header as="h1">Outstanding Balance</Header>
           <Link to="/tenant/payments">
-            <Button primary>Make Payment</Button>
+            <Button style={buttonStyles} primary>
+              Make Payment
+            </Button>
           </Link>
           <Link to="/tenant/workorders">
-            <Button primary>Submit Work Order</Button>
+            <Button style={buttonStyles} primary>
+              Submit Work Order
+            </Button>
           </Link>
-          <Message>
-            <Message.Header>Alerts</Message.Header>
+          <Message style={alertStyles}>
+            <Message.Header style={alertTitleStyles}>Alerts</Message.Header>
             <p>Alert 1</p>
             <p>Alert 2</p>
           </Message>
         </Grid.Column>
         <Grid.Column>
-          <Segment basic>
+          <Segment basic style={segmentStyles}>
             <Icon name="building" size="big" />
             1234 PropertyOffice Ln <br /> San Francisco, CA
           </Segment>
-          <Segment basic>
+          <Segment basic style={segmentStyles}>
             <Icon name="phone" size="big" />
             Office Number <br />
             1-800-234-5678
           </Segment>
-          <Segment basic>
+          <Segment basic style={segmentStyles}>
             <Icon name="envelope" size="big" />
             landlords@email.com
           </Segment>
-          <Segment basic>
+          <Segment basic style={segmentStyles}>
             <Icon name="phone" size="big" />
             Contact 24/7 Maintenance <br />
             1-800-123-9876

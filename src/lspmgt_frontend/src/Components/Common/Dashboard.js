@@ -16,7 +16,7 @@ import {
 
 export default class Dashboard extends Component {
   state = {
-    isAdmin: true,
+    isAdmin: false,
     activeItem: 'home',
   };
 
