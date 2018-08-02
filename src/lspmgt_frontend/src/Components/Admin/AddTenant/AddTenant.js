@@ -8,9 +8,10 @@ class AddTenant extends Component {
 
     // T represents Tenant
     this.state = {
-      T1Name: '',
-      T1Phone: '',
-      T1Email: '',
+      Name: '',
+      Phone: '',
+      Email: '',
+      PropAddress: '',
       T2Name: '',
       T2Phone: '',
       T2Email: '',
@@ -33,9 +34,10 @@ class AddTenant extends Component {
       console.los('Error in AddTenant..', err);
     });
     this.setState({
-      T1Name: '',
-      T1Phone: '',
-      T1Email: '',
+      Name: '',
+      Phone: '',
+      Email: '',
+      PropAddress: '',
       T2Name: '',
       T2Phone: '',
       T2Email: '',
@@ -43,7 +45,7 @@ class AddTenant extends Component {
   };
 
   render() {
-    const { T1Name, T1Phone, T1Email, T2Name, T2Phone, T2Email } = this.state;
+    const { Name, Phone, Email, PropAddress, T2Name, T2Phone, T2Email } = this.state;
     return (
       <Grid>
         <Grid.Row columns={2}>
@@ -52,22 +54,28 @@ class AddTenant extends Component {
               <Message.Header>Tenant #1</Message.Header>
               <Form>
                 <Form.Input
-                  name="T1Name"
-                  value={T1Name}
+                  name="Name"
+                  value={Name}
                   onChange={this.handleInput}
                   placeholder="Name"
                 />
                 <Form.Input
                   name="T1Phone"
-                  value={T1Phone}
+                  value={Phone}
                   onChange={this.handleInput}
                   placeholder="Phone"
                 />
                 <Form.Input
-                  name="T1Email"
-                  value={T1Email}
+                  name="Email"
+                  value={Email}
                   onChange={this.handleInput}
                   placeholder="Email"
+                />
+                <Form.Input
+                  name="PropAddress"
+                  value={PropAddress}
+                  onChange={this.handleInput}
+                  placeholder="Property Address"
                 />
                 <Button type="submit" onClick={this.handleSubmit} primary>
                   Submit
