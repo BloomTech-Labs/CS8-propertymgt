@@ -4,6 +4,7 @@ import axios from 'axios';
 import Checkout from './Checkout';
 import Amplify, { Auth } from 'aws-amplify';
 import AuthSettings from '../../Config/Auth';
+import { Redirect } from 'react-router-dom';
 
 Amplify.configure(AuthSettings);
 
@@ -18,9 +19,7 @@ class BuyNowModal extends Component {
     };
   }
 
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   handleInput = (e) => {
     this.setState({
@@ -30,23 +29,26 @@ class BuyNowModal extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
+
+    // this.props.stripe.createToken().then(())
+
     Auth.signUp({
-      'username': 'lambdapropertymgt@gmail.com', 
-      'password': '!2345Abc',
-      'attributes': {
-        'custom:access_level': 'admin'
-      }
+      username: this.state.AdminEmail,
+      password: this.state.AdminPW,
+      attributes: {
+        'custom:access_level': 'admin',
+      },
     })
-      .then(data => {
+      .then((data) => {
         alert('you have been sign up');
         console.log('user has signed up');
-        this.props.history.push('/');
+        this.props.history.push('/admin/dashboard');
+        // <Redirect to='/'/>
       })
-      .catch(err => {
+      .catch((err) => {
         alert('There was an error signing up');
         console.log('There was an error signing up ---> ', err);
-      })
+      });
 
     // axios
     //   .post('http://localhost:5000/users/admin/signup', this.state)

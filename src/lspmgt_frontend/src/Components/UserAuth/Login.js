@@ -17,22 +17,23 @@ export default class Login extends Component {
     password: '',
   };
 
-  componentDidMount() {
+  // componentDidMount() {
 
-    Auth.currentSession()
-    .then(data => {
-      console.log(data)
-      this.props.history.push("/tenant/dashboard")
-    })
-    .catch(err => console.log(err))
-  }
+  //   Auth.currentSession()
+  //   .then(data => {
+  //     data.idToken.payload['custom:access_level'] == 'admin' ?
+  //     this.props.history.push('/admin/dashboard') :
+  //     this.props.history.push('/tenant/dashboard');
+  //   })
+  //   .catch(err => console.log(err))
+  // }
 
   handleSignin = () => {
-    console.log(this.state);
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
-        console.log('Sign in sucess data -> ', data);
-        this.props.history.push("/tenant/dashboard");
+        data.signInUserSession.idToken.payload['custom:access_level'] == 'admin' ?
+        this.props.history.push('/admin/dashboard') :
+        this.props.history.push('/tenant/dashboard');
       })
       .catch((err) => {
         console.log('THERE WAS AN ERROR -> ', err);
