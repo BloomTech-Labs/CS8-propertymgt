@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
-import AmplifyConfig from '../../Config/Auth';
+import AmplifyConfig from '../../../Config/Auth';
+import { CardElement, injectStripe } from 'react-stripe-elements';
 
 Amplify.configure(AmplifyConfig);
 
-export default class AdminSignUp extends Component {
+class AdminSignUp extends Component {
   state = {
     Name: '',
     Email: '',
@@ -33,11 +34,10 @@ export default class AdminSignUp extends Component {
       attributes: {
         'custom:access_level': 'admin',
       },
-    })
-      .then((data) => {
-        console.log('user signed up -> ', data);
-      })
-      .catch((err) => console.log('there was an error -> '), err);
+    }).then((data) => {
+      console.log('user signed up -> ', data);
+    });
+    // .catch((err) => console.log('there was an error -> '), err);
 
     // axios
     //   .post('http://localhost:5000/users/admin/signup', temp)
@@ -107,3 +107,5 @@ export default class AdminSignUp extends Component {
     );
   }
 }
+
+export default injectStripe(AdminSignUp);
