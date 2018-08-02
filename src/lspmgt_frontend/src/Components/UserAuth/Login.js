@@ -1,6 +1,6 @@
 /*eslint-disable import/first*/
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Message, Segment, Container } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
@@ -52,23 +52,14 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="login-form">
-        <style>
-          {`
-            body > div,
-            body > div > div,
-            body > div > div > div.login-form {
-              height: 100%;
-            }
-          `}
-        </style>
-        <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
+      <Container>
+        <Grid inverted textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h1" color="blue" textAlign="center">
               PropertyMaxx
             </Header>
-            <Form size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
-              <Segment raised style={{ maxWidth: '100%' }}>
+            <Form inverted size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
+              <Segment inverted raised style={{ maxWidth: '100%' }}>
                 <Form.Input
                   fluid
                   icon="user"
@@ -87,20 +78,20 @@ export default class Login extends Component {
                   name="password"
                   onChange={this.handleInput}
                 />
-                <Button color="blue" fluid size="large">
+                <Segment >
+                <Button fluid size="large">
                   Login
                 </Button>
+                {/* <Link to="/">
+                  <Button size='large'>Back</Button>
+                </Link> */}
+                  </Segment>
               </Segment>
             </Form>
-            <Segment>
-              <AdminLogin /> <TenantLogin />
-            </Segment>
-            <Link to="/">
-              <Button secondary>Back</Button>
-            </Link>
+
           </Grid.Column>
         </Grid>
-      </div>
+      </Container>
     );
   }
 }

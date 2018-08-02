@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { LandingPage } from './Components';
 import { Container, Grid, GridColumn, Menu } from 'semantic-ui-react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import { 
     AdminProperties,
     AdminWorkOrders,
@@ -18,7 +18,7 @@ import {
 export default class Dashboard extends Component {
     
     state = {
-        isAdmin: true,
+        isAdmin: false,
         activeItem: 'home'
     }
 
@@ -26,8 +26,6 @@ export default class Dashboard extends Component {
 
     render() {
         let display = this.state.isAdmin 
-        //     ? <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
-        //     : <SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
         return (
             <div>
             {display ? (<SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
@@ -39,7 +37,7 @@ export default class Dashboard extends Component {
 }
 
 const SideBarAdmin = (props) => {
-    console.log('loading props ---> ', props)
+
     return (
         <Grid container>
                 <Grid.Column width={4}>
@@ -101,11 +99,13 @@ const SideBarAdmin = (props) => {
                 </Grid.Column>
                 <Grid.Column  width={12}>
                     <Container fluid>
+                    <Switch>
                         <Route path="/admin/properties" component={AdminProperties} />
                         <Route path="/admin/workorders" component={AdminWorkOrders} />
                         <Route path="/admin/addtenant" component={AdminAddTenant} />
                         <Route path="/admin/billing" component={AdminBilling} />
                         <Route path="/admin/settings" component={AdminSettings} />  
+                    </Switch>
                     </Container>
             </Grid.Column>
         </Grid>
@@ -116,7 +116,7 @@ const SideBarAdmin = (props) => {
 const SideBarTenant = (props) => {
     return (
 
-<Grid container>
+            <Grid container>
                 <Grid.Column width={4}>
                     <Menu  pointing vertical stackable>
                         {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
@@ -166,10 +166,12 @@ const SideBarTenant = (props) => {
                 </Grid.Column>
                 <Grid.Column  width={12}>
                     <Container fluid>
+                    <Switch>
                     <Route path="/tenant/dashboard" component={TenantDashboard} />
                     <Route path="/tenant/payments" component={TenantBilling} />
                     <Route path="/tenant/workorders" component={TenantWorkOrders} />
                     <Route path="/tenant/settings" component={TenantSettings} />
+                    </Switch>
                     </Container>
             </Grid.Column>
         </Grid>

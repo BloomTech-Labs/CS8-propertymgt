@@ -37,6 +37,7 @@ export default class NavBar extends Component {
                     Sign-in
                 </Menu.Item> */}
                 </Menu.Menu>
+                
             </Menu> 
         )
     }

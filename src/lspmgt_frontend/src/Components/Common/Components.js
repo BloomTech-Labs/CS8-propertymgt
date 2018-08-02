@@ -12,6 +12,7 @@ import TenantDashboard from '../Tenant/Dashboard/Dashboard';
 import TenantBilling from '../Tenant/Payments/Payments';
 import TenantWorkOrders from '../Tenant/WorkOrders/WorkOrders';
 import TenantSettings from '../Tenant/Settings/Settings';
+import LoginForm from '../UserAuth/Login';
 
 export {
     Home,
@@ -28,4 +29,5 @@ export {
     TenantBilling,
     TenantWorkOrders,
     TenantSettings,
+    LoginForm,
 }
