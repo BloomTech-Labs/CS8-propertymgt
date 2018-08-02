@@ -1,4 +1,4 @@
-import NavBar from './NavBar'
+import NavBar from './NavBar';
 import Home from './Home';
 import LandingPage from '../LandingPage/LandingPrototype';
 import BuyNow from '../Payment/BuyNowModal';
@@ -12,20 +12,22 @@ import TenantDashboard from '../Tenant/Dashboard/Dashboard';
 import TenantBilling from '../Tenant/Payments/Payments';
 import TenantWorkOrders from '../Tenant/WorkOrders/WorkOrders';
 import TenantSettings from '../Tenant/Settings/Settings';
+import AdminSignUp from '../UserAuth/SignUp/AdminSignUp';
 
 export {
-    Home,
-    NavBar,
-    LandingPage,
-    BuyNow,
-    Dashboard,
-    AdminProperties,
-    AdminWorkOrders,
-    AdminAddTenant,
-    AdminBilling,
-    AdminSettings,
-    TenantDashboard,
-    TenantBilling,
-    TenantWorkOrders,
-    TenantSettings,
-}
+  Home,
+  NavBar,
+  LandingPage,
+  BuyNow,
+  Dashboard,
+  AdminProperties,
+  AdminWorkOrders,
+  AdminAddTenant,
+  AdminBilling,
+  AdminSettings,
+  TenantDashboard,
+  TenantBilling,
+  TenantWorkOrders,
+  TenantSettings,
+  AdminSignUp,
+};
