@@ -1,42 +1,19 @@
-const T = {
-  Tinfo: [],
-  Quantity: 0, // Tinfo.length
+const LSDB = {
+  // lsdbId: '', // primary key
+  Admin: '', // adminId
+  Property: '', // propertyId
+  Tenants: [], // [tenantId, tenantId]
 };
 
-const Tinfo = {
-  NameT: '',
-  MobileT: '',
-  EmailT: '',
-  HouseApplicationT: '',
-  GetEmailT: '',
-  GetTextsT: '',
-  DueDate: '',
-  StartEndDataT: '',
-  AssignedPropertyT: '',
-  SendContractT: '',
-  Balance: '',
-  Alerts: '',
-  WOrder: [],
-};
-
-// sign up fields
 const Admin = {
+  // adminId: '', // primary key
   Name: '',
   Email: '',
   Phone: '',
 };
 
-const WOrder = {
-  PropertyAddr: '',
-  TenantPhone: '',
-  Issue: '',
-  PhotoIssue: '',
-  Permission: '',
-  Status: '',
-};
-
 const PropertyInfo = {
-  propertyId: '',
+  // propertyId: '', // primary key
   NameOwner: '',
   EmailOwner: '',
   MobileOwner: '',
@@ -47,9 +24,56 @@ const PropertyInfo = {
   Bedrooms: '',
   Bathrooms: '',
   YearBuilt: '',
-  Contract: '',
-  Tenant: [],
+  Contract: false, // boolean
   Admin: '',
+};
+
+const Tenant = {
+  T: [
+    {
+      // tenantId: '', // primary key
+      propertyId: '',
+      NameT: '',
+      MobileT: '',
+      EmailT: '',
+      HouseApplicationT: '',
+      GetEmailT: false, // boolean
+      GetTextsT: false, // boolean
+      DueDate: '',
+      StartEndDataT: '',
+      AssignedPropertyT: '',
+      SendContractT: false, // boolean
+      Balance: '',
+      Alerts: '',
+      WOrder: [],
+    },
+    {
+      // tenantId: '',
+      propertyId: '',
+      NameT: '',
+      MobileT: '',
+      EmailT: '',
+      HouseApplicationT: '',
+      GetEmailT: false, // boolean
+      GetTextsT: false, // boolean
+      DueDate: '',
+      StartEndDataT: '',
+      AssignedPropertyT: '',
+      SendContractT: '',
+      Balance: '',
+      Alerts: '',
+      WOrder: [],
+    },
+  ],
+  Admin: '',
+};
+
+const WOrder = {
+  PropertyAddr: '',
+  Issue: '',
+  PhotoIssue: '', // stores a picture
+  Permission: true, // boolean
+  Status: 'SUBMITTED',
 };
 
 module.exports = PropertyInfo;
