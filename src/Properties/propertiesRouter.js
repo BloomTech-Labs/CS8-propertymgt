@@ -6,6 +6,8 @@ const dd = require('../Config/AwsConfig');
 const hashingId = require('../Common/HashingId');
 const hashingId2 = require('../Common/HashingId2');
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+
 // const writingToLSDB = (x) => {
 //   const { Tenants, StartD, EndD, propertyId, PropertyAddr, Contract } = x;
 //   const params = {
@@ -104,6 +106,7 @@ const properties = (req, res) => {
 
 // Add a new property
 const addProperty = (req, res) => {
+  const propertyAmount = 140000;
   const {
     NameOwner,
     EmailOwner,
@@ -145,7 +148,23 @@ const addProperty = (req, res) => {
 
   dd.put(params, (error) => {
     if (error) res.status(404).json({ error });
-    else res.status(200).json({ message: 'success' });
+    // else res.status(200).json({ message: 'success' });
+    // STRIPE INTEGRATION
+    else {
+      stripe.plans.create(
+        {
+          id: params.Item.PropertyAddr, // plan ID === Property Address
+          amount: propertyAmount,
+          interval: 'month',
+          product: 'prod_DLRBi4QUbCDEVn',
+          currency: 'usd',
+        },
+        (stripeErr, plan) => {
+          if (stripeErr) res.status(500).json({ status: 'stripe error', stripeErr });
+          else res.status(200).json({ status: 'property created!', plan });
+        }
+      );
+    }
   });
 
   // writingToLSDB(toLSDB);
