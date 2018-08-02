@@ -3,11 +3,12 @@ import { Grid, Segment, Header, Button, Message, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 const buttonStyles = {
-  margin: '.2rem 0',
+  margin: '1rem 0',
 };
 
 const alertStyles = {
-  marginTop: '.8rem',
+  marginTop: '1.3rem',
+  marginBottom: '0',
 };
 
 const segmentStyles = {
@@ -29,21 +30,19 @@ class Dashboard extends Component {
       <Grid columns={2} relaxed style={{ maxWidth: '100%' }}>
         <Grid.Column>
           <Header as="h1">Outstanding Balance</Header>
+          <Message style={alertStyles}>
+            <Message.Header style={alertTitleStyles}>Alerts</Message.Header>
+            <p>Alert 1</p>
+            <p>Alert 2</p>
+          </Message>
           <Link to="/tenant/payments">
             <Button style={buttonStyles} primary>
               Make Payment
             </Button>
           </Link>
           <Link to="/tenant/workorders">
-            <Button style={buttonStyles} primary>
-              Submit Work Order
-            </Button>
+            <Button primary>Submit Work Order</Button>
           </Link>
-          <Message style={alertStyles}>
-            <Message.Header style={alertTitleStyles}>Alerts</Message.Header>
-            <p>Alert 1</p>
-            <p>Alert 2</p>
-          </Message>
         </Grid.Column>
         <Grid.Column>
           <Segment basic style={segmentStyles}>
