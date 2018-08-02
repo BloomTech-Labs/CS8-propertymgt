@@ -1,20 +1,24 @@
 const express = require('express');
+
 const router = express.Router();
 
 // import route modules
 const {
-    properties,
-    addProperty,
-    deleteProperty,
-    updateProperty,
-    settingsUpdate
+  // propertieslsdb,
+  // lsdb,
+  properties,
+  addProperty,
+  // addTenant,
+  deleteProperty,
+  updateProperty,
 } = require('./propertiesRouter');
 
+// router.get('/lsdb', propertieslsdb);
 router.get('/all', properties);
 router.post('/add', addProperty);
+// router.post('/addtenant/', addTenant);
+// router.post('/lsdb', lsdb);
 router.delete('/delete/:id', deleteProperty);
 router.patch('/update/:id', updateProperty);
-router.patch('/settings/update/:id', settingsUpdate);
-
 
 module.exports = router;

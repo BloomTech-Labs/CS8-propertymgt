@@ -31,9 +31,9 @@ export default class Login extends Component {
   handleSignin = () => {
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
-        data.signInUserSession.idToken.payload['custom:access_level'] == 'admin' ?
-        this.props.history.push('/admin/dashboard') :
-        this.props.history.push('/tenant/dashboard');
+        data.signInUserSession.idToken.payload['custom:access_level'] == 'admin'
+          ? this.props.history.push('/admin/dashboard')
+          : this.props.history.push('/tenant/dashboard');
       })
       .catch((err) => {
         console.log('THERE WAS AN ERROR -> ', err);
