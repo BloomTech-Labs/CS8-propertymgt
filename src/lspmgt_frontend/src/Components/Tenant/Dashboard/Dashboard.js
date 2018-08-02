@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const buttonStyles = {
   margin: '1rem 0',
+  marginRight: '1rem',
 };
 
 const alertStyles = {
