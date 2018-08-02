@@ -24,7 +24,11 @@ export default class NavBar extends Component {
                     Signin 
                 </Menu.Item>
                 </Link>
-
+                <Link to='/login'>
+                <Menu.Item>
+                    Sign out 
+                </Menu.Item>
+                </Link>
                 {/* <Menu.Item
                     name='sign-in'
                     active={activeItem === 'sign-in'}

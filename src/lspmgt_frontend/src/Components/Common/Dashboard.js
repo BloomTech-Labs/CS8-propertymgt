@@ -18,7 +18,7 @@ import {
 export default class Dashboard extends Component {
     
     state = {
-        isAdmin: false,
+        isAdmin: true,
         activeItem: 'home'
     }
 
@@ -26,10 +26,14 @@ export default class Dashboard extends Component {
 
     render() {
         let display = this.state.isAdmin 
-            ? <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
-            : <SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+        //     ? <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+        //     : <SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
         return (
-            <display />
+            <div>
+            {display ? (<SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+            ) : (<SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+            ) }
+            </div>
         )
     }
 }
