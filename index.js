@@ -7,6 +7,7 @@ const UserRouter = require('./src/Users');
 const AdminRouter = require('./src/Admin');
 const PropertyRouter = require('./src/Properties');
 const SettingsRouter = require('./src/Settings');
+const AddTenantRouter = require('./src/AddTenant');
 const TenantRouter = require('./src/Tenant/tenantRouter');
 const billingRouter = require('./src/Billing/BillingRouter');
 const home = require('./src/Home/HomeRouter');
@@ -28,6 +29,7 @@ app.use('/api/tenant', TenantRouter);
 app.use('/api/users', UserRouter);
 app.use('/api/property', PropertyRouter);
 app.use('/api/settings', SettingsRouter);
+app.use('/api/addtenant', AddTenantRouter);
 app.use('/billing', billingRouter);
 
 const port = process.env.PORT || 5000;

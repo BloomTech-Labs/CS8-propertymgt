@@ -1,3 +1,10 @@
+const LSDB = {
+  // lsdbId: '', // primary key
+  Admin: '', // adminId
+  Property: '', // propertyId
+  Tenants: [], // [tenantId, tenantId]
+};
+
 const Admin = {
   // adminId: '', // primary key
   Name: '',
@@ -18,41 +25,46 @@ const PropertyInfo = {
   Bathrooms: '',
   YearBuilt: '',
   Contract: false, // boolean
-  Tenants: [], // holds tenantId for each tenant
   Admin: '',
 };
 
 const Tenant = {
-  // tenantId: '', // primary key
-  NameT: '',
-  MobileT: '',
-  EmailT: '',
-  HouseApplicationT: '',
-  GetEmailT: false, // boolean
-  GetTextsT: false, // boolean
-  DueDate: '',
-  StartEndDataT: '',
-  AssignedPropertyT: '',
-  SendContractT: '',
-  Balance: '',
-  Alerts: '',
-  WOrder: [],
-  T2: {
-    // tenantId: '',
-    NameT: '',
-    MobileT: '',
-    EmailT: '',
-    HouseApplicationT: '',
-    GetEmailT: false, // boolean
-    GetTextsT: false, // boolean
-    DueDate: '',
-    StartEndDataT: '',
-    AssignedPropertyT: '',
-    SendContractT: '',
-    Balance: '',
-    Alerts: '',
-    WOrder: [],
-  },
+  T: [
+    {
+      // tenantId: '', // primary key
+      propertyId: '',
+      NameT: '',
+      MobileT: '',
+      EmailT: '',
+      HouseApplicationT: '',
+      GetEmailT: false, // boolean
+      GetTextsT: false, // boolean
+      DueDate: '',
+      StartEndDataT: '',
+      AssignedPropertyT: '',
+      SendContractT: false, // boolean
+      Balance: '',
+      Alerts: '',
+      WOrder: [],
+    },
+    {
+      // tenantId: '',
+      propertyId: '',
+      NameT: '',
+      MobileT: '',
+      EmailT: '',
+      HouseApplicationT: '',
+      GetEmailT: false, // boolean
+      GetTextsT: false, // boolean
+      DueDate: '',
+      StartEndDataT: '',
+      AssignedPropertyT: '',
+      SendContractT: '',
+      Balance: '',
+      Alerts: '',
+      WOrder: [],
+    },
+  ],
   Admin: '',
 };
 

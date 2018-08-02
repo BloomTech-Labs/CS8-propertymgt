@@ -139,7 +139,6 @@ const addProperty = (req, res) => {
       Bathrooms,
       YearBuilt,
       Contract,
-      Tenant: [],
       Admin: '123',
     },
   };
@@ -241,95 +240,11 @@ const updateProperty = (req, res) => {
   });
 };
 
-// Add a new tenant and creates a LS_DB item with property, contract, and tenant info
-const addTenant = (req, res) => {
-  // console.log('addtenant POST method in admin triggered.. ');
-
-  // my propertyId
-  // const { id } = req.params;
-
-  // my tenant object values
-  const {
-    T1Name,
-    T1Phone,
-    T1Email,
-    T1NotiP,
-    T1NotiE,
-    T2Name,
-    T2Phone,
-    T2Email,
-    T2NotiP,
-    T2NotiE,
-    StartD,
-    EndD,
-    propertyId,
-  } = req.body;
-
-  // const T1 = {
-  //   tenantId: hashingId,
-  //   NameT: T1Name,
-  //   MobileT: T1Phone,
-  //   EmailT: T1Email,
-  //   NotiP: T1NotiP,
-  //   NotiE: T1NotiE,
-  //   WOrder: [],
-  // };
-
-  const T2 = {
-    tenantId: hashingId2,
-    NameT: T2Name,
-    MobileT: T2Phone,
-    EmailT: T2Email,
-    NotiP: T2NotiP,
-    NotiE: T2NotiE,
-    WOrder: [],
-  };
-
-  // const T = [];
-  // T.push(T1);
-  // T.push(T2);
-
-  // const toLSDB = {
-  //   Tenants: T,
-  //   StartD,
-  //   EndD,
-  //   propertyId,
-  //   PropertyAddr,
-  //   Contract,
-  // };
-
-  const params = {
-    TableName: 'Tenants',
-    Item: {
-      Admin: '123',
-      tenantId: hashingId,
-      propertyId,
-      NameT: T1Name,
-      MobileT: T1Phone,
-      EmailT: T1Email,
-      NotiP: T1NotiP,
-      NotiE: T1NotiE,
-      StartD,
-      EndD,
-      WOrder: [],
-      T2,
-    },
-  };
-
-  dd.put(params, (error, data) => {
-    if (error) res.status(400).json({ error });
-    else res.status(200).json({ status: 'Success..', data });
-  });
-
-  // writingToLSDB(toLSDB);
-};
-
 module.exports = {
   // lsdb,
   // propertieslsdb,
   properties,
   addProperty,
-  // addTenant,
   deleteProperty,
   updateProperty,
 };

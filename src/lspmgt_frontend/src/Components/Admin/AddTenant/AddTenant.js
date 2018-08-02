@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { Grid, Message, Form, Input, Checkbox, Button, Container } from 'semantic-ui-react';
+import {
+  Dropdown,
+  Icon,
+  Grid,
+  Message,
+  Form,
+  Input,
+  Checkbox,
+  Button,
+  Container,
+} from 'semantic-ui-react';
 import axios from 'axios';
 
 class AddTenant extends Component {
@@ -20,26 +30,53 @@ class AddTenant extends Component {
       T2NotiE: false,
       StartD: '',
       EndD: '',
-      SelectedProperty: '', // selected property from dropdown menu
+      SelectedProperty: '', // selected property from dropdown menu **using to get admin and selected property id's
       LoP: [], // list of properties
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.sendContract = this.sendContract.bind(this);
+    this.getLoP = this.getLoP.bind(this);
+    this.setProperty = this.setProperty.bind(this);
   }
 
   // Gets available properties without a contract
   componentDidMount() {
     axios
-      .get('api/property/properties')
+      .get('http://localhost:5000/api/property/all')
       .then((res) => {
         this.setState({
           LoP: res.data.data.Items,
         });
+        console.log(this.state.LoP);
       })
       .catch((error) => {
         console.log('Error in AddTenant GET..', error);
       });
   }
+
+  // Returns usable List of Properties (LoP) list with text key value pair
+  getLoP = () => {
+    const myArr = this.state.LoP.map((property, index) => {
+      const constructingTheObject = {
+        key: index,
+        value: property.PropertyAddr,
+        flag: '',
+      };
+      const array = Object.keys(property);
+      const x = array.indexOf('PropertyAddr');
+      const addrToText = property[Object.keys(property)[x]];
+      const propertyWithText = Object.assign({ text: addrToText }, constructingTheObject);
+      return propertyWithText;
+    });
+    return myArr;
+  };
+
+  // TODO: Sends email to tenant with contract attached
+  sendContract = () => {
+    const { T1Email, T2Email } = this.state;
+    console.log('sendContract triggered..');
+  };
 
   // Sets input from form to state
   handleInput = (e) => {
@@ -49,7 +86,8 @@ class AddTenant extends Component {
     });
   };
 
-  // Sends state to backend using express
+  // TODO: BROKEN
+  // Sends data to server
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -68,7 +106,12 @@ class AddTenant extends Component {
       StartD,
       EndD,
       SelectedProperty,
+      LoP,
     } = this.state;
+
+    // const { propertyId } = SelectedProperty; // SelectedProperty only has an address in "value"
+    console.log('Hi..', LoP);
+    console.log('Hello..', SelectedProperty);
 
     const toTenants = {
       T1Name,
@@ -83,25 +126,36 @@ class AddTenant extends Component {
       T2NotiE,
       StartD,
       EndD,
+      // propertyId,
     };
 
     axios
-      .post('api/property/addtenant', toTenants)
-      .then()
+      .post('http://localhost:5000/api/addtenant/add', toTenants)
+      .then(
+        // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
+        //   console.log(res);
+        // })
+        console.log('step2')
+      )
       .catch((error) => {
         console.log('Error in AddTenant POST..', error);
       });
 
-    const toLSDB = {
-      propertyId: SelectedProperty.propertyId,
-    };
+    // const T = [];
+    // T.push('testTId');
+    // T.push('testTId');
 
-    axios
-      .post('api/property/lsdb', toLSDB)
-      .then()
-      .catch((error) => {
-        console.log('Error in AddTenant POST for LSDB..', error);
-      });
+    // const toLSDB = {
+    //   propertyId: 'testId',
+    //   tenants: T,
+    // };
+
+    // axios
+    //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
+    //   .then()
+    //   .catch((error) => {
+    //     console.log('Error in AddTenant POST for LSDB..', error);
+    //   });
 
     this.setState({
       T1Name: '',
@@ -122,17 +176,21 @@ class AddTenant extends Component {
   };
 
   handleCheck = (e) => {
-    console.log(e.target);
-
     const { target } = e;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const { name } = target;
-
-    console.log('before handleClick setState..', name, value);
     this.setState({
       [name]: value,
     });
-    console.log('after handleClick..', name, value);
+    // console.log('after handleClick..', name, value);
+  };
+
+  setProperty = (e, { name, value }) => {
+    // console.log('setProperty triggered..');
+    // console.log('name', name, 'value', value);
+    this.setState({
+      [name]: value,
+    });
   };
 
   render() {
@@ -149,9 +207,11 @@ class AddTenant extends Component {
       T2NotiE,
       StartD,
       EndD,
-      PropertyAddr,
-      Contract,
+      SelectedProperty,
     } = this.state;
+
+    const testArr = this.getLoP();
+    console.log('testArr..', testArr);
 
     return (
       <Grid>
@@ -160,52 +220,46 @@ class AddTenant extends Component {
             <Message>
               <Message.Header>Tenant #1</Message.Header>
               <Form className="form1">
-                <Container>
-                  <Container>
-                    <Form.Input
-                      name="T1Name"
-                      value={T1Name}
-                      onChange={this.handleInput}
-                      placeholder="Name"
+                <Form.Input
+                  name="T1Name"
+                  value={T1Name}
+                  onChange={this.handleInput}
+                  placeholder="Name"
+                />
+                <Form.Input
+                  name="T1Phone"
+                  value={T1Phone}
+                  onChange={this.handleInput}
+                  placeholder="Phone"
+                />
+                <Form.Input
+                  name="T1Email"
+                  value={T1Email}
+                  onChange={this.handleInput}
+                  placeholder="Email"
+                />
+                <Form.Field>
+                  <label>
+                    Email?
+                    <input
+                      name="T1NotiE"
+                      type="checkbox"
+                      checked={T1NotiE}
+                      onChange={this.handleCheck}
                     />
-                  </Container>
-                  <Form.Input
-                    name="T1Phone"
-                    value={T1Phone}
-                    onChange={this.handleInput}
-                    placeholder="Phone"
-                  />
-                  <Form.Input
-                    name="T1Email"
-                    value={T1Email}
-                    onChange={this.handleInput}
-                    placeholder="Email"
-                  />
-                </Container>
-                <Container>
-                  <Form.Field>
-                    <label>
-                      Email?
-                      <input
-                        name="T1NotiE"
-                        type="checkbox"
-                        checked={T1NotiE}
-                        onChange={this.handleCheck}
-                      />
-                    </label>
-                  </Form.Field>
-                  <Form.Field>
-                    <label>
-                      Text?
-                      <input
-                        name="T1NotiP"
-                        type="checkbox"
-                        checked={T1NotiP}
-                        onChange={this.handleCheck}
-                      />
-                    </label>
-                  </Form.Field>
-                </Container>
+                  </label>
+                </Form.Field>
+                <Form.Field>
+                  <label>
+                    Text?
+                    <input
+                      name="T1NotiP"
+                      type="checkbox"
+                      checked={T1NotiP}
+                      onChange={this.handleCheck}
+                    />
+                  </label>
+                </Form.Field>
               </Form>
             </Message>
           </Grid.Column>
@@ -231,37 +285,61 @@ class AddTenant extends Component {
                   onChange={this.handleInput}
                   placeholder="Email"
                 />
-                <Container>
-                  <Form.Field>
-                    <label>
-                      Email?
-                      <input
-                        name="T2NotiE"
-                        type="checkbox"
-                        checked={T2NotiE}
-                        onChange={this.handleCheck}
-                      />
-                    </label>
-                  </Form.Field>
-                  <Form.Field>
-                    <label>
-                      Text?
-                      <input
-                        name="T2NotiP"
-                        type="checkbox"
-                        checked={T2NotiP}
-                        onChange={this.handleCheck}
-                      />
-                    </label>
-                  </Form.Field>
-                </Container>
+                <Form.Field>
+                  <label>
+                    Email?
+                    <input
+                      name="T2NotiE"
+                      type="checkbox"
+                      checked={T2NotiE}
+                      onChange={this.handleCheck}
+                    />
+                  </label>
+                </Form.Field>
+                <Form.Field>
+                  <label>
+                    Text?
+                    <input
+                      name="T2NotiP"
+                      type="checkbox"
+                      checked={T2NotiP}
+                      onChange={this.handleCheck}
+                    />
+                  </label>
+                </Form.Field>
               </Form>
             </Message>
           </Grid.Column>
         </Grid.Row>
-        <Button type="submit" onClick={this.handleSubmit} primary>
-          Save
-        </Button>
+        <Grid.Row>
+          <Message>
+            <Message.Header>Housing Information</Message.Header>
+            <Icon name="calendar alternate outline" />
+            <Input
+              placeholder="StartDate"
+              name="StartD"
+              value={StartD}
+              onChange={this.handleInput}
+            />
+            -
+            <Input placeholder="EndDate" name="EndD" value={EndD} onChange={this.handleInput} />
+            <Dropdown
+              placeholder="Select a property"
+              selection
+              name="SelectedProperty"
+              options={testArr}
+              onChange={this.setProperty}
+            />
+            <Button type="submit" onClick={this.sendContract} primary>
+              <Icon name="paper plane outline" />Send Contract
+            </Button>
+          </Message>
+        </Grid.Row>
+        <Grid.Row>
+          <Button type="submit" onClick={this.handleSubmit} primary>
+            Save
+          </Button>
+        </Grid.Row>
       </Grid>
     );
   }
