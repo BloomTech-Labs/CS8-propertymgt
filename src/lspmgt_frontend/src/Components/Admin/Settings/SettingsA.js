@@ -12,7 +12,7 @@ class SettingsA extends Component {
       DisplayName: '',
       OldPassword: '',
       NewPassword: '',
-      id: 1,
+      id: 123,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,9 +27,9 @@ class SettingsA extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { id } = this.state.id;
+    const { id } = this.state;
     axios
-      .patch('http://localhost:5000/api/admin/settingsupdate/1', this.state)
+      .patch(`http://localhost:5000/api/settings/update/${id}`, this.state)
       .then((res) => {
         console.log('Updated admin info..', res);
       })

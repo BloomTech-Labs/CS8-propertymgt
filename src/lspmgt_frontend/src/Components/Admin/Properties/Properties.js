@@ -20,7 +20,7 @@ class Properties extends Component {
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/admin/propertieslsdb')
+      .get('http://localhost:5000/api/property/lsdb')
       .then((response) => {
         this.setState({
           list: response.data.data.Items,
@@ -49,6 +49,15 @@ class Properties extends Component {
     ) : (
       <span style={{ color: 'red' }}>Contract Not Signed</span>
     );
+  };
+
+  // Makes sure an array of tenant names is passed back not as undefined
+  displayTenants = (x) => {
+    let arr = [{ NameT: 'tenant' }, { NameT: 'tenant' }];
+    if (x !== undefined) {
+      arr = x;
+    }
+    return `${arr[0].NameT}, ${arr[1].NameT}`;
   };
 
   // Populates each listOfProperties element with proper data field from database properties list,
@@ -102,9 +111,7 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="user" />
               </Feed.Label>
-              <Feed.Content>
-                {tenants[0].NameT}, {tenants[1].NameT}
-              </Feed.Content>
+              <Feed.Content>{this.displayTenants(tenants)}</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>

@@ -14,7 +14,7 @@ class DeleteProperty extends Component {
     e.preventDefault();
     const { id } = this.props;
     axios
-      .delete(`http://localhost:5000/api/admin/deleteproperty/${id}`)
+      .delete(`http://localhost:5000/api/property/delete/${id}`)
       .then((res) => {
         console.log('Deleted property..', res);
         this.setState({});

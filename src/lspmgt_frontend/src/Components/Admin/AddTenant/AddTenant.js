@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Message, Form, Input, Checkbox, Button } from 'semantic-ui-react';
+import { Grid, Message, Form, Input, Checkbox, Button, Container } from 'semantic-ui-react';
 import axios from 'axios';
 
 class AddTenant extends Component {
@@ -20,9 +20,8 @@ class AddTenant extends Component {
       T2NotiE: false,
       StartD: '',
       EndD: '',
-      PropertyAddr: '', // selected property address from dropdown menu
-      Contract: false, // Always initially false?
-      LoP: [],
+      SelectedProperty: '', // selected property from dropdown menu
+      LoP: [], // list of properties
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,7 +30,7 @@ class AddTenant extends Component {
   // Gets available properties without a contract
   componentDidMount() {
     axios
-      .get('api/admin/properties')
+      .get('api/property/properties')
       .then((res) => {
         this.setState({
           LoP: res.data.data.Items,
@@ -68,11 +67,10 @@ class AddTenant extends Component {
       T2NotiE,
       StartD,
       EndD,
-      PropertyAddr,
-      Contract,
+      SelectedProperty,
     } = this.state;
 
-    const x = {
+    const toTenants = {
       T1Name,
       T1Phone,
       T1Email,
@@ -85,16 +83,26 @@ class AddTenant extends Component {
       T2NotiE,
       StartD,
       EndD,
-      PropertyAddr,
-      Contract,
     };
 
     axios
-      .post('api/admin/addtenant', x)
+      .post('api/property/addtenant', toTenants)
       .then()
       .catch((error) => {
         console.log('Error in AddTenant POST..', error);
       });
+
+    const toLSDB = {
+      propertyId: SelectedProperty.propertyId,
+    };
+
+    axios
+      .post('api/property/lsdb', toLSDB)
+      .then()
+      .catch((error) => {
+        console.log('Error in AddTenant POST for LSDB..', error);
+      });
+
     this.setState({
       T1Name: '',
       T1Phone: '',
@@ -152,15 +160,15 @@ class AddTenant extends Component {
             <Message>
               <Message.Header>Tenant #1</Message.Header>
               <Form className="form1">
-                <div>
-                  <div>
+                <Container>
+                  <Container>
                     <Form.Input
                       name="T1Name"
                       value={T1Name}
                       onChange={this.handleInput}
                       placeholder="Name"
                     />
-                  </div>
+                  </Container>
                   <Form.Input
                     name="T1Phone"
                     value={T1Phone}
@@ -173,8 +181,8 @@ class AddTenant extends Component {
                     onChange={this.handleInput}
                     placeholder="Email"
                   />
-                </div>
-                <div>
+                </Container>
+                <Container>
                   <Form.Field>
                     <label>
                       Email?
@@ -197,7 +205,7 @@ class AddTenant extends Component {
                       />
                     </label>
                   </Form.Field>
-                </div>
+                </Container>
               </Form>
             </Message>
           </Grid.Column>
@@ -223,7 +231,7 @@ class AddTenant extends Component {
                   onChange={this.handleInput}
                   placeholder="Email"
                 />
-                <div>
+                <Container>
                   <Form.Field>
                     <label>
                       Email?
@@ -246,7 +254,7 @@ class AddTenant extends Component {
                       />
                     </label>
                   </Form.Field>
-                </div>
+                </Container>
               </Form>
             </Message>
           </Grid.Column>

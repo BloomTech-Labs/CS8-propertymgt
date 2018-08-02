@@ -1,42 +1,12 @@
-// const T = {
-//   Tinfo: [],
-//   Quantity: 0, // Tinfo.length
-// };
-
-const Tinfo = {
-  NameT: '',
-  MobileT: '',
-  EmailT: '',
-  HouseApplicationT: '',
-  GetEmailT: '',
-  GetTextsT: '',
-  DueDate: '',
-  StartEndDataT: '',
-  AssignedPropertyT: '',
-  SendContractT: '',
-  Balance: '',
-  Alerts: '',
-  WOrder: [],
-};
-
-// sign up fields
 const Admin = {
+  // adminId: '', // primary key
   Name: '',
   Email: '',
   Phone: '',
 };
 
-const WOrder = {
-  PropertyAddr: '',
-  TenantPhone: '',
-  Issue: '',
-  PhotoIssue: '',
-  Permission: '',
-  Status: '',
-};
-
 const PropertyInfo = {
-  propertyId: '',
+  // propertyId: '', // primary key
   NameOwner: '',
   EmailOwner: '',
   MobileOwner: '',
@@ -47,9 +17,51 @@ const PropertyInfo = {
   Bedrooms: '',
   Bathrooms: '',
   YearBuilt: '',
-  Contract: '', // boolean
+  Contract: false, // boolean
   Tenants: [], // holds tenantId for each tenant
   Admin: '',
+};
+
+const Tenant = {
+  // tenantId: '', // primary key
+  NameT: '',
+  MobileT: '',
+  EmailT: '',
+  HouseApplicationT: '',
+  GetEmailT: false, // boolean
+  GetTextsT: false, // boolean
+  DueDate: '',
+  StartEndDataT: '',
+  AssignedPropertyT: '',
+  SendContractT: '',
+  Balance: '',
+  Alerts: '',
+  WOrder: [],
+  T2: {
+    // tenantId: '',
+    NameT: '',
+    MobileT: '',
+    EmailT: '',
+    HouseApplicationT: '',
+    GetEmailT: false, // boolean
+    GetTextsT: false, // boolean
+    DueDate: '',
+    StartEndDataT: '',
+    AssignedPropertyT: '',
+    SendContractT: '',
+    Balance: '',
+    Alerts: '',
+    WOrder: [],
+  },
+  Admin: '',
+};
+
+const WOrder = {
+  PropertyAddr: '',
+  Issue: '',
+  PhotoIssue: '', // stores a picture
+  Permission: true, // boolean
+  Status: 'SUBMITTED',
 };
 
 module.exports = PropertyInfo;
