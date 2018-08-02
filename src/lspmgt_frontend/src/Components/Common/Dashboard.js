@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
 import { LandingPage } from './Components';
-import { Container, Grid, GridColumn, Menu } from 'semantic-ui-react';
-<<<<<<< HEAD
-import { Link, Route, Switch } from 'react-router-dom';
-import { 
-    AdminProperties,
-    AdminWorkOrders,
-    AdminAddTenant,
-    AdminBilling,
-    AdminSettings,
-    TenantDashboard,
-    TenantBilling,
-    TenantWorkOrders,
-    TenantSettings
-        
-} from './Components';
-
-export default class Dashboard extends Component {
-    
-    state = {
-        isAdmin: false,
-        activeItem: 'home'
-    }
-=======
+import { Container, Grid, Menu } from 'semantic-ui-react';
 import { Link, Route } from 'react-router-dom';
 import {
   AdminProperties,
@@ -41,171 +19,14 @@ export default class Dashboard extends Component {
     isAdmin: false,
     activeItem: 'home',
   };
->>>>>>> c12e4d661b4783993525c900296dd635a1566068
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
-<<<<<<< HEAD
-    render() {
-        let display = this.state.isAdmin 
-        return (
-            <Container>
-                {display ? (<SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
-                ) : (<SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
-                ) }
-            </Container>
-        )
-    }
-}
-
-const SideBarAdmin = (props) => {
-
-    return (
-        <Grid container>
-                <Grid.Column width={4}>
-                    <Menu inverted pointing vertical stackable>
-                        {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
-                    
-                        <Link to="/admin/properties">
-                        <Menu.Item
-                            name='Properties'
-                            active={props.activeItem === 'Properties'}
-                            onClick={props.handleItemClick}
-                        >
-                            Properties
-                        </Menu.Item>
-                        </Link>
-
-                        <Link to="/admin/workorders">
-                        <Menu.Item
-                            name='friends'
-                            active={props.activeItem === 'Word Orders'}
-                            onClick={props.handleItemClick}
-                        >
-                        Work Orders
-                        </Menu.Item>
-                        </Link>
 
 
-                        <Link to="/admin/addtenant">
-                        <Menu.Item
-                            name='friends'
-                            active={props.activeItem === 'Add Tenant'}
-                            onClick={props.handleItemClick}
-                        >
-                        Add Tenant
-                        </Menu.Item>
-                        </Link>
-
-
-                        <Link to="/admin/billing">
-                        <Menu.Item
-                            name='friends'
-                            active={props.activeItem === 'Billing'}
-                            onClick={props.handleItemClick}
-                        >
-                        Billing
-                        </Menu.Item>
-                        </Link>
-
-                        <Link to="/admin/settings">
-                        <Menu.Item
-                            name='friends'
-                            active={props.activeItem === 'Settings'}
-                            onClick={props.handleItemClick}
-                        >
-                        Settings
-                        </Menu.Item>
-                        </Link>
-                    </Menu>
-                </Grid.Column>
-                <Grid.Column  width={12}>
-                    <Container fluid>
-                    <Switch>
-                        <Route path="/admin/properties" component={AdminProperties} />
-                        <Route path="/admin/workorders" component={AdminWorkOrders} />
-                        <Route path="/admin/addtenant" component={AdminAddTenant} />
-                        <Route path="/admin/billing" component={AdminBilling} />
-                        <Route path="/admin/settings" component={AdminSettings} />  
-                    </Switch>
-                    </Container>
-            </Grid.Column>
-        </Grid>
-
-    );
-};
-
-const SideBarTenant = (props) => {
-    return (
-
-            <Grid container>
-                <Grid.Column width={4}>
-                    <Menu inverted  pointing vertical stackable>
-                        {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
-                    
-                        <Link to="/tenant/dashboard">
-                        <Menu.Item
-                            name='Dashboard'
-                            active={props.activeItem === 'Dashboard'}
-                            onClick={props.handleItemClick}
-                        >
-                            Dashboard
-                        </Menu.Item>
-                        </Link>
-
-                        <Link to="/tenant/payments">
-                        <Menu.Item
-                            name='Billing'
-                            active={props.activeItem === 'Billing'}
-                            onClick={props.handleItemClick}
-                        >
-                        Billing
-                        </Menu.Item>
-                        </Link>
-
-
-                        <Link to="/tenant/workorders">
-                        <Menu.Item
-                            name='WorkOrder'
-                            active={props.activeItem === 'WorkOrder'}
-                            onClick={props.handleItemClick}
-                        >
-                        Work Orders
-                        </Menu.Item>
-                        </Link>
-
-
-                        <Link to="/tenant/settings">
-                        <Menu.Item
-                            name='Settings'
-                            active={props.activeItem === 'Settings'}
-                            onClick={props.handleItemClick}
-                        >
-                        Settings
-                        </Menu.Item>
-                        </Link>
-                    </Menu>
-                </Grid.Column>
-                <Grid.Column  width={12}>
-                    <Container fluid>
-                    <Switch>
-                    <Route path="/tenant/dashboard" component={TenantDashboard} />
-                    <Route path="/tenant/payments" component={TenantBilling} />
-                    <Route path="/tenant/workorders" component={TenantWorkOrders} />
-                    <Route path="/tenant/settings" component={TenantSettings} />
-                    </Switch>
-                    </Container>
-            </Grid.Column>
-        </Grid>
-    );
-  };
-=======
   render() {
     let display = this.state.isAdmin;
     //     ? <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
     //     : <SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
     return (
-      <div>
+      <Container fluid>
         {display ? (
           <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
         ) : (
@@ -214,7 +35,7 @@ const SideBarTenant = (props) => {
             activeItem={this.state.activeItem}
           />
         )}
-      </div>
+      </Container>
     );
   }
 }
@@ -223,69 +44,71 @@ const SideBarAdmin = (props) => {
   console.log('loading props ---> ', props);
   return (
     <Grid container>
-      <Grid.Column width={4}>
-        <Menu pointing vertical stackable>
-          {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
+      <Grid.Column>
+        <Grid.Column>
+          <Menu pointing vertical stackable>
+            {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
-          <Link to="/admin/properties">
-            <Menu.Item
-              name="Properties"
-              active={props.activeItem === 'Properties'}
-              onClick={props.handleItemClick}
-            >
-              Properties
-            </Menu.Item>
-          </Link>
+            <Link to="/admin/properties">
+              <Menu.Item
+                name="Properties"
+                active={props.activeItem === 'Properties'}
+                onClick={props.handleItemClick}
+              >
+                Properties
+              </Menu.Item>
+            </Link>
 
-          <Link to="/admin/workorders">
-            <Menu.Item
-              name="friends"
-              active={props.activeItem === 'Word Orders'}
-              onClick={props.handleItemClick}
-            >
-              Work Orders
-            </Menu.Item>
-          </Link>
+            <Link to="/admin/workorders">
+              <Menu.Item
+                name="friends"
+                active={props.activeItem === 'Word Orders'}
+                onClick={props.handleItemClick}
+              >
+                Work Orders
+              </Menu.Item>
+            </Link>
 
-          <Link to="/admin/addtenant">
-            <Menu.Item
-              name="friends"
-              active={props.activeItem === 'Add Tenant'}
-              onClick={props.handleItemClick}
-            >
-              Add Tenant
-            </Menu.Item>
-          </Link>
+            <Link to="/admin/addtenant">
+              <Menu.Item
+                name="friends"
+                active={props.activeItem === 'Add Tenant'}
+                onClick={props.handleItemClick}
+              >
+                Add Tenant
+              </Menu.Item>
+            </Link>
 
-          <Link to="/admin/billing">
-            <Menu.Item
-              name="friends"
-              active={props.activeItem === 'Billing'}
-              onClick={props.handleItemClick}
-            >
-              Billing
-            </Menu.Item>
-          </Link>
+            <Link to="/admin/billing">
+              <Menu.Item
+                name="friends"
+                active={props.activeItem === 'Billing'}
+                onClick={props.handleItemClick}
+              >
+                Billing
+              </Menu.Item>
+            </Link>
 
-          <Link to="/admin/settings">
-            <Menu.Item
-              name="friends"
-              active={props.activeItem === 'Settings'}
-              onClick={props.handleItemClick}
-            >
-              Settings
-            </Menu.Item>
-          </Link>
-        </Menu>
-      </Grid.Column>
-      <Grid.Column width={12}>
-        <Container fluid>
-          <Route path="/admin/properties" component={AdminProperties} />
-          <Route path="/admin/workorders" component={AdminWorkOrders} />
-          <Route path="/admin/addtenant" component={AdminAddTenant} />
-          <Route path="/admin/billing" component={AdminBilling} />
-          <Route path="/admin/settings" component={AdminSettings} />
-        </Container>
+            <Link to="/admin/settings">
+              <Menu.Item
+                name="friends"
+                active={props.activeItem === 'Settings'}
+                onClick={props.handleItemClick}
+              >
+                Settings
+              </Menu.Item>
+            </Link>
+          </Menu>
+        </Grid.Column>
+        <Grid.Column>
+          <Container fluid>
+            <Route path="/admin/properties" component={AdminProperties} />
+            <Route path="/admin/workorders" component={AdminWorkOrders} />
+            <Route path="/admin/addtenant" component={AdminAddTenant} />
+            <Route path="/admin/billing" component={AdminBilling} />
+            <Route path="/admin/settings" component={AdminSettings} />
+          </Container>
+        </Grid.Column>
       </Grid.Column>
     </Grid>
   );
@@ -293,61 +116,70 @@ const SideBarAdmin = (props) => {
 
 const SideBarTenant = (props) => {
   return (
-    <Grid container>
-      <Grid.Column width={4}>
-        <Menu pointing vertical stackable>
-          {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
+    <Container>
+      <Grid columns={2} relaxed style={{ maxWidth: '100%' }}>
+        {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
+        <Grid.Column
+          mobile={16}
+          computer={4}
+          tablet={4}
+          centered
+          style={{ backgroundColor: 'blue' }}
+        >
+          <Menu pointing vertical inverted fluid centered>
+            {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
-          <Link to="/tenant/dashboard">
-            <Menu.Item
-              name="Dashboard"
-              active={props.activeItem === 'Dashboard'}
-              onClick={props.handleItemClick}
-            >
-              Dashboard
-            </Menu.Item>
-          </Link>
+            <Link to="/tenant/dashboard">
+              <Menu.Item
+                name="Dashboard"
+                active={props.activeItem === 'Dashboard'}
+                onClick={props.handleItemClick}
+              >
+                Dashboard
+              </Menu.Item>
+            </Link>
 
-          <Link to="/tenant/payments">
-            <Menu.Item
-              name="Billing"
-              active={props.activeItem === 'Billing'}
-              onClick={props.handleItemClick}
-            >
-              Billing
-            </Menu.Item>
-          </Link>
+            <Link to="/tenant/payments">
+              <Menu.Item
+                name="Billing"
+                active={props.activeItem === 'Billing'}
+                onClick={props.handleItemClick}
+              >
+                Billing
+              </Menu.Item>
+            </Link>
 
-          <Link to="/tenant/workorders">
-            <Menu.Item
-              name="WorkOrder"
-              active={props.activeItem === 'WorkOrder'}
-              onClick={props.handleItemClick}
-            >
-              Work Orders
-            </Menu.Item>
-          </Link>
+            <Link to="/tenant/workorders">
+              <Menu.Item
+                name="WorkOrder"
+                active={props.activeItem === 'WorkOrder'}
+                onClick={props.handleItemClick}
+              >
+                Work Orders
+              </Menu.Item>
+            </Link>
 
-          <Link to="/tenant/settings">
-            <Menu.Item
-              name="Settings"
-              active={props.activeItem === 'Settings'}
-              onClick={props.handleItemClick}
-            >
-              Settings
-            </Menu.Item>
-          </Link>
-        </Menu>
-      </Grid.Column>
-      <Grid.Column width={12}>
-        <Container fluid>
-          <Route path="/tenant/dashboard" component={TenantDashboard} />
-          <Route path="/tenant/payments" component={TenantBilling} />
-          <Route path="/tenant/workorders" component={TenantWorkOrders} />
-          <Route path="/tenant/settings" component={TenantSettings} />
-        </Container>
-      </Grid.Column>
-    </Grid>
+            <Link to="/tenant/settings">
+              <Menu.Item
+                name="Settings"
+                active={props.activeItem === 'Settings'}
+                onClick={props.handleItemClick}
+              >
+                Settings
+              </Menu.Item>
+            </Link>
+          </Menu>
+        </Grid.Column>
+        <Grid.Column mobile={16} computer={12} tablet={12} style={{ backgroundColor: 'red' }}>
+          <Container>
+            <Route path="/tenant/dashboard" component={TenantDashboard} />
+            <Route path="/tenant/payments" component={TenantBilling} />
+            <Route path="/tenant/workorders" component={TenantWorkOrders} />
+            <Route path="/tenant/settings" component={TenantSettings} />
+          </Container>
+        </Grid.Column>
+      </Grid>
+    </Container>
   );
 };
->>>>>>> c12e4d661b4783993525c900296dd635a1566068
+
