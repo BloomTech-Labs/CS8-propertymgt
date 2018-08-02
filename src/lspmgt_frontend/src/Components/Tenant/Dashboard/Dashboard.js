@@ -1,7 +1,29 @@
 import React, { Component } from 'react';
-import { Grid, Segment, Header, Button, Message, Icon } from 'semantic-ui-react';
+import { Grid, Segment, Header, Button, Message, Icon, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import './Dashboard.css';
 
+const buttonStyles = {
+  margin: '1rem 0',
+  marginRight: '1rem',
+};
+
+const alertStyles = {
+  marginTop: '1.3rem',
+  marginBottom: '0',
+};
+
+const segmentStyles = {
+  margin: '0',
+};
+
+const alertTitleStyles = {
+  paddingBottom: '.8rem',
+};
+
+const officeLabelStyles = {
+  border: '1px solid black',
+};
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -14,36 +36,44 @@ class Dashboard extends Component {
       <Grid columns={2} relaxed style={{ maxWidth: '100%' }}>
         <Grid.Column>
           <Header as="h1">Outstanding Balance</Header>
-          <Link to="/tenant/payments">
-            <Button primary>Make Payment</Button>
-          </Link>
-          <Link to="/tenant/workorders">
-            <Button primary>Submit Work Order</Button>
-          </Link>
-          <Message>
-            <Message.Header>Alerts</Message.Header>
+          <Message style={alertStyles}>
+            <Message.Header style={alertTitleStyles}>Alerts</Message.Header>
             <p>Alert 1</p>
             <p>Alert 2</p>
           </Message>
+          <Link to="/tenant/payments">
+            <Button style={buttonStyles} secondary>
+              Make Payment
+            </Button>
+          </Link>
+          <Link to="/tenant/workorders">
+            <Button secondary>Submit Work Order</Button>
+          </Link>
         </Grid.Column>
         <Grid.Column>
-          <Segment basic>
-            <Icon name="building" size="big" />
-            1234 PropertyOffice Ln <br /> San Francisco, CA
+          <Segment className="address" basic style={segmentStyles}>
+            <Icon name="building" size="large" circular inverted />
+            <Label basic style={officeLabelStyles} pointing="left">
+              1234 PropertyOffice Ln <br /> San Francisco, CA
+            </Label>
           </Segment>
-          <Segment basic>
-            <Icon name="phone" size="big" />
-            Office Number <br />
-            1-800-234-5678
+          <Segment className="officeNumber" basic style={segmentStyles}>
+            <Icon name="phone" size="large" circular inverted />
+            <Label basic style={officeLabelStyles} pointing="left">
+              Office Number <br /> 1-800-234-5678
+            </Label>
           </Segment>
-          <Segment basic>
-            <Icon name="envelope" size="big" />
-            landlords@email.com
+          <Segment className="email" basic style={segmentStyles}>
+            <Icon name="envelope" size="large" circular inverted />
+            <Label basic style={officeLabelStyles} pointing="left">
+              landlords@email.com
+            </Label>
           </Segment>
-          <Segment basic>
-            <Icon name="phone" size="big" />
-            Contact 24/7 Maintenance <br />
-            1-800-123-9876
+          <Segment className="maintenanceNumber" basic style={segmentStyles}>
+            <Icon name="wrench" size="large" circular inverted />
+            <Label basic style={officeLabelStyles} pointing="left">
+              Contact 24/7 Maintenance <br /> 1-800-123-9876
+            </Label>
           </Segment>
         </Grid.Column>
       </Grid>
