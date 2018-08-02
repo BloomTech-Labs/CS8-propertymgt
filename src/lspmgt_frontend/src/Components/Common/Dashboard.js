@@ -16,19 +16,28 @@ import {
 
 export default class Dashboard extends Component {
   state = {
-    isAdmin: false,
+    isAdmin: true,
     activeItem: 'home',
   };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = this.state.isAdmin ? (
-      <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
-    ) : (
-      <SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+    let display = this.state.isAdmin;
+    //     ? <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+    //     : <SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+    return (
+      <div>
+        {display ? (
+          <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+        ) : (
+          <SideBarTenant
+            handleItemClick={this.handleItemClick}
+            activeItem={this.state.activeItem}
+          />
+        )}
+      </div>
     );
-    return <display />;
   }
 }
 
