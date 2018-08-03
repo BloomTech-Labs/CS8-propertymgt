@@ -11,7 +11,6 @@ import { signInUser } from '../Redux/Actions';
 
 Amplify.configure(AmplifyConfig);
 
-
 import TenantLogin from './TenantLogin';
 import AdminLogin from './AdminLogin';
 
@@ -24,11 +23,9 @@ class Login extends Component {
   handleSignin = () => {
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
-
         // let isAdmin = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
-        this.props.signInUser(true)
-        this.props.history.push('/dashboard')
-
+        this.props.signInUser(true);
+        this.props.history.push('/dashboard');
       })
       .catch((err) => {
         console.log('THERE WAS AN ERROR -> ', err);
@@ -45,7 +42,6 @@ class Login extends Component {
   };
 
   render() {
-
     return (
       <Container>
         <Grid inverted textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
@@ -73,17 +69,16 @@ class Login extends Component {
                   name="password"
                   onChange={this.handleInput}
                 />
-                <Segment >
+                <Segment>
                   <Button fluid size="large">
                     Login
-                </Button>
+                  </Button>
                   {/* <Link to="/">
                   <Button size='large'>Back</Button>
                 </Link> */}
                 </Segment>
               </Segment>
             </Form>
-
           </Grid.Column>
         </Grid>
       </Container>
@@ -91,11 +86,16 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   console.log('this is maptoprops --> ', state);
   return {
-    isAdmin: state
+    isAdmin: state,
   };
 };
 
-export default withRouter(connect(mapStateToProps, { signInUser })(Login));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { signInUser }
+  )(Login)
+);

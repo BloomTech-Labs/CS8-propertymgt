@@ -11,20 +11,14 @@ import { signOUtUser } from '../Redux/Actions';
 Amplify.configure(AmplifyConfig);
 
 class NavBar extends Component {
-
   render() {
-
     return (
       <Menu stackable fluid inverted>
-        <Menu.Item>
-          LS PROPERTY MANAGEMENT
-      </Menu.Item>
-
-
+        <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
 
         <Menu.Menu position="right">
           <Link to="/signup">
-            <Menu.Item  >Signup</Menu.Item>
+            <Menu.Item>Signup</Menu.Item>
           </Link>
 
           <Link to="/login">
@@ -33,24 +27,29 @@ class NavBar extends Component {
 
           <Link to="/">
             <Menu.Item
-            onClick={() => {
-              Auth.signOut()
-              this.props.signOUtUser()
-            }}
-            >Sign out</Menu.Item>
+              onClick={() => {
+                Auth.signOut();
+                this.props.signOUtUser();
+              }}
+            >
+              Sign out
+            </Menu.Item>
           </Link>
         </Menu.Menu>
-
-
       </Menu>
-    )
+    );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-      getUser: state,
-      isAdmin: state.isAdmin
+    getUser: state,
+    isAdmin: state.isAdmin,
   };
 };
 
-export default withRouter(connect(mapStateToProps, { signOUtUser })(NavBar));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { signOUtUser }
+  )(NavBar)
+);

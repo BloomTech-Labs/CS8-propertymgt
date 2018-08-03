@@ -13,7 +13,7 @@ import {
   TenantSettings,
 } from './Components';
 
-import Amplify, { Auth } from "aws-amplify";
+import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 
 Amplify.configure(AmplifyConfig);
@@ -41,12 +41,14 @@ export default class Dashboard extends Component {
           />
         )}
         <Link to="/">
-            <Menu.Item
-              onClick={() => {
-                Auth.signOut()
-              }}
-            >Sign out</Menu.Item>
-          </Link>
+          <Menu.Item
+            onClick={() => {
+              Auth.signOut();
+            }}
+          >
+            Sign out
+          </Menu.Item>
+        </Link>
       </Container>
     );
   }
@@ -128,70 +130,64 @@ const SideBarAdmin = (props) => {
 const SideBarTenant = (props) => {
   return (
     // <Container fluid>
-      <Grid columns={2} relaxed>
-        {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
-        <Grid.Column
-          mobile={16}
-          computer={4}
-          tablet={4}
-        
-        >
-          <Menu pointing vertical inverted fluid>
-            {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
+    <Grid columns={2} relaxed>
+      {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
+      <Grid.Column mobile={16} computer={4} tablet={4}>
+        <Menu pointing vertical inverted fluid>
+          {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
-            <Link to="/dashboard">
-              <Menu.Item
-                name="Dashboard"
-                active={props.activeItem === 'Dashboard'}
-                onClick={props.handleItemClick}
-              >
-                Dashboard
-              </Menu.Item>
-            </Link>
+          <Link to="/dashboard">
+            <Menu.Item
+              name="Dashboard"
+              active={props.activeItem === 'Dashboard'}
+              onClick={props.handleItemClick}
+            >
+              Dashboard
+            </Menu.Item>
+          </Link>
 
-            <Link to="/payments">
-              <Menu.Item
-                name="Billing"
-                active={props.activeItem === 'Billing'}
-                onClick={props.handleItemClick}
-              >
-                Billing
-              </Menu.Item>
-            </Link>
+          <Link to="/payments">
+            <Menu.Item
+              name="Billing"
+              active={props.activeItem === 'Billing'}
+              onClick={props.handleItemClick}
+            >
+              Billing
+            </Menu.Item>
+          </Link>
 
-            <Link to="/workorders">
-              <Menu.Item
-                name="WorkOrder"
-                active={props.activeItem === 'WorkOrder'}
-                onClick={props.handleItemClick}
-              >
-                Work Orders
-              </Menu.Item>
-            </Link>
+          <Link to="/workorders">
+            <Menu.Item
+              name="WorkOrder"
+              active={props.activeItem === 'WorkOrder'}
+              onClick={props.handleItemClick}
+            >
+              Work Orders
+            </Menu.Item>
+          </Link>
 
-            <Link to="/settings">
-              <Menu.Item
-                name="Settings"
-                active={props.activeItem === 'Settings'}
-                onClick={props.handleItemClick}
-              >
-                Settings
-              </Menu.Item>
-            </Link>
-          </Menu>
-        </Grid.Column>
-        <Grid.Column mobile={16} computer={12} tablet={12}>
-          <Container>
-            <Switch>
+          <Link to="/settings">
+            <Menu.Item
+              name="Settings"
+              active={props.activeItem === 'Settings'}
+              onClick={props.handleItemClick}
+            >
+              Settings
+            </Menu.Item>
+          </Link>
+        </Menu>
+      </Grid.Column>
+      <Grid.Column mobile={16} computer={12} tablet={12}>
+        <Container>
+          <Switch>
             <Route path="/payments" component={TenantBilling} />
             <Route path="/workorders" component={TenantWorkOrders} />
             <Route path="/settings" component={TenantSettings} />
             <Route component={TenantDashboard} />
-            </Switch>
-          </Container>
-        </Grid.Column>
-      </Grid>
+          </Switch>
+        </Container>
+      </Grid.Column>
+    </Grid>
     // </Container>
   );
 };
-

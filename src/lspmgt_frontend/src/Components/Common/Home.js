@@ -7,40 +7,43 @@ import AmplifyConfig from '../../Config/Auth';
 import { connect } from 'react-redux';
 import { getUserStatus } from '../Redux/Actions';
 
-
 Amplify.configure(AmplifyConfig);
 
 class Home extends Component {
+  state = {
+    allow: false,
+  };
 
-    state={
-        allow: false
-    }
+  componentDidMount() {
+    this.props.getUserStatus();
+    this.setState({
+      allow: this.props.isAdmin,
+    });
+  }
 
-    componentDidMount() {
-        this.props.getUserStatus()
-        this.setState({
-            allow: this.props.isAdmin
-        })
+  render() {
+    if (this.props.isAdmin) {
+      return <Dashboard />;
     }
-
-    render() {
-        if (this.props.isAdmin) {
-            return <Dashboard />
-        }
-        return (
-            <Container fluid>
-                <LandingPage />
-                <Route path='/login' component={LoginForm} />
-            </Container>
-        )
-    }
+    return (
+      <Container fluid>
+        <LandingPage />
+        <Route path="/login" component={LoginForm} />
+      </Container>
+    );
+  }
 }
 
-const mapStateToProps = state => {
-    return {
-        getUser: state,
-        isAdmin: state.isAdmin
-    };
+const mapStateToProps = (state) => {
+  return {
+    getUser: state,
+    isAdmin: state.isAdmin,
+  };
 };
 
-export default withRouter(connect(mapStateToProps, { getUserStatus })(Home));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getUserStatus }
+  )(Home)
+);
