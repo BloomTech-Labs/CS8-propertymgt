@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Link, Redirect, withRouter, Switch, Route } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -15,10 +16,11 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+
 import Landing from './Landing';
 import './LandingPrototype.css';
 import video from './Nueva-york.mp4';
+import { LoginForm } from '../Common/Components'
 // import BuyNowModal from '../../Payment/BuyNowModal';
 // import BuyNowModal from '../UserAuth/Payment'
 export default class LandingProto extends Component {
@@ -47,6 +49,7 @@ export default class LandingProto extends Component {
         </Visibility>
 
         {children}
+
       </Responsive>
     );
   }

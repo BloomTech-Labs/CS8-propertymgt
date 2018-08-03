@@ -1,20 +1,26 @@
 /*eslint-disable import/first*/
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment, Container } from 'semantic-ui-react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 
+import { connect } from 'react-redux';
+import { signInUser } from '../Redux/Actions';
+
 Amplify.configure(AmplifyConfig);
+
 
 import TenantLogin from './TenantLogin';
 import AdminLogin from './AdminLogin';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     username: '',
     password: '',
+    // isLoggedIn: false,
+    // isAdmin: false
   };
 
   // componentDidMount() {
@@ -31,9 +37,11 @@ export default class Login extends Component {
   handleSignin = () => {
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
-        data.signInUserSession.idToken.payload['custom:access_level'] == 'admin'
-          ? this.props.history.push('/admin/dashboard')
-          : this.props.history.push('/tenant/dashboard');
+
+        // let isAdmin = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
+        this.props.signInUser(true)
+        this.props.history.push('/dashboard')
+
       })
       .catch((err) => {
         console.log('THERE WAS AN ERROR -> ', err);
@@ -51,6 +59,12 @@ export default class Login extends Component {
   };
 
   render() {
+
+    // if (this.state.isAdmin) {
+    //   console.log('signing in and redirecting')
+    //   return <Redirect to='/dashboard' path='/dashboard' />
+    // }
+
     return (
       <Container>
         <Grid inverted textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
@@ -79,13 +93,13 @@ export default class Login extends Component {
                   onChange={this.handleInput}
                 />
                 <Segment >
-                <Button fluid size="large">
-                  Login
+                  <Button fluid size="large">
+                    Login
                 </Button>
-                {/* <Link to="/">
+                  {/* <Link to="/">
                   <Button size='large'>Back</Button>
                 </Link> */}
-                  </Segment>
+                </Segment>
               </Segment>
             </Form>
 
@@ -95,3 +109,12 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  console.log('this is maptoprops --> ', state);
+  return {
+    isAdmin: state
+  };
+};
+
+export default withRouter(connect(mapStateToProps, { signInUser })(Login));

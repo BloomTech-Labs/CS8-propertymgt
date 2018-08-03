@@ -7,8 +7,8 @@ class Payments extends Component {
 
     this.state = {
       BalanceDue: '$400.00',
-      PaymentAmount: '',
-      PaymentType: '',
+      // PaymentAmount: '',
+      // PaymentType: '',
     };
   }
 
