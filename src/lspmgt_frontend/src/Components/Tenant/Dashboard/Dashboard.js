@@ -69,7 +69,7 @@ export default Dashboard;
 const styles = {
   buttonStyles: {
     marginTop: '1rem',
-    backgroundColor: 'rgb(1,113,199)',
+    backgroundColor: 'rgb(0, 134, 221)',
     color: 'whitesmoke',
   },
   alertStyles: {

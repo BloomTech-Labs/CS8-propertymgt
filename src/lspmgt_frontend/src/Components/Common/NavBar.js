@@ -40,16 +40,16 @@ class NavBar extends Component {
     // }
 
     return (
-      <Menu stackable fluid inverted>
-        <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
+      <Menu style={{ backgroundColor: 'rgb(0, 94, 155)' }} stackable fluid inverted>
+        <Menu.Item style={textStyles}>LS PROPERTY MANAGEMENT</Menu.Item>
 
         <Menu.Menu position="right">
           <Link to="/signup">
-            <Menu.Item>Signup</Menu.Item>
+            <Menu.Item style={textStyles}>Signup</Menu.Item>
           </Link>
 
           <Link to="/login">
-            <Menu.Item style={{ color: 'whitesmoke' }}>Signin</Menu.Item>
+            <Menu.Item style={textStyles}>Signin</Menu.Item>
           </Link>
 
           <Link to="/">
@@ -58,6 +58,7 @@ class NavBar extends Component {
                 Auth.signOut();
                 this.props.signOUtUser();
               }}
+              style={textStyles}
             >
               Sign out
             </Menu.Item>
@@ -81,3 +82,7 @@ export default withRouter(
     { signOUtUser }
   )(NavBar)
 );
+
+const textStyles = {
+  color: 'whitesmoke',
+};

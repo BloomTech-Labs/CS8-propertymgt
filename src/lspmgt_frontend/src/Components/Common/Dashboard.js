@@ -138,7 +138,7 @@ const SideBarTenant = (props) => {
     <Grid columns={2} relaxed>
       {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
       <Grid.Column mobile={16} computer={4} tablet={4}>
-        <Menu vertical fluid style={{ backgroundColor: 'rgb(1,113,199)' }}>
+        <Menu vertical fluid style={{ backgroundColor: 'rgb(0, 94, 155)' }}>
           {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
           <Link to="/dashboard">
@@ -146,6 +146,7 @@ const SideBarTenant = (props) => {
               name="Dashboard"
               active={props.activeItem === 'Dashboard'}
               onClick={props.handleItemClick}
+              style={textStyles}
             >
               Dashboard
             </Menu.Item>
@@ -156,6 +157,7 @@ const SideBarTenant = (props) => {
               name="Billing"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
+              style={textStyles}
             >
               Billing
             </Menu.Item>
@@ -166,6 +168,7 @@ const SideBarTenant = (props) => {
               name="WorkOrder"
               active={props.activeItem === 'WorkOrder'}
               onClick={props.handleItemClick}
+              style={textStyles}
             >
               Work Orders
             </Menu.Item>
@@ -176,6 +179,7 @@ const SideBarTenant = (props) => {
               name="Settings"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
+              style={textStyles}
             >
               Settings
             </Menu.Item>
@@ -195,4 +199,8 @@ const SideBarTenant = (props) => {
     </Grid>
     // </Container>
   );
+};
+
+const textStyles = {
+  color: 'whitesmoke',
 };
