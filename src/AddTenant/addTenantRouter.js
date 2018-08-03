@@ -2,6 +2,7 @@ const dd = require('../Config/AwsConfig');
 const hashingId = require('../Common/HashingId');
 const hashingId2 = require('../Common/HashingId2');
 
+// TODO: Do not push stripe key to github
 const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 
 // Add a new tenant and creates a LS_DB item with property, contract, and tenant info

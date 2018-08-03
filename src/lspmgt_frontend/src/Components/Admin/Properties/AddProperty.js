@@ -38,7 +38,7 @@ class AddProperty extends Component {
 
   // Sends new property info to db
   handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     this.setState({ Contract: true });
     axios
       .post('http://localhost:5000/api/property/add', this.state)
