@@ -111,9 +111,11 @@ class AddTenant extends Component {
 
     // Gets property id from property address or selectedproperty
     for (let i = 0; i < LoP.length; i++) {
-      if (LoP[i].PropertyAddr === SelectedProperty) {
-        LoP[i].propertyId = propertyId;
-        console.log('list of property id -->', LoP[i].propertyId, 'propertyId -->', propertyId);
+      if (SelectedProperty === LoP[i].PropertyAddr) {
+        this.setState({
+          propertyId: LoP[i].propertyId,
+        });
+        console.log('list of property id -->', LoP[i].propertyId, '\npropertyId -->', propertyId);
       }
     }
 
@@ -139,7 +141,7 @@ class AddTenant extends Component {
         // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
         //   console.log(res);
         // })
-        console.log('step2')
+        console.log('handleSubmit fired')
       )
       .catch((error) => {
         console.log('Error in AddTenant POST..', error);
@@ -165,8 +167,8 @@ class AddTenant extends Component {
       T2NotiE: false,
       StartD: '',
       EndD: '',
-      PropertyAddr: '',
-      Contract: false,
+      SelectedProperty: '',
+      propertyId: '',
     });
   };
 
@@ -181,11 +183,22 @@ class AddTenant extends Component {
     console.log('after handleClick..', name, value);
   };
 
+  getPropertyId = (address) => {
+    const { LoP } = this.state;
+    for (let i = 0; i < LoP.length; i++) {
+      if (address === LoP[i].PropertyAddr) {
+        // console.log(PropertyList[i].propertyId);
+        return LoP[i].propertyId;
+      }
+    }
+  };
+
   setProperty = (e, { name, value }) => {
     console.log('setProperty triggered..');
     console.log('name', name, 'value', value);
     this.setState({
       [name]: value,
+      propertyId: this.getPropertyId(value),
     });
   };
 
@@ -205,7 +218,7 @@ class AddTenant extends Component {
       EndD,
     } = this.state;
 
-    const theLoP = this.getLoP;
+    const theLoP = this.getLoP();
 
     return (
       <Grid>
@@ -215,7 +228,7 @@ class AddTenant extends Component {
               <Message.Header>Tenant #1</Message.Header>
               <Form className="form1">
                 <Form.Input
-                  name="Name"
+                  name="T1Name"
                   value={T1Name}
                   onChange={this.handleInput}
                   placeholder="Name"
@@ -227,7 +240,7 @@ class AddTenant extends Component {
                   placeholder="Phone"
                 />
                 <Form.Input
-                  name="Email"
+                  name="T1Email"
                   value={T1Email}
                   onChange={this.handleInput}
                   placeholder="Email"

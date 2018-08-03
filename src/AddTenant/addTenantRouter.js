@@ -6,6 +6,7 @@ const hashingId2 = require('../Common/HashingId2');
 const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 
 // Add a new tenant and creates a LS_DB item with property, contract, and tenant info
+// Tenant should have tenantId, propertyId, (stripe customer id)
 const addTenant = (req, res) => {
   const {
     T1Name,
@@ -24,7 +25,7 @@ const addTenant = (req, res) => {
   } = req.body;
 
   const T2 = {
-    tenantId: hashingId2,
+    tenantId: hashingId2(),
     propertyId,
     NameT: T2Name,
     MobileT: T2Phone,
@@ -58,20 +59,20 @@ const addTenant = (req, res) => {
   stripe.customers.create(
     {
       // Add Tenant Route, Stripe First so we can give stripeID to new Tenant
-      description: hashingId,
+      description: T1Name,
       email: T1Email,
     },
     (customerErr, customer) => {
       const params = {
         TableName: 'Tenants',
         Item: {
-          tenantId: hashingId,
+          tenantId: hashingId(),
           propertyId,
           stripeId: customer.id, // StripeID needed to check data in Stripe DB. Created from line 60
           NameT: T1Name,
           MobileT: T1Phone,
           EmailT: T1Email,
-          GettestArrTextsT: T1NotiP,
+          GetTextsT: T1NotiP,
           GetEmailT: T1NotiE,
           StartD,
           EndD,
@@ -84,8 +85,10 @@ const addTenant = (req, res) => {
       if (customerErr) res.status(500).json({ status: 'stripe customer error', customerErr });
       else {
         dd.put(params, (dbError) => {
-          if (dbError) res.status(300).json({ status: 'db Error', dbError });
-          else {
+          if (dbError) {
+            console.log('this is params -->', params, '\nthis is dbError -->', dbError);
+            res.status(300).json({ status: 'db Error', dbError });
+          } else {
             console.log('params in dd.put -->', params);
             stripe.subscriptions.create({
               customer: customer.id,
