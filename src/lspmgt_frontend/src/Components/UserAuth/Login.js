@@ -11,9 +11,6 @@ import { signInUser } from '../Redux/Actions';
 
 Amplify.configure(AmplifyConfig);
 
-import TenantLogin from './TenantLogin';
-import AdminLogin from './AdminLogin';
-
 class Login extends Component {
   state = {
     username: '',

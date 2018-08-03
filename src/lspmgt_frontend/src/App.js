@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { NavBar, Home } from './Components/Common/Components';
 import { Container } from 'semantic-ui-react';
-import { Route, withRouter } from "react-router-dom";
-
+import { Route, withRouter } from 'react-router-dom';
 
 class App extends Component {
   render() {
@@ -11,7 +10,7 @@ class App extends Component {
       <Container>
         <NavBar />
         <Home />
-          <Route exact path='/'/>
+        <Route exact path="/" />
       </Container>
     );
   }

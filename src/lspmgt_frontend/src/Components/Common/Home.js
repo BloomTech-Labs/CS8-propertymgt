@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LandingPage, Dashboard, LoginForm } from './Components';
+import { LandingPage, Dashboard, LoginForm, AdminSignup } from './Components';
 import { Container, Grid, GridColumn, Gr } from 'semantic-ui-react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify';
@@ -28,6 +28,7 @@ class Home extends Component {
     return (
       <Container fluid>
         <LandingPage />
+        <Route path="/signup" component={AdminSignup} />
         <Route path="/login" component={LoginForm} />
       </Container>
     );
