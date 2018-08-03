@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = this.props.isAdmin;
+    let display = !this.props.isAdmin; // Development purposes, change bool to access either tenant or admin
     console.log('inside dashboard --> state --> ', this.state);
     return (
       <Container fluid>

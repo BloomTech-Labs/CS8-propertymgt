@@ -85,6 +85,7 @@ const addTenant = (req, res) => {
         dd.put(params, (dbError) => {
           if (dbError) res.status(300).json({ status: 'db Error', dbError });
           else {
+            console.log('params in dd.put -->', params);
             stripe.subscriptions.create({
               customer: customer.id,
               items: [

@@ -20,7 +20,7 @@ class Properties extends Component {
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/property/lsdb')
+      .get('http://localhost:5000/api/property/all')
       .then((response) => {
         this.setState({
           list: response.data.data.Items,

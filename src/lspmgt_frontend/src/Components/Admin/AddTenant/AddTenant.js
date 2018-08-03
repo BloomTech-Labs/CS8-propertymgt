@@ -206,11 +206,7 @@ class AddTenant extends Component {
       T2NotiE,
       StartD,
       EndD,
-      SelectedProperty,
     } = this.state;
-
-    const testArr = this.getLoP();
-    console.log('testArr..', testArr);
 
     return (
       <Grid>
@@ -326,7 +322,7 @@ class AddTenant extends Component {
               placeholder="Select a property"
               selection
               name="SelectedProperty"
-              options={testArr}
+              options={this.getLoP}
               onChange={this.setProperty}
             />
             <Button type="submit" onClick={this.sendContract} primary>
