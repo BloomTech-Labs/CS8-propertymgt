@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { LandingPage } from './Components';
 import { Container, Grid, Menu } from 'semantic-ui-react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
   AdminWorkOrders,
@@ -14,18 +14,26 @@ import {
   TenantSettings,
 } from './Components';
 
+import { connect } from 'react-redux';
+
+import Amplify, { Auth } from 'aws-amplify';
+import AmplifyConfig from '../../Config/Auth';
+
+Amplify.configure(AmplifyConfig);
+
 export default class Dashboard extends Component {
-  state = {
-    isAdmin: false,
-    activeItem: 'home',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeItem: 'home',
+    };
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = this.state.isAdmin;
-    //     ? <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
-    //     : <SideBarTenant handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+    let display = this.props.isAdmin;
+    console.log('inside dashboard --> state --> ', this.state);
     return (
       <Container fluid>
         {display ? (
@@ -36,6 +44,15 @@ export default class Dashboard extends Component {
             activeItem={this.state.activeItem}
           />
         )}
+        <Link to="/">
+          <Menu.Item
+            onClick={() => {
+              Auth.signOut();
+            }}
+          >
+            Sign out
+          </Menu.Item>
+        </Link>
       </Container>
     );
   }
@@ -50,7 +67,7 @@ const SideBarAdmin = (props) => {
           <Menu pointing vertical stackable>
             {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
-            <Link to="/admin/properties">
+            <Link to="/properties">
               <Menu.Item
                 name="Properties"
                 active={props.activeItem === 'Properties'}
@@ -60,7 +77,7 @@ const SideBarAdmin = (props) => {
               </Menu.Item>
             </Link>
 
-            <Link to="/admin/workorders">
+            <Link to="/workorders">
               <Menu.Item
                 name="friends"
                 active={props.activeItem === 'Word Orders'}
@@ -70,7 +87,7 @@ const SideBarAdmin = (props) => {
               </Menu.Item>
             </Link>
 
-            <Link to="/admin/addtenant">
+            <Link to="/addtenant">
               <Menu.Item
                 name="friends"
                 active={props.activeItem === 'Add Tenant'}
@@ -80,7 +97,7 @@ const SideBarAdmin = (props) => {
               </Menu.Item>
             </Link>
 
-            <Link to="/admin/billing">
+            <Link to="/billing">
               <Menu.Item
                 name="friends"
                 active={props.activeItem === 'Billing'}
@@ -90,7 +107,7 @@ const SideBarAdmin = (props) => {
               </Menu.Item>
             </Link>
 
-            <Link to="/admin/settings">
+            <Link to="/settings">
               <Menu.Item
                 name="friends"
                 active={props.activeItem === 'Settings'}
@@ -103,11 +120,11 @@ const SideBarAdmin = (props) => {
         </Grid.Column>
         <Grid.Column>
           <Container fluid>
-            <Route path="/admin/properties" component={AdminProperties} />
-            <Route path="/admin/workorders" component={AdminWorkOrders} />
-            <Route path="/admin/addtenant" component={AdminAddTenant} />
-            <Route path="/admin/billing" component={AdminBilling} />
-            <Route path="/admin/settings" component={AdminSettings} />
+            <Route path="/properties" component={AdminProperties} />
+            <Route path="/workorders" component={AdminWorkOrders} />
+            <Route path="/addtenant" component={AdminAddTenant} />
+            <Route path="/billing" component={AdminBilling} />
+            <Route path="/settings" component={AdminSettings} />
           </Container>
         </Grid.Column>
       </Grid.Column>
@@ -124,45 +141,41 @@ const SideBarTenant = (props) => {
         <Menu vertical fluid style={{ backgroundColor: 'rgb(1,113,199)' }}>
           {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
-          <Link to="/tenant/dashboard">
+          <Link to="/dashboard">
             <Menu.Item
               name="Dashboard"
               active={props.activeItem === 'Dashboard'}
               onClick={props.handleItemClick}
-              style={{ color: 'whitesmoke' }}
             >
               Dashboard
             </Menu.Item>
           </Link>
 
-          <Link to="/tenant/payments">
+          <Link to="/payments">
             <Menu.Item
               name="Billing"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
-              style={{ color: 'whitesmoke' }}
             >
               Billing
             </Menu.Item>
           </Link>
 
-          <Link to="/tenant/workorders">
+          <Link to="/workorders">
             <Menu.Item
               name="WorkOrder"
               active={props.activeItem === 'WorkOrder'}
               onClick={props.handleItemClick}
-              style={{ color: 'whitesmoke' }}
             >
               Work Orders
             </Menu.Item>
           </Link>
 
-          <Link to="/tenant/settings">
+          <Link to="/settings">
             <Menu.Item
               name="Settings"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
-              style={{ color: 'whitesmoke' }}
             >
               Settings
             </Menu.Item>
@@ -171,10 +184,12 @@ const SideBarTenant = (props) => {
       </Grid.Column>
       <Grid.Column mobile={16} computer={12} tablet={12}>
         <Container>
-          <Route path="/tenant/dashboard" component={TenantDashboard} />
-          <Route path="/tenant/payments" component={TenantBilling} />
-          <Route path="/tenant/workorders" component={TenantWorkOrders} />
-          <Route path="/tenant/settings" component={TenantSettings} />
+          <Switch>
+            <Route path="/payments" component={TenantBilling} />
+            <Route path="/workorders" component={TenantWorkOrders} />
+            <Route path="/settings" component={TenantSettings} />
+            <Route component={TenantDashboard} />
+          </Switch>
         </Container>
       </Grid.Column>
     </Grid>
