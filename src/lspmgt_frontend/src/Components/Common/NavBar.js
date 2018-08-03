@@ -22,7 +22,7 @@ class NavBar extends Component {
           </Link>
 
           <Link to="/login">
-            <Menu.Item>Signin</Menu.Item>
+            <Menu.Item style={textStyles}>Signin</Menu.Item>
           </Link>
 
           <Link to="/">
@@ -53,3 +53,7 @@ export default withRouter(
     { signOUtUser }
   )(NavBar)
 );
+
+const textStyles = {
+  color: 'whitesmoke',
+};
