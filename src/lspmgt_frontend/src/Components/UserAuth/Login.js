@@ -41,7 +41,6 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(Amplify);
     this.handleSignin();
   };
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { LandingPage } from './Components';
 import { Container, Grid, Menu } from 'semantic-ui-react';
-import { Link, Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import {
   AdminProperties,
   AdminWorkOrders,
@@ -14,12 +13,8 @@ import {
   TenantSettings,
 } from './Components';
 
-import {connect} from 'react-redux';
-
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify, { Auth } from "aws-amplify";
 import AmplifyConfig from '../../Config/Auth';
-
-
 
 Amplify.configure(AmplifyConfig);
 
@@ -35,7 +30,6 @@ export default class Dashboard extends Component {
 
   render() {
     let display = this.props.isAdmin;
-    console.log('inside dashboard --> state --> ', this.state)
     return (
       <Container fluid>
         {display ? (
@@ -53,15 +47,12 @@ export default class Dashboard extends Component {
               }}
             >Sign out</Menu.Item>
           </Link>
-
-
       </Container>
     );
   }
 }
 
 const SideBarAdmin = (props) => {
-  console.log('loading props ---> ', props);
   return (
     <Grid container>
       <Grid.Column>

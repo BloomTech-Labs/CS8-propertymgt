@@ -15,23 +15,15 @@ class Home extends Component {
     state={
         allow: false
     }
+
     componentDidMount() {
         this.props.getUserStatus()
-        console.log('------------->>>> ', this.props.isAdmin)
         this.setState({
             allow: this.props.isAdmin
         })
     }
 
-
     render() {
-        console.log('show state --> ', this.state);
-        console.log('show props --> ', this.props);
-        // if (this.state.isLoggedIn) {
-        //     console.log('signing in and redirecting')
-        //     return <Redirect to='/dashboard'/>
-        //   }
-
         if (this.props.isAdmin) {
             return <Dashboard />
         }
@@ -45,11 +37,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('this is maptoprops --> ', state);
     return {
         getUser: state,
         isAdmin: state.isAdmin
-
     };
 };
 
