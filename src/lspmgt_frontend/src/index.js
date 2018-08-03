@@ -13,21 +13,19 @@ import { TenantDashboard, Home, Dashboard } from './Components/Common/Components
 import { createStore, applyMiddleware } from 'redux';
 
 import { Provider } from 'react-redux';
-import rootReducer from './Components/Redux/Reducers'
+import rootReducer from './Components/Redux/Reducers';
 import thunk from 'redux-thunk';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <BrowserRouter>
-  <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
-  <Provider store={store}>
-    <App/>
-
-  </Provider>
-  </StripeProvider>
-      </BrowserRouter>
-  ,
+    <StripeProvider apiKey="pk_test_zouhM74e22FwAz2fdQpwdqfu">
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </StripeProvider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 registerServiceWorker();

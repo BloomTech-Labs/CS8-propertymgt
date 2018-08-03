@@ -4,7 +4,6 @@ const dd = require('../Config/AwsConfig');
 // const dbModel = require('../Config/DbModel');
 // const { Admin } = require('../Config/DynamoDbTables');
 const hashingId = require('../Common/HashingId');
-const hashingId2 = require('../Common/HashingId2');
 
 // TODO: Do not push stripe key to github
 const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
@@ -30,17 +29,17 @@ const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 // };
 
 // // Returns items in table with specified filter
-// const scanF = (myTableName, myAdminId, p) => {
-//   const params = {
-//     TableName: myTableName,
-//     FilterExpression: 'Admin = :this_admin',
-//     ExpressionAttributeValues: { ':this_admin': myAdminId },
-//   };
-//   dd.scan(params, (err, data) => {
-//     if (err) console.log(err);
-//     else console.log(data);
-//   });
-// };
+const scanF = (myTableName, myAdminId, p) => {
+  const params = {
+    TableName: myTableName,
+    FilterExpression: 'Admin = :this_admin',
+    ExpressionAttributeValues: { ':this_admin': myAdminId },
+  };
+  dd.scan(params, (err, data) => {
+    if (err) console.log(err);
+    else console.log(data);
+  });
+};
 
 // // Get list of tenants with specified admin Id to filter with
 // const scanForTenants = (req, res) => {
@@ -90,7 +89,6 @@ const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 //   });
 // };
 
-// TODO: BROKEN UNTIL addTenant and addProperty are fully featured
 // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {
 const properties = (req, res) => {
@@ -128,13 +126,13 @@ const addProperty = (req, res) => {
   //   Contract,
   // };
 
-  console.log('this is hashingId -->', hashingId);
-  console.log('this is hashingId2 -->', hashingId2);
+  console.log('this is hashingId() -->', hashingId());
+  console.log('this is hashingId() -->', hashingId());
 
   const params = {
     TableName: 'Properties',
     Item: {
-      propertyId: hashingId,
+      propertyId: hashingId(),
       NameOwner,
       EmailOwner,
       MobileOwner,
@@ -272,6 +270,7 @@ const updateProperty = (req, res) => {
 module.exports = {
   // lsdb,
   // propertieslsdb,
+  scanF,
   properties,
   addProperty,
   deleteProperty,

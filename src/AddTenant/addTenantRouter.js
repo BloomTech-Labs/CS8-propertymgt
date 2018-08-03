@@ -37,23 +37,7 @@ const addTenant = (req, res) => {
     WOrder: [],
   };
 
-  // const params = {
-  //   TableName: 'Tenants',
-  //   Item: {
-  //     tenantId: hashingId,
-  //     propertyId,
-  //     NameT: T1Name,
-  //     MobileT: T1Phone,
-  //     EmailT: T1Email,
-  //     GetTextsT: T1NotiP,
-  //     GetEmailT: T1NotiE,
-  //     StartD,
-  //     EndD,
-  //     WOrder: [],
-  //     T2,
-  //     Admin: '123',
-  //   },
-  // };
+  // Create the cc information here
 
   // STRIPE FIRST METHOD
   stripe.customers.create(
@@ -94,7 +78,7 @@ const addTenant = (req, res) => {
               customer: customer.id,
               items: [
                 {
-                  plan: '123 fake st',
+                  plan: params.Item.propertyId,
                 },
               ],
             });

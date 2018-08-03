@@ -13,7 +13,7 @@ const signup = (req, res) => {
       AdminName,
       AdminEmail,
       AdminPW,
-      adminId: hashingId,
+      adminId: hashingId(),
     },
   };
 
@@ -84,35 +84,35 @@ const listTenants = (req, res) => {
   });
 };
 
-const tenantSignup = (req, res) => {
-  console.log(req.body);
-  const { Name, Email, Phone, Password } = req.body;
-  const params = {
-    TableName: 'Tenants',
-    Item: {
-      Name,
-      Email,
-      Phone,
-      Password,
-      tenantId: hashingId,
-    },
-  };
+// const tenantSignup = (req, res) => {
+//   console.log(req.body);
+//   const { Name, Email, Phone, Password } = req.body;
+//   const params = {
+//     TableName: 'Tenants',
+//     Item: {
+//       Name,
+//       Email,
+//       Phone,
+//       Password,
+//       tenantId: hashingId(),
+//     },
+//   };
 
-  dd.put(params, (err, d) => {
-    if (err) {
-      console.log(err);
-      res.status(200).json({ status: 'error', error: err });
-    } else {
-      console.log(d);
-      res.status(200).json({ status: 'success', data: d });
-    }
-  });
-};
+//   dd.put(params, (err, d) => {
+//     if (err) {
+//       console.log(err);
+//       res.status(200).json({ status: 'error', error: err });
+//     } else {
+//       console.log(d);
+//       res.status(200).json({ status: 'success', data: d });
+//     }
+//   });
+// };
 
 module.exports = {
   signup,
   signin,
   list,
   listTenants,
-  tenantSignup,
+  // tenantSignup,
 };
