@@ -116,17 +116,16 @@ const SideBarAdmin = (props) => {
 
 const SideBarTenant = (props) => {
   return (
-    <Container>
-      <Grid columns={2} relaxed style={{ maxWidth: '100%' }}>
+    // <Container fluid>
+      <Grid columns={2} relaxed>
         {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
         <Grid.Column
           mobile={16}
           computer={4}
           tablet={4}
-          centered
-          style={{ backgroundColor: 'blue' }}
+        
         >
-          <Menu pointing vertical inverted fluid centered>
+          <Menu pointing vertical inverted fluid>
             {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
             <Link to="/tenant/dashboard">
@@ -170,7 +169,7 @@ const SideBarTenant = (props) => {
             </Link>
           </Menu>
         </Grid.Column>
-        <Grid.Column mobile={16} computer={12} tablet={12} style={{ backgroundColor: 'red' }}>
+        <Grid.Column mobile={16} computer={12} tablet={12}>
           <Container>
             <Route path="/tenant/dashboard" component={TenantDashboard} />
             <Route path="/tenant/payments" component={TenantBilling} />
@@ -179,7 +178,7 @@ const SideBarTenant = (props) => {
           </Container>
         </Grid.Column>
       </Grid>
-    </Container>
+    // </Container>
   );
 };
 

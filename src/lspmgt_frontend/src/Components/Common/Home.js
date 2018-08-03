@@ -31,7 +31,7 @@ class Home extends Component {
     render() {
 
         return (
-            <Container>
+            <Container fluid>
                 {this.state.isLoggedIn ? (<Dashboard />
                 ) : (<LandingPage />
                 ) }

@@ -5,6 +5,7 @@
 .officeNumber {
   display: flex;
   align-items: center;
+  justify-content: space-between
 }
 .email {
   display: flex;
