@@ -1,20 +1,26 @@
 /*eslint-disable import/first*/
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
-import { Link, Redirect } from 'react-router-dom';
+import { Button, Form, Grid, Header, Message, Segment, Container } from 'semantic-ui-react';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 
+import { connect } from 'react-redux';
+import { signInUser } from '../Redux/Actions';
+
 Amplify.configure(AmplifyConfig);
+
 
 import TenantLogin from './TenantLogin';
 import AdminLogin from './AdminLogin';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     username: '',
     password: '',
+    // isLoggedIn: false,
+    // isAdmin: false
   };
 
   // componentDidMount() {
@@ -31,9 +37,11 @@ export default class Login extends Component {
   handleSignin = () => {
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
-        data.signInUserSession.idToken.payload['custom:access_level'] == 'admin'
-          ? this.props.history.push('/admin/dashboard')
-          : this.props.history.push('/tenant/dashboard');
+
+        // let isAdmin = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
+        this.props.signInUser(true)
+        this.props.history.push('/dashboard')
+
       })
       .catch((err) => {
         console.log('THERE WAS AN ERROR -> ', err);
@@ -51,24 +59,21 @@ export default class Login extends Component {
   };
 
   render() {
+
+    // if (this.state.isAdmin) {
+    //   console.log('signing in and redirecting')
+    //   return <Redirect to='/dashboard' path='/dashboard' />
+    // }
+
     return (
-      <div className="login-form">
-        <style>
-          {`
-            body > div,
-            body > div > div,
-            body > div > div > div.login-form {
-              height: 100%;
-            }
-          `}
-        </style>
-        <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
+      <Container>
+        <Grid inverted textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h1" color="blue" textAlign="center">
               PropertyMaxx
             </Header>
-            <Form size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
-              <Segment raised style={{ maxWidth: '100%' }}>
+            <Form inverted size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
+              <Segment inverted raised style={{ maxWidth: '100%' }}>
                 <Form.Input
                   fluid
                   icon="user"
@@ -87,20 +92,29 @@ export default class Login extends Component {
                   name="password"
                   onChange={this.handleInput}
                 />
-                <Button color="blue" fluid size="large">
-                  Login
+                <Segment >
+                  <Button fluid size="large">
+                    Login
                 </Button>
+                  {/* <Link to="/">
+                  <Button size='large'>Back</Button>
+                </Link> */}
+                </Segment>
               </Segment>
             </Form>
-            <Segment>
-              <AdminLogin /> <TenantLogin />
-            </Segment>
-            <Link to="/">
-              <Button secondary>Back</Button>
-            </Link>
+
           </Grid.Column>
         </Grid>
-      </div>
+      </Container>
     );
   }
 }
+
+const mapStateToProps = state => {
+  console.log('this is maptoprops --> ', state);
+  return {
+    isAdmin: state
+  };
+};
+
+export default withRouter(connect(mapStateToProps, { signInUser })(Login));

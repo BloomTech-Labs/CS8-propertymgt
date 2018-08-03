@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'semantic-ui-react';
+import { Form, Input, Button, FormGroup } from 'semantic-ui-react';
 import axios from 'axios';
 import './SettingsA.css';
 
@@ -44,19 +44,27 @@ class SettingsA extends Component {
       <Form className="form">
         <Form.Group className="settings">
           <Form.Input label="Email: " name="Email" value={Email} onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group className="settings">
           <Form.Input label="Phone: " name="Phone" value={Phone} onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group className="settings">
           <Form.Input
             label="DisplayName: "
             name="DisplayName"
             value={DisplayName}
             onChange={this.handleChange}
           />
+        </Form.Group>
+        <Form.Group className="settings">
           <Form.Input
             label="OldPassword: "
             name="OldPassword"
             value={OldPassword}
             onChange={this.handleChange}
           />
+        </Form.Group>
+        <Form.Group className="settings">
           <Form.Input
             label="NewPassword: "
             name="NewPassword"
