@@ -1,42 +1,66 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Container } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
-
+import { Loader } from '../Common/Components';
 import { connect } from 'react-redux';
 import { signOUtUser } from '../Redux/Actions';
 
 Amplify.configure(AmplifyConfig);
 
 class NavBar extends Component {
+  state = {
+    loader: false,
+  };
+
+  handleSignout = () => {
+    this.setState({ loader: !this.state.loader });
+  };
+
   render() {
+    let notLogged = (
+      <Menu.Menu position="right">
+        <Link to="/signup">
+          <Menu.Item>Signup</Menu.Item>
+        </Link>
+
+        <Link to="/login">
+          <Menu.Item style={textStyles}>Signin</Menu.Item>
+        </Link>
+      </Menu.Menu>
+    );
+
+    let logged = (
+      <Menu.Menu position="right">
+        <Link to="/">
+          <Menu.Item
+            onClick={() => {
+              this.handleSignout();
+              Auth.signOut().then(() => {
+                setTimeout(() => {
+                  this.handleSignout();
+                  this.props.signOUtUser();
+                }, 2000);
+              });
+            }}
+          >
+            Sign out
+          </Menu.Item>
+        </Link>
+      </Menu.Menu>
+    );
+    console.log('state of the props isadmin -> ', this.props.isAdmin);
     return (
-      <Menu stackable fluid inverted>
-        <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
+      <Container>
+        <Loader stat={this.state.loader} />
+        <Menu stackable fluid inverted>
+          <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
 
-        <Menu.Menu position="right">
-          <Link to="/signup">
-            <Menu.Item>Signup</Menu.Item>
-          </Link>
-
-          <Link to="/login">
-            <Menu.Item style={textStyles}>Signin</Menu.Item>
-          </Link>
-
-          <Link to="/">
-            <Menu.Item
-              onClick={() => {
-                Auth.signOut();
-                this.props.signOUtUser();
-              }}
-            >
-              Sign out
-            </Menu.Item>
-          </Link>
-        </Menu.Menu>
-      </Menu>
+          <Menu.Menu position="right">{this.props.isAdmin ? logged : notLogged}</Menu.Menu>
+        </Menu>
+      </Container>
     );
   }
 }

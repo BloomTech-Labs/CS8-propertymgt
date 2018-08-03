@@ -39,7 +39,6 @@ class Home extends Component {
         <LandingPage />
         <Route path="/signup" component={AdminCheckout} />
         <Route path="/login" component={LoginForm} />
-        {/* </Loader> */}
       </Container>
     );
   }

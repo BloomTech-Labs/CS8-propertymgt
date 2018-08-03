@@ -29,7 +29,7 @@ export default class Dashboard extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = !this.props.isAdmin;
+    let display = this.props.isAdmin;
     return (
       <Container fluid>
         {display ? (
@@ -40,15 +40,6 @@ export default class Dashboard extends Component {
             activeItem={this.state.activeItem}
           />
         )}
-        <Link to="/">
-          <Menu.Item
-            onClick={() => {
-              Auth.signOut();
-            }}
-          >
-            Sign out
-          </Menu.Item>
-        </Link>
       </Container>
     );
   }
@@ -133,7 +124,7 @@ const SideBarTenant = (props) => {
     <Grid columns={2} relaxed>
       {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
       <Grid.Column mobile={16} computer={4} tablet={4}>
-        <Menu vertical fluid style={{ backgroundColor: 'rgb(0, 94, 155)' }}>
+        <Menu vertical fluid inverted>
           {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
           <Link to="/dashboard">
@@ -141,7 +132,7 @@ const SideBarTenant = (props) => {
               name="Dashboard"
               active={props.activeItem === 'Dashboard'}
               onClick={props.handleItemClick}
-              style={textStyles}
+              // style={textStyles}
             >
               Dashboard
             </Menu.Item>
@@ -152,7 +143,7 @@ const SideBarTenant = (props) => {
               name="Billing"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
-              style={textStyles}
+              // style={textStyles}
             >
               Billing
             </Menu.Item>
@@ -163,7 +154,7 @@ const SideBarTenant = (props) => {
               name="WorkOrder"
               active={props.activeItem === 'WorkOrder'}
               onClick={props.handleItemClick}
-              style={textStyles}
+              // style={textStyles}
             >
               Work Orders
             </Menu.Item>
@@ -174,7 +165,7 @@ const SideBarTenant = (props) => {
               name="Settings"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
-              style={textStyles}
+              // style={textStyles}
             >
               Settings
             </Menu.Item>
