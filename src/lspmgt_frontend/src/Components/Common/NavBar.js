@@ -23,11 +23,11 @@ class NavBar extends Component {
     let notLogged = (
       <Menu.Menu position="right">
         <Link to="/signup">
-          <Menu.Item>Signup</Menu.Item>
+          <Menu.Item>Sign Up</Menu.Item>
         </Link>
 
         <Link to="/login">
-          <Menu.Item style={textStyles}>Signin</Menu.Item>
+          <Menu.Item style={textStyles}>Sign In</Menu.Item>
         </Link>
       </Menu.Menu>
     );
@@ -46,7 +46,7 @@ class NavBar extends Component {
               });
             }}
           >
-            Sign out
+            Sign Out
           </Menu.Item>
         </Link>
       </Menu.Menu>

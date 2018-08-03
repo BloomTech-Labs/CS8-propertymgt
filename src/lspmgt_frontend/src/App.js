@@ -9,6 +9,7 @@ class App extends Component {
     return (
       <Container>
         <NavBar />
+        <br />
         <Home />
         <Route exact path="/" />
       </Container>
