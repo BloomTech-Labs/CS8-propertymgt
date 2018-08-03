@@ -19,20 +19,7 @@ class Login extends Component {
   state = {
     username: '',
     password: '',
-    // isLoggedIn: false,
-    // isAdmin: false
   };
-
-  // componentDidMount() {
-
-  //   Auth.currentSession()
-  //   .then(data => {
-  //     data.idToken.payload['custom:access_level'] == 'admin' ?
-  //     this.props.history.push('/admin/dashboard') :
-  //     this.props.history.push('/tenant/dashboard');
-  //   })
-  //   .catch(err => console.log(err))
-  // }
 
   handleSignin = () => {
     Auth.signIn(this.state.username, this.state.password)
@@ -59,11 +46,6 @@ class Login extends Component {
   };
 
   render() {
-
-    // if (this.state.isAdmin) {
-    //   console.log('signing in and redirecting')
-    //   return <Redirect to='/dashboard' path='/dashboard' />
-    // }
 
     return (
       <Container>
