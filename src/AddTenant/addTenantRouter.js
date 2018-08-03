@@ -2,7 +2,7 @@ const dd = require('../Config/AwsConfig');
 const hashingId = require('../Common/HashingId');
 const hashingId2 = require('../Common/HashingId2');
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 
 // Add a new tenant and creates a LS_DB item with property, contract, and tenant info
 const addTenant = (req, res) => {
@@ -54,7 +54,7 @@ const addTenant = (req, res) => {
   // };
 
   // STRIPE FIRST METHOD
-  stripe.customer.create(
+  stripe.customers.create(
     {
       // Add Tenant Route, Stripe First so we can give stripeID to new Tenant
       description: hashingId,
@@ -101,43 +101,43 @@ const addTenant = (req, res) => {
 
   // DB FIRST METHOD
 
-  dd.put(params, (error) => {
-    if (error) res.status(400).json({ error });
-    // else res.status(200).json({ status: 'Success..' });
-    // ************************************************
-    // STRIPE INTEGRATION
-    // ************************************************
-    else {
-      stripe.customer.create(
-        {
-          description: params.Item.tenantId,
-          email: params.Item.EmailT,
-        },
-        (stripeCustErr, customer) => {
-          if (stripeCustErr) {
-            res.status(500).json({ status: 'stripe customer error', stripeCustErr });
-          } else {
-            stripe.subscriptions.create(
-              {
-                customer: customer.id,
-                items: [
-                  {
-                    plan: '123 fake st', // Add Property Address as plan ID
-                  },
-                ],
-              },
-              (subErr, subscription) => {
-                if (subErr) res.status(500).json({ status: 'subscription error', subErr });
-                else {
-                  res.status(200).json({ status: 'new tenant added successfully', subscription });
-                }
-              }
-            );
-          }
-        }
-      );
-    }
-  });
+  // dd.put(params, (error) => {
+  //   if (error) res.status(400).json({ error });
+  //   // else res.status(200).json({ status: 'Success..' });
+  //   // ************************************************
+  //   // STRIPE INTEGRATION
+  //   // ************************************************
+  //   else {
+  //     stripe.customer.create(
+  //       {
+  //         description: params.Item.tenantId,
+  //         email: params.Item.EmailT,
+  //       },
+  //       (stripeCustErr, customer) => {
+  //         if (stripeCustErr) {
+  //           res.status(500).json({ status: 'stripe customer error', stripeCustErr });
+  //         } else {
+  //           stripe.subscriptions.create(
+  //             {
+  //               customer: customer.id,
+  //               items: [
+  //                 {
+  //                   plan: '123 fake st', // Add Property Address as plan ID
+  //                 },
+  //               ],
+  //             },
+  //             (subErr, subscription) => {
+  //               if (subErr) res.status(500).json({ status: 'subscription error', subErr });
+  //               else {
+  //                 res.status(200).json({ status: 'new tenant added successfully', subscription });
+  //               }
+  //             }
+  //           );
+  //         }
+  //       }
+  //     );
+  //   }
+  // });
 };
 
 const lsdb = (req, res) => {

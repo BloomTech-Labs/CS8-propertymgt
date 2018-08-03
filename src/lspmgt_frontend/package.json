@@ -12,9 +12,12 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-pdf": "^3.0.5",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-stripe-elements": "^2.0.1",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.82.0"
   },
   "scripts": {

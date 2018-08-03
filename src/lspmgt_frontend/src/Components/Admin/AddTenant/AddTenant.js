@@ -114,6 +114,13 @@ class AddTenant extends Component {
     console.log('Hi..', LoP);
     console.log('Hello..', SelectedProperty);
 
+    for (let i = 0; i < LoP.length; i++) {
+      if (LoP[i].PropertyAddr === SelectedProperty) {
+        LoP[i].propertyId = propertyId;
+        console.log('list of property id -->', LoP[i].propertyId, 'propertyId -->', propertyId);
+      }
+    }
+
     const toTenants = {
       T1Name,
       T1Phone,
@@ -142,21 +149,12 @@ class AddTenant extends Component {
         console.log('Error in AddTenant POST..', error);
       });
 
-    // const T = [];
-    // T.push('testTId');
-    // T.push('testTId');
-
-    // const toLSDB = {
-    //   propertyId: 'testId',
-    //   tenants: T,
-    // };
-
-    // axios
-    //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
-    //   .then()
-    //   .catch((error) => {
-    //     console.log('Error in AddTenant POST for LSDB..', error);
-    //   });
+    axios
+      .post('http://localhost:5000/api/property/lsdb', toLSDB)
+      .then()
+      .catch((error) => {
+        console.log('Error in AddTenant POST for LSDB..', error);
+      });
 
     this.setState({
       T1Name: '',
