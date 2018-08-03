@@ -113,40 +113,40 @@ const workorder = (req, res) => {
 };
 
 // Add a new tenant to the system
-const addTenant = (req, res) => {
-  console.log('addtenant POST method in admin triggered.. ');
-  const { Name, Phone, Email, PropAddress, T2Name, T2Phone, T2Email } = req.body;
-  const params = {
-    TableName: 'Tenants',
-    Item: {
-      tenantId: hashingId,
-      NameT: Name,
-      MobileT: Phone,
-      EmailT: Email,
-      WOrder: [],
-      PropAddress,
-      // T2Name,
-      // T2Phone,
-      // T2Email
-    },
-  };
+// const addTenant = (req, res) => {
+//   console.log('addtenant POST method in admin triggered.. ');
+//   const { Name, Phone, Email, PropAddress, T2Name, T2Phone, T2Email } = req.body;
+//   const params = {
+//     TableName: 'Tenants',
+//     Item: {
+//       tenantId: hashingId,
+//       NameT: Name,
+//       MobileT: Phone,
+//       EmailT: Email,
+//       WOrder: [],
+//       PropAddress,
+//       // T2Name,
+//       // T2Phone,
+//       // T2Email
+//     },
+//   };
 
-  dd.put(params, (error, data) => {
-    if (error) res.status(400).json({ error });
-    else {
-      stripe.customers.create(
-        {
-          description: params.Item.tenantId,
-          email: params.Item.EmailT,
-        },
-        (stripeErr, customer) => {
-          if (stripeErr) res.status(500).json({ status: 'stripe Error', stripeErr });
-          else res.status(200).json({ status: 'Tenant Creation success', customer });
-        }
-      );
-    }
-  });
-};
+//   dd.put(params, (error, data) => {
+//     if (error) res.status(400).json({ error });
+//     else {
+//       stripe.customers.create(
+//         {
+//           description: params.Item.tenantId,
+//           email: params.Item.EmailT,
+//         },
+//         (stripeErr, customer) => {
+//           if (stripeErr) res.status(500).json({ status: 'stripe Error', stripeErr });
+//           else res.status(200).json({ status: 'Tenant Creation success', customer });
+//         }
+//       );
+//     }
+//   });
+// };
 
 // display the billing information
 // router.get('/billing', (req, res) => {
@@ -207,5 +207,5 @@ const addTenant = (req, res) => {
 module.exports = {
   propertyId,
   workorder,
-  addTenant,
+  // addTenant,
 };
