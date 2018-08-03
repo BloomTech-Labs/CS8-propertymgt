@@ -66,6 +66,8 @@ class Billing extends React.Component {
     });
     // this.getPropertyId();
     console.log(this.getPropertyId());
+
+    axios.get(`http://localhost:5000/api/`);
   };
 
   render() {

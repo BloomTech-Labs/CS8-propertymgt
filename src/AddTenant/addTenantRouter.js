@@ -53,15 +53,12 @@ const addTenant = (req, res) => {
   //   },
   // };
 
-  console.log('Hiyoo', params);
-
   // STRIPE FIRST METHOD
-
   stripe.customer.create(
     {
       // Add Tenant Route, Stripe First so we can give stripeID to new Tenant
-      description: params.Item.tenantId,
-      email: params.Item.EmailT,
+      description: hashingId,
+      email: T1Email,
     },
     (customerErr, customer) => {
       const params = {

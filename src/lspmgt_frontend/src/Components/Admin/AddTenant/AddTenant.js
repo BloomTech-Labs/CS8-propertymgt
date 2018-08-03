@@ -31,6 +31,7 @@ class AddTenant extends Component {
       StartD: '',
       EndD: '',
       SelectedProperty: '', // selected property from dropdown menu **using to get admin and selected property id's
+      propertyId: '',
       LoP: [], // list of properties
     };
     this.handleInput = this.handleInput.bind(this);
@@ -86,7 +87,6 @@ class AddTenant extends Component {
     });
   };
 
-  // TODO: BROKEN
   // Sends data to server
   handleSubmit = (e) => {
     e.preventDefault();
@@ -106,6 +106,7 @@ class AddTenant extends Component {
       StartD,
       EndD,
       SelectedProperty,
+      propertyId,
       LoP,
     } = this.state;
 
@@ -126,7 +127,7 @@ class AddTenant extends Component {
       T2NotiE,
       StartD,
       EndD,
-      // propertyId,
+      propertyId,
     };
 
     axios
