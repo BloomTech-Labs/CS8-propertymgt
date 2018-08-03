@@ -4,6 +4,7 @@ import { Container, Grid, Menu } from 'semantic-ui-react';
 import { Link, Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
+  AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,
@@ -121,6 +122,7 @@ const SideBarAdmin = (props) => {
         <Grid.Column>
           <Container fluid>
             <Route path="/properties" component={AdminProperties} />
+            <Route path="/addproperty" component={AdminAddProperty} />
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />

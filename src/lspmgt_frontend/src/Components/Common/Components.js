@@ -4,6 +4,7 @@ import LandingPage from '../LandingPage/LandingPrototype';
 import BuyNow from '../UserAuth/Payment/BuyNowModal';
 import Dashboard from './Dashboard';
 import AdminProperties from '../Admin/Properties/Properties';
+import AdminAddProperty from '../Admin/Properties/AddProperty';
 import AdminWorkOrders from '../Admin/WorkOrder/WorkOrderA';
 import AdminAddTenant from '../Admin/AddTenant/AddTenant';
 import AdminBilling from '../Admin/Billing/Billing';
@@ -23,6 +24,7 @@ export {
   BuyNow,
   Dashboard,
   AdminProperties,
+  AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,

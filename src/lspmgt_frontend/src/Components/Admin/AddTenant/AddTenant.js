@@ -41,7 +41,7 @@ class AddTenant extends Component {
     this.setProperty = this.setProperty.bind(this);
   }
 
-  // Gets available properties without a contract
+  // Populates LoP
   componentDidMount() {
     axios
       .get('http://localhost:5000/api/property/all')
@@ -49,7 +49,6 @@ class AddTenant extends Component {
         this.setState({
           LoP: res.data.data.Items,
         });
-        console.log(this.state.LoP);
       })
       .catch((error) => {
         console.log('Error in AddTenant GET..', error);
@@ -79,7 +78,7 @@ class AddTenant extends Component {
     console.log('sendContract triggered..');
   };
 
-  // Sets input from form to state
+  // Handles input
   handleInput = (e) => {
     const { name, value } = e.target;
     this.setState({
@@ -87,7 +86,7 @@ class AddTenant extends Component {
     });
   };
 
-  // Sends data to server
+  // Handle final submit
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -110,10 +109,7 @@ class AddTenant extends Component {
       LoP,
     } = this.state;
 
-    // const { propertyId } = SelectedProperty; // SelectedProperty only has an address in "value"
-    console.log('Hi..', LoP);
-    console.log('Hello..', SelectedProperty);
-
+    // Gets property id from property address or selectedproperty
     for (let i = 0; i < LoP.length; i++) {
       if (LoP[i].PropertyAddr === SelectedProperty) {
         LoP[i].propertyId = propertyId;
@@ -174,6 +170,7 @@ class AddTenant extends Component {
     });
   };
 
+  // Handles checkboxes
   handleCheck = (e) => {
     const { target } = e;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -181,12 +178,12 @@ class AddTenant extends Component {
     this.setState({
       [name]: value,
     });
-    // console.log('after handleClick..', name, value);
+    console.log('after handleClick..', name, value);
   };
 
   setProperty = (e, { name, value }) => {
-    // console.log('setProperty triggered..');
-    // console.log('name', name, 'value', value);
+    console.log('setProperty triggered..');
+    console.log('name', name, 'value', value);
     this.setState({
       [name]: value,
     });
@@ -207,6 +204,8 @@ class AddTenant extends Component {
       StartD,
       EndD,
     } = this.state;
+
+    const theLoP = this.getLoP;
 
     return (
       <Grid>
@@ -322,7 +321,7 @@ class AddTenant extends Component {
               placeholder="Select a property"
               selection
               name="SelectedProperty"
-              options={this.getLoP}
+              options={theLoP}
               onChange={this.setProperty}
             />
             <Button type="submit" onClick={this.sendContract} primary>

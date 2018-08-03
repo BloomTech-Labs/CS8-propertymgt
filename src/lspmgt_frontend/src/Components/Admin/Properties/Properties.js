@@ -36,8 +36,8 @@ class Properties extends Component {
     return (
       <div>
         <h4> Add a new Property </h4>
-        <Link to="/admin/addproperty">
-          <Icon name="plus circle" size="massive" link />{' '}
+        <Link to="/addproperty">
+          <Icon name="plus circle" size="massive" link />
         </Link>
       </div>
     );
