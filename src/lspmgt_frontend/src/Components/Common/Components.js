@@ -14,8 +14,9 @@ import TenantWorkOrders from '../Tenant/WorkOrders/WorkOrders';
 import TenantSettings from '../Tenant/Settings/Settings';
 import LoginForm from '../UserAuth/Login';
 import AdminSignup from '../UserAuth/SignUp/AdminSignUp';
-// import AdminCheckout from '../UserAuth/SignUp/Checkout';
-// import AdminSignupForm from '../UserAuth/SignUp/AdminSignUpForm';
+import AdminCheckout from '../UserAuth/SignUp/Checkout';
+import AdminSignupForm from '../UserAuth/SignUp/AdminSignUpForm';
+import Loader from './Loader';
 
 export {
   Home,
@@ -34,6 +35,7 @@ export {
   TenantSettings,
   LoginForm,
   AdminSignup,
-  // AdminCheckout,
-  // AdminSignUpForm,
+  AdminCheckout,
+  AdminSignupForm,
+  Loader,
 };

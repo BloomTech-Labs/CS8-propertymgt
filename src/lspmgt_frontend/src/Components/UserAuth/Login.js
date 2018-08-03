@@ -5,6 +5,7 @@ import { Link, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
+import { Loader } from '../Common/Components';
 
 import { connect } from 'react-redux';
 import { signInUser } from '../Redux/Actions';
@@ -15,16 +16,21 @@ class Login extends Component {
   state = {
     username: '',
     password: '',
+    loader: false,
   };
 
   handleSignin = () => {
+    this.setState({ loader: true });
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
         // let isAdmin = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
+
+        this.setState({ loader: false });
         this.props.signInUser(true);
         this.props.history.push('/dashboard');
       })
       .catch((err) => {
+        this.setState({ loader: false });
         console.log('THERE WAS AN ERROR -> ', err);
       });
   };
@@ -41,6 +47,7 @@ class Login extends Component {
   render() {
     return (
       <Container>
+        <Loader stat={this.state.loader} />
         <Grid inverted textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h1" color="blue" textAlign="center">

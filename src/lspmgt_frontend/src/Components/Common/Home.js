@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { LandingPage, Dashboard, LoginForm, AdminSignup } from './Components';
 import { Container, Grid, GridColumn, Gr } from 'semantic-ui-react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 import { connect } from 'react-redux';
 import { getUserStatus } from '../Redux/Actions';
+import {
+  LandingPage,
+  Dashboard,
+  LoginForm,
+  AdminSignup,
+  AdminSignupForm,
+  AdminCheckout,
+  Loader,
+} from './Components';
 
 Amplify.configure(AmplifyConfig);
 
@@ -27,9 +35,11 @@ class Home extends Component {
     }
     return (
       <Container fluid>
+        <Loader stat={false} />
         <LandingPage />
-        <Route path="/signup" component={AdminSignup} />
+        <Route path="/signup" component={AdminCheckout} />
         <Route path="/login" component={LoginForm} />
+        {/* </Loader> */}
       </Container>
     );
   }

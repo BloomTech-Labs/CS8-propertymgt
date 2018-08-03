@@ -118,4 +118,4 @@ class AdminSignUp extends Component {
   }
 }
 
-export default withRouter(connect()(injectStripe(AdminSignUp)));
+export default injectStripe(AdminSignUp);
