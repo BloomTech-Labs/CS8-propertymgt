@@ -118,68 +118,66 @@ const SideBarAdmin = (props) => {
 const SideBarTenant = (props) => {
   return (
     // <Container fluid>
-      <Grid columns={2} relaxed>
-        {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
-        <Grid.Column
-          mobile={16}
-          computer={4}
-          tablet={4}
-        
-        >
-          <Menu pointing vertical inverted fluid>
-            {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
+    <Grid columns={2} relaxed>
+      {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
+      <Grid.Column mobile={16} computer={4} tablet={4}>
+        <Menu vertical fluid style={{ backgroundColor: 'rgb(1,113,199)' }}>
+          {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
-            <Link to="/tenant/dashboard">
-              <Menu.Item
-                name="Dashboard"
-                active={props.activeItem === 'Dashboard'}
-                onClick={props.handleItemClick}
-              >
-                Dashboard
-              </Menu.Item>
-            </Link>
+          <Link to="/tenant/dashboard">
+            <Menu.Item
+              name="Dashboard"
+              active={props.activeItem === 'Dashboard'}
+              onClick={props.handleItemClick}
+              style={{ color: 'whitesmoke' }}
+            >
+              Dashboard
+            </Menu.Item>
+          </Link>
 
-            <Link to="/tenant/payments">
-              <Menu.Item
-                name="Billing"
-                active={props.activeItem === 'Billing'}
-                onClick={props.handleItemClick}
-              >
-                Billing
-              </Menu.Item>
-            </Link>
+          <Link to="/tenant/payments">
+            <Menu.Item
+              name="Billing"
+              active={props.activeItem === 'Billing'}
+              onClick={props.handleItemClick}
+              style={{ color: 'whitesmoke' }}
+            >
+              Billing
+            </Menu.Item>
+          </Link>
 
-            <Link to="/tenant/workorders">
-              <Menu.Item
-                name="WorkOrder"
-                active={props.activeItem === 'WorkOrder'}
-                onClick={props.handleItemClick}
-              >
-                Work Orders
-              </Menu.Item>
-            </Link>
+          <Link to="/tenant/workorders">
+            <Menu.Item
+              name="WorkOrder"
+              active={props.activeItem === 'WorkOrder'}
+              onClick={props.handleItemClick}
+              style={{ color: 'whitesmoke' }}
+            >
+              Work Orders
+            </Menu.Item>
+          </Link>
 
-            <Link to="/tenant/settings">
-              <Menu.Item
-                name="Settings"
-                active={props.activeItem === 'Settings'}
-                onClick={props.handleItemClick}
-              >
-                Settings
-              </Menu.Item>
-            </Link>
-          </Menu>
-        </Grid.Column>
-        <Grid.Column mobile={16} computer={12} tablet={12}>
-          <Container>
-            <Route path="/tenant/dashboard" component={TenantDashboard} />
-            <Route path="/tenant/payments" component={TenantBilling} />
-            <Route path="/tenant/workorders" component={TenantWorkOrders} />
-            <Route path="/tenant/settings" component={TenantSettings} />
-          </Container>
-        </Grid.Column>
-      </Grid>
+          <Link to="/tenant/settings">
+            <Menu.Item
+              name="Settings"
+              active={props.activeItem === 'Settings'}
+              onClick={props.handleItemClick}
+              style={{ color: 'whitesmoke' }}
+            >
+              Settings
+            </Menu.Item>
+          </Link>
+        </Menu>
+      </Grid.Column>
+      <Grid.Column mobile={16} computer={12} tablet={12}>
+        <Container>
+          <Route path="/tenant/dashboard" component={TenantDashboard} />
+          <Route path="/tenant/payments" component={TenantBilling} />
+          <Route path="/tenant/workorders" component={TenantWorkOrders} />
+          <Route path="/tenant/settings" component={TenantSettings} />
+        </Container>
+      </Grid.Column>
+    </Grid>
     // </Container>
   );
 };
-

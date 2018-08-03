@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 export default class NavBar extends Component {
   render() {
     return (
-      <Menu stackable fluid inverted>
-        <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
+      <Menu stackable fluid style={{ backgroundColor: 'rgb(0, 94, 155)' }}>
+        <Menu.Item style={{ color: 'whitesmoke' }}>LS PROPERTY MANAGEMENT</Menu.Item>
 
         <Menu.Menu position="right">
           <Link to="/signup">
-            <Menu.Item>Signup</Menu.Item>
+            <Menu.Item style={{ color: 'whitesmoke' }}>Signup</Menu.Item>
           </Link>
           <Link to="/login">
-            <Menu.Item>Signin</Menu.Item>
+            <Menu.Item style={{ color: 'whitesmoke' }}>Signin</Menu.Item>
           </Link>
 
           {/* <Menu.Item
@@ -22,9 +22,8 @@ export default class NavBar extends Component {
                 >
                     Sign-in
                 </Menu.Item> */}
-                </Menu.Menu>
-                
-            </Menu> 
-        )
-    }
+        </Menu.Menu>
+      </Menu>
+    );
+  }
 }
