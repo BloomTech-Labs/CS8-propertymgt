@@ -149,12 +149,12 @@ class AddTenant extends Component {
         console.log('Error in AddTenant POST..', error);
       });
 
-    axios
-      .post('http://localhost:5000/api/property/lsdb', toLSDB)
-      .then()
-      .catch((error) => {
-        console.log('Error in AddTenant POST for LSDB..', error);
-      });
+    // axios
+    //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
+    //   .then()
+    //   .catch((error) => {
+    //     console.log('Error in AddTenant POST for LSDB..', error);
+    //   });
 
     this.setState({
       T1Name: '',
