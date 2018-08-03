@@ -35,23 +35,23 @@ const addTenant = (req, res) => {
     WOrder: [],
   };
 
-  const params = {
-    TableName: 'Tenants',
-    Item: {
-      tenantId: hashingId,
-      propertyId,
-      NameT: T1Name,
-      MobileT: T1Phone,
-      EmailT: T1Email,
-      GetTextsT: T1NotiP,
-      GetEmailT: T1NotiE,
-      StartD,
-      EndD,
-      WOrder: [],
-      T2,
-      Admin: '123',
-    },
-  };
+  // const params = {
+  //   TableName: 'Tenants',
+  //   Item: {
+  //     tenantId: hashingId,
+  //     propertyId,
+  //     NameT: T1Name,
+  //     MobileT: T1Phone,
+  //     EmailT: T1Email,
+  //     GetTextsT: T1NotiP,
+  //     GetEmailT: T1NotiE,
+  //     StartD,
+  //     EndD,
+  //     WOrder: [],
+  //     T2,
+  //     Admin: '123',
+  //   },
+  // };
 
   console.log('Hiyoo', params);
 
@@ -59,6 +59,7 @@ const addTenant = (req, res) => {
 
   stripe.customer.create(
     {
+      // Add Tenant Route, Stripe First so we can give stripeID to new Tenant
       description: params.Item.tenantId,
       email: params.Item.EmailT,
     },
@@ -68,11 +69,11 @@ const addTenant = (req, res) => {
         Item: {
           tenantId: hashingId,
           propertyId,
-          stripeId: customer.id,
+          stripeId: customer.id, // StripeID needed to check data in Stripe DB. Created from line 60
           NameT: T1Name,
           MobileT: T1Phone,
           EmailT: T1Email,
-          GetTextsT: T1NotiP,
+          GettestArrTextsT: T1NotiP,
           GetEmailT: T1NotiE,
           StartD,
           EndD,
@@ -106,7 +107,9 @@ const addTenant = (req, res) => {
   dd.put(params, (error) => {
     if (error) res.status(400).json({ error });
     // else res.status(200).json({ status: 'Success..' });
+    // ************************************************
     // STRIPE INTEGRATION
+    // ************************************************
     else {
       stripe.customer.create(
         {

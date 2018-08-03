@@ -17,6 +17,12 @@ router.get('/', (req, res) => {
   });
 });
 
+// ROUTE FOR ADMIN => BILLING => DISPLAY SAVED CARD INFO
+router.get('/info', (req, res) => {});
+
+// ROUTE FOR ADMIN => BILLING => DISPLAY RENT HISTORY
+router.get('/history', (req, res) => {});
+
 // // Stripe Charge Route WORKING
 router.post('/testcharge', (req, res) => {
   const cost = 2500;

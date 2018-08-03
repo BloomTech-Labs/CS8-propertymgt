@@ -9,8 +9,10 @@ class Billing extends React.Component {
     super(props);
 
     this.state = {
-      SelectedProperty: '',
+      SelectedProperty: '', // Property Address
+      SelectedPropertyId: '', // Property ID
       PropertyList: [],
+      // SavedCard: {},
     };
 
     this.setProperty = this.setProperty.bind(this);
@@ -29,6 +31,16 @@ class Billing extends React.Component {
       });
   }
 
+  getPropertyId = (address) => {
+    const { PropertyList, SelectedProperty } = this.state;
+    for (let i = 0; i < PropertyList.length; i++) {
+      if (address === PropertyList[i].PropertyAddr) {
+        // console.log(PropertyList[i].propertyId);
+        return PropertyList[i].propertyId;
+      }
+    }
+  };
+
   getPropList = () => {
     const myArr = this.state.PropertyList.map((property, index) => {
       const constructingTheObject = {
@@ -46,12 +58,22 @@ class Billing extends React.Component {
   };
 
   setProperty = (e, { name, value }) => {
+    console.log(name);
+    console.log(value);
     this.setState({
       [name]: value,
+      SelectedPropertyId: this.getPropertyId(value),
     });
+    // this.getPropertyId();
+    console.log(this.getPropertyId());
   };
 
   render() {
+    console.log(this.state);
+
+    // const x = this.getPropertyId();
+    // console.log(x);
+
     const { SelectedProperty } = this.state;
 
     const testArr = this.getPropList();
