@@ -12,7 +12,7 @@ class Billing extends React.Component {
       SelectedProperty: '', // Property Address
       SelectedPropertyId: '', // Property ID
       PropertyList: [],
-      // SavedCard: {},
+      SavedCard: {},
     };
 
     this.setProperty = this.setProperty.bind(this);
@@ -41,6 +41,8 @@ class Billing extends React.Component {
     }
   };
 
+  // getCustomer
+
   getPropList = () => {
     const myArr = this.state.PropertyList.map((property, index) => {
       const constructingTheObject = {
@@ -57,6 +59,16 @@ class Billing extends React.Component {
     return myArr;
   };
 
+  // GET CREDIT CARD
+  // getCreditCard = (custId) => {
+  //   Query Tenants Table for Tenant with matching Property ID
+  //   If found matching
+  //     Get Stripe ID from Tenant
+  //   Use Stripe ID on DynamoDB to Query Stripe DB -- customerId === Stripe ID
+  //   Pass Stripe customerId to '/billing/customerCC' and the Route in
+  //   Billing Router.js should return credit card object
+  // };
+
   setProperty = (e, { name, value }) => {
     console.log(name);
     console.log(value);
@@ -65,7 +77,6 @@ class Billing extends React.Component {
       SelectedPropertyId: this.getPropertyId(value),
     });
     // this.getPropertyId();
-    console.log(this.getPropertyId());
   };
 
   render() {

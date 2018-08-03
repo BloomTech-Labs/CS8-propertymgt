@@ -5,7 +5,7 @@ const router = express.Router();
 // const dbModel = require('../Config/Dbmodel');
 // const stripeKey = require('./StripeSK.js');
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 
 // second attribute passed is the secret key
 // const stripe = require('stripe')(stripeKey.SK);
@@ -14,6 +14,17 @@ router.get('/', (req, res) => {
   stripe.balance.listTransactions({ limit: 10 }, (err, transactions) => {
     if (err) res.status(500).json({ status: 'error', error: err });
     res.status(200).json({ status: 'display transaction history', data: transactions });
+  });
+});
+
+router.get('/customerCC', (req, res) => {
+  const { custId } = req.body;
+  console.log(req.body);
+  stripe.customers.retrieve('cus_DL9gteAYfiS3mS', (custErr, customer) => {
+    if (custErr) res.status(500).json({ status: 'customer retrieval error', custErr });
+    else {
+      res.status(200).json({ status: 'successful retrievial', data: customer.sources.data });
+    }
   });
 });
 
