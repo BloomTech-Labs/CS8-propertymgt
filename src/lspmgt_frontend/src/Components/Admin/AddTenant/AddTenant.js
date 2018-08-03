@@ -185,7 +185,7 @@ class AddTenant extends Component {
     // console.log('after handleClick..', name, value);
   };
 
-  setProperty = (e, { name, value }) => {
+  setProperty = (e, { name, value => {
     // console.log('setProperty triggered..');
     // console.log('name', name, 'value', value);
     this.setState({
