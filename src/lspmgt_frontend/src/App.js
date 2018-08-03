@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <Container>
         <NavBar />
-        <Home sytle={{backgroundColor: 'blue'}}/>
+        <Home />
       </Container>
     );
   }

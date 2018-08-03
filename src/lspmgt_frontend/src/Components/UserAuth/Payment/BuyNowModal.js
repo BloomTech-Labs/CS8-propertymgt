@@ -19,9 +19,7 @@ class BuyNowModal extends Component {
     };
   }
 
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   handleInput = (e) => {
     this.setState({
@@ -31,24 +29,26 @@ class BuyNowModal extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
+
+    // this.props.stripe.createToken().then(())
+
     Auth.signUp({
-      'username': this.state.AdminEmail, 
-      'password': this.state.AdminPW,
-      'attributes': {
-        'custom:access_level': 'admin'
-      }
+      username: this.state.AdminEmail,
+      password: this.state.AdminPW,
+      attributes: {
+        'custom:access_level': 'admin',
+      },
     })
-      .then(data => {
+      .then((data) => {
         alert('you have been sign up');
         console.log('user has signed up');
         this.props.history.push('/admin/dashboard');
         // <Redirect to='/'/>
       })
-      .catch(err => {
+      .catch((err) => {
         alert('There was an error signing up');
         console.log('There was an error signing up ---> ', err);
-      })
+      });
 
     // axios
     //   .post('http://localhost:5000/users/admin/signup', this.state)
