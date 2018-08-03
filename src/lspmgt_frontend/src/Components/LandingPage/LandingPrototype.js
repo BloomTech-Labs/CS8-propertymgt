@@ -19,8 +19,8 @@ import { Link } from 'react-router-dom';
 import Landing from './Landing';
 import './LandingPrototype.css';
 import video from './Nueva-york.mp4';
-import BuyNowModal from '../Payment/BuyNowModal';
-
+// import BuyNowModal from '../../Payment/BuyNowModal';
+// import BuyNowModal from '../UserAuth/Payment'
 export default class LandingProto extends Component {
   state = {};
 

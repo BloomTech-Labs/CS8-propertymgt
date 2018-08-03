@@ -22,17 +22,9 @@ export default class NavBar extends Component {
                 >
                     Sign-in
                 </Menu.Item> */}
-<<<<<<< HEAD
                 </Menu.Menu>
                 
             </Menu> 
         )
     }
 }
-=======
-        </Menu.Menu>
-      </Menu>
-    );
-  }
-}
->>>>>>> master
