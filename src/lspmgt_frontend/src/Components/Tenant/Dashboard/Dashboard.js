@@ -73,7 +73,7 @@ const styles = {
     color: 'whitesmoke',
   },
   alert: {
-    marginTop: '1.3rem',
+    marginTop: '1.38rem',
     marginBottom: '0',
   },
   segment: {

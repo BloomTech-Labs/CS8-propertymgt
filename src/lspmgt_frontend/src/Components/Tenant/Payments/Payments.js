@@ -15,7 +15,7 @@ class Payments extends Component {
   render() {
     const { BalanceDue, PaymentAmount, PaymentType } = this.state;
     return (
-      <Grid columns={2}>
+      <Grid>
         <Grid.Row>
           <Grid.Column mobile={16}>
             <Header as="h1">Payments</Header>
@@ -117,7 +117,7 @@ const styles = {
   },
   balanceDue: {
     maxWidth: '226px',
-    marginTop: '1.8rem',
+    marginTop: '1.78rem',
   },
   paymentHeader: {
     paddingBottom: '0',
