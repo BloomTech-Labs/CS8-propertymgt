@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Segment, Header, Button, Message, Icon, Label } from 'semantic-ui-react';
+import { Grid, Segment, Header, Button, Message, Icon, Label, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 
@@ -16,7 +16,10 @@ class Dashboard extends Component {
         <Grid.Column mobile={16} computer={8}>
           <Header as="h1">Outstanding Balance</Header>
           <Message style={styles.alert}>
-            <Message.Header style={styles.alertTitle}>Alerts</Message.Header>
+            <Message.Header iconPosition="left" style={styles.alertTitle}>
+              <Icon name="bell" style={{ paddingRight: '1rem' }} />
+              Alerts
+            </Message.Header>
             <p>Alert 1</p>
             <p>Alert 2</p>
           </Message>
@@ -73,7 +76,7 @@ const styles = {
     color: 'whitesmoke',
   },
   alert: {
-    marginTop: '1.38rem',
+    marginTop: '1.29rem',
     marginBottom: '0',
   },
   segment: {

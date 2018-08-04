@@ -35,11 +35,13 @@ class Payments extends Component {
 
         <Grid.Row columns={2} style={styles.paymentRow}>
           <Grid.Column mobile={16} computer={8} tablet={8}>
-            <Form>
+            <Form style={styles.paymentForm}>
               <Form.Field
+                icon="dollar"
+                iconPosition="left"
                 control={Input}
                 placeholder="Payment Amount"
-                style={{ paddingTop: '1.65rem' }}
+                style={styles.paymentField}
               />
               <Form.Group>
                 <Form.Field
@@ -58,6 +60,8 @@ class Payments extends Component {
             <Form>
               <Form.Field
                 id="CCName"
+                icon="user"
+                iconPosition="left"
                 control={Input}
                 label="Cardholder's Name"
                 placeholder="John Doe"
@@ -65,6 +69,8 @@ class Payments extends Component {
 
               <Form.Field
                 id="CCNumber"
+                icon="credit card"
+                iconPosition="left"
                 control={Input}
                 label="Card Number"
                 // placeholder=""
@@ -73,11 +79,19 @@ class Payments extends Component {
               <Form.Group widths="2">
                 <Form.Field
                   id="CCExpiration"
+                  icon="calendar alternate"
+                  iconPosition="left"
                   control={Input}
                   label="Expiration Date"
                   placeholder="MM/YY"
                 />
-                <Form.Field id="CCCVV" control={Input} label="CVV" />
+                <Form.Field
+                  id="CCCVV"
+                  icon="protect"
+                  iconPosition="left"
+                  control={Input}
+                  label="CVV"
+                />
               </Form.Group>
 
               <Form.Field
@@ -87,9 +101,21 @@ class Payments extends Component {
                 placeholder="Checking, Savings, etc"
               />
 
-              <Form.Field id="CCRoutingNumber" control={Input} placeholder="Routing Number" />
+              <Form.Field
+                id="CCRoutingNumber"
+                icon="hashtag"
+                iconPosition="left"
+                control={Input}
+                placeholder="Routing Number"
+              />
 
-              <Form.Field id="CCAccountNumber" control={Input} placeholder="Account Number" />
+              <Form.Field
+                id="CCAccountNumber"
+                icon="hashtag"
+                iconPosition="left"
+                control={Input}
+                placeholder="Account Number"
+              />
 
               <Button secondary style={styles.button}>
                 Submit
@@ -104,8 +130,20 @@ class Payments extends Component {
 
 const fields = [
   { key: 'bank', text: 'Bank Account', value: 'bankaccount' },
-  { key: 'visa', text: 'Visa', value: 'visa' },
-  { key: 'mc', text: 'MasterCard', value: 'mastercard' },
+  {
+    key: 'visa',
+    icon: 'cc visa',
+    iconPosition: 'left',
+    text: 'Visa',
+    value: 'visa',
+  },
+  {
+    key: 'mc',
+    icon: 'cc mastercard',
+    iconPosition: 'left',
+    text: 'MasterCard',
+    value: 'mastercard',
+  },
 ];
 
 const styles = {
@@ -119,13 +157,19 @@ const styles = {
   },
   balanceDue: {
     maxWidth: '226px',
-    marginTop: '1.78rem',
+    marginTop: '1.68rem',
   },
   paymentHeader: {
     paddingBottom: '0',
   },
   paymentRow: {
     paddingTop: '0',
+  },
+  paymentForm: {
+    paddingTop: '1.65rem',
+  },
+  paymentField: {
+    maxWidth: '196px',
   },
 };
 

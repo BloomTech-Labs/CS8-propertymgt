@@ -56,7 +56,8 @@ class WorkOrders extends Component {
           <Grid.Column mobile={16} computer={8} tablet={8}>
             <Form>
               <Form.Input
-                fluid
+                icon="home"
+                iconPosition="left"
                 label="Address"
                 placeholder="1234 Cherry St"
                 name="PropertyAddr"
@@ -70,7 +71,8 @@ class WorkOrders extends Component {
                 onChange={this.handleChange}
               />
               <Form.Input
-                fluid
+                icon="phone"
+                iconPosition="left"
                 label="Phone Number"
                 name="TenantPhone"
                 value={TenantPhone}
@@ -85,7 +87,7 @@ class WorkOrders extends Component {
         <Grid.Row>
           <Grid.Column>
             <Form>
-              <Form.Checkbox label="Permission to enter residence without tenant home" />
+              <Form.Checkbox label="Permission to enter residence without tenant present" />
               <Button secondary type="submit" onClick={this.handleSubmit}>
                 Submit
               </Button>
@@ -106,7 +108,7 @@ const styles = {
   },
   maintenanceInfo: {
     maxWidth: '270px',
-    marginTop: '1.68rem',
+    marginTop: '1.59rem',
   },
 };
 
