@@ -22,18 +22,18 @@ class Payments extends Component {
             <Header as="h2" style={styles.balanceHeader}>
               Outstanding Balance
             </Header>
-            <Message style={{ maxWidth: '226px', marginTop: '1.8rem' }}>
+            <Message style={styles.balanceDue}>
               <Message.Header>{BalanceDue}</Message.Header>
             </Message>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row style={{ paddingBottom: '0' }}>
+        <Grid.Row style={styles.paymentHeader}>
           <Grid.Column mobile={16}>
             <Header as="h2">Payment Details</Header>
           </Grid.Column>
         </Grid.Row>
 
-        <Grid.Row columns={2} style={{ paddingTop: '0' }}>
+        <Grid.Row columns={2} style={styles.paymentRow}>
           <Grid.Column mobile={16} computer={8} tablet={8}>
             <Form>
               <Form.Field
@@ -46,7 +46,7 @@ class Payments extends Component {
                   control={Select}
                   label="Payment Method"
                   options={fields}
-                  placeholder="Select Card"
+                  placeholder="Select Method"
                   style={{ marginBottom: '1rem' }}
                 />
                 {/* <Form.Field label="Visa" control="input" type="radio" name="paymentType" />
@@ -100,16 +100,30 @@ class Payments extends Component {
   }
 }
 
-const fields = [{ text: 'Visa', value: 'visa' }, { text: 'MasterCard', value: 'mastercard' }];
+const fields = [
+  { key: 'bank', text: 'Bank Account', value: 'bankaccount' },
+  { key: 'visa', text: 'Visa', value: 'visa' },
+  { key: 'mc', text: 'MasterCard', value: 'mastercard' },
+];
 
 const styles = {
   button: {
-    backgroundColor: 'rgb(0, 134, 221)',
+    backgroundColor: 'rgb(0, 94, 155)',
     color: 'whitesmoke',
   },
   balanceHeader: {
     marginTop: '2rem',
     marginBottom: '0',
+  },
+  balanceDue: {
+    maxWidth: '226px',
+    marginTop: '1.8rem',
+  },
+  paymentHeader: {
+    paddingBottom: '0',
+  },
+  paymentRow: {
+    paddingTop: '0',
   },
 };
 
