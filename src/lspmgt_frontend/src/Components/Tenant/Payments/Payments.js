@@ -91,7 +91,9 @@ class Payments extends Component {
 
               <Form.Field id="CCAccountNumber" control={Input} placeholder="Account Number" />
 
-              <Button style={styles.button}>Submit</Button>
+              <Button secondary style={styles.button}>
+                Submit
+              </Button>
             </Form>
           </Grid.Column>
         </Grid.Row>
@@ -108,7 +110,7 @@ const fields = [
 
 const styles = {
   button: {
-    backgroundColor: 'rgb(0, 94, 155)',
+    // backgroundColor: 'rgb(0, 94, 155)',
     color: 'whitesmoke',
   },
   balanceHeader: {

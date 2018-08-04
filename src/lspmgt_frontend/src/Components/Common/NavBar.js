@@ -40,7 +40,7 @@ class NavBar extends Component {
     // }
 
     return (
-      <Menu style={{ backgroundColor: 'rgb(0, 94, 155)' }} stackable fluid inverted>
+      <Menu stackable fluid inverted>
         <Menu.Item style={textStyles}>LS PROPERTY MANAGEMENT</Menu.Item>
 
         <Menu.Menu position="right">

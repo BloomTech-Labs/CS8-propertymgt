@@ -85,8 +85,8 @@ class WorkOrders extends Component {
         <Grid.Row>
           <Grid.Column>
             <Form>
-              <Form.Checkbox label="Permission to Enter Residence?" />
-              <Button type="submit" onClick={this.handleSubmit}>
+              <Form.Checkbox label="Permission to enter residence without tenant home" />
+              <Button secondary type="submit" onClick={this.handleSubmit}>
                 Submit
               </Button>
             </Form>

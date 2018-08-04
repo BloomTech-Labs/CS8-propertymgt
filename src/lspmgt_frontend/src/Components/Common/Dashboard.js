@@ -138,7 +138,7 @@ const SideBarTenant = (props) => {
     <Grid columns={2} relaxed>
       {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
       <Grid.Column mobile={16} computer={4} tablet={4}>
-        <Menu vertical fluid style={{ backgroundColor: 'rgb(0, 94, 155)' }}>
+        <Menu vertical fluid pointing inverted>
           {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
           <Link to="/dashboard">
