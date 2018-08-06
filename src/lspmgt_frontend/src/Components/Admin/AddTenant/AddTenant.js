@@ -11,6 +11,9 @@ import {
   Container,
 } from 'semantic-ui-react';
 import axios from 'axios';
+import Amplify, { Auth } from 'aws-amplify';
+import AmplifyConfig from '../../../Config/Auth';
+Amplify.configure(AmplifyConfig);
 
 class AddTenant extends Component {
   constructor() {
@@ -129,33 +132,43 @@ class AddTenant extends Component {
       // propertyId,
     };
 
-    axios
-      .post('http://localhost:5000/api/addtenant/add', toTenants)
-      .then(
-        // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
-        //   console.log(res);
-        // })
-        console.log('step2')
-      )
-      .catch((error) => {
-        console.log('Error in AddTenant POST..', error);
-      });
+    Auth.signUp({
+      username: this.state.Email,
+      password: this.state.Password,
+      attributes: {
+        'custom:access_level': 'tenant',
+      },
+    }).then((data) => {
+      console.log('user signed up -> ', data);
 
-    // const T = [];
-    // T.push('testTId');
-    // T.push('testTId');
+      axios
+        .post('http://localhost:5000/api/addtenant/add', toTenants)
+        .then(
+          // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
+          //   console.log(res);
+          // })
+          console.log('step2')
+        )
+        .catch((error) => {
+          console.log('Error in AddTenant POST..', error);
+        });
 
-    // const toLSDB = {
-    //   propertyId: 'testId',
-    //   tenants: T,
-    // };
+      // const T = [];
+      // T.push('testTId');
+      // T.push('testTId');
 
-    // axios
-    //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
-    //   .then()
-    //   .catch((error) => {
-    //     console.log('Error in AddTenant POST for LSDB..', error);
-    //   });
+      // const toLSDB = {
+      //   propertyId: 'testId',
+      //   tenants: T,
+      // };
+
+      // axios
+      //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
+      //   .then()
+      //   .catch((error) => {
+      //     console.log('Error in AddTenant POST for LSDB..', error);
+      //   });
+    });
 
     this.setState({
       T1Name: '',
