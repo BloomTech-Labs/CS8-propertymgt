@@ -47,6 +47,7 @@ const addTenant = (req, res) => {
       email: T1Email,
     },
     (customerErr, customer) => {
+      // console.log('customer is created here -->', customer);
       const params = {
         TableName: 'Tenants',
         Item: {
