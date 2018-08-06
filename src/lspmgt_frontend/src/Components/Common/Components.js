@@ -12,9 +12,11 @@ import TenantDashboard from '../Tenant/Dashboard/Dashboard';
 import TenantBilling from '../Tenant/Payments/Payments';
 import TenantWorkOrders from '../Tenant/WorkOrders/WorkOrders';
 import TenantSettings from '../Tenant/Settings/Settings';
-import AdminSignUp from '../UserAuth/SignUp/AdminSignUp';
 import LoginForm from '../UserAuth/Login';
-import Signout from '../UserAuth/Signout';
+import AdminSignup from '../UserAuth/SignUp/AdminSignUp';
+import AdminCheckout from '../UserAuth/SignUp/Checkout';
+import AdminSignupForm from '../UserAuth/SignUp/AdminSignUpForm';
+import Loader from './Loader';
 
 export {
   Home,
@@ -31,7 +33,9 @@ export {
   TenantBilling,
   TenantWorkOrders,
   TenantSettings,
-  AdminSignUp,
   LoginForm,
-  Signout,
+  AdminSignup,
+  AdminCheckout,
+  AdminSignupForm,
+  Loader,
 };
