@@ -3,7 +3,7 @@ import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import LandingCarousel from './LandingCarousel';
 // import BuyNowModal from '../Payment/BuyNowModal';
-import BuyNowModal from '../UserAuth/Payment/BuyNowModal'
+import BuyNowModal from '../UserAuth/Payment/BuyNowModal';
 
 import './Landing.css';
 

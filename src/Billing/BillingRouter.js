@@ -1,67 +1,37 @@
-const express = require('express');
-
-const router = express.Router();
-// const dd = require('../Config/AwsConfig');
-// const dbModel = require('../Config/Dbmodel');
-// const stripeKey = require('./StripeSK.js');
-
+const db = require('../Config/AwsConfig');
+// NEW THINGS
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
-// second attribute passed is the secret key
-// const stripe = require('stripe')(stripeKey.SK);
+// Get tenant with property Id
+const getCustomer = (req, res) => {
+  const { id } = req.params;
+};
 
-router.get('/', (req, res) => {
-  stripe.balance.listTransactions({ limit: 10 }, (err, transactions) => {
-    if (err) res.status(500).json({ status: 'error', error: err });
-    res.status(200).json({ status: 'display transaction history', data: transactions });
-  });
-});
+// Search DynamoDB for Tenant w/ matching property ID
+// if Match {
+//   Get Stripe ID from that Tenant
+//   Use Stripe ID to get customer card info
+//   Return Card Info
 
-// // Stripe Charge Route WORKING
-router.post('/testcharge', (req, res) => {
-  const cost = 2500;
-  const { amount, currency, source, description } = req.body;
-  // Basic Charge -- WORKING
-  stripe.charges.create(
-    {
-      amount,
-      currency,
-      source,
-      description,
+const getTenant = (req, res) => {
+  const { Id } = req.params;
+  console.log(Id);
+  const params = {
+    TableName: 'Tenants',
+    Key: {
+      propertyId: Id,
     },
-    (err, charge) => {
-      if (err) res.status(200).json({ status: 'error', error: err });
-      res.status(200).json({ status: 'charge complete', data: charge });
-    }
-  );
-});
+  };
 
-// charge made with New Customer -- NOT WORKING
-// stripe.customers.create({
-//     email: req.body.stripeEmail,
-//     source: req.body.stripeToken
-// }).then(customer => stripe.charges.create({
-//     amount,
-//     description: 'test',
-//     currency: 'usd',
-//     customer: customer.id
-// }))
-// .then(charge => res.status(200).json({ status: 'success', }))
-// });
+  db.get(params, (dbErr, data) => {
+    console.log(data);
+    if (dbErr) res.status(400).json({ status: 'db Error', dbErr });
+    // else res.status(200).json({ data });
+    stripe.customers.retrieve(data.stripeId, (stripeErr, customer) => {
+      if (stripeErr) res.status(500).json({ status: 'stripe Error', stripeErr });
+      else res.status(200).json({ customer });
+    });
+  });
+};
 
-// Charge made with Async/Await
-// router.post('/testcharge', async (req, res) => {
-//   try {
-//     const status = await stripe.charges.create({
-//       amount: 2000,
-//       currency: 'usd',
-//       description: 'an aexample charge',
-//       source: req.body,
-//     });
-//     res.json({ status });
-//   } catch (err) {
-//     res.status(500).end();
-//   }
-// });
-
-module.exports = router;
+module.exports = { getCustomer, getTenant };

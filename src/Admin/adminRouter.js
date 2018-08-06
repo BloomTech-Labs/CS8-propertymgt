@@ -5,6 +5,8 @@ const dbModel = require('../Config/DbModel');
 const hashingId = require('../Common/HashingId');
 const { Admins } = require('../Config/DynamoDbTables');
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+
 // // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {
 //   console.log(req.body);
@@ -111,28 +113,40 @@ const workorder = (req, res) => {
 };
 
 // Add a new tenant to the system
-const addTenant = (req, res) => {
-  console.log('addtenant POST method in admin triggered.. ');
-  const { T1Name, T1Phone, T1Email, T2Name, T2Phone, T2Email } = req.body;
-  const params = {
-    TableName: 'Tenants',
-    Item: {
-      tenantId: hashingId,
-      NameT: T1Name,
-      MobileT: T1Phone,
-      EmailT: T1Email,
-      WOrder: [],
-      // T2Name,
-      // T2Phone,
-      // T2Email
-    },
-  };
+// const addTenant = (req, res) => {
+//   console.log('addtenant POST method in admin triggered.. ');
+//   const { Name, Phone, Email, PropAddress, T2Name, T2Phone, T2Email } = req.body;
+//   const params = {
+//     TableName: 'Tenants',
+//     Item: {
+//       tenantId: hashingId,
+//       NameT: Name,
+//       MobileT: Phone,
+//       EmailT: Email,
+//       WOrder: [],
+//       PropAddress,
+//       // T2Name,
+//       // T2Phone,
+//       // T2Email
+//     },
+//   };
 
-  dd.put(params, (error, data) => {
-    if (error) res.status(400).json({ error });
-    else res.status(200).json({ status: 'Success..', data });
-  });
-};
+//   dd.put(params, (error, data) => {
+//     if (error) res.status(400).json({ error });
+//     else {
+//       stripe.customers.create(
+//         {
+//           description: params.Item.tenantId,
+//           email: params.Item.EmailT,
+//         },
+//         (stripeErr, customer) => {
+//           if (stripeErr) res.status(500).json({ status: 'stripe Error', stripeErr });
+//           else res.status(200).json({ status: 'Tenant Creation success', customer });
+//         }
+//       );
+//     }
+//   });
+// };
 
 // display the billing information
 // router.get('/billing', (req, res) => {
@@ -164,8 +178,6 @@ const addTenant = (req, res) => {
 //   });
 // });
 
-
-
 // ***IMPORTANT THIS CODE BELOW HAS BEEN MOVED TO USER/USERAUTH FOLDER
 // ANY API CALLING THIS END POINT SHOULD BE CALLING THE NEW END POINT
 
@@ -195,5 +207,5 @@ const addTenant = (req, res) => {
 module.exports = {
   propertyId,
   workorder,
-  addTenant
+  // addTenant,
 };

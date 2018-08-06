@@ -6,6 +6,9 @@ const dd = require('../Config/AwsConfig');
 const hashingId = require('../Common/HashingId');
 const hashingId2 = require('../Common/HashingId2');
 
+// TODO: Do not push stripe key to github
+const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
+
 // const writingToLSDB = (x) => {
 //   const { Tenants, StartD, EndD, propertyId, PropertyAddr, Contract } = x;
 //   const params = {
@@ -104,6 +107,7 @@ const properties = (req, res) => {
 
 // Add a new property
 const addProperty = (req, res) => {
+  const propertyAmount = 120000; // hard coded
   const {
     NameOwner,
     EmailOwner,
@@ -124,10 +128,13 @@ const addProperty = (req, res) => {
   //   Contract,
   // };
 
+  console.log('this is hashingId -->', hashingId);
+  console.log('this is hashingId2 -->', hashingId2);
+
   const params = {
     TableName: 'Properties',
     Item: {
-      propertyId: hashingId,
+      propertyId: hashingId(),
       NameOwner,
       EmailOwner,
       MobileOwner,
@@ -145,7 +152,29 @@ const addProperty = (req, res) => {
 
   dd.put(params, (error) => {
     if (error) res.status(404).json({ error });
-    else res.status(200).json({ message: 'success' });
+    // else res.status(200).json({ message: 'success' });
+    // STRIPE INTEGRATION
+    else {
+      stripe.plans.create(
+        {
+          id: params.Item.propertyId, // plan ID === Property Address
+          amount: propertyAmount,
+          interval: 'month',
+          product: 'prod_DLRBi4QUbCDEVn',
+          nickname: PropertyAddr,
+          currency: 'usd',
+        },
+        (stripeErr, plan) => {
+          if (stripeErr) {
+            console.log('this is stripeErr -->', stripeErr);
+            res.status(500).json({ status: 'stripe error', stripeErr });
+          } else {
+            console.log('this is plan -->', plan);
+            res.status(200).json({ status: 'property created!', plan });
+          }
+        }
+      );
+    }
   });
 
   // writingToLSDB(toLSDB);
