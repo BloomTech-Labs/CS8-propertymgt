@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { LandingPage } from './Components';
 import { Container, Grid, Menu } from 'semantic-ui-react';
-import { Link, Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import {
   AdminProperties,
   AdminAddProperty,
@@ -14,8 +13,6 @@ import {
   TenantWorkOrders,
   TenantSettings,
 } from './Components';
-
-import { connect } from 'react-redux';
 
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
@@ -33,8 +30,7 @@ export default class Dashboard extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = !this.props.isAdmin; // Development purposes, change bool to access either tenant or admin
-    console.log('inside dashboard --> state --> ', this.state);
+    let display = this.props.isAdmin;
     return (
       <Container fluid>
         {display ? (
@@ -45,22 +41,12 @@ export default class Dashboard extends Component {
             activeItem={this.state.activeItem}
           />
         )}
-        <Link to="/">
-          <Menu.Item
-            onClick={() => {
-              Auth.signOut();
-            }}
-          >
-            Sign out
-          </Menu.Item>
-        </Link>
       </Container>
     );
   }
 }
 
 const SideBarAdmin = (props) => {
-  console.log('loading props ---> ', props);
   return (
     <Grid container>
       <Grid.Column>
@@ -140,7 +126,7 @@ const SideBarTenant = (props) => {
     <Grid columns={2} relaxed>
       {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
       <Grid.Column mobile={16} computer={4} tablet={4}>
-        <Menu vertical fluid style={{ backgroundColor: 'rgb(0, 94, 155)' }}>
+        <Menu vertical fluid inverted>
           {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
 
           <Link to="/dashboard">
@@ -148,7 +134,7 @@ const SideBarTenant = (props) => {
               name="Dashboard"
               active={props.activeItem === 'Dashboard'}
               onClick={props.handleItemClick}
-              style={textStyles}
+              // style={textStyles}
             >
               Dashboard
             </Menu.Item>
@@ -159,7 +145,7 @@ const SideBarTenant = (props) => {
               name="Billing"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
-              style={textStyles}
+              // style={textStyles}
             >
               Billing
             </Menu.Item>
@@ -170,7 +156,7 @@ const SideBarTenant = (props) => {
               name="WorkOrder"
               active={props.activeItem === 'WorkOrder'}
               onClick={props.handleItemClick}
-              style={textStyles}
+              // style={textStyles}
             >
               Work Orders
             </Menu.Item>
@@ -181,7 +167,7 @@ const SideBarTenant = (props) => {
               name="Settings"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
-              style={textStyles}
+              // style={textStyles}
             >
               Settings
             </Menu.Item>

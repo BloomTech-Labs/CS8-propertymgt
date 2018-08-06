@@ -4,9 +4,9 @@ import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../../Config/Auth';
 import { CardElement, injectStripe } from 'react-stripe-elements';
-
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 Amplify.configure(AmplifyConfig);
-
 class AdminSignUp extends Component {
   state = {
     Name: '',
