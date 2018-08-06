@@ -12,4 +12,6 @@ const getCustomer = (req, res) => {
 //   Use Stripe ID to get customer card info
 //   Return Card Info
 
+const getTenant = (req, res) => {};
+
 module.exports = { getCustomer };
