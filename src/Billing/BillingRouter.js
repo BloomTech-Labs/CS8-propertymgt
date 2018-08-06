@@ -6,4 +6,10 @@ const getCustomer = (req, res) => {
   const { id } = req.params;
 };
 
+// Search DynamoDB for Tenant w/ matching property ID
+// if Match {
+//   Get Stripe ID from that Tenant
+//   Use Stripe ID to get customer card info
+//   Return Card Info
+
 module.exports = { getCustomer };

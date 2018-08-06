@@ -1,75 +1,70 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
-import { Link, withRouter, Redirect, Route } from 'react-router-dom';
-import { Signout } from './Components';
+import { Menu, Container } from 'semantic-ui-react';
+import { Link, withRouter } from 'react-router-dom';
 
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
-
+import { Loader } from '../Common/Components';
 import { connect } from 'react-redux';
 import { signOUtUser } from '../Redux/Actions';
 
 Amplify.configure(AmplifyConfig);
 
 class NavBar extends Component {
-  // state = {
-  //   isLoggedIn: false,
-  // }
+  state = {
+    loader: false,
+  };
 
-  // componentDidMount() {
-
-  //     Auth.currentSession()
-  //     .then(data => {
-  //         console.log('HOME CHECK ------> ', data)
-  //         this.setState({isLoggedIn: true})
-  //         console.log(data);
-  //         this.setState({
-  //             isLoggedIn: data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
-  //         })
-  //     })
-  //     .catch(err => console.log(err))
-  // }
-
-  handleSignOut = () => {
-    // console.log('sign out ')
+  handleSignout = () => {
+    this.setState({ loader: !this.state.loader });
   };
 
   render() {
-    // if (!this.state.isLoggedIn) {
-    //   return < />
-    // }
+    let notLogged = (
+      <Menu.Menu position="right">
+        <Link to="/signup">
+          <Menu.Item>Sign Up</Menu.Item>
+        </Link>
 
+        <Link to="/login">
+          <Menu.Item style={textStyles}>Sign In</Menu.Item>
+        </Link>
+      </Menu.Menu>
+    );
+
+    let logged = (
+      <Menu.Menu position="right">
+        <Link to="/">
+          <Menu.Item
+            onClick={() => {
+              this.handleSignout();
+              Auth.signOut().then(() => {
+                setTimeout(() => {
+                  this.handleSignout();
+                  this.props.signOUtUser();
+                }, 2000);
+              });
+            }}
+          >
+            Sign Out
+          </Menu.Item>
+        </Link>
+      </Menu.Menu>
+    );
+    console.log('state of the props isadmin -> ', this.props.isAdmin);
     return (
-      <Menu style={{ backgroundColor: 'rgb(0, 94, 155)' }} stackable fluid inverted>
-        <Menu.Item style={textStyles}>LS PROPERTY MANAGEMENT</Menu.Item>
+      <Container>
+        <Loader stat={this.state.loader} />
+        <Menu stackable fluid inverted>
+          <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
 
-        <Menu.Menu position="right">
-          <Link to="/signup">
-            <Menu.Item style={textStyles}>Signup</Menu.Item>
-          </Link>
-
-          <Link to="/login">
-            <Menu.Item style={textStyles}>Signin</Menu.Item>
-          </Link>
-
-          <Link to="/">
-            <Menu.Item
-              onClick={() => {
-                Auth.signOut();
-                this.props.signOUtUser();
-              }}
-              style={textStyles}
-            >
-              Sign out
-            </Menu.Item>
-          </Link>
-        </Menu.Menu>
-      </Menu>
+          <Menu.Menu position="right">{this.props.isAdmin ? logged : notLogged}</Menu.Menu>
+        </Menu>
+      </Container>
     );
   }
 }
 const mapStateToProps = (state) => {
-  console.log('this is maptoprops --> ', state);
   return {
     getUser: state,
     isAdmin: state.isAdmin,

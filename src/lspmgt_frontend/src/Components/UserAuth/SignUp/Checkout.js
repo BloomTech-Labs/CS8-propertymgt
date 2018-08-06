@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Elements } from 'react-stripe-elements';
-import injectedAdminSignUpForm from './AdminSignUpForm';
-
+import { withRouter } from 'react-router-dom';
+import { AdminSignupForm } from '../../Common/Components';
 class Checkout extends Component {
   render() {
     return (
-      <Elements>
-        <injectedAdminSignUpForm />
-      </Elements>
+      <div>
+        <Elements>
+          <AdminSignupForm />
+        </Elements>
+      </div>
     );
   }
 }
 
-export default Checkout;
+export default withRouter(Checkout);

@@ -7,29 +7,20 @@ export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 Amplify.configure(AmplifyConfig);
 
 export const getUserStatus = () => (dispatch) => {
-    console.log('actions getuser ')
-
-    Auth.currentSession()
-        .then(data => {
-            console.log('Actions CHECK ------> ', data)
-            let status = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
-            dispatch({ type: GET_USER_STATUS, payload: true });
-        })
-        .catch(err => console.log('there was an erro -> ', err))
+  Auth.currentSession()
+    .then((data) => {
+      // let status = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
+      dispatch({ type: GET_USER_STATUS, payload: true });
+    })
+    .catch((err) => console.log('there was an erro -> ', err));
 };
 
 export const signInUser = (isAdmin) => (dispatch) => {
-    console.log('actions getuser ')
-
-    dispatch({ type: SIGN_IN_USER, payload: isAdmin });
-
+  dispatch({ type: SIGN_IN_USER, payload: isAdmin });
 };
 
 export const signOUtUser = () => (dispatch) => {
-    console.log('actions getuser ')
-
-    Auth.signOut().then(() => {
-        dispatch({ type: SIGN_OUT_USER, payload: false });
-    });
-
+  Auth.signOut().then(() => {
+    dispatch({ type: SIGN_OUT_USER, payload: false });
+  });
 };

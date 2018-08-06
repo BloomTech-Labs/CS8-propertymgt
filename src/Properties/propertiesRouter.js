@@ -134,7 +134,7 @@ const addProperty = (req, res) => {
   const params = {
     TableName: 'Properties',
     Item: {
-      propertyId: hashingId,
+      propertyId: hashingId(),
       NameOwner,
       EmailOwner,
       MobileOwner,

@@ -41,58 +41,75 @@ class WorkOrders extends Component {
   render() {
     const { PropertyAddr, Issue, TenantPhone } = this.state;
     return (
-      <Grid divided="vertically">
+      <Grid>
         <Grid.Row>
-          <Header as="h1">Submit a Work Order </Header>
+          <Grid.Column mobile={16}>
+            <Header as="h1">Submit a Work Order </Header>
+            <Message style={styles.maintenanceInfo}>
+              <Icon name="phone" />
+              <p>24/7 Maintenance</p>
+              <p>1-800-123-9876</p>
+            </Message>
+          </Grid.Column>
         </Grid.Row>
-        <Message>
-          <Icon name="phone" />
-          <p>24/7 Maintenance</p>
-          <p>1-800-123-9876</p>
-        </Message>
         <Grid.Row columns={2}>
-          <Grid.Column>
+          <Grid.Column mobile={16} computer={8} tablet={8}>
             <Form>
               <Form.Input
-                fluid
+                icon="home"
+                iconPosition="left"
                 label="Address"
-                placeholder="Address"
+                placeholder="1234 Cherry St"
                 name="PropertyAddr"
                 value={PropertyAddr}
                 onChange={this.handleChange}
               />
               <Form.TextArea
-                label="WorkOrder Desc"
-                placeholder="Enter Description of your Work Order"
+                label="Work Order Description"
                 name="Issue"
                 value={Issue}
                 onChange={this.handleChange}
               />
               <Form.Input
-                fluid
+                icon="phone"
+                iconPosition="left"
                 label="Phone Number"
-                placeholder="Phone Number"
                 name="TenantPhone"
                 value={TenantPhone}
                 onChange={this.handleChange}
               />
             </Form>
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column mobile={16} computer={8} tablet={8} style={styles.imageColumn}>
             <Icon name="file image outline" size="massive" />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Form>
-            <Form.Checkbox label="Permission to Enter?" />
-            <Button type="submit" onClick={this.handleSubmit}>
-              Submit
-            </Button>
-          </Form>
+          <Grid.Column>
+            <Form>
+              <Form.Checkbox label="Permission to enter residence without tenant present" />
+              <Button secondary type="submit" onClick={this.handleSubmit}>
+                Submit
+              </Button>
+            </Form>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     );
   }
 }
+
+const styles = {
+  imageColumn: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    paddingTop: '2rem',
+  },
+  maintenanceInfo: {
+    maxWidth: '270px',
+    marginTop: '1.59rem',
+  },
+};
 
 export default WorkOrders;
