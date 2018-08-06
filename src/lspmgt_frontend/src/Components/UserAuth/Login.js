@@ -23,10 +23,12 @@ class Login extends Component {
     this.setState({ loader: true });
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
-        // let isAdmin = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
+        let user = data.signInUserSession.idToken.payload['custom:access_level'];
+
+        // let status = data.idToken.payload['custom:access_level'] == 'admin' ? 'admin' : 'tenant';
 
         this.setState({ loader: false });
-        this.props.signInUser(true);
+        this.props.signInUser(user);
         this.props.history.push('/dashboard');
       })
       .catch((err) => {

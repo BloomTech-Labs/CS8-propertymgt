@@ -139,8 +139,8 @@ class AddTenant extends Component {
     };
 
     Auth.signUp({
-      username: this.state.Email,
-      password: this.state.Password,
+      username: this.state.T1Email,
+      password: '!Test123', // temp pwd hard coded, it will need to be replaced by a random hash gen pwd
       attributes: {
         'custom:access_level': 'tenant',
       },
