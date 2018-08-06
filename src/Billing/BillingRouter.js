@@ -14,12 +14,12 @@ const getCustomer = (req, res) => {
 //   Return Card Info
 
 const getTenant = (req, res) => {
-  const { Id } = req.params;
-  console.log(Id);
+  // const Id = req.params;
+  // console.log(Id);
   const params = {
     TableName: 'Tenants',
     Key: {
-      propertyId: Id,
+      tenantId: req.params.id,
     },
   };
 
@@ -27,7 +27,7 @@ const getTenant = (req, res) => {
     console.log(data);
     if (dbErr) res.status(400).json({ status: 'db Error', dbErr });
     // else res.status(200).json({ data });
-    stripe.customers.retrieve(data.stripeId, (stripeErr, customer) => {
+    stripe.customers.retrieve(data.Item.stripeId, (stripeErr, customer) => {
       if (stripeErr) res.status(500).json({ status: 'stripe Error', stripeErr });
       else res.status(200).json({ customer });
     });
