@@ -9,10 +9,10 @@ class BillingForm extends React.Component {
     return (
       <Grid.Row>
         <Grid.Column width={3}>
-          <p>Saved Card Info of property {property}</p>
+          <p>Saved Card Info of {property}</p>
         </Grid.Column>
         <Grid.Column width={13}>
-          <p>Rent History of property {property}</p>
+          <p>Rent History of {property}</p>
         </Grid.Column>
       </Grid.Row>
     );

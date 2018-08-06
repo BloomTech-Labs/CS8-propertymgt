@@ -11,6 +11,9 @@ import {
   Container,
 } from 'semantic-ui-react';
 import axios from 'axios';
+import Amplify, { Auth } from 'aws-amplify';
+import AmplifyConfig from '../../../Config/Auth';
+Amplify.configure(AmplifyConfig);
 
 class AddTenant extends Component {
   constructor() {
@@ -31,6 +34,7 @@ class AddTenant extends Component {
       StartD: '',
       EndD: '',
       SelectedProperty: '', // selected property from dropdown menu **using to get admin and selected property id's
+      propertyId: '',
       LoP: [], // list of properties
     };
     this.handleInput = this.handleInput.bind(this);
@@ -40,7 +44,7 @@ class AddTenant extends Component {
     this.setProperty = this.setProperty.bind(this);
   }
 
-  // Gets available properties without a contract
+  // Populates LoP
   componentDidMount() {
     axios
       .get('http://localhost:5000/api/property/all')
@@ -48,7 +52,6 @@ class AddTenant extends Component {
         this.setState({
           LoP: res.data.data.Items,
         });
-        console.log(this.state.LoP);
       })
       .catch((error) => {
         console.log('Error in AddTenant GET..', error);
@@ -78,7 +81,7 @@ class AddTenant extends Component {
     console.log('sendContract triggered..');
   };
 
-  // Sets input from form to state
+  // Handles input
   handleInput = (e) => {
     const { name, value } = e.target;
     this.setState({
@@ -86,8 +89,7 @@ class AddTenant extends Component {
     });
   };
 
-  // TODO: BROKEN
-  // Sends data to server
+  // Handle final submit
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -106,12 +108,19 @@ class AddTenant extends Component {
       StartD,
       EndD,
       SelectedProperty,
+      propertyId,
       LoP,
     } = this.state;
 
-    // const { propertyId } = SelectedProperty; // SelectedProperty only has an address in "value"
-    console.log('Hi..', LoP);
-    console.log('Hello..', SelectedProperty);
+    // Gets property id from property address or selectedproperty
+    for (let i = 0; i < LoP.length; i++) {
+      if (SelectedProperty === LoP[i].PropertyAddr) {
+        this.setState({
+          propertyId: LoP[i].propertyId,
+        });
+        console.log('list of property id -->', LoP[i].propertyId, '\npropertyId -->', propertyId);
+      }
+    }
 
     const toTenants = {
       T1Name,
@@ -126,36 +135,46 @@ class AddTenant extends Component {
       T2NotiE,
       StartD,
       EndD,
-      // propertyId,
+      propertyId,
     };
 
-    axios
-      .post('http://localhost:5000/api/addtenant/add', toTenants)
-      .then(
-        // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
-        //   console.log(res);
-        // })
-        console.log('step2')
-      )
-      .catch((error) => {
-        console.log('Error in AddTenant POST..', error);
-      });
+    Auth.signUp({
+      username: this.state.T1Email,
+      password: '!Test123', // temp pwd hard coded, it will need to be replaced by a random hash gen pwd
+      attributes: {
+        'custom:access_level': 'tenant',
+      },
+    }).then((data) => {
+      console.log('user signed up -> ', data);
 
-    // const T = [];
-    // T.push('testTId');
-    // T.push('testTId');
+      axios
+        .post('http://localhost:5000/api/addtenant/add', toTenants)
+        .then(
+          // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
+          //   console.log(res);
+          // })
+          console.log('step2')
+        )
+        .catch((error) => {
+          console.log('Error in AddTenant POST..', error);
+        });
 
-    // const toLSDB = {
-    //   propertyId: 'testId',
-    //   tenants: T,
-    // };
+      // const T = [];
+      // T.push('testTId');
+      // T.push('testTId');
 
-    // axios
-    //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
-    //   .then()
-    //   .catch((error) => {
-    //     console.log('Error in AddTenant POST for LSDB..', error);
-    //   });
+      // const toLSDB = {
+      //   propertyId: 'testId',
+      //   tenants: T,
+      // };
+
+      // axios
+      //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
+      //   .then()
+      //   .catch((error) => {
+      //     console.log('Error in AddTenant POST for LSDB..', error);
+      //   });
+    });
 
     this.setState({
       T1Name: '',
@@ -170,11 +189,12 @@ class AddTenant extends Component {
       T2NotiE: false,
       StartD: '',
       EndD: '',
-      PropertyAddr: '',
-      Contract: false,
+      SelectedProperty: '',
+      propertyId: '',
     });
   };
 
+  // Handles checkboxes
   handleCheck = (e) => {
     const { target } = e;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -182,14 +202,25 @@ class AddTenant extends Component {
     this.setState({
       [name]: value,
     });
-    // console.log('after handleClick..', name, value);
+    console.log('after handleClick..', name, value);
+  };
+
+  getPropertyId = (address) => {
+    const { LoP } = this.state;
+    for (let i = 0; i < LoP.length; i++) {
+      if (address === LoP[i].PropertyAddr) {
+        // console.log(PropertyList[i].propertyId);
+        return LoP[i].propertyId;
+      }
+    }
   };
 
   setProperty = (e, { name, value }) => {
-    // console.log('setProperty triggered..');
-    // console.log('name', name, 'value', value);
+    console.log('setProperty triggered..');
+    console.log('name', name, 'value', value);
     this.setState({
       [name]: value,
+      propertyId: this.getPropertyId(value),
     });
   };
 
@@ -207,11 +238,9 @@ class AddTenant extends Component {
       T2NotiE,
       StartD,
       EndD,
-      SelectedProperty,
     } = this.state;
 
-    const testArr = this.getLoP();
-    console.log('testArr..', testArr);
+    const theLoP = this.getLoP();
 
     return (
       <Grid>
@@ -327,7 +356,7 @@ class AddTenant extends Component {
               placeholder="Select a property"
               selection
               name="SelectedProperty"
-              options={testArr}
+              options={theLoP}
               onChange={this.setProperty}
             />
             <Button type="submit" onClick={this.sendContract} primary>

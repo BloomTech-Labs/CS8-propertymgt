@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Grid, Menu } from 'semantic-ui-react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
+  AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,
@@ -12,24 +13,33 @@ import {
   TenantWorkOrders,
   TenantSettings,
 } from './Components';
+import { connect } from 'react-redux';
+import { signOUtUser } from '../Redux/Actions';
 
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 
 Amplify.configure(AmplifyConfig);
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeItem: 'home',
+      isAdmin: false,
     };
+  }
+
+  componentDidUpdate() {
+    // this.props.getUser();
+    console.log('did update in dashboard -> ', this.props);
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = this.props.isAdmin;
+    let display = this.props.isAdmin == 'admin';
+    console.log('dashboard check -->  ', this.props);
     return (
       <Container fluid>
         {display ? (
@@ -107,6 +117,7 @@ const SideBarAdmin = (props) => {
         <Grid.Column>
           <Container fluid>
             <Route path="/properties" component={AdminProperties} />
+            <Route path="/addproperty" component={AdminAddProperty} />
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />
@@ -186,6 +197,22 @@ const SideBarTenant = (props) => {
     // </Container>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    getUser: state,
+    isAdmin: state.isAdmin,
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { signOUtUser }
+  )(Dashboard)
+);
+
+// export default Dashboard;
 
 const textStyles = {
   color: 'whitesmoke',

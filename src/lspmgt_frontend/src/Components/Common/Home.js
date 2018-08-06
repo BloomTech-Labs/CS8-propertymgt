@@ -20,18 +20,21 @@ Amplify.configure(AmplifyConfig);
 class Home extends Component {
   state = {
     allow: false,
+    isAdmin: false,
   };
 
   componentDidMount() {
+    console.log('checking for user auth -> ', this.props);
     this.props.getUserStatus();
     this.setState({
-      allow: this.props.isAdmin,
+      allow: this.props.isLoggedIn,
     });
   }
 
   render() {
-    if (this.props.isAdmin) {
-      return <Dashboard />;
+    console.log('this is home checking user ->  ', this.props);
+    if (this.props.isLoggedIn) {
+      return <Dashboard isAdmin={this.props} />;
     }
     return (
       <Container fluid>
@@ -48,6 +51,7 @@ const mapStateToProps = (state) => {
   return {
     getUser: state,
     isAdmin: state.isAdmin,
+    isLoggedIn: state.isLoggedIn,
   };
 };
 
