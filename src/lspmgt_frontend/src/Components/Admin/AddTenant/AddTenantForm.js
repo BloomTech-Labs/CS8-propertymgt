@@ -328,6 +328,14 @@ class AddTenantForm extends Component {
         </Grid.Row>
         <Grid.Row>
           <Message>
+            <Message.Header>Enter Tenant Payment</Message.Header>
+            <Form>
+              <CardElement />
+            </Form>
+          </Message>
+        </Grid.Row>
+        <Grid.Row>
+          <Message>
             <Message.Header>Housing Information</Message.Header>
             <Icon name="calendar alternate outline" />
             <Input
@@ -350,9 +358,7 @@ class AddTenantForm extends Component {
             </Button>
           </Message>
         </Grid.Row>
-        <Grid.Row>
-          <CardElement />
-        </Grid.Row>
+
         <Grid.Row>
           <Button type="submit" onClick={this.handleSubmit} primary>
             Save

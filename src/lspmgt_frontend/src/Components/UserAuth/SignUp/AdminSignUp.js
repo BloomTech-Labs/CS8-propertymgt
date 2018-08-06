@@ -4,6 +4,10 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Checkout from './Checkout';
 
+// *************************
+// TO BE PHASED OUT -- DEPRECIATED
+// *************************
+
 class AdminSignUp extends Component {
   render() {
     return (
