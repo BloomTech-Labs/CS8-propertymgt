@@ -29,7 +29,7 @@ class Payments extends Component {
         </Grid.Row>
         <Grid.Row style={styles.paymentHeader}>
           <Grid.Column mobile={16}>
-            <Header as="h2">Payment Details</Header>
+            <Header as="h2">Make a Payment</Header>
           </Grid.Column>
         </Grid.Row>
 
