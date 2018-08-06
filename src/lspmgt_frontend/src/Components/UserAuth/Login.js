@@ -5,45 +5,32 @@ import { Link, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
+import { Loader } from '../Common/Components';
 
 import { connect } from 'react-redux';
 import { signInUser } from '../Redux/Actions';
 
 Amplify.configure(AmplifyConfig);
 
-
-import TenantLogin from './TenantLogin';
-import AdminLogin from './AdminLogin';
-
 class Login extends Component {
   state = {
     username: '',
     password: '',
-    // isLoggedIn: false,
-    // isAdmin: false
+    loader: false,
   };
 
-  // componentDidMount() {
-
-  //   Auth.currentSession()
-  //   .then(data => {
-  //     data.idToken.payload['custom:access_level'] == 'admin' ?
-  //     this.props.history.push('/admin/dashboard') :
-  //     this.props.history.push('/tenant/dashboard');
-  //   })
-  //   .catch(err => console.log(err))
-  // }
-
   handleSignin = () => {
+    this.setState({ loader: true });
     Auth.signIn(this.state.username, this.state.password)
       .then((data) => {
-
         // let isAdmin = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
-        this.props.signInUser(true)
-        this.props.history.push('/dashboard')
 
+        this.setState({ loader: false });
+        this.props.signInUser(true);
+        this.props.history.push('/dashboard');
       })
       .catch((err) => {
+        this.setState({ loader: false });
         console.log('THERE WAS AN ERROR -> ', err);
       });
   };
@@ -54,19 +41,13 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(Amplify);
     this.handleSignin();
   };
 
   render() {
-
-    // if (this.state.isAdmin) {
-    //   console.log('signing in and redirecting')
-    //   return <Redirect to='/dashboard' path='/dashboard' />
-    // }
-
     return (
       <Container>
+        <Loader stat={this.state.loader} />
         <Grid inverted textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h1" color="blue" textAlign="center">
@@ -92,17 +73,16 @@ class Login extends Component {
                   name="password"
                   onChange={this.handleInput}
                 />
-                <Segment >
+                <Segment>
                   <Button fluid size="large">
                     Login
-                </Button>
+                  </Button>
                   {/* <Link to="/">
                   <Button size='large'>Back</Button>
                 </Link> */}
                 </Segment>
               </Segment>
             </Form>
-
           </Grid.Column>
         </Grid>
       </Container>
@@ -110,11 +90,16 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   console.log('this is maptoprops --> ', state);
   return {
-    isAdmin: state
+    isAdmin: state,
   };
 };
 
-export default withRouter(connect(mapStateToProps, { signInUser })(Login));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { signInUser }
+  )(Login)
+);

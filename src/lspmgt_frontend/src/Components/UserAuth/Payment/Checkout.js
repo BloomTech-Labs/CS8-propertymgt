@@ -6,6 +6,7 @@ class Checkout extends Component {
   render() {
     return (
       <Elements>
+        <h1> ADMIN SIGNUP checkout </h1>
         <PaymentForm />
       </Elements>
     );
