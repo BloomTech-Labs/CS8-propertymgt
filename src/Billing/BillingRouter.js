@@ -1,3 +1,4 @@
+const db = require('../Config/AwsConfig');
 // NEW THINGS
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
@@ -12,6 +13,25 @@ const getCustomer = (req, res) => {
 //   Use Stripe ID to get customer card info
 //   Return Card Info
 
-const getTenant = (req, res) => {};
+const getTenant = (req, res) => {
+  const { Id } = req.params;
+  console.log(Id);
+  const params = {
+    TableName: 'Tenants',
+    Key: {
+      propertyId: Id,
+    },
+  };
 
-module.exports = { getCustomer };
+  db.get(params, (dbErr, data) => {
+    console.log(data);
+    if (dbErr) res.status(400).json({ status: 'db Error', dbErr });
+    // else res.status(200).json({ data });
+    stripe.customers.retrieve(data.stripeId, (stripeErr, customer) => {
+      if (stripeErr) res.status(500).json({ status: 'stripe Error', stripeErr });
+      else res.status(200).json({ customer });
+    });
+  });
+};
+
+module.exports = { getCustomer, getTenant };
