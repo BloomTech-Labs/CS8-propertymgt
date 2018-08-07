@@ -29,6 +29,7 @@ class AdminSignUp extends Component {
 
     const temp = { User: this.state };
 
+    // Creates the token for stripe
     this.props.stripe.createToken().then((token) => {
       this.setState({
         stripeToken: token,

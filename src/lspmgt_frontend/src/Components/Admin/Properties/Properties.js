@@ -11,10 +11,13 @@ class Properties extends Component {
     super();
     this.state = {
       list: [],
+      test: {},
+      tenantList: [],
     };
     this.desc = this.desc.bind(this);
     this.addr = this.addr.bind(this);
     this.checkForContract = this.checkForContract.bind(this);
+    this.getTenant = this.getTenant.bind(this);
   }
 
   // Gets data from server and adds it to state
@@ -24,6 +27,17 @@ class Properties extends Component {
       .then((response) => {
         this.setState({
           list: response.data.data.Items,
+        });
+      })
+      .catch((error) => {
+        console.log('In Properties component: ', error);
+      });
+
+    axios
+      .get('http://localhost:5000/api/property/alltenants')
+      .then((response) => {
+        this.setState({
+          tenantList: response.data.data.Items,
         });
       })
       .catch((error) => {
@@ -75,17 +89,29 @@ class Properties extends Component {
     // console.log('My property address is located at..', x);
     const address = property[Object.keys(property)[x]];
 
-    // Get Tenants array
-    x = array.indexOf('Tenants');
-    console.log('My tenants are located at..', x);
-    const tenants = property[Object.keys(property)[x]];
-    // console.log('My tenants are..', tenants);
+    // Get tenant object off of tenant table
+    // this.getTenant(id);
+    const { tenantList } = this.state;
+    console.log('tenant list is here -->', tenantList);
+    // const tenant1 = tenantList.find((FUCKINGTENANT) => FUCKINGTENANT.propertyId === id).NameT;
+    const tenant1 = 'abc';
+    console.log('tenant1 is -->', tenant1);
 
-    // Get Start/ End dates
-    x = array.indexOf('StartD');
-    const startD = property[Object.keys(property)[x]];
-    x = array.indexOf('EndD');
-    const endD = property[Object.keys(property)[x]];
+    // const array2 = Object.keys(test);
+    // console.log('My array of attributes -->', array2);
+
+    // // Get Tenants array
+    // x = array2.indexOf('NameT');
+    // // let y = array2.indexOf('T2');
+    // console.log('My tenants are located at..', x);
+    // const tenants = test[Object.keys(test)[x]];
+    // // console.log('My tenants are..', tenants);
+
+    // // Get Start/ End dates
+    // x = array2.indexOf('StartD');
+    // const startD = test[Object.keys(test)[x]];
+    // x = array2.indexOf('EndD');
+    // const endD = test[Object.keys(test)[x]];
 
     // Get Contract
     x = array.indexOf('Contract');
@@ -111,7 +137,7 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="user" />
               </Feed.Label>
-              <Feed.Content>{this.displayTenants(tenants)}</Feed.Content>
+              <Feed.Content>{tenant1}, abc</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
@@ -119,9 +145,7 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="calendar alternate outline" />
               </Feed.Label>
-              <Feed.Content>
-                {startD} - {endD}
-              </Feed.Content>
+              <Feed.Content>abc - abc</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
@@ -135,6 +159,20 @@ class Properties extends Component {
         </Card.Content>
       </Card>
     );
+  };
+
+  getTenant = (propertyId) => {
+    axios
+      .get(`http://localhost:5000/api/property/tenant/${propertyId}/${123}`)
+      .then((res) => {
+        console.log('res is here -->', res.data.data.Items[0]);
+        this.setState({
+          test: res.data.data.Items[0],
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {

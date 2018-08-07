@@ -9,6 +9,6 @@ router.get('/signup', signup);
 router.get('/signin', signin);
 router.get('/admin/list', list);
 router.get('/tenant/list', listTenants);
-router.get('/tenant/signup', tenantSignup);
+// router.get('/tenant/signup', tenantSignup);
 
 module.exports = router;

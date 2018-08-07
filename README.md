@@ -43,3 +43,18 @@
 | Method | Endpoint (/billing) | Description |
 | ------ | ------------------- | ----------- |
 
+
+## Stack
+
+| Tech             | Description              |
+| ---------------- | ------------------------ |
+| Heroku           | Hosts our website        |
+| Node.js          | Used to write our apis   |
+| React            | Library for building app |
+| Redux            | State handling           |
+| React-Router-Dom | Used to navigate app     |
+| Semantic UI      | Styling                  |
+| Stripe           | Handles payment method   |
+| AWS - DynamoDB   | Database                 |
+| AWS - Cognito    | Authentication           |
+| AWS - S3         | Document database        |

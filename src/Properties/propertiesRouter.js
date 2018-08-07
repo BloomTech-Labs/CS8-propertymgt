@@ -4,7 +4,6 @@ const dd = require('../Config/AwsConfig');
 // const dbModel = require('../Config/DbModel');
 // const { Admin } = require('../Config/DynamoDbTables');
 const hashingId = require('../Common/HashingId');
-const hashingId2 = require('../Common/HashingId2');
 
 // TODO: Do not push stripe key to github
 const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
@@ -30,17 +29,29 @@ const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 // };
 
 // // Returns items in table with specified filter
-// const scanF = (myTableName, myAdminId, p) => {
-//   const params = {
-//     TableName: myTableName,
-//     FilterExpression: 'Admin = :this_admin',
-//     ExpressionAttributeValues: { ':this_admin': myAdminId },
-//   };
-//   dd.scan(params, (err, data) => {
-//     if (err) console.log(err);
-//     else console.log(data);
-//   });
-// };
+const scanF = (req, res) => {
+  const { pid, test } = req.params;
+  console.log('my id ==>', typeof id);
+  const params = {
+    TableName: 'Tenants',
+    FilterExpression: 'propertyId = :this_p AND propertyId > :this_test',
+    ExpressionAttributeValues: { ':this_p': pid, ':this_test': test },
+  };
+
+  // const params2 = {
+  //   TableName: 'Tenants',
+  //   FilterExpression: 'propertyId = :this_p',
+  //   ExpressionAttributeValues: { ':this_p': id },
+  // };
+
+  dd.scan(params, (err, data) => {
+    if (err) {
+      console.log('Err after scan', err);
+      res.status(404).json({ msg: 'Error', data });
+    } else console.log('my data ==>', data);
+    res.status(200).json({ msg: 'success', data });
+  });
+};
 
 // // Get list of tenants with specified admin Id to filter with
 // const scanForTenants = (req, res) => {
@@ -90,7 +101,6 @@ const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 //   });
 // };
 
-// TODO: BROKEN UNTIL addTenant and addProperty are fully featured
 // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {
 const properties = (req, res) => {
@@ -102,6 +112,18 @@ const properties = (req, res) => {
     if (error) {
       res.status(404).json({ error });
     } else res.status(200).json({ status: 'success', data });
+  });
+};
+
+const getAllTenants = (req, res) => {
+  const params = {
+    TableName: 'Tenants',
+  };
+
+  dd.scan(params, (error, data) => {
+    if (error) {
+      res.status(404).json({ msg: error in getAllTenants, error });
+    } else res.status(200).json({ msg: 'success', data });
   });
 };
 
@@ -128,8 +150,8 @@ const addProperty = (req, res) => {
   //   Contract,
   // };
 
-  console.log('this is hashingId -->', hashingId);
-  console.log('this is hashingId2 -->', hashingId2);
+  console.log('this is hashingId() -->', hashingId());
+  console.log('this is hashingId() -->', hashingId());
 
   const params = {
     TableName: 'Properties',
@@ -272,8 +294,10 @@ const updateProperty = (req, res) => {
 module.exports = {
   // lsdb,
   // propertieslsdb,
+  scanF,
   properties,
   addProperty,
   deleteProperty,
   updateProperty,
+  getAllTenants,
 };
