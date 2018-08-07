@@ -9,6 +9,7 @@ import {
   Checkbox,
   Button,
   Container,
+  Divider,
   Header,
   Select,
 } from 'semantic-ui-react';
@@ -377,6 +378,7 @@ class AddTenant extends Component {
             </Button>
           </Grid.Column>
         </Grid.Row>
+        <Divider />
         <Grid.Row>
           <Grid.Column mobile={16} tablet={16} computer={3}>
             <Button fluid type="submit" onClick={this.handleSubmit} primary>
