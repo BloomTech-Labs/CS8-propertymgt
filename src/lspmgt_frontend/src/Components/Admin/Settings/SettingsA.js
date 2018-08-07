@@ -74,12 +74,19 @@ class SettingsA extends Component {
           <Header as="h2">Password Reset</Header>
           <Form>
             {/* <Form.Field control={Input} label="Old Password" /> */}
-            <Form.Field icon="key" iconPosition="left" control={Input} label="New Password" />
+            <Form.Field
+              icon="key"
+              iconPosition="left"
+              control={Input}
+              label="New Password"
+              type="password"
+            />
             <Form.Field
               icon="protect"
               iconPosition="left"
               control={Input}
               label="Re-enter Password"
+              type="password"
             />
             <Button secondary>Save</Button>
           </Form>

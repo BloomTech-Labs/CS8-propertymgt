@@ -23,12 +23,19 @@ class Settings extends Component {
           </Form>
           <Header as="h2">Password Reset</Header>
           <Form>
-            <Form.Field icon="key" iconPosition="left" control={Input} placeholder="New Password" />
+            <Form.Field
+              icon="key"
+              iconPosition="left"
+              control={Input}
+              placeholder="New Password"
+              type="password"
+            />
             <Form.Field
               icon="protect"
               iconPosition="left"
               control={Input}
               placeholder="Re-enter Password"
+              type="password"
             />
             <Button secondary>Save</Button>
           </Form>
