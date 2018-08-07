@@ -246,7 +246,7 @@ class AddTenant extends Component {
     return (
       <Grid>
         <Grid.Row columns={2}>
-          <Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
             <Form>
               <Header>Tenant #1</Header>
               <Form.Field
@@ -288,7 +288,7 @@ class AddTenant extends Component {
               </Form.Group>
             </Form>
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
             <Form>
               <Header>Tenant #2</Header>
               <Form.Field
@@ -332,8 +332,8 @@ class AddTenant extends Component {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column>
-            <Form>
+          <Grid.Column mobile={16} tablet={16} computer={13}>
+            <Form widths="equal">
               <Header>Housing Information</Header>
               <Form.Group>
                 <Form.Field
@@ -345,7 +345,7 @@ class AddTenant extends Component {
                   name="StartD"
                   value={StartD}
                   onChange={this.handleInput}
-                  width={4}
+                  width={5}
                 />
 
                 <Form.Field
@@ -357,7 +357,7 @@ class AddTenant extends Component {
                   name="EndD"
                   value={EndD}
                   onChange={this.handleInput}
-                  width={4}
+                  width={5}
                 />
                 <Form.Field
                   placeholder="Select a property"
@@ -365,15 +365,21 @@ class AddTenant extends Component {
                   name="Selected Property"
                   options={theLoP}
                   onChange={this.setProperty}
-                  width={4}
+                  width={6}
                 />
-                <Button type="submit" onClick={this.sendContract} primary>
-                  <Icon name="paper plane outline" />Send Contract
-                </Button>
               </Form.Group>
             </Form>
-
-            <Button type="submit" onClick={this.handleSubmit} primary>
+          </Grid.Column>
+          <Grid.Column mobile={16} tablet={16} computer={3}>
+            <Header as="h3"> Contract </Header>
+            <Button fluid type="submit" onClick={this.sendContract} primary>
+              <Icon name="paper plane outline" />Send
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <Button fluid type="submit" onClick={this.handleSubmit} primary>
               Save
             </Button>
           </Grid.Column>
