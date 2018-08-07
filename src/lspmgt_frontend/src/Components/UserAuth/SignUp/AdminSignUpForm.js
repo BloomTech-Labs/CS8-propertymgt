@@ -43,17 +43,18 @@ class AdminSignUp extends Component {
       },
     }).then((data) => {
       console.log('user signed up -> ', data);
-    });
-    // .catch((err) => console.log('there was an error -> '), err);
 
-    // axios
-    //   .post('http://localhost:5000/users/admin/signup', temp)
-    //   .then((res) => {
-    //     console.log('Posted user..', res);
-    //   })
-    //   .catch((err) => {
-    //     console.log('Error in SignUpForm', err);
-    //   });
+      // .catch((err) => console.log('there was an error -> '), err);
+
+      // axios
+      //   .post('http://localhost:5000/users/admin/signup', temp)
+      //   .then((res) => {
+      //     console.log('Posted user..', res);
+      //   })
+      //   .catch((err) => {
+      //     console.log('Error in SignUpForm', err);
+      //   });
+    });
   };
 
   // determines if submit button displays using boolean
