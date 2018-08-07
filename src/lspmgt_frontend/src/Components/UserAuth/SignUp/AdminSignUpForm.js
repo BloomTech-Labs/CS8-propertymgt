@@ -68,48 +68,47 @@ class AdminSignUp extends Component {
 
     return (
       <Form>
-        <Form.Group widths="equal">
-          <Form.Input
-            label="Name"
-            placeholder="Admin name.."
-            type="text"
-            name="Name"
-            value={Name}
-            onChange={this.handleInput}
-          />
-          <Form.Input
-            label="Email"
-            placeholder="Tenant email.."
-            type="text"
-            name="Email"
-            value={Email}
-            onChange={this.handleInput}
-          />
-          <Form.Input
-            label="Phone"
-            placeholder="Admin phone.."
-            type="text"
-            name="Phone"
-            value={Phone}
-            onChange={this.handleInput}
-          />
-          <Form.Input
-            label="Password"
-            placeholder="Enter Password"
-            type="text"
-            name="Password"
-            value={Password}
-            onChange={this.handleInput}
-          />
-          <Form.Input
-            label="RetypePassword"
-            placeholder="Confirm your Password"
-            type="text"
-            name="RetypePassword"
-            value={RetypePassword}
-            onChange={this.handleInput}
-          />
-        </Form.Group>
+        <Form.Field
+          label="Name"
+          placeholder="Admin name.."
+          control={Input}
+          type="text"
+          name="Name"
+          value={Name}
+          onChange={this.handleInput}
+        />
+        <Form.Field
+          label="Email"
+          placeholder="Tenant email.."
+          type="text"
+          name="Email"
+          value={Email}
+          onChange={this.handleInput}
+        />
+        <Form.Field
+          label="Phone"
+          placeholder="Admin phone.."
+          type="text"
+          name="Phone"
+          value={Phone}
+          onChange={this.handleInput}
+        />
+        <Form.Field
+          label="Password"
+          placeholder="Enter Password"
+          type="text"
+          name="Password"
+          value={Password}
+          onChange={this.handleInput}
+        />
+        <Form.Field
+          label="RetypePassword"
+          placeholder="Confirm your Password"
+          type="text"
+          name="RetypePassword"
+          value={RetypePassword}
+          onChange={this.handleInput}
+        />
         <CardElement />
         <Button disabled={!this.canBeDisplayed()} type="Submit" onClick={this.handleSubmit}>
           Submit
