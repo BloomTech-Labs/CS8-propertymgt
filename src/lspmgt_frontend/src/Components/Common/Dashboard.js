@@ -57,73 +57,70 @@ class Dashboard extends Component {
 
 const SideBarAdmin = (props) => {
   return (
-    <Grid container>
-      <Grid.Column>
-        <Grid.Column>
-          <Menu pointing vertical stackable>
-            {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
+    <Grid columns={2} relaxed>
+      <Grid.Column mobile={16} computer={4} tablet={4}>
+        <Menu pointing fluid vertical inverted>
+          <Link to="/properties">
+            <Menu.Item
+              name="Properties"
+              active={props.activeItem === 'Properties'}
+              onClick={props.handleItemClick}
+            >
+              Properties
+            </Menu.Item>
+          </Link>
 
-            <Link to="/properties">
-              <Menu.Item
-                name="Properties"
-                active={props.activeItem === 'Properties'}
-                onClick={props.handleItemClick}
-              >
-                Properties
-              </Menu.Item>
-            </Link>
+          <Link to="/workorders">
+            <Menu.Item
+              name="friends"
+              active={props.activeItem === 'Word Orders'}
+              onClick={props.handleItemClick}
+            >
+              Work Orders
+            </Menu.Item>
+          </Link>
 
-            <Link to="/workorders">
-              <Menu.Item
-                name="friends"
-                active={props.activeItem === 'Word Orders'}
-                onClick={props.handleItemClick}
-              >
-                Work Orders
-              </Menu.Item>
-            </Link>
+          <Link to="/addtenant">
+            <Menu.Item
+              name="friends"
+              active={props.activeItem === 'Add Tenant'}
+              onClick={props.handleItemClick}
+            >
+              Add Tenant
+            </Menu.Item>
+          </Link>
 
-            <Link to="/addtenant">
-              <Menu.Item
-                name="friends"
-                active={props.activeItem === 'Add Tenant'}
-                onClick={props.handleItemClick}
-              >
-                Add Tenant
-              </Menu.Item>
-            </Link>
+          <Link to="/billing">
+            <Menu.Item
+              name="friends"
+              active={props.activeItem === 'Billing'}
+              onClick={props.handleItemClick}
+            >
+              Billing
+            </Menu.Item>
+          </Link>
 
-            <Link to="/billing">
-              <Menu.Item
-                name="friends"
-                active={props.activeItem === 'Billing'}
-                onClick={props.handleItemClick}
-              >
-                Billing
-              </Menu.Item>
-            </Link>
-
-            <Link to="/settings">
-              <Menu.Item
-                name="friends"
-                active={props.activeItem === 'Settings'}
-                onClick={props.handleItemClick}
-              >
-                Settings
-              </Menu.Item>
-            </Link>
-          </Menu>
-        </Grid.Column>
-        <Grid.Column>
-          <Container fluid>
-            <Route path="/properties" component={AdminProperties} />
-            <Route path="/addproperty" component={AdminAddProperty} />
+          <Link to="/settings">
+            <Menu.Item
+              name="friends"
+              active={props.activeItem === 'Settings'}
+              onClick={props.handleItemClick}
+            >
+              Settings
+            </Menu.Item>
+          </Link>
+        </Menu>
+      </Grid.Column>
+      <Grid.Column mobile={16} computer={12} tablet={12}>
+        <Container>
+          <Switch>
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />
             <Route path="/settings" component={AdminSettings} />
-          </Container>
-        </Grid.Column>
+            <Route component={AdminProperties} />
+          </Switch>
+        </Container>
       </Grid.Column>
     </Grid>
   );
@@ -131,13 +128,9 @@ const SideBarAdmin = (props) => {
 
 const SideBarTenant = (props) => {
   return (
-    // <Container fluid>
     <Grid columns={2} relaxed>
-      {/* <Grid.Row mobile={16} computer={8} columns={2}> */}
       <Grid.Column mobile={16} computer={4} tablet={4}>
-        <Menu vertical fluid inverted>
-          {/* <Menu.Item name='Home' active={props.activeItem === 'home'} onClick={props.handleItemClick} /> */}
-
+        <Menu pointing fluid vertical inverted>
           <Link to="/dashboard">
             <Menu.Item
               name="Dashboard"
@@ -194,7 +187,6 @@ const SideBarTenant = (props) => {
         </Container>
       </Grid.Column>
     </Grid>
-    // </Container>
   );
 };
 

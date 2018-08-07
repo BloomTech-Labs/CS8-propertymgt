@@ -9,6 +9,9 @@ import {
   Checkbox,
   Button,
   Container,
+  Divider,
+  Header,
+  Select,
 } from 'semantic-ui-react';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
@@ -81,7 +84,6 @@ class AddTenant extends Component {
     console.log('sendContract triggered..');
   };
 
-  // Handles input
   handleInput = (e) => {
     const { name, value } = e.target;
     this.setState({
@@ -245,133 +247,155 @@ class AddTenant extends Component {
     return (
       <Grid>
         <Grid.Row columns={2}>
-          <Grid.Column>
-            <Message>
-              <Message.Header>Tenant #1</Message.Header>
-              <Form className="form1">
-                <Form.Input
-                  name="T1Name"
-                  value={T1Name}
-                  onChange={this.handleInput}
-                  placeholder="Name"
+          <Grid.Column mobile={16} computer={8}>
+            <Form>
+              <Header>Tenant #1</Header>
+              <Form.Field
+                name="T1Name"
+                value={T1Name}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Name"
+              />
+              <Form.Field
+                name="T1Phone"
+                value={T1Phone}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Phone"
+              />
+              <Form.Field
+                name="T1Email"
+                value={T1Email}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Email"
+              />
+              <Form.Group style={styles.t1checkboxes}>
+                <Form.Checkbox
+                  label="Receive Emails?"
+                  name="T1NotiE"
+                  type="checkbox"
+                  checked={T1NotiE}
+                  onChange={this.handleCheck}
                 />
-                <Form.Input
-                  name="T1Phone"
-                  value={T1Phone}
-                  onChange={this.handleInput}
-                  placeholder="Phone"
+                <Form.Checkbox
+                  label="Receive Texts?"
+                  name="T1NotiP"
+                  type="checkbox"
+                  checked={T1NotiP}
+                  onChange={this.handleCheck}
                 />
-                <Form.Input
-                  name="T1Email"
-                  value={T1Email}
-                  onChange={this.handleInput}
-                  placeholder="Email"
-                />
-                <Form.Field>
-                  <label>
-                    Email?
-                    <input
-                      name="T1NotiE"
-                      type="checkbox"
-                      checked={T1NotiE}
-                      onChange={this.handleCheck}
-                    />
-                  </label>
-                </Form.Field>
-                <Form.Field>
-                  <label>
-                    Text?
-                    <input
-                      name="T1NotiP"
-                      type="checkbox"
-                      checked={T1NotiP}
-                      onChange={this.handleCheck}
-                    />
-                  </label>
-                </Form.Field>
-              </Form>
-            </Message>
+              </Form.Group>
+            </Form>
           </Grid.Column>
-          <Grid.Column>
-            <Message>
-              <Message.Header>Tenant #2</Message.Header>
-              <Form>
-                <Form.Input
-                  name="T2Name"
-                  value={T2Name}
-                  onChange={this.handleInput}
-                  placeholder="Name"
+          <Grid.Column mobile={16} computer={8}>
+            <Form>
+              <Header>Tenant #2</Header>
+              <Form.Field
+                name="T2Name"
+                value={T2Name}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Name"
+              />
+              <Form.Field
+                name="T2Phone"
+                value={T2Phone}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Phone"
+              />
+              <Form.Field
+                name="T2Email"
+                value={T2Email}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Email"
+              />
+              <Form.Group>
+                <Form.Checkbox
+                  label="Receive Emails?"
+                  name="T2NotiE"
+                  type="checkbox"
+                  checked={T2NotiE}
+                  onChange={this.handleCheck}
                 />
-                <Form.Input
-                  name="T2Phone"
-                  value={T2Phone}
-                  onChange={this.handleInput}
-                  placeholder="Phone"
+                <Form.Checkbox
+                  label="Receive Texts?"
+                  name="T2NotiP"
+                  type="checkbox"
+                  checked={T2NotiP}
+                  onChange={this.handleCheck}
                 />
-                <Form.Input
-                  name="T2Email"
-                  value={T2Email}
-                  onChange={this.handleInput}
-                  placeholder="Email"
-                />
-                <Form.Field>
-                  <label>
-                    Email?
-                    <input
-                      name="T2NotiE"
-                      type="checkbox"
-                      checked={T2NotiE}
-                      onChange={this.handleCheck}
-                    />
-                  </label>
-                </Form.Field>
-                <Form.Field>
-                  <label>
-                    Text?
-                    <input
-                      name="T2NotiP"
-                      type="checkbox"
-                      checked={T2NotiP}
-                      onChange={this.handleCheck}
-                    />
-                  </label>
-                </Form.Field>
-              </Form>
-            </Message>
+              </Form.Group>
+            </Form>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
-          <Message>
-            <Message.Header>Housing Information</Message.Header>
-            <Icon name="calendar alternate outline" />
-            <Input
-              placeholder="StartDate"
-              name="StartD"
-              value={StartD}
-              onChange={this.handleInput}
-            />
-            -
-            <Input placeholder="EndDate" name="EndD" value={EndD} onChange={this.handleInput} />
-            <Dropdown
-              placeholder="Select a property"
-              selection
-              name="SelectedProperty"
-              options={theLoP}
-              onChange={this.setProperty}
-            />
-            <Button type="submit" onClick={this.sendContract} primary>
-              <Icon name="paper plane outline" />Send Contract
+        <Grid.Row columns={2}>
+          <Grid.Column mobile={16} tablet={16} computer={13}>
+            <Form widths="equal">
+              <Header>Housing Information</Header>
+              <Form.Group>
+                <Form.Field
+                  icon="calendar alternate"
+                  iconPosition="left"
+                  placeholder="Start Date"
+                  control={Input}
+                  type="date"
+                  name="StartD"
+                  value={StartD}
+                  onChange={this.handleInput}
+                  width={5}
+                />
+
+                <Form.Field
+                  icon="calendar alternate"
+                  iconPosition="left"
+                  placeholder="End Date"
+                  control={Input}
+                  type="date"
+                  name="EndD"
+                  value={EndD}
+                  onChange={this.handleInput}
+                  width={5}
+                />
+                <Form.Field
+                  placeholder="Select a property"
+                  control={Select}
+                  name="Selected Property"
+                  options={theLoP}
+                  onChange={this.setProperty}
+                  width={6}
+                />
+              </Form.Group>
+            </Form>
+          </Grid.Column>
+          <Grid.Column mobile={16} tablet={16} computer={3}>
+            <Header as="h3"> Contract </Header>
+            <Button fluid type="submit" onClick={this.sendContract} primary>
+              <Icon name="paper plane outline" />Send
             </Button>
-          </Message>
+          </Grid.Column>
         </Grid.Row>
+        <Divider />
         <Grid.Row>
-          <Button type="submit" onClick={this.handleSubmit} primary>
-            Save
-          </Button>
+          <Grid.Column mobile={16} tablet={16} computer={3}>
+            <Button fluid type="submit" onClick={this.handleSubmit} primary>
+              Save
+            </Button>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     );
   }
 }
+
+const styles = {
+  t1checkboxes: {
+    paddingBottom: '1.4rem',
+    marginBottom: '0',
+  },
+};
 
 export default AddTenant;

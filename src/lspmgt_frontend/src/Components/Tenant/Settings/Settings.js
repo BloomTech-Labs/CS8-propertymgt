@@ -16,20 +16,26 @@ class Settings extends Component {
           <Form>
             <Form.Field icon="at" iconPosition="left" control={Input} label="Email" />
             <Form.Field icon="phone" iconPosition="left" control={Input} label="Phone Number" />
-            <Form.Group style={styles.checkboxes}>
+            <Form.Group>
               <Form.Checkbox label="Receive Texts?" />
               <Form.Checkbox label="Receive Emails?" />
             </Form.Group>
           </Form>
           <Header as="h2">Password Reset</Header>
           <Form>
-            {/* <Form.Field control={Input} label="Old Password" /> */}
-            <Form.Field icon="key" iconPosition="left" control={Input} placeholder="New Password" />
+            <Form.Field
+              icon="key"
+              iconPosition="left"
+              control={Input}
+              placeholder="New Password"
+              type="password"
+            />
             <Form.Field
               icon="protect"
               iconPosition="left"
               control={Input}
               placeholder="Re-enter Password"
+              type="password"
             />
             <Button secondary>Save</Button>
           </Form>
@@ -38,11 +44,5 @@ class Settings extends Component {
     );
   }
 }
-
-const styles = {
-  checkboxes: {
-    paddingTop: '.5rem',
-  },
-};
 
 export default Settings;
