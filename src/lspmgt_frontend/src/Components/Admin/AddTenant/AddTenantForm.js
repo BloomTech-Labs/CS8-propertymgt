@@ -92,96 +92,99 @@ class AddTenantForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    // create Stripe Source from Card Element Below
+    // create Stripe Card Token from Card Element Below
     this.props.stripe.createToken().then((token) => {
       console.log(token);
       this.setState({
         cardToken: token,
       });
-    });
 
-    // Send Tenant object, send PropertyAddr and Contract
-    const {
-      T1Name,
-      T1Phone,
-      T1Email,
-      T1NotiP,
-      T1NotiE,
-      T2Name,
-      T2Phone,
-      T2Email,
-      T2NotiP,
-      T2NotiE,
-      StartD,
-      EndD,
-      SelectedProperty,
-      propertyId,
-      cardToken,
-      LoP,
-    } = this.state;
+      // Send Tenant object, send PropertyAddr and Contract
+      const {
+        T1Name,
+        T1Phone,
+        T1Email,
+        T1NotiP,
+        T1NotiE,
+        T2Name,
+        T2Phone,
+        T2Email,
+        T2NotiP,
+        T2NotiE,
+        StartD,
+        EndD,
+        SelectedProperty,
+        propertyId,
+        cardToken,
+        LoP,
+      } = this.state;
 
-    // Gets property id from property address or selectedproperty
-    for (let i = 0; i < LoP.length; i++) {
-      if (SelectedProperty === LoP[i].PropertyAddr) {
-        this.setState({
-          propertyId: LoP[i].propertyId,
-        });
-        console.log('list of property id -->', LoP[i].propertyId, '\npropertyId -->', propertyId);
+      // Gets property id from property address or selectedproperty
+      for (let i = 0; i < LoP.length; i++) {
+        if (SelectedProperty === LoP[i].PropertyAddr) {
+          this.setState({
+            propertyId: LoP[i].propertyId,
+          });
+          console.log('list of property id -->', LoP[i].propertyId, '\npropertyId -->', propertyId);
+        }
       }
-    }
 
-    const toTenants = {
-      T1Name,
-      T1Phone,
-      T1Email,
-      T1NotiP,
-      T1NotiE,
-      T2Name,
-      T2Phone,
-      T2Email,
-      T2NotiP,
-      T2NotiE,
-      StartD,
-      EndD,
-      propertyId,
-      cardToken,
-    };
+      const toTenants = {
+        T1Name,
+        T1Phone,
+        T1Email,
+        T1NotiP,
+        T1NotiE,
+        T2Name,
+        T2Phone,
+        T2Email,
+        T2NotiP,
+        T2NotiE,
+        StartD,
+        EndD,
+        propertyId,
+        cardToken,
+      };
 
-    axios
-      .post('http://localhost:5000/api/addtenant/add', toTenants)
-      .then(
-        // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
-        //   console.log(res);
-        // })
-        console.log('handleSubmit fired')
-      )
-      .catch((error) => {
-        console.log('Error in AddTenant POST..', error);
+      console.log(toTenants);
+      console.log(this.state);
+
+      axios
+        .post('http://localhost:5000/api/addtenant/add', this.state)
+        .then(
+          // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
+          //   console.log(res);
+          // })
+          console.log('handleSubmit fired')
+        )
+        .catch((error) => {
+          console.log('Error in AddTenant POST..', error);
+        });
+
+      // axios
+      //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
+      //   .then()
+      //   .catch((error) => {
+      //     console.log('Error in AddTenant POST for LSDB..', error);
+      //   });
+
+      this.setState({
+        T1Name: '',
+        T1Phone: '',
+        T1Email: '',
+        T1NotiP: false,
+        T1NotiE: false,
+        T2Name: '',
+        T2Phone: '',
+        T2Email: '',
+        T2NotiP: false,
+        T2NotiE: false,
+        StartD: '',
+        EndD: '',
+        SelectedProperty: '',
+        propertyId: '',
+        cardToken: {},
       });
-
-    // axios
-    //   .post('http://localhost:5000/api/property/lsdb', toLSDB)
-    //   .then()
-    //   .catch((error) => {
-    //     console.log('Error in AddTenant POST for LSDB..', error);
-    //   });
-
-    this.setState({
-      T1Name: '',
-      T1Phone: '',
-      T1Email: '',
-      T1NotiP: false,
-      T1NotiE: false,
-      T2Name: '',
-      T2Phone: '',
-      T2Email: '',
-      T2NotiP: false,
-      T2NotiE: false,
-      StartD: '',
-      EndD: '',
-      SelectedProperty: '',
-      propertyId: '',
-      cardToken: {},
     });
   };
 
