@@ -21,7 +21,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <BrowserRouter>
-    <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
+    <StripeProvider apiKey="pk_test_zouhM74e22FwAz2fdQpwdqfu">
       <Provider store={store}>
         <App />
       </Provider>

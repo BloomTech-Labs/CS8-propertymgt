@@ -34,27 +34,27 @@ class AdminSignUp extends Component {
       this.setState({
         stripeToken: token,
       });
-    });
 
-    Auth.signUp({
-      username: this.state.Email,
-      password: this.state.Password,
-      attributes: {
-        'custom:access_level': 'admin',
-      },
-    }).then((data) => {
-      console.log('user signed up -> ', data);
-    });
-    // .catch((err) => console.log('there was an error -> '), err);
+      Auth.signUp({
+        username: this.state.Email,
+        password: this.state.Password,
+        attributes: {
+          'custom:access_level': 'admin',
+        },
+      }).then((data) => {
+        console.log('user signed up -> ', data);
+      });
+      // .catch((err) => console.log('there was an error -> '), err);
 
-    // axios
-    //   .post('http://localhost:5000/users/admin/signup', temp)
-    //   .then((res) => {
-    //     console.log('Posted user..', res);
-    //   })
-    //   .catch((err) => {
-    //     console.log('Error in SignUpForm', err);
-    //   });
+      // axios
+      //   .post('http://localhost:5000/users/admin/signup', temp)
+      //   .then((res) => {
+      //     console.log('Posted user..', res);
+      //   })
+      //   .catch((err) => {
+      //     console.log('Error in SignUpForm', err);
+      //   });
+    });
   };
 
   // determines if submit button displays using boolean

@@ -29,6 +29,7 @@ const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 // };
 
 // // Returns items in table with specified filter
+
 const scanF = (req, res) => {
   const { pid, test } = req.params;
   console.log('my id ==>', typeof id);
