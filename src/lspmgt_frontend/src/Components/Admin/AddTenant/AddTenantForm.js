@@ -11,6 +11,7 @@ import {
   Container,
 } from 'semantic-ui-react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 class AddTenantForm extends Component {
@@ -121,7 +122,8 @@ class AddTenantForm extends Component {
       }
     }
 
-    this.props.stripe.createSource().then((source) => {
+    const { stripe } = this.props;
+    stripe.createSource().then((source) => {
       this.setState({
         stripeSource: source,
       });
@@ -362,5 +364,9 @@ class AddTenantForm extends Component {
     );
   }
 }
+
+AddTenantForm.propTypes = {
+  stripe: PropTypes.node.isRequired,
+};
 
 export default injectStripe(AddTenantForm);
