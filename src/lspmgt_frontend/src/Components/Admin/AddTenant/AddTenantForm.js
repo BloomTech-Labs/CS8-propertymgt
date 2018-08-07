@@ -289,14 +289,14 @@ class AddTenant extends Component {
                   label="Receive Emails?"
                   name="T1NotiE"
                   type="checkbox"
-                  checked={T1NotiE}
+                  // checked={T1NotiE}
                   onChange={this.handleCheck}
                 />
                 <Form.Checkbox
                   label="Receive Texts?"
                   name="T1NotiP"
                   type="checkbox"
-                  checked={T1NotiP}
+                  // checked={T1NotiP}
                   onChange={this.handleCheck}
                 />
               </Form.Group>
@@ -331,14 +331,14 @@ class AddTenant extends Component {
                   label="Receive Emails?"
                   name="T2NotiE"
                   type="checkbox"
-                  checked={T2NotiE}
+                  // checked={T2NotiE}
                   onChange={this.handleCheck}
                 />
                 <Form.Checkbox
                   label="Receive Texts?"
                   name="T2NotiP"
                   type="checkbox"
-                  checked={T2NotiP}
+                  // checked={T2NotiP}
                   onChange={this.handleCheck}
                 />
               </Form.Group>
