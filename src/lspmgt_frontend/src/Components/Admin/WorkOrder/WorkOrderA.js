@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Icon, Image } from 'semantic-ui-react';
 import axios from 'axios';
 
 class WorkOrderA extends Component {
@@ -35,24 +35,22 @@ class WorkOrderA extends Component {
     return tempArray;
   };
 
-  desc = (workorder, x) => {
+  desc = (workorder, workorderId) => {
     return (
-      <Card>
+      <Card style={styles.card}>
         <Card.Content extra>
-          <div>
-            <h4>Work Order #{x}</h4>
-            {workorder.PhotoIssue}
-          </div>
-          <h4>
+          <Card.Header>Work Order #{workorderId}</Card.Header>
+          <Image>{workorder.PhotoIssue}</Image>
+          <Card.Description>
             <Icon name="home"> {workorder.PropertyAddr} </Icon> <br />
             <Icon name="wrench"> {workorder.Issue} </Icon> <br />
             <Icon name="check circle outline">
               <br />
-              {workorder.Permission ? 'AccessGranded' : 'PropertyInaccessible'}
+              {workorder.Permission ? 'AccessGranted' : 'PropertyInaccessible'}
             </Icon>
             <br />
-            <Icon name="phone"> {workorder.TentantPhone} </Icon>
-          </h4>
+            <Icon name="phone"> {workorder.TenantPhone} </Icon>
+          </Card.Description>
         </Card.Content>
       </Card>
     );
@@ -62,7 +60,7 @@ class WorkOrderA extends Component {
     const { list } = this.state;
 
     return (
-      <Card.Group className="page" itemsPerRow="3">
+      <Card.Group style={styles.cardGroup}>
         {list.map((workorder, index) => {
           if (workorder !== undefined) {
             return this.desc(workorder, index);
@@ -72,5 +70,15 @@ class WorkOrderA extends Component {
     );
   }
 }
+
+const styles = {
+  card: {
+    maxWidth: '250px',
+    margin: '1rem',
+  },
+  cardGroup: {
+    justifyContent: 'center',
+  },
+};
 
 export default WorkOrderA;

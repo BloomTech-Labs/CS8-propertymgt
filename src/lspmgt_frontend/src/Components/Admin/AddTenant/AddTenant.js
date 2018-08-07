@@ -341,33 +341,33 @@ class AddTenant extends Component {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Message>
-            <Message.Header>Housing Information</Message.Header>
-            <Icon name="calendar alternate outline" />
-            <Input
-              placeholder="StartDate"
-              name="StartD"
-              value={StartD}
-              onChange={this.handleInput}
-            />
-            -
-            <Input placeholder="EndDate" name="EndD" value={EndD} onChange={this.handleInput} />
-            <Dropdown
-              placeholder="Select a property"
-              selection
-              name="SelectedProperty"
-              options={theLoP}
-              onChange={this.setProperty}
-            />
-            <Button type="submit" onClick={this.sendContract} primary>
-              <Icon name="paper plane outline" />Send Contract
+          <Grid.Column>
+            <Message>
+              <Message.Header>Housing Information</Message.Header>
+              <Icon name="calendar alternate outline" />
+              <Input
+                placeholder="StartDate"
+                name="StartD"
+                value={StartD}
+                onChange={this.handleInput}
+              />
+              -
+              <Input placeholder="EndDate" name="EndD" value={EndD} onChange={this.handleInput} />
+              <Dropdown
+                placeholder="Select a property"
+                selection
+                name="SelectedProperty"
+                options={theLoP}
+                onChange={this.setProperty}
+              />
+              <Button type="submit" onClick={this.sendContract} primary>
+                <Icon name="paper plane outline" />Send Contract
+              </Button>
+            </Message>
+            <Button type="submit" onClick={this.handleSubmit} primary>
+              Save
             </Button>
-          </Message>
-        </Grid.Row>
-        <Grid.Row>
-          <Button type="submit" onClick={this.handleSubmit} primary>
-            Save
-          </Button>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     );
