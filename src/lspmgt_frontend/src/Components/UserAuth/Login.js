@@ -1,11 +1,13 @@
 /*eslint-disable import/first*/
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment, Container } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Message, Segment, Container, Icon } from 'semantic-ui-react';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 import { Loader } from '../Common/Components';
+
+import { Tooltip } from 'react-tippy';
 
 import { connect } from 'react-redux';
 import { signInUser } from '../Redux/Actions';
@@ -17,6 +19,7 @@ class Login extends Component {
     username: '',
     password: '',
     loader: false,
+    wrongPwd: true,
   };
 
   handleSignin = () => {
@@ -32,9 +35,15 @@ class Login extends Component {
         this.props.history.push('/dashboard');
       })
       .catch((err) => {
-        this.setState({ loader: false });
+        this.setState({
+          loader: false,
+          wrongPwd: false,
+        });
         console.log('THERE WAS AN ERROR -> ', err);
       });
+    setTimeout(() => {
+      this.setState({ wrongPwd: true });
+    }, 3000);
   };
 
   handleInput = (e) => {
@@ -65,16 +74,25 @@ class Login extends Component {
                   name="username"
                   placeholder="E-mail address"
                   onChange={this.handleInput}
+                  required
                 />
-                <Form.Input
-                  fluid
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="Password"
-                  type="password"
-                  name="password"
-                  onChange={this.handleInput}
-                />
+                <Tooltip
+                  title="Password must contain special characters, upper case, lower case and a minimum lenght of 8"
+                  position="bottom"
+                  trigger="click"
+                  style={{ 'background-color': 'blue' }}
+                >
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
+                    name="password"
+                    onChange={this.handleInput}
+                    required
+                  />
+                </Tooltip>
                 <Segment>
                   <Button fluid size="large">
                     Login
@@ -85,6 +103,13 @@ class Login extends Component {
                 </Segment>
               </Segment>
             </Form>
+            <Message attached="bottom" info content style={{ textAlign: 'justify' }}>
+              <Link to="/signup">Need an account ? Sign Up here.&nbsp;</Link> <br />
+              <Link to="/">Forgot Password.&nbsp;</Link>
+            </Message>
+            <Message negative hidden={this.state.wrongPwd}>
+              <Link to="/">Wrong Email or Password?&nbsp;</Link>
+            </Message>
           </Grid.Column>
         </Grid>
       </Container>
