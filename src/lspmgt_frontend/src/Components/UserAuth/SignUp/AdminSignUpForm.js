@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
 import axios from 'axios';
-import Amplify, { Auth } from 'aws-amplify';
-import AmplifyConfig from '../../../Config/Auth';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Amplify, { Auth } from 'aws-amplify';
+import AmplifyConfig from '../../../Config/Auth';
 Amplify.configure(AmplifyConfig);
 class AdminSignUp extends Component {
   state = {

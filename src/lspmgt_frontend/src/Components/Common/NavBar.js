@@ -51,7 +51,7 @@ class NavBar extends Component {
         </Link>
       </Menu.Menu>
     );
-    console.log('state of the props isadmin -> ', this.props.isAdmin);
+    console.log('state of the props isadmin -> ', this.props);
     return (
       <Container>
         <Loader stat={this.state.loader} />

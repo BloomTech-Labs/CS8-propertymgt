@@ -9,20 +9,19 @@ Amplify.configure(AmplifyConfig);
 export const getUserStatus = () => (dispatch) => {
   Auth.currentSession()
     .then((data) => {
-      // let status = data.idToken.payload['custom:access_level'] == 'admin' || 'tenant'
-      dispatch({ type: GET_USER_STATUS, payload: true });
+      let status = data.idToken.payload['custom:access_level'] == 'admin' ? 'admin' : 'tenant';
+      dispatch({ type: GET_USER_STATUS, payload: { isAdmin: status, isLoggedIn: true } });
     })
     .catch((err) => console.log('there was an erro -> ', err));
 };
 
-export const signInUser = (isAdmin) => (dispatch) => {
-  dispatch({ type: SIGN_IN_USER, payload: isAdmin });
-
-  // Make a get to admin table to retrieve who is logged in (get the adminId)
+export const signInUser = (user) => (dispatch) => {
+  // let status = data.idToken.payload['custom:access_level'] == 'admin' ? 'admin' : 'tenant';
+  dispatch({ type: SIGN_IN_USER, payload: { isAdmin: user, isLoggedIn: true } });
 };
 
 export const signOUtUser = () => (dispatch) => {
   Auth.signOut().then(() => {
-    dispatch({ type: SIGN_OUT_USER, payload: false });
+    dispatch({ type: SIGN_OUT_USER, payload: { isAdmin: '', isLoggedIn: false } });
   });
 };
