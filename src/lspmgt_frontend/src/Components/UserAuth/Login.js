@@ -104,7 +104,7 @@ class Login extends Component {
               </Segment>
             </Form>
             <Message attached="bottom" info content style={{ textAlign: 'justify' }}>
-              <Link to="/signup">Need an account ? Sign Up here.&nbsp;</Link> <br />
+              <Link to="/signup">Need an account? Sign Up here.&nbsp;</Link> <br />
               <Link to="/">Forgot Password.&nbsp;</Link>
             </Message>
             <Message negative hidden={this.state.wrongPwd}>
