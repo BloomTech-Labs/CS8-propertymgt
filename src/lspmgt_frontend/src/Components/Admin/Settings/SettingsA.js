@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, FormGroup } from 'semantic-ui-react';
+import { Form, Input, Button, Grid, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import './SettingsA.css';
 
@@ -39,42 +39,59 @@ class SettingsA extends Component {
   };
 
   render() {
-    const { Email, Phone, DisplayName, OldPassword, NewPassword } = this.state;
+    // const { Email, Phone, DisplayName, OldPassword, NewPassword } = this.state;
     return (
-      <Form className="form">
-        <Form.Group className="settings">
-          <Form.Input label="Email: " name="Email" value={Email} onChange={this.handleChange} />
-        </Form.Group>
-        <Form.Group className="settings">
-          <Form.Input label="Phone: " name="Phone" value={Phone} onChange={this.handleChange} />
-        </Form.Group>
-        <Form.Group className="settings">
-          <Form.Input
-            label="DisplayName: "
-            name="DisplayName"
-            value={DisplayName}
-            onChange={this.handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="settings">
-          <Form.Input
-            label="OldPassword: "
-            name="OldPassword"
-            value={OldPassword}
-            onChange={this.handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="settings">
-          <Form.Input
-            label="NewPassword: "
-            name="NewPassword"
-            value={NewPassword}
-            onChange={this.handleChange}
-          />
-        </Form.Group>
-
-        <Button type="Submit" onClick={this.handleSubmit} content="Save" />
-      </Form>
+      <Grid>
+        <Grid.Column>
+          <Header as="h1">Account Settings</Header>
+          <Form>
+            <Form.Field
+              icon="at"
+              iconPosition="left"
+              control={Input}
+              label="Email"
+              onChange={this.handleChange}
+            />
+            <Form.Field
+              icon="phone"
+              iconPosition="left"
+              control={Input}
+              label="Phone Number"
+              onChange={this.handleChange}
+            />
+            <Form.Field
+              icon="user"
+              iconPosition="left"
+              control={Input}
+              label="Username"
+              onChange={this.handleChange}
+            />
+            <Form.Group>
+              <Form.Checkbox label="Receive Texts?" />
+              <Form.Checkbox label="Receive Emails?" />
+            </Form.Group>
+          </Form>
+          <Header as="h2">Password Reset</Header>
+          <Form>
+            {/* <Form.Field control={Input} label="Old Password" /> */}
+            <Form.Field
+              icon="key"
+              iconPosition="left"
+              control={Input}
+              label="New Password"
+              type="password"
+            />
+            <Form.Field
+              icon="protect"
+              iconPosition="left"
+              control={Input}
+              label="Re-enter Password"
+              type="password"
+            />
+            <Button secondary>Save</Button>
+          </Form>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

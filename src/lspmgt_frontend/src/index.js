@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './semantic/dist/semantic.min.css';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { StripeProvider } from 'react-stripe-elements';
 import { Container } from 'semantic-ui-react';
-import './semantic/dist/semantic.min.css';
 
 import { TenantDashboard, Home, Dashboard } from './Components/Common/Components';
 
@@ -20,7 +20,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <BrowserRouter>
-    <StripeProvider apiKey="pk_test_zouhM74e22FwAz2fdQpwdqfu">
+    <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
       <Provider store={store}>
         <App />
       </Provider>

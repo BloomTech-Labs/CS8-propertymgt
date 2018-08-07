@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
+import {
+  Dropdown,
+  Icon,
+  Grid,
+  Message,
+  Form,
+  Input,
+  Checkbox,
+  Button,
+  Container,
+  Divider,
+  Header,
+  Select,
+} from 'semantic-ui-react';
 import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../../Config/Auth';
-import { Elements } from 'react-stripe-elements';
 Amplify.configure(AmplifyConfig);
 
 class AddTenant extends Component {
@@ -71,7 +84,6 @@ class AddTenant extends Component {
     console.log('sendContract triggered..');
   };
 
-  // Handles input
   handleInput = (e) => {
     const { name, value } = e.target;
     this.setState({
@@ -215,12 +227,170 @@ class AddTenant extends Component {
   };
 
   render() {
+    const {
+      T1Name,
+      T1Phone,
+      T1Email,
+      T1NotiP,
+      T1NotiE,
+      T2Name,
+      T2Phone,
+      T2Email,
+      T2NotiP,
+      T2NotiE,
+      StartD,
+      EndD,
+    } = this.state;
+
+    const theLoP = this.getLoP();
+
     return (
-      <Elements>
-        <injectedAddTenantForm />
-      </Elements>
+      <Grid>
+        <Grid.Row columns={2}>
+          <Grid.Column mobile={16} computer={8}>
+            <Form>
+              <Header>Tenant #1</Header>
+              <Form.Field
+                name="T1Name"
+                value={T1Name}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Name"
+              />
+              <Form.Field
+                name="T1Phone"
+                value={T1Phone}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Phone"
+              />
+              <Form.Field
+                name="T1Email"
+                value={T1Email}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Email"
+              />
+              <Form.Group>
+                <Form.Checkbox
+                  label="Receive Emails?"
+                  name="T1NotiE"
+                  type="checkbox"
+                  checked={T1NotiE}
+                  onChange={this.handleCheck}
+                />
+                <Form.Checkbox
+                  label="Receive Texts?"
+                  name="T1NotiP"
+                  type="checkbox"
+                  checked={T1NotiP}
+                  onChange={this.handleCheck}
+                />
+              </Form.Group>
+            </Form>
+          </Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
+            <Form>
+              <Header>Tenant #2</Header>
+              <Form.Field
+                name="T2Name"
+                value={T2Name}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Name"
+              />
+              <Form.Field
+                name="T2Phone"
+                value={T2Phone}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Phone"
+              />
+              <Form.Field
+                name="T2Email"
+                value={T2Email}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Email"
+              />
+              <Form.Group>
+                <Form.Checkbox
+                  label="Receive Emails?"
+                  name="T2NotiE"
+                  type="checkbox"
+                  checked={T2NotiE}
+                  onChange={this.handleCheck}
+                />
+                <Form.Checkbox
+                  label="Receive Texts?"
+                  name="T2NotiP"
+                  type="checkbox"
+                  checked={T2NotiP}
+                  onChange={this.handleCheck}
+                />
+              </Form.Group>
+            </Form>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column mobile={16} tablet={16} computer={13}>
+            <Form widths="equal">
+              <Header>Housing Information</Header>
+              <Form.Group>
+                <Form.Field
+                  icon="calendar alternate"
+                  iconPosition="left"
+                  placeholder="Start Date"
+                  control={Input}
+                  type="date"
+                  name="StartD"
+                  value={StartD}
+                  onChange={this.handleInput}
+                  width={5}
+                />
+
+                <Form.Field
+                  icon="calendar alternate"
+                  iconPosition="left"
+                  placeholder="End Date"
+                  control={Input}
+                  type="date"
+                  name="EndD"
+                  value={EndD}
+                  onChange={this.handleInput}
+                  width={5}
+                />
+                <Form.Field
+                  placeholder="Select a property"
+                  control={Select}
+                  name="Selected Property"
+                  options={theLoP}
+                  onChange={this.setProperty}
+                  width={6}
+                />
+              </Form.Group>
+            </Form>
+          </Grid.Column>
+          <Grid.Column mobile={16} tablet={16} computer={3}>
+            <Header as="h3"> Contract </Header>
+            <Button fluid type="submit" onClick={this.sendContract} primary>
+              <Icon name="paper plane outline" />Send
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
+        <Divider />
+        <Grid.Row>
+          <Grid.Column mobile={16} tablet={16} computer={3}>
+            <Button fluid type="submit" onClick={this.handleSubmit} primary>
+              Save
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
+
+const styles = {};
 
 export default AddTenant;

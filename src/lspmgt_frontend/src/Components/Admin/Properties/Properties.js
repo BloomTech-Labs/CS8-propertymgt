@@ -93,7 +93,8 @@ class Properties extends Component {
     // this.getTenant(id);
     const { tenantList } = this.state;
     console.log('tenant list is here -->', tenantList);
-    const tenant1 = tenantList.find((FUCKINGTENANT) => FUCKINGTENANT.propertyId === id).NameT;
+    // const tenant1 = tenantList.find((FUCKINGTENANT) => FUCKINGTENANT.propertyId === id).NameT;
+    const tenant1 = 'abc';
     console.log('tenant1 is -->', tenant1);
 
     // const array2 = Object.keys(test);
