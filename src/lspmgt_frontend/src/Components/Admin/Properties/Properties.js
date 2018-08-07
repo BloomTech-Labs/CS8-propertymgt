@@ -45,26 +45,6 @@ class Properties extends Component {
       });
   }
 
-  // Directs to AddProperty page
-  addr = () => {
-    return (
-      <div>
-        <h4> Add a new Property </h4>
-        <Link to="/addproperty">
-          <Icon name="plus circle" size="massive" link />
-        </Link>
-      </div>
-    );
-  };
-
-  checkForContract = (y) => {
-    return y ? (
-      <span style={{ color: 'green' }}>ContractSigned</span>
-    ) : (
-      <span style={{ color: 'red' }}>Contract Not Signed</span>
-    );
-  };
-
   // Makes sure an array of tenant names is passed back not as undefined
   displayTenants = (x) => {
     let arr = [{ NameT: 'tenant' }, { NameT: 'tenant' }];
@@ -173,6 +153,26 @@ class Properties extends Component {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  // Directs to AddProperty page
+  addr = () => {
+    return (
+      <div>
+        <h4> Add a new Property </h4>
+        <Link to="/addproperty">
+          <Icon name="plus circle" size="massive" link />
+        </Link>
+      </div>
+    );
+  };
+
+  checkForContract = (y) => {
+    return y ? (
+      <span style={{ color: 'green' }}>ContractSigned</span>
+    ) : (
+      <span style={{ color: 'red' }}>Contract Not Signed</span>
+    );
   };
 
   render() {
