@@ -81,6 +81,7 @@ const styles = {
   },
   segment: {
     margin: '0',
+    paddingRight: '0',
   },
   alertTitle: {
     paddingBottom: '.8rem',
