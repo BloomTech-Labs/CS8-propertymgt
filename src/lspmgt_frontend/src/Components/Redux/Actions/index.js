@@ -17,6 +17,8 @@ export const getUserStatus = () => (dispatch) => {
 
 export const signInUser = (isAdmin) => (dispatch) => {
   dispatch({ type: SIGN_IN_USER, payload: isAdmin });
+
+  // Make a get to admin table to retrieve who is logged in (get the adminId)
 };
 
 export const signOUtUser = () => (dispatch) => {

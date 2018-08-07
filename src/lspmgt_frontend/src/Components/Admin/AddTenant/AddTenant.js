@@ -7,11 +7,9 @@ import injectedAddTenantForm from './AddTenantForm';
 class AddTenant extends Component {
   render() {
     return (
-      <div>
-        <Elements>
-          <injectedAddTenantForm />
-        </Elements>
-      </div>
+      <Elements>
+        <injectedAddTenantForm />
+      </Elements>
     );
   }
 }
