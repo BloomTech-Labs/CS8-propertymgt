@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './semantic/dist/semantic.min.css';
 import './index.css';
+import 'react-tippy/dist/tippy.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route } from 'react-router-dom';
