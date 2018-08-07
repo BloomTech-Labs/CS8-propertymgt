@@ -22,6 +22,7 @@ const addTenant = (req, res) => {
     StartD, // same start date for both tenants
     EndD, // same end date for both tenants
     propertyId,
+    stripeSource,
   } = req.body;
 
   const T2 = {

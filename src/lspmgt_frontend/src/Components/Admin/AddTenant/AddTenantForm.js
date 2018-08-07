@@ -34,7 +34,7 @@ class AddTenantForm extends Component {
       SelectedProperty: '', // selected property from dropdown menu **using to get admin and selected property id's
       propertyId: '',
       LoP: [], // list of properties
-      stripeSource: {},
+      cardToken: {},
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -92,6 +92,14 @@ class AddTenantForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
+    // create Stripe Source from Card Element Below
+    this.props.stripe.createToken().then((token) => {
+      console.log(token);
+      this.setState({
+        cardToken: token,
+      });
+    });
+
     // Send Tenant object, send PropertyAddr and Contract
     const {
       T1Name,
@@ -108,6 +116,7 @@ class AddTenantForm extends Component {
       EndD,
       SelectedProperty,
       propertyId,
+      cardToken,
       LoP,
     } = this.state;
 
@@ -120,12 +129,6 @@ class AddTenantForm extends Component {
         console.log('list of property id -->', LoP[i].propertyId, '\npropertyId -->', propertyId);
       }
     }
-
-    this.props.stripe.createSource().then((source) => {
-      this.setState({
-        stripeSource: source,
-      });
-    });
 
     const toTenants = {
       T1Name,
@@ -141,6 +144,7 @@ class AddTenantForm extends Component {
       StartD,
       EndD,
       propertyId,
+      cardToken,
     };
 
     axios
@@ -177,6 +181,7 @@ class AddTenantForm extends Component {
       EndD: '',
       SelectedProperty: '',
       propertyId: '',
+      cardToken: {},
     });
   };
 
