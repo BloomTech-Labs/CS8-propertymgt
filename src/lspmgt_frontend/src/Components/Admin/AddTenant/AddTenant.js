@@ -378,7 +378,7 @@ class AddTenant extends Component {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column>
+          <Grid.Column mobile={16} tablet={16} computer={3}>
             <Button fluid type="submit" onClick={this.handleSubmit} primary>
               Save
             </Button>
