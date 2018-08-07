@@ -45,17 +45,21 @@ class Properties extends Component {
       });
   }
 
-  // Directs to AddProperty page
-  addr = () => {
-    return (
-      <div>
-        <h4> Add a new Property </h4>
-        <Link to="/addproperty">
-          <Icon name="plus circle" size="massive" link />
-        </Link>
-      </div>
-    );
+  getTenant = (propertyId) => {
+    axios
+      .get(`http://localhost:5000/api/property/tenant/${propertyId}/${123}`)
+      .then((res) => {
+        console.log('res is here -->', res.data.data.Items[0]);
+        this.setState({
+          test: res.data.data.Items[0],
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  // Directs to AddProperty page
 
   checkForContract = (y) => {
     return y ? (
@@ -72,6 +76,17 @@ class Properties extends Component {
       arr = x;
     }
     return `${arr[0].NameT}, ${arr[1].NameT}`;
+  };
+
+  addr = () => {
+    return (
+      <div>
+        <h4> Add a new Property </h4>
+        <Link to="/addproperty">
+          <Icon name="plus circle" size="massive" link />
+        </Link>
+      </div>
+    );
   };
 
   // Populates each listOfProperties element with proper data field from database properties list,
@@ -159,20 +174,6 @@ class Properties extends Component {
         </Card.Content>
       </Card>
     );
-  };
-
-  getTenant = (propertyId) => {
-    axios
-      .get(`http://localhost:5000/api/property/tenant/${propertyId}/${123}`)
-      .then((res) => {
-        console.log('res is here -->', res.data.data.Items[0]);
-        this.setState({
-          test: res.data.data.Items[0],
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   render() {

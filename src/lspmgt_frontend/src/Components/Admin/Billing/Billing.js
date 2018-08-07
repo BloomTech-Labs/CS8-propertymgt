@@ -44,7 +44,8 @@ class Billing extends React.Component {
   getCustomer = () => {};
 
   getPropList = () => {
-    const myArr = this.state.PropertyList.map((property, index) => {
+    const { PropertyList } = this.state;
+    const myArr = PropertyList.map((property, index) => {
       const constructingTheObject = {
         key: index,
         value: property.PropertyAddr,
@@ -77,8 +78,9 @@ class Billing extends React.Component {
     });
 
     // Get CC information
+    const { SelectedPropertyId } = this.state;
     axios
-      .get(`http://localhost:5000/api/billing/get${this.state.SelectedPropertyId}`)
+      .get(`http://localhost:5000/api/billing/get${SelectedPropertyId}`)
       .then((res) => {
         // Store CC in state to display
       })
