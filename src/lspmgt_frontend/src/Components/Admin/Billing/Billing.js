@@ -16,6 +16,7 @@ class Billing extends React.Component {
     };
 
     this.setProperty = this.setProperty.bind(this);
+    this.getPropertyId = this.setProperty.bind(this);
   }
 
   componentDidMount() {
@@ -32,16 +33,15 @@ class Billing extends React.Component {
   }
 
   getPropertyId = (address) => {
-    const { PropertyList, SelectedProperty } = this.state;
+    const { PropertyList } = this.state;
     for (let i = 0; i < PropertyList.length; i++) {
       if (address === PropertyList[i].PropertyAddr) {
-        // console.log(PropertyList[i].propertyId);
         return PropertyList[i].propertyId;
       }
     }
   };
 
-  // getCustomer
+  getCustomer = () => {};
 
   getPropList = () => {
     const myArr = this.state.PropertyList.map((property, index) => {
@@ -74,9 +74,17 @@ class Billing extends React.Component {
     console.log(value);
     this.setState({
       [name]: value,
-      SelectedPropertyId: this.getPropertyId(value),
     });
-    // this.getPropertyId();
+
+    // Get CC information
+    axios
+      .get(`http://localhost:5000/api/billing/get${this.state.SelectedPropertyId}`)
+      .then((res) => {
+        // Store CC in state to display
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {

@@ -271,7 +271,7 @@ class AddTenant extends Component {
                 onChange={this.handleInput}
                 placeholder="Email"
               />
-              <Form.Group style={styles.t1checkboxes}>
+              <Form.Group>
                 <Form.Checkbox
                   label="Receive Emails?"
                   name="T1NotiE"
@@ -332,7 +332,7 @@ class AddTenant extends Component {
             </Form>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row columns={2}>
+        <Grid.Row>
           <Grid.Column mobile={16} tablet={16} computer={13}>
             <Form widths="equal">
               <Header>Housing Information</Header>
@@ -391,11 +391,6 @@ class AddTenant extends Component {
   }
 }
 
-const styles = {
-  t1checkboxes: {
-    paddingBottom: '1.4rem',
-    marginBottom: '0',
-  },
-};
+const styles = {};
 
 export default AddTenant;

@@ -24,13 +24,14 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET);
 // return a single property using the id parameter
 const propertyId = (req, res) => {
   const params = {
-    TableName: 'ls_property_mgt',
+    TableName: 'Properties',
     Key: {
-      propertyId: Number(req.params.id),
+      propertyId: req.params.id,
     },
   };
 
   dd.get(params, (err, data) => {
+    console.log(data);
     if (err) {
       res.status(200).json({ status: 'error', error: err });
     } else {
