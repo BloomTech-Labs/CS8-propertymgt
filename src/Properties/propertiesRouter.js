@@ -29,15 +29,28 @@ const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 // };
 
 // // Returns items in table with specified filter
-const scanF = (myTableName, myAdminId, p) => {
+
+const scanF = (req, res) => {
+  const { pid, test } = req.params;
+  console.log('my id ==>', typeof id);
   const params = {
-    TableName: myTableName,
-    FilterExpression: 'Admin = :this_admin',
-    ExpressionAttributeValues: { ':this_admin': myAdminId },
+    TableName: 'Tenants',
+    FilterExpression: 'propertyId = :this_p AND propertyId > :this_test',
+    ExpressionAttributeValues: { ':this_p': pid, ':this_test': test },
   };
+
+  // const params2 = {
+  //   TableName: 'Tenants',
+  //   FilterExpression: 'propertyId = :this_p',
+  //   ExpressionAttributeValues: { ':this_p': id },
+  // };
+
   dd.scan(params, (err, data) => {
-    if (err) console.log(err);
-    else console.log(data);
+    if (err) {
+      console.log('Err after scan', err);
+      res.status(404).json({ msg: 'Error', data });
+    } else console.log('my data ==>', data);
+    res.status(200).json({ msg: 'success', data });
   });
 };
 
@@ -100,6 +113,18 @@ const properties = (req, res) => {
     if (error) {
       res.status(404).json({ error });
     } else res.status(200).json({ status: 'success', data });
+  });
+};
+
+const getAllTenants = (req, res) => {
+  const params = {
+    TableName: 'Tenants',
+  };
+
+  dd.scan(params, (error, data) => {
+    if (error) {
+      res.status(404).json({ msg: error in getAllTenants, error });
+    } else res.status(200).json({ msg: 'success', data });
   });
 };
 
@@ -275,4 +300,5 @@ module.exports = {
   addProperty,
   deleteProperty,
   updateProperty,
+  getAllTenants,
 };

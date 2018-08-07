@@ -224,15 +224,111 @@ export default withRouter(AddTenant);
 //     console.log('after handleClick..', name, value);
 //   };
 
-//   getPropertyId = (address) => {
-//     const { LoP } = this.state;
-//     for (let i = 0; i < LoP.length; i++) {
-//       if (address === LoP[i].PropertyAddr) {
-//         // console.log(PropertyList[i].propertyId);
-//         return LoP[i].propertyId;
-//       }
-//     }
-//   };
+
+    return (
+      <Grid>
+        <Grid.Row columns={2}>
+          <Grid.Column mobile={16} computer={8}>
+            <Form>
+              <Header>Tenant #1</Header>
+              <Form.Field
+                name="T1Name"
+                value={T1Name}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Name"
+              />
+              <Form.Field
+                name="T1Phone"
+                value={T1Phone}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Phone"
+              />
+              <Form.Field
+                name="T1Email"
+                value={T1Email}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Email"
+              />
+              <Form.Group>
+                <Form.Checkbox
+                  label="Receive Emails?"
+                  name="T1NotiE"
+                  type="checkbox"
+                  checked={T1NotiE}
+                  onChange={this.handleCheck}
+                />
+                <Form.Checkbox
+                  label="Receive Texts?"
+                  name="T1NotiP"
+                  type="checkbox"
+                  checked={T1NotiP}
+                  onChange={this.handleCheck}
+                />
+              </Form.Group>
+            </Form>
+          </Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
+            <Form>
+              <Header>Tenant #2</Header>
+              <Form.Field
+                name="T2Name"
+                value={T2Name}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Name"
+              />
+              <Form.Field
+                name="T2Phone"
+                value={T2Phone}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Phone"
+              />
+              <Form.Field
+                name="T2Email"
+                value={T2Email}
+                control={Input}
+                onChange={this.handleInput}
+                placeholder="Email"
+              />
+              <Form.Group>
+                <Form.Checkbox
+                  label="Receive Emails?"
+                  name="T2NotiE"
+                  type="checkbox"
+                  checked={T2NotiE}
+                  onChange={this.handleCheck}
+                />
+                <Form.Checkbox
+                  label="Receive Texts?"
+                  name="T2NotiP"
+                  type="checkbox"
+                  checked={T2NotiP}
+                  onChange={this.handleCheck}
+                />
+              </Form.Group>
+            </Form>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column mobile={16} tablet={16} computer={13}>
+            <Form widths="equal">
+              <Header>Housing Information</Header>
+              <Form.Group>
+                <Form.Field
+                  icon="calendar alternate"
+                  iconPosition="left"
+                  placeholder="Start Date"
+                  control={Input}
+                  type="date"
+                  name="StartD"
+                  value={StartD}
+                  onChange={this.handleInput}
+                  width={5}
+                />
 
 //   setProperty = (e, { name, value }) => {
 //     console.log('setProperty triggered..');
@@ -392,14 +488,7 @@ export default withRouter(AddTenant);
 //           </Message>
 //         </Grid.Row>
 
-//         <Grid.Row>
-//           <Button type="submit" onClick={this.handleSubmit} primary>
-//             Save
-//           </Button>
-//         </Grid.Row>
-//       </Grid>
-//     );
-//   }
-// }
+
+const styles = {};
 
 // export default injectStripe(AddTenantForm);
