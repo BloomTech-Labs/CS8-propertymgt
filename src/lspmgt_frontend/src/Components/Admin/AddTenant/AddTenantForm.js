@@ -41,7 +41,6 @@ class AddTenant extends Component {
       propertyId: '',
       LoP: [], // list of properties
       cardToken: {},
-
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -86,7 +85,6 @@ class AddTenant extends Component {
     const { T1Email, T2Email } = this.state;
     console.log('sendContract triggered..');
   };
-
 
   // Handles input
   handleInput = (e) => {
@@ -207,7 +205,6 @@ class AddTenant extends Component {
         SelectedProperty: '',
         propertyId: '',
       });
-
     });
   };
 
@@ -399,7 +396,6 @@ class AddTenant extends Component {
               <Message.Header>Enter Tenant Payment</Message.Header>
               <Form>
                 <CardElement />
-
               </Form>
             </Message>
           </Grid.Column>
@@ -411,7 +407,6 @@ class AddTenant extends Component {
               Save
             </Button>
           </Grid.Column>
-
         </Grid.Row>
       </Grid>
     );
@@ -421,4 +416,3 @@ class AddTenant extends Component {
 const styles = {};
 
 export default injectStripe(AddTenant);
-

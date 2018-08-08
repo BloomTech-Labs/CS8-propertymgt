@@ -6,7 +6,7 @@ const dd = require('../Config/AwsConfig');
 const hashingId = require('../Common/HashingId');
 
 // TODO: Do not push stripe key to github
-const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 // const writingToLSDB = (x) => {
 //   const { Tenants, StartD, EndD, propertyId, PropertyAddr, Contract } = x;
@@ -101,6 +101,8 @@ const scanF = (req, res) => {
 //     else res.status(200).json({ status: 'success', data });
 //   });
 // };
+
+// get Tenant for Property
 
 // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {
