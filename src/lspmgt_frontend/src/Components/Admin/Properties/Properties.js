@@ -65,17 +65,22 @@ class Properties extends Component {
     const array = Object.keys(property);
 
     // Get propertyId
-    let x = array.indexOf('propertyId');
-    let y = array.indexOf('propertyId');
-    const id = property[Object.keys(property)[x]];
+    const idIndex = array.indexOf('propertyId');
+    const addrIndex = array.indexOf('PropertyAddr');
+    const tNameIndex = array.indexOf('tenantName');
+    const sDateIndex = array.indexOf('tenantStartDate');
+    const eDateIndex = array.indexOf('tenantEndDate');
+    // const id = property[Object.keys(property)[addr]];
     // console.log('My id in properties component is..', id);
 
     // Get PropertyAddr
-    x = array.indexOf('PropertyAddr');
-    y = array.indexOf('tenantName');
+    // addr = array.indexOf('PropertyAddr');
+    // sDate =
     // console.log('My property address is located at..', x);
-    const address = property[Object.keys(property)[x]];
-    const tenant = property[Object.keys(property)[y]];
+    const address = property[Object.keys(property)[addrIndex]];
+    const tenant = property[Object.keys(property)[tNameIndex]];
+    const startDate = property[Object.keys(property)[sDateIndex]];
+    const endDate = property[Object.keys(property)[eDateIndex]];
 
     // Get tenant object off of tenant table
     // this.getTenant(id);
@@ -102,14 +107,14 @@ class Properties extends Component {
     // const endD = test[Object.keys(test)[x]];
 
     // Get Contract
-    x = array.indexOf('Contract');
-    const contract = property[Object.keys(property)[x]];
+    const tContract = array.indexOf('Contract');
+    const contract = property[Object.keys(property)[addrIndex]];
 
     return (
       <Card>
         <Card.Content textAlign="right">
           <EditProperty property={property} />
-          <DeleteProperty id={id} />
+          <DeleteProperty id={idIndex} />
         </Card.Content>
         <Card.Content>
           <Feed>
@@ -133,7 +138,15 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="calendar alternate outline" />
               </Feed.Label>
-              <Feed.Content>abc - abc</Feed.Content>
+              <Feed.Content>Start Date:</Feed.Content>
+              <Feed.Content>{startDate}</Feed.Content>
+            </Feed.Event>
+            <Feed.Event>
+              <Feed.Label>
+                <Icon name="calendar alternate outline" />
+              </Feed.Label>
+              <Feed.Content>End Date:</Feed.Content>
+              <Feed.Content>{endDate}</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
