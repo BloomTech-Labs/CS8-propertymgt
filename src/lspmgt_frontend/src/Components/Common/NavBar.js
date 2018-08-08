@@ -54,7 +54,7 @@ class NavBar extends Component {
     );
     console.log('state of the props isadmin -> ', this.props);
     return (
-      <Container>
+      <Container fluid>
         <Loader stat={this.state.loader} />
         <Menu style={styles.topbar} fluid>
           <Menu.Item style={styles.text}>LS PROPERTY MANAGEMENT</Menu.Item>

@@ -50,7 +50,7 @@ class Dashboard extends Component {
         ) : (
           <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
         )}
-        <FooterAdmin style={styles.footer} />
+        <FooterAdmin />
       </Container>
     );
   }
@@ -195,14 +195,14 @@ const SideBarTenant = (props) => {
 
 const FooterAdmin = () => {
   return (
-    <Segment inverted vertical style={{ position: 'fixed', bottom: 0 }}>
-      <Container textAlign="center">
+    <Container inverted fluid textAlign="center">
+      <Segment style={styles.footer} inverted>
         <Grid.Row columns={2}>
           <Grid.Column>PropertyMaxx</Grid.Column>
           <Grid.Column>Created by: Anderson L. - Bonn W. - Erik A. - Shaun K.</Grid.Column>
         </Grid.Row>
-      </Container>
-    </Segment>
+      </Segment>
+    </Container>
   );
 };
 
@@ -228,8 +228,11 @@ const styles = {
   },
   footer: {
     backgroundColor: '#093F6B',
-    position: 'fixed',
-    bottom: 0,
+    // position: 'absolute',
+    bottom: '0',
+    // width: 'auto',
+    // display: 'flex',
+    // alignSelf: 'flex-end',
   },
   sidebar: {
     backgroundColor: '#093F6B',
