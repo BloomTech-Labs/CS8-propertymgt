@@ -70,6 +70,7 @@ class Properties extends Component {
     const tNameIndex = array.indexOf('tenantName');
     const sDateIndex = array.indexOf('tenantStartDate');
     const eDateIndex = array.indexOf('tenantEndDate');
+    const rentIndex = array.indexOf('PropertyRent');
     // const id = property[Object.keys(property)[addr]];
     // console.log('My id in properties component is..', id);
 
@@ -81,6 +82,7 @@ class Properties extends Component {
     const tenant = property[Object.keys(property)[tNameIndex]];
     const startDate = property[Object.keys(property)[sDateIndex]];
     const endDate = property[Object.keys(property)[eDateIndex]];
+    const rentAmount = property[Object.keys(property)[rentIndex]];
 
     // Get tenant object off of tenant table
     // this.getTenant(id);
@@ -156,7 +158,15 @@ class Properties extends Component {
               </Feed.Label>
               <Feed.Content>{this.checkForContract(contract)}</Feed.Content>
             </Feed.Event>
-          </Feed>`
+          </Feed>
+          <Feed>
+            <Feed.Event>
+              <Feed.Label>
+                <Icon name="dollar sign" />
+              </Feed.Label>
+              <Feed.Content>Rent: ${rentAmount}</Feed.Content>
+            </Feed.Event>
+          </Feed>
         </Card.Content>
       </Card>
     );

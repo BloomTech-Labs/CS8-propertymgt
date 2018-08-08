@@ -132,7 +132,7 @@ const getAllTenants = (req, res) => {
 
 // Add a new property
 const addProperty = (req, res) => {
-  const propertyAmount = 120000; // hard coded
+  // const propertyAmount = 120000; // hard coded
   const {
     NameOwner,
     EmailOwner,
@@ -145,6 +145,7 @@ const addProperty = (req, res) => {
     Bathrooms,
     YearBuilt,
     Contract,
+    PropertyRent,
   } = req.body;
 
   // const toLSDB = {
@@ -171,6 +172,7 @@ const addProperty = (req, res) => {
       Bathrooms,
       YearBuilt,
       Contract,
+      PropertyRent,
       Admin: '123',
     },
   };
@@ -183,7 +185,7 @@ const addProperty = (req, res) => {
       stripe.plans.create(
         {
           id: params.Item.propertyId, // plan ID === Property Address
-          amount: propertyAmount,
+          amount: PropertyRent,
           interval: 'month',
           product: 'prod_DLRBi4QUbCDEVn',
           nickname: PropertyAddr,
