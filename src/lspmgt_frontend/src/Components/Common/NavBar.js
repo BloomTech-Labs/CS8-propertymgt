@@ -27,7 +27,7 @@ class NavBar extends Component {
         </Link>
 
         <Link to="/login">
-          <Menu.Item style={styles.text}>Sign In</Menu.Item>
+          <Menu.Item>Sign In</Menu.Item>
         </Link>
       </Menu.Menu>
     );
@@ -55,7 +55,7 @@ class NavBar extends Component {
     return (
       <Container>
         <Loader stat={this.state.loader} />
-        <Menu stackable fluid inverted style={styles.topbar}>
+        <Menu stackable fluid color="blue" inverted>
           <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
 
           <Menu.Menu position="right">{this.props.isAdmin ? logged : notLogged}</Menu.Menu>
@@ -79,10 +79,12 @@ export default withRouter(
 );
 
 const styles = {
-  text: {
-    color: 'whitesmoke',
-  },
-  topbar: {
-    marginTop: '0',
-  },
+  // text: {
+  //   fontColor: 'whitesmoke',
+  // },
+  // topbar: {
+  //   marginTop: '0',
+  //   background: '#071826',
+  //   color: 'white',
+  // },
 };

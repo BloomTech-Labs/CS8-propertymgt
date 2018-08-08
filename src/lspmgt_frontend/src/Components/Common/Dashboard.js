@@ -59,7 +59,7 @@ const SideBarAdmin = (props) => {
   return (
     <Grid columns={2} relaxed>
       <Grid.Column mobile={16} computer={4} tablet={4}>
-        <Menu pointing fluid vertical inverted>
+        <Menu inverted color="blue" fluid vertical>
           <Link to="/properties">
             <Menu.Item
               name="Properties"
@@ -130,13 +130,12 @@ const SideBarTenant = (props) => {
   return (
     <Grid columns={2} relaxed>
       <Grid.Column mobile={16} computer={4} tablet={4}>
-        <Menu pointing fluid vertical inverted>
+        <Menu pointing fluid vertical>
           <Link to="/dashboard">
             <Menu.Item
               name="Dashboard"
               active={props.activeItem === 'Dashboard'}
               onClick={props.handleItemClick}
-              // style={textStyles}
             >
               Dashboard
             </Menu.Item>
@@ -147,7 +146,6 @@ const SideBarTenant = (props) => {
               name="Billing"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
-              // style={textStyles}
             >
               Billing
             </Menu.Item>
@@ -158,7 +156,6 @@ const SideBarTenant = (props) => {
               name="WorkOrder"
               active={props.activeItem === 'WorkOrder'}
               onClick={props.handleItemClick}
-              // style={textStyles}
             >
               Work Orders
             </Menu.Item>
@@ -169,7 +166,6 @@ const SideBarTenant = (props) => {
               name="Settings"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
-              // style={textStyles}
             >
               Settings
             </Menu.Item>
@@ -206,6 +202,9 @@ export default withRouter(
 
 // export default Dashboard;
 
-const textStyles = {
-  color: 'whitesmoke',
+const styles = {
+  // sidebar: {
+  //   backgroundColor: 'rgb(7,24,38)',
+  //   color: 'white',
+  // },
 };

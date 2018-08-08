@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../../Config/Auth';
+
 Amplify.configure(AmplifyConfig);
 class AdminSignUp extends Component {
   state = {

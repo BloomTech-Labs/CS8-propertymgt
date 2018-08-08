@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Grid, GridColumn, Gr } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
