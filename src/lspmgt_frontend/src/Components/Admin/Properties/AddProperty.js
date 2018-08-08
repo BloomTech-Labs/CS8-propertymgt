@@ -184,4 +184,11 @@ class AddProperty extends Component {
   }
 }
 
+const styles = {
+  buttons: {
+    background: '#327E96',
+    color: '#327E96',
+  },
+};
+
 export default AddProperty;
