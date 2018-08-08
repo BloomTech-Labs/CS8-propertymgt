@@ -50,7 +50,7 @@ class Dashboard extends Component {
         ) : (
           <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
         )}
-        {/* <FooterAdmin style={styles.fullNav} /> */}
+        <FooterAdmin style={styles.footer} />
       </Container>
     );
   }
@@ -195,9 +195,12 @@ const SideBarTenant = (props) => {
 
 const FooterAdmin = () => {
   return (
-    <Segment inverted vertical style={{ margin: '5em -em -em', padding: '5em 0em' }}>
+    <Segment inverted vertical style={{ position: 'fixed', bottom: 0 }}>
       <Container textAlign="center">
-        <Grid.Row />
+        <Grid.Row columns={2}>
+          <Grid.Column>PropertyMaxx</Grid.Column>
+          <Grid.Column>Created by: Anderson L. - Bonn W. - Erik A. - Shaun K.</Grid.Column>
+        </Grid.Row>
       </Container>
     </Segment>
   );
@@ -222,6 +225,11 @@ export default withRouter(
 const styles = {
   fullNav: {
     backgroundColor: '#093F6B',
+  },
+  footer: {
+    backgroundColor: '#093F6B',
+    position: 'fixed',
+    bottom: 0,
   },
   sidebar: {
     backgroundColor: '#093F6B',
