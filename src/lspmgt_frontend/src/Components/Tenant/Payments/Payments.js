@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Segment, Form, Header, Message, Input, Button, Select } from 'semantic-ui-react';
+import { Grid, Form, Header, Message, Input, Button, Select } from 'semantic-ui-react'; // Segment deleted from here
 
 class Payments extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Payments extends Component {
   }
 
   render() {
-    const { BalanceDue, PaymentAmount, PaymentType } = this.state;
+    const { BalanceDue } = this.state;
     return (
       <Grid>
         <Grid.Row>

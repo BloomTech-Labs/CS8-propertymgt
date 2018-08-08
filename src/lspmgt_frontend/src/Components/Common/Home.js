@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Grid, GridColumn, Gr } from 'semantic-ui-react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import Amplify, { Auth } from 'aws-amplify';
+import { Container } from 'semantic-ui-react'; // Grid, GridColumn, Gr deleted
+import { Route, withRouter } from 'react-router-dom'; // Switch, Redirect deleted
+import Amplify from 'aws-amplify'; // { Auth } deleted
 import AmplifyConfig from '../../Config/Auth';
 import { connect } from 'react-redux';
 import { getUserStatus } from '../Redux/Actions';
@@ -9,8 +9,8 @@ import {
   LandingPage,
   Dashboard,
   LoginForm,
-  AdminSignup,
-  AdminSignupForm,
+  // AdminSignup,
+  // AdminSignupForm,
   AdminCheckout,
   Loader,
 } from './Components';
@@ -24,7 +24,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    console.log('checking for user auth -> ', this.props);
+    // console.log('checking for user auth -> ', this.props);
     this.props.getUserStatus();
     this.setState({
       allow: this.props.isLoggedIn,
@@ -32,7 +32,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log('this is home checking user ->  ', this.props);
+    // console.log('this is home checking user ->  ', this.props);
     if (this.props.isLoggedIn) {
       return <Dashboard isAdmin={this.props} />;
     }

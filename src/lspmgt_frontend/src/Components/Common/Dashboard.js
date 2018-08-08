@@ -3,7 +3,7 @@ import { Container, Grid, Menu } from 'semantic-ui-react';
 import { Link, Route, Switch, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
-  AdminAddProperty,
+  // AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,
@@ -14,7 +14,7 @@ import {
   TenantSettings,
 } from './Components';
 import { connect } from 'react-redux';
-import { signOUtUser } from '../Redux/Actions';
+import { signOUtUser, getUserSettings } from '../Redux/Actions';
 
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
@@ -31,9 +31,20 @@ class Dashboard extends Component {
     };
   }
 
-  componentDidUpdate() {
-    // this.props.getUser();
-    console.log('did update in dashboard -> ', this.props);
+  componentDidMount() {
+    Auth.currentSession()
+      .then((data) => {
+        // const { email } = data.idToken.payload;
+        const user = data.idToken.payload['custom:access_level'];
+
+        const sendEvent = {
+          user,
+          action: 'getusersettings',
+          payload: data.idToken.payload,
+        };
+        this.props.getUserSettings(sendEvent);
+      })
+      .catch((err) => console.log('there was an erro -> ', err));
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -41,8 +52,8 @@ class Dashboard extends Component {
   render() {
     const { isAdmin } = this.props;
     const { activeItem } = this.state;
-    const display = isAdmin == 'admin';
-    console.log('dashboard check -->  ', this.props);
+    const display = isAdmin === 'admin';
+    // console.log('dashboard check -->  ', this.props);
     return (
       <Container fluid>
         {display ? (
@@ -114,7 +125,7 @@ const SideBarAdmin = (props) => {
       <Grid.Column mobile={16} computer={12} tablet={12}>
         <Container>
           <Switch>
-            <Route path="/addproperty" component={AdminAddProperty} />
+            {/* <Route path="/addproperty" component={AdminAddProperty} /> */}
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />
@@ -201,7 +212,7 @@ const mapStateToProps = (state) => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { signOUtUser }
+    { getUserSettings }
   )(Dashboard)
 );
 

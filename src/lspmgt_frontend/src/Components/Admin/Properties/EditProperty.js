@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Icon, Modal, Input, Form } from 'semantic-ui-react';
+import { Button, Header, Icon, Modal } from 'semantic-ui-react'; // Input deleted from here
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
