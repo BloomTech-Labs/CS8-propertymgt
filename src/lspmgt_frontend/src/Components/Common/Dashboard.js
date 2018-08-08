@@ -59,7 +59,7 @@ class Dashboard extends Component {
 const SideBarAdmin = (props) => {
   return (
     <Grid columns={2} relaxed>
-      <Grid.Column mobile={16} computer={4} tablet={4} style={styles.fullNav}>
+      <Grid.Column mobile={16} computer={4} tablet={4}>
         <Menu style={styles.sidebar} fluid vertical>
           <Link to="/properties">
             <Menu.Item
@@ -233,6 +233,7 @@ const styles = {
   },
   sidebar: {
     backgroundColor: '#093F6B',
+    height: '50vh',
   },
   text: {
     color: '#F2F2F0',
