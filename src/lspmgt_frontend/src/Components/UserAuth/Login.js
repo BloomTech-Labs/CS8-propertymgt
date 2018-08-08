@@ -54,9 +54,15 @@ class Login extends Component {
     this.handleSignin();
   };
 
+  // determines if submit button displays using boolean
+  canBeDisplayed = () => {
+    const { username, password } = this.state;
+    return username.length > 0 && password.length > 0;
+  };
+
   render() {
     return (
-      <Container>
+      <Container style={{ marginTop: '5rem' }}>
         <Loader stat={this.state.loader} />
         <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: '550px' }}>
@@ -71,7 +77,7 @@ class Login extends Component {
                 iconPosition="left"
                 type="email"
                 name="username"
-                placeholder="E-mail address"
+                placeholder="Email"
                 onChange={this.handleInput}
                 required
               />
@@ -92,7 +98,13 @@ class Login extends Component {
                   required
                 />
               </Tooltip>
-              <Button fluid size="large" style={styles.button}>
+              <Button
+                fluid
+                size="large"
+                // disabled={!this.canBeDisplayed()}
+                style={styles.button}
+                onClick={this.handleSubmit}
+              >
                 Login
               </Button>
               {/* <Link to="/">
@@ -116,11 +128,12 @@ class Login extends Component {
 
 const styles = {
   button: {
-    backgroundColor: '0',
+    backgroundColor: '#093F6B',
     margin: '1rem 0',
+    color: '#F2F2F0',
   },
   title: {
-    color: '#327E96',
+    color: '#093F6B',
     textAlign: 'center',
   },
 };

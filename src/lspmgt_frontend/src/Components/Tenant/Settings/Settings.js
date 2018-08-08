@@ -47,7 +47,7 @@ class Settings extends Component {
 
 const styles = {
   button: {
-    backgroundColor: '#327E96',
+    backgroundColor: '#093F6B',
     color: '#F2F2F0',
     width: '120px',
   },

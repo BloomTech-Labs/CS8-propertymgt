@@ -86,7 +86,6 @@ class SettingsA extends Component {
               label="Email"
               name="Email"
               value={email}
-              disabled
               onChange={this.handleChange}
             />
             <Form.Field
@@ -125,7 +124,7 @@ class SettingsA extends Component {
               label="Re-enter Password"
               type="password"
             />
-            <Button style={StyleSheet.button} type="submit" onClick={this.handleSubmit}>
+            <Button style={styles.button} type="submit" onClick={this.handleSubmit}>
               Save
             </Button>
           </Form>
@@ -136,7 +135,11 @@ class SettingsA extends Component {
 }
 
 const styles = {
-  color: 'blue',
+  button: {
+    backgroundColor: '#093F6B',
+    color: '#F2F2F0',
+    width: '120px',
+  },
 };
 
 const mapStateToProps = (state) => {
