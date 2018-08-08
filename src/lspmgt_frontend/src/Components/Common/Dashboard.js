@@ -55,18 +55,6 @@ class Dashboard extends Component {
     const display = isAdmin === 'admin';
     // console.log('dashboard check -->  ', this.props);
     return (
-<<<<<<< HEAD
-      <div>
-        <Container fluid>
-          {display ? (
-            <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
-          ) : (
-            <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
-          )}
-        </Container>
-        {/* <FooterAdmin /> */}
-      </div>
-=======
       <Container>
         {display ? (
           <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
@@ -75,7 +63,6 @@ class Dashboard extends Component {
         )}
         {/* <FooterAdmin /> */}
       </Container>
->>>>>>> 60efd18e41c00a60417c9e3fa1d72f9b811edabf
     );
   }
 }
@@ -264,20 +251,6 @@ export default withRouter(
 // export default Dashboard;
 
 const styles = {
-<<<<<<< HEAD
-  fullNav: {
-    backgroundColor: '#093F6B',
-  },
-  footer: {
-    minHeight: '5%',
-    position: 'fixed',
-    bottom: '0',
-    width: '100%',
-    backgroundColor: '#093F6B',
-    // margin: '10em 0em 0em',
-    // padding: '2em 0em',
-  },
-=======
   // footer: {
   //   backgroundColor: '#093F6B',
   //   position: 'absolute',
@@ -290,7 +263,6 @@ const styles = {
   //   fontSize: '1.8em',
   //   minWidth: '100%',
   // },
->>>>>>> 60efd18e41c00a60417c9e3fa1d72f9b811edabf
   sidebar: {
     backgroundColor: '#093F6B',
     // height: '55vh',
