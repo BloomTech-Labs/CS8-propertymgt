@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Icon, Image, Header, Container } from 'semantic-ui-react';
 import axios from 'axios';
 
 class WorkOrderA extends Component {
@@ -63,7 +63,12 @@ class WorkOrderA extends Component {
     const { list } = this.state;
     console.log(list);
 
-    return <Card.Group style={styles.cardGroup}>{WorkOrderCards}</Card.Group>;
+    return (
+      <Container>
+        <Header>Work Orders</Header>
+        <Card.Group style={styles.cardGroup}>{WorkOrderCards}</Card.Group>;
+      </Container>
+    );
   }
 }
 
@@ -71,7 +76,7 @@ const DisplayWorkOrders = (props) => {
   return (
     <Card style={styles.card}>
       <Card.Content extra>
-        <Card.Header>Work Order #{props.workorder.workorderId}</Card.Header>
+        <Card.Header>ID #{props.workorder.workorderId}</Card.Header>
         <Image>{props.workorder.PhotoIssue}</Image>
         <Card.Description>
           <Icon name="home"> {props.workorder.Address} </Icon> <br />
