@@ -17,6 +17,8 @@ import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../../Config/Auth';
 import { injectStripe, CardElement } from 'react-stripe-elements';
+import PropTypes from 'prop-types';
+
 Amplify.configure(AmplifyConfig);
 
 class AddTenant extends Component {
@@ -41,7 +43,6 @@ class AddTenant extends Component {
       propertyId: '',
       LoP: [], // list of properties
       cardToken: {},
-
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,7 +67,8 @@ class AddTenant extends Component {
 
   // Returns usable List of Properties (LoP) list with text key value pair
   getLoP = () => {
-    const myArr = this.state.LoP.map((property, index) => {
+    const { LoP } = this.state;
+    const myArr = LoP.map((property, index) => {
       const constructingTheObject = {
         key: index,
         value: property.PropertyAddr,
@@ -81,12 +83,30 @@ class AddTenant extends Component {
     return myArr;
   };
 
+  getPropertyId = (address) => {
+    const { LoP } = this.state;
+    for (let i = 0; i < LoP.length; i++) {
+      if (address === LoP[i].PropertyAddr) {
+        // console.log(PropertyList[i].propertyId);
+        return LoP[i].propertyId;
+      }
+    }
+  };
+
+  setProperty = (e, { name, value }) => {
+    console.log('setProperty triggered..');
+    console.log('name', name, 'value', value);
+    this.setState({
+      [name]: value,
+      propertyId: this.getPropertyId(value),
+    });
+  };
+
   // TODO: Sends email to tenant with contract attached
   sendContract = () => {
     const { T1Email, T2Email } = this.state;
     console.log('sendContract triggered..');
   };
-
 
   // Handles input
   handleInput = (e) => {
@@ -99,8 +119,9 @@ class AddTenant extends Component {
   // Handle final submit
   handleSubmit = (e) => {
     e.preventDefault();
+    const { stripe } = this.props;
 
-    this.props.stripe.createToken().then((token) => {
+    stripe.createToken().then((token) => {
       console.log(token);
       this.setState({
         cardToken: token,
@@ -154,7 +175,7 @@ class AddTenant extends Component {
       };
 
       Auth.signUp({
-        username: this.state.T1Email,
+        username: T1Email,
         password: '!Test123', // temp pwd hard coded, it will need to be replaced by a random hash gen pwd
         attributes: {
           'custom:access_level': 'tenant',
@@ -207,7 +228,6 @@ class AddTenant extends Component {
         SelectedProperty: '',
         propertyId: '',
       });
-
     });
   };
 
@@ -220,25 +240,6 @@ class AddTenant extends Component {
       [name]: value,
     });
     console.log('after handleClick..', name, value);
-  };
-
-  getPropertyId = (address) => {
-    const { LoP } = this.state;
-    for (let i = 0; i < LoP.length; i++) {
-      if (address === LoP[i].PropertyAddr) {
-        // console.log(PropertyList[i].propertyId);
-        return LoP[i].propertyId;
-      }
-    }
-  };
-
-  setProperty = (e, { name, value }) => {
-    console.log('setProperty triggered..');
-    console.log('name', name, 'value', value);
-    this.setState({
-      [name]: value,
-      propertyId: this.getPropertyId(value),
-    });
   };
 
   render() {
@@ -291,14 +292,14 @@ class AddTenant extends Component {
                   label="Receive Emails?"
                   name="T1NotiE"
                   type="checkbox"
-                  checked={T1NotiE}
+                  // checked={T1NotiE}
                   onChange={this.handleCheck}
                 />
                 <Form.Checkbox
                   label="Receive Texts?"
                   name="T1NotiP"
                   type="checkbox"
-                  checked={T1NotiP}
+                  // checked={T1NotiP}
                   onChange={this.handleCheck}
                 />
               </Form.Group>
@@ -333,14 +334,14 @@ class AddTenant extends Component {
                   label="Receive Emails?"
                   name="T2NotiE"
                   type="checkbox"
-                  checked={T2NotiE}
+                  // checked={T2NotiE}
                   onChange={this.handleCheck}
                 />
                 <Form.Checkbox
                   label="Receive Texts?"
                   name="T2NotiP"
                   type="checkbox"
-                  checked={T2NotiP}
+                  // checked={T2NotiP}
                   onChange={this.handleCheck}
                 />
               </Form.Group>
@@ -399,7 +400,6 @@ class AddTenant extends Component {
               <Message.Header>Enter Tenant Payment</Message.Header>
               <Form>
                 <CardElement />
-
               </Form>
             </Message>
           </Grid.Column>
@@ -411,14 +411,14 @@ class AddTenant extends Component {
               Save
             </Button>
           </Grid.Column>
-
         </Grid.Row>
       </Grid>
     );
   }
 }
 
-const styles = {};
+AddTenant.propTypes = {
+  stripe: PropTypes.node.isRequired,
+};
 
 export default injectStripe(AddTenant);
-
