@@ -104,7 +104,7 @@ const propertyId = (req, res) => {
 const workorder = (req, res) => {
   console.log('Workorder GET method triggered');
   const params = {
-    TableName: 'Tenants',
+    TableName: 'Work_Orders',
   };
 
   dd.scan(params, (err, data) => {
