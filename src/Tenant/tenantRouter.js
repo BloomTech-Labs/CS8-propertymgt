@@ -1,9 +1,10 @@
 // // Option A is that we can make User it's own model and route
 
 // const express = require('express');
-// const dd = require('../Config/AwsConfig');
+const dd = require('../Config/AwsConfig');
 // const { Admins } = require('../Config/DynamoDbTables');
-// const hashingId = require('../Common/HashingId');
+const hashingId = require('../Common/HashingId');
+// const hashingId2 = require('../Common/HashingId2');
 
 // const router = express.Router();
 
@@ -42,32 +43,26 @@
 //   });
 // });
 
-// router.post('/workorder', (req, res) => {
-//   const wo = req.body;
-//   const params = {
-//     TableName: 'Tenants',
-//     Key: {
-//       tenantId: '9dd974cffa981a3e49af',
-//     },
-//     Item: {
-//       tenantId: '9dd974cffa981a3e49af',
-//       WOrder: {
-//         PropertyAddr: wo.PropertyAddr,
-//         Issue: wo.Issue,
-//         PhotoIssue: 'smiley_face',
-//         Permission: wo.Permission,
-//         TenantPhone: wo.TenantPhone,
-//         Status: false,
-//       },
-//     },
-//   };
+router.post('/workorder', (req, res) => {
+  const { Address, WODesc, Phone } = req.body;
+  const params = {
+    TableName: 'Work_Orders',
+    Item: {
+      workorderId: hashingId(),
+      Address,
+      WODesc,
+      Phone,
+    },
+  };
 
-//   dd.put(params, (err, d) => {
-//     if (err) {
-//       res.status(200).json({ status: 'error', error: err });
-//     }
-//     res.status(200).json({ status: 'success', data: d });
-//   });
-// });
+  dd.put(params, (err, d) => {
+    if (err) {
+      res.status(200).json({ status: 'error', error: err });
+    } else {
+      console.log('work order posted');
+      res.status(200).json({ status: 'success', data: d });
+    }
+  });
+});
 
 // module.exports = router;
