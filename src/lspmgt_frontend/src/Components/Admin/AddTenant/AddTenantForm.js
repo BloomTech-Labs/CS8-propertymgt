@@ -265,34 +265,52 @@ class AddTenant extends Component {
           <Grid.Column mobile={16} computer={8}>
             <Form>
               <Header>Tenant #1</Header>
+
+              {/* adding icons to any of the Add Tenant fields yields an icon position... */}
+              {/* ... like the icon located in the Housing Info fields further below */}
+              {/* e.g. padding issue */}
+
               <Form.Field
+                icon="user"
+                iconPosition="left"
                 name="T1Name"
                 value={T1Name}
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Name"
+                // transparent
+                // style={styles.fields}
               />
               <Form.Field
+                icon="phone"
+                iconPosition="left"
                 name="T1Phone"
                 value={T1Phone}
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Phone"
+                // transparent
+                // style={styles.fields}
               />
               <Form.Field
+                icon="at"
+                iconPosition="left"
                 name="T1Email"
                 value={T1Email}
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Email"
+                // transparent
+                // style={styles.fields}
               />
-              <Form.Group>
+              <Form.Group style={styles.t1checkboxes}>
                 <Form.Checkbox
                   label="Receive Emails?"
                   name="T1NotiE"
                   type="checkbox"
                   // checked={T1NotiE}
                   onChange={this.handleCheck}
+                  // style={styles.fields}
                 />
                 <Form.Checkbox
                   label="Receive Texts?"
@@ -300,6 +318,8 @@ class AddTenant extends Component {
                   type="checkbox"
                   // checked={T1NotiP}
                   onChange={this.handleCheck}
+                  // transparent
+                  // style={styles.fields}
                 />
               </Form.Group>
             </Form>
@@ -308,25 +328,38 @@ class AddTenant extends Component {
             <Form>
               <Header>Tenant #2</Header>
               <Form.Field
+                icon="user"
+                iconPosition="left"
                 name="T2Name"
                 value={T2Name}
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Name"
+                // transparent
+                // style={styles.fields}
               />
+
               <Form.Field
+                icon="phone"
+                iconPosition="left"
                 name="T2Phone"
                 value={T2Phone}
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Phone"
+                // transparent
+                // style={styles.fields}
               />
               <Form.Field
+                icon="at"
+                iconPosition="left"
                 name="T2Email"
                 value={T2Email}
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Email"
+                // transparent
+                // style={styles.fields}
               />
               <Form.Group>
                 <Form.Checkbox
@@ -335,6 +368,8 @@ class AddTenant extends Component {
                   type="checkbox"
                   // checked={T2NotiE}
                   onChange={this.handleCheck}
+                  // transparent
+                  // style={styles.fields}
                 />
                 <Form.Checkbox
                   label="Receive Texts?"
@@ -342,6 +377,8 @@ class AddTenant extends Component {
                   type="checkbox"
                   // checked={T2NotiP}
                   onChange={this.handleCheck}
+                  // transparent
+                  // style={styles.fields}
                 />
               </Form.Group>
             </Form>
@@ -362,6 +399,8 @@ class AddTenant extends Component {
                   value={StartD}
                   onChange={this.handleInput}
                   width={5}
+                  // transparent
+                  // style={styles.fields}
                 />
 
                 <Form.Field
@@ -374,6 +413,8 @@ class AddTenant extends Component {
                   value={EndD}
                   onChange={this.handleInput}
                   width={5}
+                  // transparent
+                  // style={styles.fields}
                 />
                 <Form.Field
                   placeholder="Select a property"
@@ -382,13 +423,15 @@ class AddTenant extends Component {
                   options={theLoP}
                   onChange={this.setProperty}
                   width={6}
+                  // transparent
+                  // style={styles.fields}
                 />
               </Form.Group>
             </Form>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={16} computer={3}>
             <Header as="h3"> Contract </Header>
-            <Button fluid type="submit" onClick={this.sendContract} primary>
+            <Button fluid type="submit" onClick={this.sendContract} style={styles.buttons}>
               <Icon name="paper plane outline" />Send
             </Button>
           </Grid.Column>
@@ -396,7 +439,9 @@ class AddTenant extends Component {
         <Grid.Row>
           <Grid.Column>
             <Message>
-              <Message.Header>Enter Tenant Payment</Message.Header>
+              <Message.Header style={{ paddingBottom: '.8rem' }}>
+                Enter Tenant Payment
+              </Message.Header>
               <Form>
                 <CardElement />
               </Form>
@@ -406,7 +451,7 @@ class AddTenant extends Component {
         <Divider />
         <Grid.Row>
           <Grid.Column mobile={16} tablet={16} computer={3}>
-            <Button fluid type="submit" onClick={this.handleSubmit} primary>
+            <Button fluid type="submit" onClick={this.handleSubmit} style={styles.buttons}>
               Save
             </Button>
           </Grid.Column>
@@ -416,8 +461,22 @@ class AddTenant extends Component {
   }
 }
 
-AddTenant.propTypes = {
-  stripe: PropTypes.node.isRequired,
+const styles = {
+  // fields: {
+  //   backgroundColor: 'rgb(242, 242, 240)',
+  //   padding: '.6785rem 1rem',
+  //   borderRadius: '4px',
+  // },
+  t1checkboxes: {
+    paddingBottom: '1rem',
+  },
+  buttons: {
+    backgroundColor: '#327E96',
+    color: '#F2F2F0',
+  },
 };
+// AddTenant.propTypes = {
+//   stripe: PropTypes.node.isRequired,
+// };
 
 export default injectStripe(AddTenant);

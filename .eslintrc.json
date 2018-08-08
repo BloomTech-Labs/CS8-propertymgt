@@ -16,6 +16,7 @@
     "no-unused-vars": 1,
     "object-curly-newline": 0,
     "import/order": 0,
+    "import/no-cycle": 0,
     "no-plusplus": 0,
     "no-console": 0,
     "import/no-unresolved": 0,

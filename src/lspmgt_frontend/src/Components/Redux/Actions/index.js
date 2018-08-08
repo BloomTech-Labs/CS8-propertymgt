@@ -36,15 +36,15 @@ export const signOUtUser = () => (dispatch) => {
 // export const
 
 export const getUserSettings = (event) => (dispatch) => {
-  console.log('ACTION GET USER SETTINGS -> ', event);
+  // console.log('ACTION GET USER SETTINGS -> ', event);
   const url = event.user === 'admin' ? AdminUrl : TenantUrl;
 
   axios
     .get(`${url}${event.action}/${event.payload.email}`) // /api/xxxx/getusersettings
     .then((response) => {
-      console.log('Response in ACTION AXIOS -->', response);
+      // console.log('Response in ACTION AXIOS -->', response.data.data);
 
-      dispatch({ type: GET_USER_SETTINGS, payload: response.data.userData });
+      dispatch({ type: GET_USER_SETTINGS, payload: response.data.data });
     })
     .catch((error) => {
       console.log('Error while retrieving adminId -->', error);

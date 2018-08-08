@@ -27,18 +27,14 @@ class SettingsA extends Component {
   // Get id by passing email back to server
   // Get email from logged in user
   componentDidMount() {
-    console.log('props in did mount --------> ', this.props.userHandle);
+    // console.log('props in did mount --------> ', this.props);
     this.setState({
       email: this.props.userHandle.email,
-      // phone: this.props.userHandle.phone,
-      // name: this.props.userHandle.name,
+      phone: this.props.userHandle.phone,
+      name: this.props.userHandle.name,
       adminId: this.props.userHandle.adminId,
     });
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.adminId === )
-  // }
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -77,10 +73,10 @@ class SettingsA extends Component {
 
   render() {
     const { email, phone, name } = this.state;
-    console.log(
-      'after action -> after reducer -> after mapToProps -> after setstate -> my state is ->',
-      this.state
-    );
+    // console.log(
+    //   'after action -> after reducer -> after mapToProps -> after setstate -> my state is ->',
+    //   this.state
+    // );
     return (
       <Grid>
         <Grid.Column>
@@ -103,6 +99,7 @@ class SettingsA extends Component {
               label="Phone Number"
               name="phone"
               value={phone}
+              placeholder={phone}
               onChange={this.handleChange}
             />
             <Form.Field
@@ -112,6 +109,7 @@ class SettingsA extends Component {
               label="Username"
               name="name"
               value={name}
+              placeholder={name}
               onChange={this.handleChange}
             />
           </Form>

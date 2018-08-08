@@ -81,6 +81,7 @@ class AdminSignUp extends Component {
         <Form.Field
           label="Email"
           placeholder="Tenant email.."
+          control={Input}
           type="text"
           name="Email"
           value={Email}
@@ -89,6 +90,7 @@ class AdminSignUp extends Component {
         <Form.Field
           label="Phone"
           placeholder="Admin phone.."
+          control={Input}
           type="text"
           name="Phone"
           value={Phone}
@@ -97,6 +99,7 @@ class AdminSignUp extends Component {
         <Form.Field
           label="Password"
           placeholder="Enter Password"
+          control={Input}
           type="text"
           name="Password"
           value={Password}
@@ -105,12 +108,13 @@ class AdminSignUp extends Component {
         <Form.Field
           label="RetypePassword"
           placeholder="Confirm your Password"
+          control={Input}
           type="text"
           name="RetypePassword"
           value={RetypePassword}
           onChange={this.handleInput}
         />
-        <CardElement />
+        <CardElement color="white" />
         <Button disabled={!this.canBeDisplayed()} type="Submit" onClick={this.handleSubmit}>
           Submit
         </Button>
