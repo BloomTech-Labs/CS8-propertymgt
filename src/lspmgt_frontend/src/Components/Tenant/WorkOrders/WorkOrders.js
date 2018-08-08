@@ -87,14 +87,14 @@ class WorkOrders extends Component {
             </Form>
           </Grid.Column>
           <Grid.Column mobile={16} computer={8} tablet={8} style={styles.imageColumn}>
-            <Icon name="file image outline" size="massive" />
+            <Icon name="file image outline" size="massive" style={styles.imageIcon} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
             <Form>
               <Form.Checkbox label="Permission to enter residence without tenant present" />
-              <Button secondary type="submit" onClick={this.handleSubmit}>
+              <Button style={styles.button} type="submit" onClick={this.handleSubmit}>
                 Submit
               </Button>
             </Form>
@@ -106,11 +106,21 @@ class WorkOrders extends Component {
 }
 
 const styles = {
+  button: {
+    backgroundColor: '#327E96',
+    color: '#F2F2F0',
+    width: '120px',
+  },
   imageColumn: {
     display: 'flex',
     justifyContent: 'center',
     alignSelf: 'center',
     paddingTop: '2rem',
+  },
+  imageIcon: {
+    color: '#327E96',
+    // color: '#F2F2F0',
+    // width: '120px',
   },
   maintenanceInfo: {
     maxWidth: '270px',

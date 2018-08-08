@@ -58,7 +58,6 @@ class Properties extends Component {
       .catch((err) => {
         console.log(err);
       });
-
   };
 
   addr = () => {
@@ -66,7 +65,7 @@ class Properties extends Component {
       <div>
         <h4> Add a new Property </h4>
         <Link to="/addproperty">
-          <Icon name="plus circle" size="massive" link />
+          <Icon style={{ color: '#327E96' }} name="plus circle" size="massive" link />
         </Link>
       </div>
     );
@@ -126,7 +125,7 @@ class Properties extends Component {
     const contract = property[Object.keys(property)[addrIndex]];
 
     return (
-      <Card>
+      <Card style={styles.card}>
         <Card.Content textAlign="right">
           <EditProperty property={property} />
           <DeleteProperty id={idIndex} />
@@ -216,7 +215,6 @@ class Properties extends Component {
   //   return `${arr[0].NameT}, ${arr[1].NameT}`;
   // };
 
-
   render() {
     const { list } = this.state;
     console.log(list);
@@ -232,5 +230,11 @@ class Properties extends Component {
     );
   }
 }
+
+const styles = {
+  card: {
+    minWidth: '250px',
+  },
+};
 
 export default Properties;
