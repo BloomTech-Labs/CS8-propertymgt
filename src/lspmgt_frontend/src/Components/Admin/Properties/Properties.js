@@ -125,7 +125,7 @@ class Properties extends Component {
     const contract = property[Object.keys(property)[addrIndex]];
 
     return (
-      <Card>
+      <Card style={styles.card}>
         <Card.Content textAlign="right">
           <EditProperty property={property} />
           <DeleteProperty id={idIndex} />
@@ -230,5 +230,11 @@ class Properties extends Component {
     );
   }
 }
+
+const styles = {
+  card: {
+    minWidth: '250px',
+  },
+};
 
 export default Properties;
