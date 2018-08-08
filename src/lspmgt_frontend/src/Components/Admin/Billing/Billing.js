@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Dropdown, Container, Header } from 'semantic-ui-react';
+import { Grid, Dropdown, Container, Header, Message } from 'semantic-ui-react';
 import BillingForm from './BillingForm';
 import Selector from './PropertySelector';
 import axios from 'axios';
@@ -88,6 +88,7 @@ class Billing extends React.Component {
   //         });
   setProperty = (e, { name, value }) => {
     this.setState({
+      SelectedProperty: value,
       SelectedLast4: '',
       PaymentHistory: [],
     });
@@ -127,7 +128,7 @@ class Billing extends React.Component {
   };
 
   render() {
-    console.log(this.state.PaymentHistory);
+    console.log(this.state);
 
     // const x = this.getPropertyId();
     // console.log(x);
@@ -154,10 +155,15 @@ class Billing extends React.Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={3}>
-              <p>Last 4 digits of Saved Card Info for {SelectedProperty}:</p>
-              <h2>{this.state.SelectedLast4}</h2>
+              <p>Credit Card on File</p>
+              <h2>**** **** **** {this.state.SelectedLast4}</h2>
             </Grid.Column>
-            <Grid.Column width={13}>{History}</Grid.Column>
+            <Grid.Column width={13}>
+              <Message>
+                <Message.Header>Payment History</Message.Header>
+              </Message>
+              {History}
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       </div>
@@ -166,11 +172,14 @@ class Billing extends React.Component {
 }
 
 const DisplayRentHistory = (props) => {
-  // console.log(props.props);
+  console.log(props.payHistory.created);
+  const created = Date(props.payHistory.created);
   return (
     <Container>
-      <Header>Amount Paid</Header>
-      {props.payHistory.amount}
+      <Grid.Row columns={2}>
+        <Grid.Column>Amount Paid: ${props.payHistory.amount}</Grid.Column>
+        <Grid.Column>Last Payment Made: {created}</Grid.Column>
+      </Grid.Row>
     </Container>
   );
 };
