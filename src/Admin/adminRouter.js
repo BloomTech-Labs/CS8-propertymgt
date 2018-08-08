@@ -206,6 +206,7 @@ const workorder = (req, res) => {
 // });
 
 const getAdminSettings = (req, res) => {
+  console.log('GET ADMIN SETTINGS API ---> ', req.params);
   const { email } = req.params;
   const params = {
     TableName: 'Admins',
@@ -217,9 +218,12 @@ const getAdminSettings = (req, res) => {
   };
 
   dd.query(params, (error, data) => {
+    log('GET ADMIN API -> ', data);
     if (error) {
       console.log('getAdminSettings returns this error -->', error);
-      res.status(400).json({ error });
+      res.status(400).json({ status: 'error', data: error });
+    } else if (data.Count === 0) {
+      res.status(400).json({ status: 'error', data: 'No data Found in the database' });
     } else {
       const userData = {
         adminId: data.Items[0].adminId,
@@ -229,8 +233,35 @@ const getAdminSettings = (req, res) => {
       };
 
       console.log('success with getAdminSettings -->', userData);
-      res.status(200).json({ msg: 'success', userData });
+      res.status(200).json({ status: 'success', data: userData });
     }
+  });
+};
+
+const updateSettings = (req, res) => {
+  console.log('UPDATE ADMIN SETTINGS API ---> ', req.params);
+  const { name, phone } = req.body;
+  const { id } = req.params;
+  console.log('id is here....', id);
+  const params = {
+    TableName: 'Admins',
+    Key: {
+      adminId: req.params.id,
+    },
+    ExpressionAttributeNames: { '#a': 'name', '#b': 'phone' },
+    ExpressionAttributeValues: {
+      ':name': name,
+      ':phone': phone,
+    },
+    UpdateExpression: 'set #a = :name, #b = :phone',
+    // ConditionExpression: '#a <> :name OR #b <> :phone',
+    ReturnValues: 'UPDATED_NEW',
+  };
+  dd.update(params, (error, data) => {
+    if (error) {
+      console.log('Admin settings update error ==>', error);
+      res.status(400).json({ status: 'Error', error });
+    } else res.status(200).json({ data });
   });
 };
 
@@ -238,5 +269,6 @@ module.exports = {
   propertyId,
   workorder,
   getAdminSettings,
+  updateSettings,
   // addTenant,
 };

@@ -42,6 +42,7 @@ class Dashboard extends Component {
           action: 'getusersettings',
           payload: data.idToken.payload,
         };
+
         this.props.getUserSettings(sendEvent);
       })
       .catch((err) => console.log('there was an erro -> ', err));
