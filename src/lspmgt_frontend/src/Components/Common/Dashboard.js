@@ -74,7 +74,6 @@ const SideBarAdmin = (props) => {
         <Menu style={styles.sidebar} fluid vertical>
           <Link to="/properties">
             <Menu.Item
-              header
               name="Properties"
               active={props.activeItem === 'Properties'}
               onClick={props.handleItemClick}
@@ -86,7 +85,6 @@ const SideBarAdmin = (props) => {
 
           <Link to="/workorders">
             <Menu.Item
-              header
               name="friends"
               active={props.activeItem === 'Word Orders'}
               onClick={props.handleItemClick}
@@ -98,7 +96,6 @@ const SideBarAdmin = (props) => {
 
           <Link to="/addtenant">
             <Menu.Item
-              header
               name="friends"
               active={props.activeItem === 'Add Tenant'}
               onClick={props.handleItemClick}
@@ -110,7 +107,6 @@ const SideBarAdmin = (props) => {
 
           <Link to="/billing">
             <Menu.Item
-              header
               name="friends"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
@@ -122,7 +118,6 @@ const SideBarAdmin = (props) => {
 
           <Link to="/settings">
             <Menu.Item
-              header
               name="friends"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
@@ -157,7 +152,6 @@ const SideBarTenant = (props) => {
         <Menu fluid vertical style={styles.sidebar} className="sidebarItems">
           <Link to="/dashboard">
             <Menu.Item
-              header
               name="Dashboard"
               active={props.activeItem === 'Dashboard'}
               onClick={props.handleItemClick}
@@ -169,7 +163,6 @@ const SideBarTenant = (props) => {
 
           <Link to="/payments">
             <Menu.Item
-              header
               name="Billing"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
@@ -181,7 +174,6 @@ const SideBarTenant = (props) => {
 
           <Link to="/workorders">
             <Menu.Item
-              header
               name="WorkOrder"
               active={props.activeItem === 'WorkOrder'}
               onClick={props.handleItemClick}
@@ -193,7 +185,6 @@ const SideBarTenant = (props) => {
 
           <Link to="/settings">
             <Menu.Item
-              header
               name="Settings"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
@@ -269,6 +260,7 @@ const styles = {
   },
   text: {
     color: '#F2F2F0',
+    fontSize: '1.2em',
   },
 };
 

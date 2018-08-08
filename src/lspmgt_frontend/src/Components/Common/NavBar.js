@@ -57,7 +57,9 @@ class NavBar extends Component {
       <Container fluid>
         <Loader stat={this.state.loader} />
         <Menu style={styles.topbar} fluid>
-          <Menu.Item style={styles.text}>PROPERTY MAXX</Menu.Item>
+          <Menu.Item as="h4" header style={styles.text}>
+            PROPERTY MAXX
+          </Menu.Item>
 
           <Menu.Menu position="right">{this.props.isAdmin ? logged : notLogged}</Menu.Menu>
         </Menu>
