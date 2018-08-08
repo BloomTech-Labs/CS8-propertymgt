@@ -1,4 +1,3 @@
-/*eslint-disable import/first*/
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment, Container, Icon } from 'semantic-ui-react';
 import { Link, Redirect, withRouter } from 'react-router-dom';
@@ -59,51 +58,49 @@ class Login extends Component {
     return (
       <Container>
         <Loader stat={this.state.loader} />
-        <Grid inverted textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h1" color="blue" textAlign="center">
+        <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
+          <Grid.Column style={{ maxWidth: '550px' }}>
+            <Header as="h1" style={styles.title}>
               PropertyMaxx
             </Header>
-            <Form inverted size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
-              <Segment inverted raised style={{ maxWidth: '100%' }}>
+            <Form size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
+              {/* <Segment raised style={{ maxWidth: '100%' }}> */}
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                type="email"
+                name="username"
+                placeholder="E-mail address"
+                onChange={this.handleInput}
+                required
+              />
+              <Tooltip
+                title="Password must contain at least one special character, one upper case, and one lower case with a minimum length of 8"
+                position="bottom"
+                trigger="click"
+                style={{ 'background-color': 'blue' }}
+              >
                 <Form.Input
                   fluid
-                  icon="user"
+                  icon="lock"
                   iconPosition="left"
-                  type="email"
-                  name="username"
-                  placeholder="E-mail address"
+                  placeholder="Password"
+                  type="password"
+                  name="password"
                   onChange={this.handleInput}
                   required
                 />
-                <Tooltip
-                  title="Password must contain special characters, upper case, lower case and a minimum lenght of 8"
-                  position="bottom"
-                  trigger="click"
-                  style={{ 'background-color': 'blue' }}
-                >
-                  <Form.Input
-                    fluid
-                    icon="lock"
-                    iconPosition="left"
-                    placeholder="Password"
-                    type="password"
-                    name="password"
-                    onChange={this.handleInput}
-                    required
-                  />
-                </Tooltip>
-                <Segment>
-                  <Button fluid size="large">
-                    Login
-                  </Button>
-                  {/* <Link to="/">
+              </Tooltip>
+              <Button fluid size="large" style={styles.button}>
+                Login
+              </Button>
+              {/* <Link to="/">
                   <Button size='large'>Back</Button>
                 </Link> */}
-                </Segment>
-              </Segment>
+              {/* </Segment> */}
             </Form>
-            <Message attached="bottom" info content style={{ textAlign: 'justify' }}>
+            <Message attached="bottom" info content style={{ textAlign: 'center' }}>
               <Link to="/signup">Need an account? Sign Up here.&nbsp;</Link> <br />
               <Link to="/">Forgot Password.&nbsp;</Link>
             </Message>
@@ -116,6 +113,17 @@ class Login extends Component {
     );
   }
 }
+
+const styles = {
+  button: {
+    backgroundColor: '0',
+    margin: '1rem 0',
+  },
+  title: {
+    color: '#327E96',
+    textAlign: 'center',
+  },
+};
 
 const mapStateToProps = (state) => {
   console.log('this is maptoprops --> ', state);

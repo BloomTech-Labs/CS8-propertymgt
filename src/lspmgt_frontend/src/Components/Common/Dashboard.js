@@ -41,16 +41,16 @@ class Dashboard extends Component {
   render() {
     const { isAdmin } = this.props;
     const { activeItem } = this.state;
-    const display = isAdmin == 'admin';
+    const display = !isAdmin == 'admin';
     console.log('dashboard check -->  ', this.props);
     return (
-      <Container fluid>
+      <Container>
         {display ? (
           <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
         ) : (
           <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
         )}
-        <FooterAdmin />
+        {/* <FooterAdmin /> */}
       </Container>
     );
   }
@@ -141,14 +141,15 @@ const SideBarAdmin = (props) => {
 const SideBarTenant = (props) => {
   return (
     <Grid columns={2} relaxed>
-      <Grid.Column mobile={16} computer={4} tablet={4} style={styles.fullNav}>
-        <Menu pointing fluid vertical>
+      <Grid.Column mobile={16} computer={4} tablet={4}>
+        <Menu fluid vertical style={styles.sidebar} className="sidebarItems">
           <Link to="/dashboard">
             <Menu.Item
               header
               name="Dashboard"
               active={props.activeItem === 'Dashboard'}
               onClick={props.handleItemClick}
+              style={styles.text}
             >
               Dashboard
             </Menu.Item>
@@ -160,6 +161,7 @@ const SideBarTenant = (props) => {
               name="Billing"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
+              style={styles.text}
             >
               Billing
             </Menu.Item>
@@ -171,6 +173,7 @@ const SideBarTenant = (props) => {
               name="WorkOrder"
               active={props.activeItem === 'WorkOrder'}
               onClick={props.handleItemClick}
+              style={styles.text}
             >
               Work Orders
             </Menu.Item>
@@ -182,6 +185,7 @@ const SideBarTenant = (props) => {
               name="Settings"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
+              style={styles.text}
             >
               Settings
             </Menu.Item>
@@ -202,6 +206,7 @@ const SideBarTenant = (props) => {
   );
 };
 
+// broken, needs some ❤️
 const FooterAdmin = () => {
   return (
     <Container inverted fluid textAlign="center">
@@ -232,25 +237,24 @@ export default withRouter(
 // export default Dashboard;
 
 const styles = {
-  fullNav: {
-    backgroundColor: '#093F6B',
-  },
-  footer: {
-    backgroundColor: '#093F6B',
-    // position: 'absolute',
-    bottom: '0',
-    // width: 'auto',
-    // display: 'flex',
-    // alignSelf: 'flex-end',
-  },
+  // footer: {
+  //   backgroundColor: '#093F6B',
+  //   position: 'absolute',
+  //   bottom: '0',
+  //   width: 'auto',
+  //   display: 'flex',
+  //   alignSelf: 'flex-end',
+  //   position: 'fixed',
+  //   textAlign: 'center',
+  //   fontSize: '1.8em',
+  //   minWidth: '100%',
+  // },
   sidebar: {
     backgroundColor: '#093F6B',
-    height: '55vh',
+    // height: '55vh',
   },
   text: {
     color: '#F2F2F0',
-    textAlign: 'center',
-    fontSize: '1.8em',
   },
 };
 
