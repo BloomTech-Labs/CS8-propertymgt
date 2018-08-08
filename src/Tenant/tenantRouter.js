@@ -4,6 +4,7 @@ const express = require('express');
 const dd = require('../Config/AwsConfig');
 const { Admins } = require('../Config/DynamoDbTables');
 const hashingId = require('../Common/HashingId');
+const hashingId2 = require('../Common/HashingId2');
 
 const router = express.Router();
 
@@ -43,30 +44,24 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/workorder', (req, res) => {
-  const wo = req.body;
+  const { Address, WODesc, Phone } = req.body;
   const params = {
-    TableName: 'Tenants',
-    Key: {
-      tenantId: '9dd974cffa981a3e49af',
-    },
+    TableName: 'Work_Orders',
     Item: {
-      tenantId: '9dd974cffa981a3e49af',
-      WOrder: {
-        PropertyAddr: wo.PropertyAddr,
-        Issue: wo.Issue,
-        PhotoIssue: 'smiley_face',
-        Permission: wo.Permission,
-        TenantPhone: wo.TenantPhone,
-        Status: false,
-      },
+      workorderId: hashingId(),
+      Address,
+      WODesc,
+      Phone,
     },
   };
 
   dd.put(params, (err, d) => {
     if (err) {
       res.status(200).json({ status: 'error', error: err });
+    } else {
+      console.log('work order posted');
+      res.status(200).json({ status: 'success', data: d });
     }
-    res.status(200).json({ status: 'success', data: d });
   });
 });
 

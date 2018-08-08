@@ -49,7 +49,8 @@ class Properties extends Component {
     axios
       .get(`http://localhost:5000/api/property/tenant/${propertyId}/${123}`)
       .then((res) => {
-        console.log('res is here -->', res.data.data.Items[0]);
+        // console.log('res is here -->', res.data.data.Items[0]);
+
         this.setState({
           test: res.data.data.Items[0],
         });
@@ -57,25 +58,7 @@ class Properties extends Component {
       .catch((err) => {
         console.log(err);
       });
-  };
 
-  // Directs to AddProperty page
-
-  checkForContract = (y) => {
-    return y ? (
-      <span style={{ color: 'green' }}>ContractSigned</span>
-    ) : (
-      <span style={{ color: 'red' }}>Contract Not Signed</span>
-    );
-  };
-
-  // Makes sure an array of tenant names is passed back not as undefined
-  displayTenants = (x) => {
-    let arr = [{ NameT: 'tenant' }, { NameT: 'tenant' }];
-    if (x !== undefined) {
-      arr = x;
-    }
-    return `${arr[0].NameT}, ${arr[1].NameT}`;
   };
 
   addr = () => {
@@ -95,22 +78,32 @@ class Properties extends Component {
     const array = Object.keys(property);
 
     // Get propertyId
-    let x = array.indexOf('propertyId');
-    const id = property[Object.keys(property)[x]];
+    const idIndex = array.indexOf('propertyId');
+    const addrIndex = array.indexOf('PropertyAddr');
+    const tNameIndex = array.indexOf('tenantName');
+    const sDateIndex = array.indexOf('tenantStartDate');
+    const eDateIndex = array.indexOf('tenantEndDate');
+    const rentIndex = array.indexOf('PropertyRent');
+    // const id = property[Object.keys(property)[addr]];
     // console.log('My id in properties component is..', id);
 
     // Get PropertyAddr
-    x = array.indexOf('PropertyAddr');
+    // addr = array.indexOf('PropertyAddr');
+    // sDate =
     // console.log('My property address is located at..', x);
-    const address = property[Object.keys(property)[x]];
+    const address = property[Object.keys(property)[addrIndex]];
+    const tenant = property[Object.keys(property)[tNameIndex]];
+    const startDate = property[Object.keys(property)[sDateIndex]];
+    const endDate = property[Object.keys(property)[eDateIndex]];
+    const rentAmount = property[Object.keys(property)[rentIndex]];
 
     // Get tenant object off of tenant table
     // this.getTenant(id);
     const { tenantList } = this.state;
-    console.log('tenant list is here -->', tenantList);
+    // console.log('tenant list is here -->', tenantList);
     // const tenant1 = tenantList.find((FUCKINGTENANT) => FUCKINGTENANT.propertyId === id).NameT;
     const tenant1 = 'abc';
-    console.log('tenant1 is -->', tenant1);
+    // console.log('tenant1 is -->', tenant1);
 
     // const array2 = Object.keys(test);
     // console.log('My array of attributes -->', array2);
@@ -129,14 +122,14 @@ class Properties extends Component {
     // const endD = test[Object.keys(test)[x]];
 
     // Get Contract
-    x = array.indexOf('Contract');
-    const contract = property[Object.keys(property)[x]];
+    const tContract = array.indexOf('Contract');
+    const contract = property[Object.keys(property)[addrIndex]];
 
     return (
       <Card>
         <Card.Content textAlign="right">
           <EditProperty property={property} />
-          <DeleteProperty id={id} />
+          <DeleteProperty id={idIndex} />
         </Card.Content>
         <Card.Content>
           <Feed>
@@ -152,7 +145,7 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="user" />
               </Feed.Label>
-              <Feed.Content>{tenant1}, abc</Feed.Content>
+              <Feed.Content>{tenant}</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
@@ -160,7 +153,15 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="calendar alternate outline" />
               </Feed.Label>
-              <Feed.Content>abc - abc</Feed.Content>
+              <Feed.Content>Start Date:</Feed.Content>
+              <Feed.Content>{startDate}</Feed.Content>
+            </Feed.Event>
+            <Feed.Event>
+              <Feed.Label>
+                <Icon name="calendar alternate outline" />
+              </Feed.Label>
+              <Feed.Content>End Date:</Feed.Content>
+              <Feed.Content>{endDate}</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
@@ -170,11 +171,51 @@ class Properties extends Component {
               </Feed.Label>
               <Feed.Content>{this.checkForContract(contract)}</Feed.Content>
             </Feed.Event>
-          </Feed>`
+          </Feed>
+          <Feed>
+            <Feed.Event>
+              <Feed.Label>
+                <Icon name="dollar sign" />
+              </Feed.Label>
+              <Feed.Content>Rent: ${rentAmount}</Feed.Content>
+            </Feed.Event>
+          </Feed>
         </Card.Content>
       </Card>
     );
   };
+
+  // Directs to AddProperty page
+  addr = () => {
+    return (
+      <div>
+        <h4> Add a new Property </h4>
+        <Link to="/addproperty">
+          <Icon name="plus circle" size="massive" link />
+        </Link>
+      </div>
+    );
+  };
+
+  checkForContract = (y) => {
+    return y ? (
+      <span style={{ color: 'green' }}>ContractSigned</span>
+    ) : (
+      <span style={{ color: 'red' }}>Contract Not Signed</span>
+    );
+  };
+
+  displayTenants = (property) => {};
+
+  // // Makes sure an array of tenant names is passed back not as undefined
+  // displayTenants = (x) => {
+  //   let arr = [{ NameT: 'tenant' }, { NameT: 'tenant' }];
+  //   if (x !== undefined) {
+  //     arr = x;
+  //   }
+  //   return `${arr[0].NameT}, ${arr[1].NameT}`;
+  // };
+
 
   render() {
     const { list } = this.state;

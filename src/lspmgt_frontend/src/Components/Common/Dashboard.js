@@ -114,6 +114,7 @@ const SideBarAdmin = (props) => {
       <Grid.Column mobile={16} computer={12} tablet={12}>
         <Container>
           <Switch>
+            <Route path="/addproperty" component={AdminAddProperty} />
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />

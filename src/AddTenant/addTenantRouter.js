@@ -3,7 +3,7 @@ const hashingId = require('../Common/HashingId');
 const hashingId2 = require('../Common/HashingId2');
 
 // TODO: Do not push stripe key to github
-const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 // Add a new tenant and creates a LS_DB item with property, contract, and tenant info
 // Tenant should have tenantId, propertyId, (stripe customer id)
@@ -83,7 +83,6 @@ const addTenant = (req, res) => {
                   console.log('this is params -->', params, '\nthis is dbError -->', dbError);
                   res.status(300).json({ status: 'db Error', dbError });
                 } else {
-                  console.log('params in dd.put -->', params);
                   stripe.subscriptions.create(
                     {
                       customer: customer.id,
@@ -95,10 +94,41 @@ const addTenant = (req, res) => {
                     },
                     (subErr, subscription) => {
                       if (subErr) {
-                        res.status(500).json({ status: 'subscription error', subscription });
+                        console.log(subErr);
+                        res.status(400).json({ status: 'subscription error', subscription });
                       } else {
                         console.log('subscription created');
-                        res.status(200).json({ status: 'Create Tenant Complete!', subscription });
+                        // res.status(200).json({ status: 'Create Tenant Complete!', subscription });
+                        const updateParams = {
+                          TableName: 'Properties',
+                          Key: {
+                            propertyId,
+                          },
+                          ExpressionAttributeNames: {
+                            '#TID': 'tenantId',
+                            '#TN': 'tenantName',
+                            '#SD': 'tenantStartDate',
+                            '#ED': 'tenantEndDate',
+                          },
+                          ExpressionAttributeValues: {
+                            ':tid': params.Item.tenantId,
+                            ':tn': params.Item.NameT,
+                            ':sd': params.Item.StartD,
+                            ':ed': params.Item.EndD,
+                          },
+                          UpdateExpression: 'SET #TID = :tid, #TN = :tn, #SD = :sd, #ED = :ed',
+                          ReturnValues: 'UPDATED_NEW',
+                        };
+
+                        dd.update(updateParams, (updateErr, data) => {
+                          if (updateErr) {
+                            console.log(updateErr);
+                            res.status(500).json({ status: 'Property Update Error', data });
+                          } else {
+                            console.log('Properties Updated!!');
+                            res.status(200).json({ status: 'Properties Updated!', data });
+                          }
+                        });
                       }
                     }
                   );

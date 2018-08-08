@@ -6,7 +6,7 @@ const dd = require('../Config/AwsConfig');
 const hashingId = require('../Common/HashingId');
 
 // TODO: Do not push stripe key to github
-const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 // const writingToLSDB = (x) => {
 //   const { Tenants, StartD, EndD, propertyId, PropertyAddr, Contract } = x;
@@ -102,6 +102,8 @@ const scanF = (req, res) => {
 //   });
 // };
 
+// get Tenant for Property
+
 // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {
 const properties = (req, res) => {
@@ -130,7 +132,7 @@ const getAllTenants = (req, res) => {
 
 // Add a new property
 const addProperty = (req, res) => {
-  const propertyAmount = 120000; // hard coded
+  // const propertyAmount = 120000; // hard coded
   const {
     NameOwner,
     EmailOwner,
@@ -143,6 +145,7 @@ const addProperty = (req, res) => {
     Bathrooms,
     YearBuilt,
     Contract,
+    PropertyRent,
   } = req.body;
 
   // const toLSDB = {
@@ -169,6 +172,7 @@ const addProperty = (req, res) => {
       Bathrooms,
       YearBuilt,
       Contract,
+      PropertyRent,
       Admin: '123',
     },
   };
@@ -181,7 +185,7 @@ const addProperty = (req, res) => {
       stripe.plans.create(
         {
           id: params.Item.propertyId, // plan ID === Property Address
-          amount: propertyAmount,
+          amount: PropertyRent,
           interval: 'month',
           product: 'prod_DLRBi4QUbCDEVn',
           nickname: PropertyAddr,
