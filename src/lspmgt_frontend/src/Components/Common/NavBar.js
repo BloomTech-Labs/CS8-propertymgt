@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
-import { Loader } from '../Common/Components';
+import { Loader } from './Components';
 import { connect } from 'react-redux';
 import { signOUtUser } from '../Redux/Actions';
 
@@ -27,7 +27,7 @@ class NavBar extends Component {
         </Link>
 
         <Link to="/login">
-          <Menu.Item>Sign In</Menu.Item>
+          <Menu.Item style={styles.text}>Sign In</Menu.Item>
         </Link>
       </Menu.Menu>
     );
@@ -36,6 +36,7 @@ class NavBar extends Component {
       <Menu.Menu position="right">
         <Link to="/">
           <Menu.Item
+            style={styles.text}
             onClick={() => {
               this.handleSignout();
               Auth.signOut().then(() => {
@@ -55,8 +56,8 @@ class NavBar extends Component {
     return (
       <Container>
         <Loader stat={this.state.loader} />
-        <Menu stackable fluid color="blue" inverted>
-          <Menu.Item>LS PROPERTY MANAGEMENT</Menu.Item>
+        <Menu style={styles.topbar} fluid>
+          <Menu.Item style={styles.text}>LS PROPERTY MANAGEMENT</Menu.Item>
 
           <Menu.Menu position="right">{this.props.isAdmin ? logged : notLogged}</Menu.Menu>
         </Menu>
@@ -79,12 +80,11 @@ export default withRouter(
 );
 
 const styles = {
-  // text: {
-  //   fontColor: 'whitesmoke',
-  // },
-  // topbar: {
-  //   marginTop: '0',
-  //   background: '#071826',
-  //   color: 'white',
-  // },
+  text: {
+    color: '#F2F2F0',
+  },
+  topbar: {
+    marginTop: '0',
+    backgroundColor: '#093F6B',
+  },
 };

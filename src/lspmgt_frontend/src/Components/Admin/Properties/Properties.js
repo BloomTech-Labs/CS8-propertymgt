@@ -155,7 +155,7 @@ class Properties extends Component {
               </Feed.Label>
               <Feed.Content>{this.checkForContract(contract)}</Feed.Content>
             </Feed.Event>
-          </Feed>`
+          </Feed>
         </Card.Content>
       </Card>
     );

@@ -262,12 +262,19 @@ class AddTenant extends Component {
           <Grid.Column mobile={16} computer={8}>
             <Form>
               <Header>Tenant #1</Header>
+
+              {/* adding icons to any of the Add Tenant fields yields an icon position... */}
+              {/* ... like the icon located in the Housing Info fields further below */}
+              {/* e.g. padding issue */}
+
               <Form.Field
                 name="T1Name"
                 value={T1Name}
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Name"
+                transparent
+                style={styles.fields}
               />
               <Form.Field
                 name="T1Phone"
@@ -275,6 +282,8 @@ class AddTenant extends Component {
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Phone"
+                transparent
+                style={styles.fields}
               />
               <Form.Field
                 name="T1Email"
@@ -282,21 +291,26 @@ class AddTenant extends Component {
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Email"
+                transparent
+                style={styles.fields}
               />
-              <Form.Group>
+              <Form.Group style={styles.t1checkboxes}>
                 <Form.Checkbox
                   label="Receive Emails?"
                   name="T1NotiE"
                   type="checkbox"
-                  checked={T1NotiE}
+                  // checked={T1NotiE}
                   onChange={this.handleCheck}
+                  style={styles.fields}
                 />
                 <Form.Checkbox
                   label="Receive Texts?"
                   name="T1NotiP"
                   type="checkbox"
-                  checked={T1NotiP}
+                  // checked={T1NotiP}
                   onChange={this.handleCheck}
+                  transparent
+                  style={styles.fields}
                 />
               </Form.Group>
             </Form>
@@ -310,9 +324,8 @@ class AddTenant extends Component {
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Name"
-                // style={styles.fields}
                 transparent
-                outline
+                style={styles.fields}
               />
               <Form.Field
                 name="T2Phone"
@@ -320,6 +333,8 @@ class AddTenant extends Component {
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Phone"
+                transparent
+                style={styles.fields}
               />
               <Form.Field
                 name="T2Email"
@@ -327,21 +342,27 @@ class AddTenant extends Component {
                 control={Input}
                 onChange={this.handleInput}
                 placeholder="Email"
+                transparent
+                style={styles.fields}
               />
               <Form.Group>
                 <Form.Checkbox
                   label="Receive Emails?"
                   name="T2NotiE"
                   type="checkbox"
-                  checked={T2NotiE}
+                  // checked={T2NotiE}
                   onChange={this.handleCheck}
+                  transparent
+                  style={styles.fields}
                 />
                 <Form.Checkbox
                   label="Receive Texts?"
                   name="T2NotiP"
                   type="checkbox"
-                  checked={T2NotiP}
+                  // checked={T2NotiP}
                   onChange={this.handleCheck}
+                  transparent
+                  style={styles.fields}
                 />
               </Form.Group>
             </Form>
@@ -362,6 +383,8 @@ class AddTenant extends Component {
                   value={StartD}
                   onChange={this.handleInput}
                   width={5}
+                  transparent
+                  style={styles.fields}
                 />
 
                 <Form.Field
@@ -374,6 +397,8 @@ class AddTenant extends Component {
                   value={EndD}
                   onChange={this.handleInput}
                   width={5}
+                  transparent
+                  style={styles.fields}
                 />
                 <Form.Field
                   placeholder="Select a property"
@@ -382,13 +407,15 @@ class AddTenant extends Component {
                   options={theLoP}
                   onChange={this.setProperty}
                   width={6}
+                  transparent
+                  style={styles.fields}
                 />
               </Form.Group>
             </Form>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={16} computer={3}>
             <Header as="h3"> Contract </Header>
-            <Button fluid type="submit" onClick={this.sendContract} primary>
+            <Button fluid type="submit" onClick={this.sendContract} style={styles.buttons}>
               <Icon name="paper plane outline" />Send
             </Button>
           </Grid.Column>
@@ -406,7 +433,7 @@ class AddTenant extends Component {
         <Divider />
         <Grid.Row>
           <Grid.Column mobile={16} tablet={16} computer={3}>
-            <Button fluid type="submit" onClick={this.handleSubmit} primary>
+            <Button fluid type="submit" onClick={this.handleSubmit} style={styles.buttons}>
               Save
             </Button>
           </Grid.Column>
@@ -418,7 +445,16 @@ class AddTenant extends Component {
 
 const styles = {
   fields: {
-    background: '#567D8C',
+    backgroundColor: 'rgb(242, 242, 240)',
+    padding: '.6785rem 1rem',
+    borderRadius: '4px',
+  },
+  t1checkboxes: {
+    paddingBottom: '1rem',
+  },
+  buttons: {
+    backgroundColor: '#327E96',
+    color: '#F2F2F0',
   },
 };
 
