@@ -38,7 +38,7 @@ class Dashboard extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = !this.props.isAdmin == 'admin';
+    let display = this.props.isAdmin == 'admin';
     console.log('dashboard check -->  ', this.props);
     return (
       <Container fluid>
