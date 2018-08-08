@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
-import axios from 'axios';
+// import axios from 'axios';
 import { CardElement, injectStripe } from 'react-stripe-elements';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+// import { withRouter } from 'react-router-dom';
+// import { connect } from 'react-redux';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../../Config/Auth';
 
@@ -28,7 +28,7 @@ class AdminSignUp extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const temp = { User: this.state };
+    // const temp = { User: this.state };
 
     // Creates the token for stripe
     this.props.stripe.createToken().then((token) => {

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {
-  Dropdown,
+  // Dropdown,
   Icon,
   Grid,
   Message,
   Form,
   Input,
-  Checkbox,
+  // Checkbox,
   Button,
-  Container,
+  // Container,
   Divider,
   Header,
   Select,
@@ -47,7 +47,7 @@ class AddTenant extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.sendContract = this.sendContract.bind(this);
-    this.getLoP = this.getLoP.bind(this);
+    this.getListOfProperties = this.getListOfProperties.bind(this);
     this.setProperty = this.setProperty.bind(this);
   }
 
@@ -66,7 +66,7 @@ class AddTenant extends Component {
   }
 
   // Returns usable List of Properties (LoP) list with text key value pair
-  getLoP = () => {
+  getListOfProperties = () => {
     const { LoP } = this.state;
     const myArr = LoP.map((property, index) => {
       const constructingTheObject = {
@@ -104,7 +104,6 @@ class AddTenant extends Component {
 
   // TODO: Sends email to tenant with contract attached
   sendContract = () => {
-    const { T1Email, T2Email } = this.state;
     console.log('sendContract triggered..');
   };
 
@@ -258,7 +257,7 @@ class AddTenant extends Component {
       EndD,
     } = this.state;
 
-    const theLoP = this.getLoP();
+    const theLoP = this.getListOfProperties();
 
     return (
       <Grid>

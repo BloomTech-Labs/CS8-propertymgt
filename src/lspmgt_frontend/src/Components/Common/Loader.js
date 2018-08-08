@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 const LoaderExampleLoader = (props) => (
   <Dimmer active={props.stat}>

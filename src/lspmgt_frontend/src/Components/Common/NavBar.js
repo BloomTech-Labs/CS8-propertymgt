@@ -52,7 +52,7 @@ class NavBar extends Component {
         </Link>
       </Menu.Menu>
     );
-    console.log('state of the props isadmin -> ', this.props);
+    // console.log('state of the props isadmin -> ', this.props);
     return (
       <Container fluid>
         <Loader stat={this.state.loader} />

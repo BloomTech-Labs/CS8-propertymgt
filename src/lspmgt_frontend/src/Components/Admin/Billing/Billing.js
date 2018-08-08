@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Dropdown, Container, Header, Message } from 'semantic-ui-react';
-import BillingForm from './BillingForm';
-import Selector from './PropertySelector';
+import { Grid, Dropdown, Container, Message } from 'semantic-ui-react';
+// import BillingForm from './BillingForm';
+// import Selector from './PropertySelector';
 import axios from 'axios';
 
 class Billing extends React.Component {
@@ -126,7 +126,6 @@ class Billing extends React.Component {
     }
 
     // Get CC information
-
   };
 
   render() {

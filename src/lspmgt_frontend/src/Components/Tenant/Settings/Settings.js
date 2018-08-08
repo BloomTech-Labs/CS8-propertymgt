@@ -54,3 +54,6 @@ const styles = {
 };
 
 export default Settings;
+
+// 1. tenant logs in? add tenant info to redux store
+// 2.

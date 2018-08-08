@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Button, Form, Input } from 'semantic-ui-react';
-import axios from 'axios';
+// import { Grid, Button, Form, INput } from 'semantic-ui-react';
+// import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Checkout from './Checkout';
 
