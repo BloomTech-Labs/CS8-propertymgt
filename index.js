@@ -34,6 +34,7 @@ app.use('/api/billing', BillingRouter);
 app.use('/api/settings', SettingsRouter);
 
 const port = process.env.PORT || 5000;
+
 app.listen(port, () => {
   log('app running on port:', port);
 });

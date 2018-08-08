@@ -22,24 +22,24 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET);
 // });
 
 // return a single property using the id parameter
-const propertyId = (req, res) => {
-  const params = {
-    TableName: 'Properties',
-    Key: {
-      propertyId: req.params.id,
-    },
-  };
+// const propertyId = (req, res) => {
+//   const params = {
+//     TableName: 'Properties',
+//     Key: {
+//       propertyId: req.params.id,
+//     },
+//   };
 
-  dd.get(params, (err, data) => {
-    console.log(data);
-    if (err) {
-      res.status(200).json({ status: 'error', error: err });
-    } else {
-      console.log(typeof params.Key.propertyId);
-      res.status(200).json({ status: 'success', data });
-    }
-  });
-};
+//   dd.get(params, (err, data) => {
+//     console.log(data);
+//     if (err) {
+//       res.status(200).json({ status: 'error', error: err });
+//     } else {
+//       console.log(typeof params.Key.propertyId);
+//       res.status(200).json({ status: 'success', data });
+//     }
+//   });
+// };
 
 // // Add a new property to dynamoDB
 // router.post('/addproperty', (req, res) => {
