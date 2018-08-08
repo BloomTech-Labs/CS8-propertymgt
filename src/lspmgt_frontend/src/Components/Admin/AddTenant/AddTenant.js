@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 // import Checkout from './Checkout';
 import { Elements } from 'react-stripe-elements';

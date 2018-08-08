@@ -27,17 +27,17 @@ class Settings extends Component {
               icon="key"
               iconPosition="left"
               control={Input}
-              placeholder="New Password"
+              label="New Password"
               type="password"
             />
             <Form.Field
               icon="protect"
               iconPosition="left"
               control={Input}
-              placeholder="Re-enter Password"
+              label="Re-enter Password"
               type="password"
             />
-            <Button secondary>Save</Button>
+            <Button style={styles.button}>Save</Button>
           </Form>
         </Grid.Column>
       </Grid>
@@ -45,4 +45,15 @@ class Settings extends Component {
   }
 }
 
+const styles = {
+  button: {
+    backgroundColor: '#327E96',
+    color: '#F2F2F0',
+    width: '120px',
+  },
+};
+
 export default Settings;
+
+// 1. tenant logs in? add tenant info to redux store
+// 2.

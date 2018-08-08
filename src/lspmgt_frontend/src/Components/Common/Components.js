@@ -5,7 +5,7 @@ import LandingPage from '../LandingPage/LandingPrototype';
 import BuyNow from '../UserAuth/Payment/BuyNowModal';
 import Dashboard from './Dashboard';
 import AdminProperties from '../Admin/Properties/Properties';
-import AdminAddProperty from '../Admin/Properties/AddProperty';
+// import AdminAddProperty from '../Admin/Properties/AddProperty';
 import AdminWorkOrders from '../Admin/WorkOrder/WorkOrderA';
 import AdminAddTenant from '../Admin/AddTenant/AddTenant';
 import AdminBilling from '../Admin/Billing/Billing';
@@ -19,7 +19,6 @@ import AdminSignup from '../UserAuth/SignUp/AdminSignUp';
 import AdminCheckout from '../UserAuth/SignUp/Checkout';
 import AdminSignupForm from '../UserAuth/SignUp/AdminSignUpForm';
 import Loader from './Loader';
-
 export {
   Home,
   NavBar,
@@ -28,7 +27,7 @@ export {
   BuyNow,
   Dashboard,
   AdminProperties,
-  AdminAddProperty,
+  // AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,

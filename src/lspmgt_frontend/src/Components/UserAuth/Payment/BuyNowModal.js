@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Header, Modal, Form } from 'semantic-ui-react';
-import axios from 'axios';
+import { Button, Modal, Form } from 'semantic-ui-react';
+// import axios from 'axios';
 import Checkout from './Checkout';
 import Amplify, { Auth } from 'aws-amplify';
 import AuthSettings from '../../../Config/Auth';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 Amplify.configure(AuthSettings);
 

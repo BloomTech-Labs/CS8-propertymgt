@@ -1,26 +1,26 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Link, Redirect, withRouter, Switch, Route } from 'react-router-dom';
+// import { Link, Redirect, withRouter, Switch, Route } from 'react-router-dom';
 import {
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  List,
-  Menu,
+  // Button,
+  // Container,
+  // Divider,
+  // Grid,
+  // Header,
+  // Icon,
+  // Image,
+  // List,
+  // Menu,
   Responsive,
-  Segment,
-  Sidebar,
+  // Segment,
+  // Sidebar,
   Visibility,
 } from 'semantic-ui-react';
 
-import Landing from './Landing';
+// import Landing from './Landing';
 import './LandingPrototype.css';
 import video from './Nueva-york.mp4';
-import { LoginForm } from '../Common/Components';
+// import { LoginForm } from '../Common/Components';
 // import BuyNowModal from '../../Payment/BuyNowModal';
 // import BuyNowModal from '../UserAuth/Payment'
 export default class LandingProto extends Component {
@@ -32,7 +32,7 @@ export default class LandingProto extends Component {
 
   render() {
     const { children } = this.props;
-    const { fixed } = this.state;
+    // const { fixed } = this.state;
 
     return (
       <Responsive>
@@ -54,6 +54,6 @@ export default class LandingProto extends Component {
   }
 }
 
-LandingProto.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+// LandingProto.propTypes = {
+//   children: PropTypes.node.isRequired,
+// };

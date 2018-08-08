@@ -3,7 +3,7 @@ import { Container, Grid, Menu, Segment } from 'semantic-ui-react';
 import { Link, Route, Switch, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
-  AdminAddProperty,
+  // AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,
@@ -14,7 +14,7 @@ import {
   TenantSettings,
 } from './Components';
 import { connect } from 'react-redux';
-import { signOUtUser } from '../Redux/Actions';
+import { signOUtUser, getUserSettings } from '../Redux/Actions';
 
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
@@ -31,9 +31,20 @@ class Dashboard extends Component {
     };
   }
 
-  componentDidUpdate() {
-    // this.props.getUser();
-    console.log('did update in dashboard -> ', this.props);
+  componentDidMount() {
+    Auth.currentSession()
+      .then((data) => {
+        // const { email } = data.idToken.payload;
+        const user = data.idToken.payload['custom:access_level'];
+
+        const sendEvent = {
+          user,
+          action: 'getusersettings',
+          payload: data.idToken.payload,
+        };
+        this.props.getUserSettings(sendEvent);
+      })
+      .catch((err) => console.log('there was an erro -> ', err));
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -41,9 +52,10 @@ class Dashboard extends Component {
   render() {
     const { isAdmin } = this.props;
     const { activeItem } = this.state;
-    const display = isAdmin == 'admin';
-    console.log('dashboard check -->  ', this.props);
+    const display = isAdmin === 'admin';
+    // console.log('dashboard check -->  ', this.props);
     return (
+<<<<<<< HEAD
       <div>
         <Container fluid>
           {display ? (
@@ -54,6 +66,16 @@ class Dashboard extends Component {
         </Container>
         {/* <FooterAdmin /> */}
       </div>
+=======
+      <Container>
+        {display ? (
+          <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
+        ) : (
+          <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
+        )}
+        {/* <FooterAdmin /> */}
+      </Container>
+>>>>>>> 60efd18e41c00a60417c9e3fa1d72f9b811edabf
     );
   }
 }
@@ -127,7 +149,7 @@ const SideBarAdmin = (props) => {
       <Grid.Column mobile={16} computer={12} tablet={12}>
         <Container>
           <Switch>
-            <Route path="/addproperty" component={AdminAddProperty} />
+            {/* <Route path="/addproperty" component={AdminAddProperty} /> */}
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />
@@ -144,14 +166,15 @@ const SideBarAdmin = (props) => {
 const SideBarTenant = (props) => {
   return (
     <Grid columns={2} relaxed>
-      <Grid.Column mobile={16} computer={4} tablet={4} style={styles.fullNav}>
-        <Menu pointing fluid vertical>
+      <Grid.Column mobile={16} computer={4} tablet={4}>
+        <Menu fluid vertical style={styles.sidebar} className="sidebarItems">
           <Link to="/dashboard">
             <Menu.Item
               header
               name="Dashboard"
               active={props.activeItem === 'Dashboard'}
               onClick={props.handleItemClick}
+              style={styles.text}
             >
               Dashboard
             </Menu.Item>
@@ -163,6 +186,7 @@ const SideBarTenant = (props) => {
               name="Billing"
               active={props.activeItem === 'Billing'}
               onClick={props.handleItemClick}
+              style={styles.text}
             >
               Billing
             </Menu.Item>
@@ -174,6 +198,7 @@ const SideBarTenant = (props) => {
               name="WorkOrder"
               active={props.activeItem === 'WorkOrder'}
               onClick={props.handleItemClick}
+              style={styles.text}
             >
               Work Orders
             </Menu.Item>
@@ -185,6 +210,7 @@ const SideBarTenant = (props) => {
               name="Settings"
               active={props.activeItem === 'Settings'}
               onClick={props.handleItemClick}
+              style={styles.text}
             >
               Settings
             </Menu.Item>
@@ -205,6 +231,7 @@ const SideBarTenant = (props) => {
   );
 };
 
+// broken, needs some ❤️
 const FooterAdmin = () => {
   return (
     <Segment fluid inverted vertical style={styles.footer}>
@@ -230,13 +257,14 @@ const mapStateToProps = (state) => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { signOUtUser }
+    { getUserSettings }
   )(Dashboard)
 );
 
 // export default Dashboard;
 
 const styles = {
+<<<<<<< HEAD
   fullNav: {
     backgroundColor: '#093F6B',
   },
@@ -249,14 +277,26 @@ const styles = {
     // margin: '10em 0em 0em',
     // padding: '2em 0em',
   },
+=======
+  // footer: {
+  //   backgroundColor: '#093F6B',
+  //   position: 'absolute',
+  //   bottom: '0',
+  //   width: 'auto',
+  //   display: 'flex',
+  //   alignSelf: 'flex-end',
+  //   position: 'fixed',
+  //   textAlign: 'center',
+  //   fontSize: '1.8em',
+  //   minWidth: '100%',
+  // },
+>>>>>>> 60efd18e41c00a60417c9e3fa1d72f9b811edabf
   sidebar: {
     backgroundColor: '#093F6B',
-    height: '55vh',
+    // height: '55vh',
   },
   text: {
     color: '#F2F2F0',
-    textAlign: 'center',
-    fontSize: '1.8em',
   },
 };
 

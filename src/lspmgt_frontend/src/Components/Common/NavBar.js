@@ -23,7 +23,7 @@ class NavBar extends Component {
     let notLogged = (
       <Menu.Menu position="right">
         <Link to="/signup">
-          <Menu.Item>Sign Up</Menu.Item>
+          <Menu.Item style={styles.text}>Sign Up</Menu.Item>
         </Link>
 
         <Link to="/login">
@@ -52,12 +52,12 @@ class NavBar extends Component {
         </Link>
       </Menu.Menu>
     );
-    console.log('state of the props isadmin -> ', this.props);
+    // console.log('state of the props isadmin -> ', this.props);
     return (
       <Container fluid>
         <Loader stat={this.state.loader} />
         <Menu style={styles.topbar} fluid>
-          <Menu.Item style={styles.text}>LS PROPERTY MANAGEMENT</Menu.Item>
+          <Menu.Item style={styles.text}>PROPERTY MAXX</Menu.Item>
 
           <Menu.Menu position="right">{this.props.isAdmin ? logged : notLogged}</Menu.Menu>
         </Menu>
@@ -86,5 +86,6 @@ const styles = {
   topbar: {
     marginTop: '0',
     backgroundColor: '#093F6B',
+    borderRadius: '0',
   },
 };
