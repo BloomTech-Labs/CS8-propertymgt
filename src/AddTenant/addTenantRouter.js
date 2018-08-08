@@ -105,16 +105,18 @@ const addTenant = (req, res) => {
                             propertyId,
                           },
                           ExpressionAttributeNames: {
-                            '#TID': 'tenantName',
+                            '#TID': 'tenantId',
+                            '#TN': 'tenantName',
                             '#SD': 'tenantStartDate',
                             '#ED': 'tenantEndDate',
                           },
                           ExpressionAttributeValues: {
-                            ':tid': params.Item.NameT,
+                            ':tid': params.Item.tenantId,
+                            ':tn': params.Item.NameT,
                             ':sd': params.Item.StartD,
                             ':ed': params.Item.EndD,
                           },
-                          UpdateExpression: 'SET #TID = :tid, #SD = :sd, #ED = :ed',
+                          UpdateExpression: 'SET #TID = :tid, #TN = :tn, #SD = :sd, #ED = :ed',
                           ReturnValues: 'UPDATED_NEW',
                         };
 

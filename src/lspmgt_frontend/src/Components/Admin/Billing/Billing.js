@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Dropdown } from 'semantic-ui-react';
+import { Grid, Dropdown, Container, Header } from 'semantic-ui-react';
 import BillingForm from './BillingForm';
 import Selector from './PropertySelector';
 import axios from 'axios';
@@ -11,8 +11,11 @@ class Billing extends React.Component {
     this.state = {
       SelectedProperty: '', // Property Address
       SelectedPropertyId: '', // Property ID
+      SelectedTenantId: '',
       PropertyList: [],
       SavedCard: {},
+      SelectedLast4: '',
+      PaymentHistory: [],
     };
 
     this.setProperty = this.setProperty.bind(this);
@@ -69,26 +72,70 @@ class Billing extends React.Component {
   //   Billing Router.js should return credit card object
   // };
 
+  // axios
+  //         .get(`http://localhost:5000/api/billing/get/${SelectedTenantId}`)
+  //         .then((res) => {
+  //           // Store CC in state to display
+  //           // console.log('response success ==>', res.data.charges.data);
+  //           // console.log('tenant last four ==>', res.data.customer.sources.data[0].last4);
+  //           this.setState({
+  //             SelectedLast4: res.data.customer.sources.data[0].last4,
+  //             PaymentHistory: res.data.charges.data,
+  //           });
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
   setProperty = (e, { name, value }) => {
+    const { PropertyList, SelectedPropertyId, SelectedTenantId } = this.state;
     console.log(name);
     console.log(value);
-    this.setState({
-      [name]: value,
+    let Selected = {};
+    PropertyList.forEach((Item) => {
+      // console.log('Item in propertyList ==>', Item);
+      if (value === Item.PropertyAddr) {
+        Selected = {
+          PropId: Item.propertyId,
+          TenantId: Item.tenantId,
+        };
+      }
     });
+    console.log('Selected object ==>', Selected);
 
-    // Get CC information
+    // this.setState({
+    //   [name]: value,
+    // });
+
+    // () => {
+    // for (let i = 0; i < PropertyList.length; i++) {
+    //   if (value === PropertyList[i].PropertyAddr) {
+    //     this.setState({
+    //       SelectedPropertyId: PropertyList[i].propertyId,
+    //       SelectedTenantId: PropertyList[i].tenantId,
+    //     });
+    //   }
+    // }
+
     axios
-      .get(`http://localhost:5000/api/billing/get${this.state.SelectedPropertyId}`)
+      .get(`http://localhost:5000/api/billing/get/${Selected.TenantId}`)
       .then((res) => {
         // Store CC in state to display
+        // console.log('response success ==>', res.data.charges.data);
+        // console.log('tenant last four ==>', res.data.customer.sources.data[0].last4);
+        this.setState({
+          SelectedLast4: res.data.customer.sources.data[0].last4,
+          PaymentHistory: res.data.charges.data,
+        });
       })
       .catch((err) => {
         console.log(err);
       });
+
+    // Get CC information
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.state.PaymentHistory);
 
     // const x = this.getPropertyId();
     // console.log(x);
@@ -96,6 +143,10 @@ class Billing extends React.Component {
     const { SelectedProperty } = this.state;
 
     const testArr = this.getPropList();
+
+    const History = this.state.PaymentHistory.map((value, index) => {
+      return <DisplayRentHistory payHistory={value} key={index} />;
+    });
 
     return (
       <div>
@@ -111,15 +162,25 @@ class Billing extends React.Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={3}>
-              <p>Saved Card Info of {SelectedProperty}</p>
+              <p>Last 4 digits of Saved Card Info for {SelectedProperty}:</p>
+              <h2>{this.state.SelectedLast4}</h2>
             </Grid.Column>
-            <Grid.Column width={13}>
-              <p>Rent History of {SelectedProperty}</p>
-            </Grid.Column>
+            <Grid.Column width={13}>{History}</Grid.Column>
           </Grid.Row>
         </Grid>
       </div>
     );
   }
 }
+
+const DisplayRentHistory = (props) => {
+  // console.log(props.props);
+  return (
+    <Container>
+      <Header>Amount Paid</Header>
+      {props.payHistory.amount}
+    </Container>
+  );
+};
+
 export default Billing;
