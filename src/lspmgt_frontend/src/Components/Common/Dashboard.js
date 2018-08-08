@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Grid, Menu } from 'semantic-ui-react';
+import { Container, Grid, Menu, Segment } from 'semantic-ui-react';
 import { Link, Route, Switch, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
@@ -50,6 +50,7 @@ class Dashboard extends Component {
         ) : (
           <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
         )}
+        {/* <FooterAdmin style={styles.fullNav} /> */}
       </Container>
     );
   }
@@ -58,7 +59,7 @@ class Dashboard extends Component {
 const SideBarAdmin = (props) => {
   return (
     <Grid columns={2} relaxed>
-      <Grid.Column mobile={16} computer={4} tablet={4}>
+      <Grid.Column mobile={16} computer={4} tablet={4} style={styles.fullNav}>
         <Menu style={styles.sidebar} fluid vertical>
           <Link to="/properties">
             <Menu.Item
@@ -135,7 +136,7 @@ const SideBarAdmin = (props) => {
 const SideBarTenant = (props) => {
   return (
     <Grid columns={2} relaxed>
-      <Grid.Column mobile={16} computer={4} tablet={4}>
+      <Grid.Column mobile={16} computer={4} tablet={4} style={styles.fullNav}>
         <Menu pointing fluid vertical>
           <Link to="/dashboard">
             <Menu.Item
@@ -192,6 +193,16 @@ const SideBarTenant = (props) => {
   );
 };
 
+const FooterAdmin = () => {
+  return (
+    <Segment inverted vertical style={{ margin: '5em -em -em', padding: '5em 0em' }}>
+      <Container textAlign="center">
+        <Grid.Row />
+      </Container>
+    </Segment>
+  );
+};
+
 const mapStateToProps = (state) => {
   return {
     getUser: state,
@@ -209,6 +220,9 @@ export default withRouter(
 // export default Dashboard;
 
 const styles = {
+  fullNav: {
+    backgroundColor: '#093F6B',
+  },
   sidebar: {
     backgroundColor: '#093F6B',
   },
