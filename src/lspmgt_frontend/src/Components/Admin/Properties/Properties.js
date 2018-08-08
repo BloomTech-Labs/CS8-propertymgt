@@ -66,13 +66,16 @@ class Properties extends Component {
 
     // Get propertyId
     let x = array.indexOf('propertyId');
+    let y = array.indexOf('propertyId');
     const id = property[Object.keys(property)[x]];
     // console.log('My id in properties component is..', id);
 
     // Get PropertyAddr
     x = array.indexOf('PropertyAddr');
+    y = array.indexOf('tenantName');
     // console.log('My property address is located at..', x);
     const address = property[Object.keys(property)[x]];
+    const tenant = property[Object.keys(property)[y]];
 
     // Get tenant object off of tenant table
     // this.getTenant(id);
@@ -122,7 +125,7 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="user" />
               </Feed.Label>
-              <Feed.Content>{tenant1}, abc</Feed.Content>
+              <Feed.Content>{tenant}</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
