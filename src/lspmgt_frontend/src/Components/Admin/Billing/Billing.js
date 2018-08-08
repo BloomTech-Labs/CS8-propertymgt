@@ -87,7 +87,11 @@ class Billing extends React.Component {
   //           console.log(err);
   //         });
   setProperty = (e, { name, value }) => {
-    const { PropertyList, SelectedPropertyId, SelectedTenantId } = this.state;
+    this.setState({
+      SelectedLast4: '',
+      PaymentHistory: [],
+    });
+    const { PropertyList } = this.state;
     console.log(name);
     console.log(value);
     let Selected = {};
@@ -101,20 +105,6 @@ class Billing extends React.Component {
       }
     });
     console.log('Selected object ==>', Selected);
-
-    // this.setState({
-    //   [name]: value,
-    // });
-
-    // () => {
-    // for (let i = 0; i < PropertyList.length; i++) {
-    //   if (value === PropertyList[i].PropertyAddr) {
-    //     this.setState({
-    //       SelectedPropertyId: PropertyList[i].propertyId,
-    //       SelectedTenantId: PropertyList[i].tenantId,
-    //     });
-    //   }
-    // }
 
     if (Selected.TenantId) {
       axios
