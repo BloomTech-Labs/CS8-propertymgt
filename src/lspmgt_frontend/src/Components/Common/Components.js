@@ -1,4 +1,5 @@
 import NavBar from './NavBar';
+import Footer from './Footer';
 import Home from './Home';
 import LandingPage from '../LandingPage/LandingPrototype';
 import BuyNow from '../UserAuth/Payment/BuyNowModal';
@@ -22,6 +23,7 @@ import Loader from './Loader';
 export {
   Home,
   NavBar,
+  Footer,
   LandingPage,
   BuyNow,
   Dashboard,

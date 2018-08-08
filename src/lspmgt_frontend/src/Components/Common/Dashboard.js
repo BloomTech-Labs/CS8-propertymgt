@@ -44,14 +44,16 @@ class Dashboard extends Component {
     const display = isAdmin == 'admin';
     console.log('dashboard check -->  ', this.props);
     return (
-      <Container fluid>
-        {display ? (
-          <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
-        ) : (
-          <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
-        )}
-        <FooterAdmin />
-      </Container>
+      <div>
+        <Container fluid>
+          {display ? (
+            <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
+          ) : (
+            <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
+          )}
+        </Container>
+        {/* <FooterAdmin /> */}
+      </div>
     );
   }
 }
@@ -134,6 +136,7 @@ const SideBarAdmin = (props) => {
           </Switch>
         </Container>
       </Grid.Column>
+      {/* <FooterAdmin style={styles.footer} /> */}
     </Grid>
   );
 };
@@ -204,14 +207,16 @@ const SideBarTenant = (props) => {
 
 const FooterAdmin = () => {
   return (
-    <Container inverted fluid textAlign="center">
-      <Segment style={styles.footer} inverted>
-        <Grid.Row columns={2}>
-          <Grid.Column>PropertyMaxx</Grid.Column>
-          <Grid.Column>Created by: Anderson L. - Bonn W. - Erik A. - Shaun K.</Grid.Column>
-        </Grid.Row>
-      </Segment>
-    </Container>
+    <Segment fluid inverted vertical style={styles.footer}>
+      <Container textAlign="center">
+        <Grid>
+          <Grid.Row columns={2}>
+            <Grid.Column>PropertyMaxx</Grid.Column>
+            <Grid.Column>Created by: Anderson L. - Bonn W. - Erik A. - Shaun K.</Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
+    </Segment>
   );
 };
 
@@ -236,12 +241,13 @@ const styles = {
     backgroundColor: '#093F6B',
   },
   footer: {
-    backgroundColor: '#093F6B',
-    // position: 'absolute',
+    minHeight: '5%',
+    position: 'fixed',
     bottom: '0',
-    // width: 'auto',
-    // display: 'flex',
-    // alignSelf: 'flex-end',
+    width: '100%',
+    backgroundColor: '#093F6B',
+    // margin: '10em 0em 0em',
+    // padding: '2em 0em',
   },
   sidebar: {
     backgroundColor: '#093F6B',
