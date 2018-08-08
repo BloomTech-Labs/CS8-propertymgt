@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Segment, Header, Button, Message, Icon, Label, Input } from 'semantic-ui-react';
+import { Grid, Segment, Header, Button, Message, Icon, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {
-  Dropdown,
+  // Dropdown,
   Icon,
   Grid,
   Message,
   Form,
   Input,
-  Checkbox,
+  // Checkbox,
   Button,
-  Container,
+  // Container,
   Divider,
   Header,
   Select,
@@ -82,7 +82,6 @@ class AddTenant extends Component {
 
   // TODO: Sends email to tenant with contract attached
   sendContract = () => {
-    const { T1Email, T2Email } = this.state;
     console.log('sendContract triggered..');
   };
 
@@ -412,8 +411,6 @@ class AddTenant extends Component {
     );
   }
 }
-
-const styles = {};
 
 export default injectStripe(AddTenant);
 

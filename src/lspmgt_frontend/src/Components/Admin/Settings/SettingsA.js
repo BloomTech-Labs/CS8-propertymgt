@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Grid, Header } from 'semantic-ui-react';
-import axios from 'axios';
+// import axios from 'axios';
 import './SettingsA.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -16,7 +16,7 @@ class SettingsA extends Component {
       email: '',
       phone: '',
       name: '',
-      adminId,
+      adminId: '',
       OldPassword: '',
       NewPassword: '',
     };
@@ -77,7 +77,7 @@ class SettingsA extends Component {
   };
 
   render() {
-    const { email, phone, name, OldPassword, NewPassword } = this.state;
+    const { email, phone, name } = this.state;
     return (
       <Grid>
         <Grid.Column>

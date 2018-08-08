@@ -3,7 +3,7 @@ import { Container, Grid, Menu } from 'semantic-ui-react';
 import { Link, Route, Switch, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
-  AdminAddProperty,
+  // AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,
@@ -16,7 +16,7 @@ import {
 import { connect } from 'react-redux';
 import { signOUtUser } from '../Redux/Actions';
 
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify'; // { Auth } deleted
 import AmplifyConfig from '../../Config/Auth';
 
 Amplify.configure(AmplifyConfig);
@@ -38,7 +38,7 @@ class Dashboard extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = this.props.isAdmin == 'admin';
+    let display = this.props.isAdmin === 'admin';
     console.log('dashboard check -->  ', this.props);
     return (
       <Container fluid>
@@ -203,9 +203,3 @@ export default withRouter(
     { signOUtUser }
   )(Dashboard)
 );
-
-// export default Dashboard;
-
-const textStyles = {
-  color: 'whitesmoke',
-};

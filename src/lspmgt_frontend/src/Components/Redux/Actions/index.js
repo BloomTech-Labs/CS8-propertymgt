@@ -16,7 +16,7 @@ const TenantUrl = '/api/tenant/';
 export const getUserStatus = () => (dispatch) => {
   Auth.currentSession()
     .then((data) => {
-      let status = data.idToken.payload['custom:access_level'] == 'admin' ? 'admin' : 'tenant';
+      let status = data.idToken.payload['custom:access_level'] === 'admin' ? 'admin' : 'tenant';
       dispatch({ type: GET_USER_STATUS, payload: { isAdmin: status, isLoggedIn: true } });
     })
     .catch((err) => console.log('there was an erro -> ', err));
@@ -37,7 +37,7 @@ export const signOUtUser = () => (dispatch) => {
 
 export const getUserSettings = (event) => (dispatch) => {
   // console.log('ACTION GET USER SETTINGS -> ', event.payload.email);
-  const url = event.payload.user == 'admin' ? AdminUrl : TenantUrl;
+  const url = event.payload.user === 'admin' ? AdminUrl : TenantUrl;
   axios
     .get(`${url}${event.action}/${event.payload.email}`) // /api/xxxx/getusersettings
     .then((response) => {
@@ -51,7 +51,7 @@ export const getUserSettings = (event) => (dispatch) => {
 
 export const updateUserSettings = (dispatch, event) => {
   console.log('ACTION UPDATE USER SETTINGS');
-  const url = event.user == 'admin' ? AdminUrl : TenantUrl;
+  const url = event.user === 'admin' ? AdminUrl : TenantUrl;
   axios
     .patch(`${url}${event.payload.userId}`, event.payload)
     .then((res) => {

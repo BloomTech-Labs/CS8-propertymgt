@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Dropdown } from 'semantic-ui-react';
-import BillingForm from './BillingForm';
-import Selector from './PropertySelector';
+// import BillingForm from './BillingForm';
+// import Selector from './PropertySelector';
 import axios from 'axios';
 
 class Billing extends React.Component {

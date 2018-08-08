@@ -5,11 +5,11 @@ import './index.css';
 import 'react-tippy/dist/tippy.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'; // Route component deleted from here
 import { StripeProvider } from 'react-stripe-elements';
-import { Container } from 'semantic-ui-react';
+// import { Container } from 'semantic-ui-react';
 
-import { TenantDashboard, Home, Dashboard } from './Components/Common/Components';
+// import { TenantDashboard, Home, Dashboard } from './Components/Common/Components';
 
 import { createStore, applyMiddleware } from 'redux';
 

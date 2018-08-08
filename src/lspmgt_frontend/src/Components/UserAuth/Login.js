@@ -1,8 +1,8 @@
 /*eslint-disable import/first*/
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment, Container, Icon } from 'semantic-ui-react';
-import { Link, Redirect, withRouter } from 'react-router-dom';
-import axios from 'axios';
+import { Button, Form, Grid, Header, Message, Segment, Container } from 'semantic-ui-react';
+import { Link, withRouter } from 'react-router-dom'; // Redirect deleted from here
+// import axios from 'axios';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 import { Loader } from '../Common/Components';

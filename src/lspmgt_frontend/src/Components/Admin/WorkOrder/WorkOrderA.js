@@ -1,3 +1,4 @@
+/*eslint-disable import/first*/
 import React, { Component } from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import axios from 'axios';
