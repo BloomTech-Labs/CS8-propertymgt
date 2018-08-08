@@ -1,6 +1,5 @@
-const dd = require('../Config/AwsConfig');
-const hashingId = require('../Common/HashingId');
-const hashingId2 = require('../Common/HashingId2');
+const dd = require('../../Config/AwsConfig');
+const hashingId = require('../../Common/HashingId');
 
 // TODO: Do not push stripe key to github
 const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
@@ -10,6 +9,7 @@ const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');
 const addTenant = (req, res) => {
   console.log(req.body);
   const CCToken = req.body.cardToken.token;
+
   const {
     T1Name,
     T1Phone,
@@ -26,21 +26,7 @@ const addTenant = (req, res) => {
     propertyId,
   } = req.body;
 
-  const T2 = {
-    tenantId: hashingId2(),
-    propertyId,
-    NameT: T2Name,
-    MobileT: T2Phone,
-    EmailT: T2Email,
-    GetTextsT: T2NotiP,
-    GetEmailT: T2NotiE,
-    StartD,
-    EndD,
-    WOrder: [],
-  };
-
   // Create the cc information here
-
   // STRIPE FIRST METHOD
   stripe.customers.create(
     {
@@ -74,7 +60,22 @@ const addTenant = (req, res) => {
                   StartD,
                   EndD,
                   WOrder: [],
-                  T2,
+                  Admin: '123',
+                },
+              };
+              const params2 = {
+                TableName: 'Tenants',
+                Item: {
+                  tenantId: hashingId(),
+                  propertyId: params.Item.propertyId,
+                  NameT: T2Name,
+                  MobileT: T2Phone,
+                  EmailT: T2Email,
+                  GetTextsT: T2NotiP,
+                  GetEmailT: T2NotiE,
+                  StartD,
+                  EndD,
+                  WOrder: [],
                   Admin: '123',
                 },
               };
@@ -102,6 +103,14 @@ const addTenant = (req, res) => {
                       }
                     }
                   );
+                  dd.put(params2, (dbError) => {
+                    if (dbError) {
+                      console.log('this is params2 -->', params2, '\nthis is dbError -->', dbError);
+                      res.status(300).json({ status: 'db Error', dbError });
+                    } else {
+                      console.log('params2 in dd.put -->', params2);
+                    }
+                  });
                 }
               });
             }
@@ -152,14 +161,16 @@ const addTenant = (req, res) => {
   // });
 };
 
+// TODO: GET ADMIN ID
+// Sends all id's to LSDB
 const lsdb = (req, res) => {
-  const { propertyId, tenants } = req.body;
+  const { adminId, propertyId, tenants } = req.body;
   const params = {
     TableName: 'LS_DB',
     Item: {
       Tenants: tenants,
       Property: propertyId,
-      Admin: '123',
+      Admin: adminId,
     },
   };
 
@@ -169,6 +180,7 @@ const lsdb = (req, res) => {
   });
 };
 
+//
 const getTenant = (req, res) => {
   const { id } = req.params;
   const params = {
@@ -183,4 +195,4 @@ const getTenant = (req, res) => {
   });
 };
 
-module.exports = { addTenant, lsdb, getTenant };
+module.exports = { addTenant, getTenant, lsdb };

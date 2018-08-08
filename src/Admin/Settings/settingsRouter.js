@@ -1,10 +1,10 @@
-const dd = require('../Config/AwsConfig');
-const hashingId = require('../Common/HashingId');
+const dd = require('../../Config/AwsConfig');
 
 // TODO: Need to hass in passwords and update them
 // Update admin settings
 const settingsUpdate = (req, res) => {
   const { Email, Phone, DisplayName, OldPassword, NewPassword } = req.body;
+
   // Passing in admin id as url params
   const { id } = req.params;
   const params = {

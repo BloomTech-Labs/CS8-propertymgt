@@ -1,9 +1,9 @@
 // const express = require('express');
 // const router = express.Router();
-const dd = require('../Config/AwsConfig');
+const dd = require('../../Config/AwsConfig');
 // const dbModel = require('../Config/DbModel');
 // const { Admin } = require('../Config/DynamoDbTables');
-const hashingId = require('../Common/HashingId');
+const hashingId = require('../../Common/HashingId');
 
 // TODO: Do not push stripe key to github
 const stripe = require('stripe')('sk_test_XXyw7Z0m5dkO9UBZ1EJ8Tc6h');

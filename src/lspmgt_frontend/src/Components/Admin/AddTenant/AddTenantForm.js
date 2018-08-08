@@ -41,12 +41,11 @@ class AddTenant extends Component {
       propertyId: '',
       LoP: [], // list of properties
       cardToken: {},
-
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.sendContract = this.sendContract.bind(this);
-    this.getLoP = this.getLoP.bind(this);
+    this.getListOfProperties = this.getListOfProperties.bind(this);
     this.setProperty = this.setProperty.bind(this);
   }
 
@@ -65,7 +64,7 @@ class AddTenant extends Component {
   }
 
   // Returns usable List of Properties (LoP) list with text key value pair
-  getLoP = () => {
+  getListOfProperties = () => {
     const myArr = this.state.LoP.map((property, index) => {
       const constructingTheObject = {
         key: index,
@@ -86,7 +85,6 @@ class AddTenant extends Component {
     const { T1Email, T2Email } = this.state;
     console.log('sendContract triggered..');
   };
-
 
   // Handles input
   handleInput = (e) => {
@@ -207,7 +205,6 @@ class AddTenant extends Component {
         SelectedProperty: '',
         propertyId: '',
       });
-
     });
   };
 
@@ -257,7 +254,7 @@ class AddTenant extends Component {
       EndD,
     } = this.state;
 
-    const theLoP = this.getLoP();
+    const theLoP = this.getListOfProperties();
 
     return (
       <Grid>
@@ -399,7 +396,6 @@ class AddTenant extends Component {
               <Message.Header>Enter Tenant Payment</Message.Header>
               <Form>
                 <CardElement />
-
               </Form>
             </Message>
           </Grid.Column>
@@ -411,7 +407,6 @@ class AddTenant extends Component {
               Save
             </Button>
           </Grid.Column>
-
         </Grid.Row>
       </Grid>
     );
@@ -422,3 +417,7 @@ const styles = {};
 
 export default injectStripe(AddTenant);
 
+// TODO:
+// 1. Send email
+// 2. Fix checkbox buttons
+// 3.

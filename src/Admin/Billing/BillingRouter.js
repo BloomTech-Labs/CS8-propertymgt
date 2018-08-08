@@ -1,4 +1,4 @@
-const db = require('../Config/AwsConfig');
+const db = require('../../Config/AwsConfig');
 // NEW THINGS
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
