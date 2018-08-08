@@ -96,7 +96,7 @@ const styles = {
     backgroundColor: 'rgb(248,248,249)',
   },
   icon: {
-    backgroundColor: '#327E96',
+    backgroundColor: '#093F6B',
     color: '#F2F2F0',
   },
 };

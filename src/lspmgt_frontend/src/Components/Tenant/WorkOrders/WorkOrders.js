@@ -107,7 +107,7 @@ class WorkOrders extends Component {
 
 const styles = {
   button: {
-    backgroundColor: '#327E96',
+    backgroundColor: '#093F6B',
     color: '#F2F2F0',
     width: '120px',
   },
@@ -118,7 +118,7 @@ const styles = {
     paddingTop: '2rem',
   },
   imageIcon: {
-    color: '#327E96',
+    color: '#093F6B',
     // color: '#F2F2F0',
     // width: '120px',
   },
