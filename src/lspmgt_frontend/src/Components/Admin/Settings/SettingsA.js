@@ -27,7 +27,7 @@ class SettingsA extends Component {
   // Get id by passing email back to server
   // Get email from logged in user
   componentDidMount() {
-    console.log('props in did mount --------> ', this.props);
+    console.log('props in did mount --------> ', this.props.userHandle);
     this.setState({
       email: this.props.userHandle.email,
       // phone: this.props.userHandle.phone,
@@ -56,8 +56,15 @@ class SettingsA extends Component {
     //   action: 'updatesettings',
     //   payload: this.state,
     // };
-    console.log('before sending state to action, it is ->', this.state);
-    this.props.updateUserSettings(this.state);
+
+    console.log('before toActions -->', this.props.userHandle.isAdmin);
+    const toActions = {
+      user: this.props.userHandle.isAdmin,
+      action: 'updatesettings',
+      payload: this.state,
+    };
+
+    this.props.updateUserSettings(toActions);
     // axios
     //   .patch(`http://localhost:5000/api/settings/update/${id}`, this.state)
     //   .then((res) => {

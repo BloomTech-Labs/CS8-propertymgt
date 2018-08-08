@@ -234,9 +234,39 @@ const getAdminSettings = (req, res) => {
   });
 };
 
+const updateSettings = (req, res) => {
+  const { name, phone } = req.body;
+  // const { id } = req.params;
+
+  console.log('id is here....', id);
+
+  const params = {
+    TableName: 'Admins',
+    Key: {
+      adminId: req.params.id,
+    },
+    ExpressionAttributeNames: { '#a': 'name', '#b': 'phone' },
+    ExpressionAttributeValues: {
+      ':name': name,
+      ':phone': phone,
+    },
+    UpdateExpression: 'set #a = :name, #b = :phone',
+    // ConditionExpression: '#a <> :name OR #b <> :phone',
+    ReturnValues: 'UPDATED_NEW',
+  };
+
+  dd.update(params, (error, data) => {
+    if (error) {
+      console.log('Admin settings update error ==>', error);
+      res.status(400).json({ msg: 'Error', error });
+    } else res.status(200).json({ data });
+  });
+};
+
 module.exports = {
   propertyId,
   workorder,
   getAdminSettings,
+  updateSettings,
   // addTenant,
 };

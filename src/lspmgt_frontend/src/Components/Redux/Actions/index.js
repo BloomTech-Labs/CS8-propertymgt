@@ -43,6 +43,7 @@ export const getUserSettings = (event) => (dispatch) => {
     .get(`${url}${event.action}/${event.payload.email}`) // /api/xxxx/getusersettings
     .then((response) => {
       console.log('Response in ACTION AXIOS -->', response);
+
       dispatch({ type: GET_USER_SETTINGS, payload: response.data.userData });
     })
     .catch((error) => {
@@ -50,17 +51,19 @@ export const getUserSettings = (event) => (dispatch) => {
     });
 };
 
-export const updateUserSettings = (dispatch, event) => {
-  console.log('ACTION UPDATE USER SETTINGS');
+export const updateUserSettings = (event) => (dispatch) => {
+  console.log('ACTION UPDATE USER SETTINGS, my event is -->', event);
+
   const url = event.user === 'admin' ? AdminUrl : TenantUrl;
+
   axios
-    .patch(`${url}${event.payload.userId}`, event.payload)
+    .patch(`${url}${event.action}/${event.payload.adminId}`, event.payload)
     .then((res) => {
       console.log('Admin settings patched from actions -->', res);
 
       dispatch({ type: UPDATE_USER_SETTINGS, payload: event.payload });
     })
     .catch((err) => {
-      console.log('Error patching admin -->', err);
+      console.log('Error patching admin in ACTION-->', err);
     });
 };
