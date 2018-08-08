@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 // import { Link, Redirect, withRouter, Switch, Route } from 'react-router-dom';
 import {
@@ -54,6 +54,6 @@ export default class LandingProto extends Component {
   }
 }
 
-LandingProto.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+// LandingProto.propTypes = {
+//   children: PropTypes.node.isRequired,
+// };

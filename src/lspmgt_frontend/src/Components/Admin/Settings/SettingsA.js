@@ -26,27 +26,19 @@ class SettingsA extends Component {
 
   // Get id by passing email back to server
   // Get email from logged in user
-  // ????
   componentDidMount() {
-    Auth.currentSession()
-      .then((data) => {
-        console.log('current session -> ', data.idToken.payload);
-        const { email } = data.idToken.payload;
-        const user = data.idToken.payload['custom:access_level'];
-
-        const sendEvent = {
-          action: 'getusersettings',
-          payload: {
-            email,
-            user,
-          },
-        };
-        this.props.getUserSettings(sendEvent);
-
-        this.setState({});
-      })
-      .catch((err) => console.log('there was an erro -> ', err));
+    console.log('props in did mount --------> ', this.props);
+    this.setState({
+      email: this.props.userHandle.email,
+      // phone: this.props.userHandle.phone,
+      // name: this.props.userHandle.name,
+      adminId: this.props.userHandle.adminId,
+    });
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.adminId === )
+  // }
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -64,8 +56,8 @@ class SettingsA extends Component {
     //   action: 'updatesettings',
     //   payload: this.state,
     // };
-
-    this.props.userHandle.updateSettings(this.state);
+    console.log('before sending state to action, it is ->', this.state);
+    this.props.updateUserSettings(this.state);
     // axios
     //   .patch(`http://localhost:5000/api/settings/update/${id}`, this.state)
     //   .then((res) => {
@@ -78,6 +70,10 @@ class SettingsA extends Component {
 
   render() {
     const { email, phone, name } = this.state;
+    console.log(
+      'after action -> after reducer -> after mapToProps -> after setstate -> my state is ->',
+      this.state
+    );
     return (
       <Grid>
         <Grid.Column>
@@ -90,6 +86,7 @@ class SettingsA extends Component {
               label="Email"
               name="Email"
               value={email}
+              disabled
               onChange={this.handleChange}
             />
             <Form.Field
@@ -97,7 +94,7 @@ class SettingsA extends Component {
               iconPosition="left"
               control={Input}
               label="Phone Number"
-              name="Phone"
+              name="phone"
               value={phone}
               onChange={this.handleChange}
             />
@@ -106,7 +103,7 @@ class SettingsA extends Component {
               iconPosition="left"
               control={Input}
               label="Username"
-              name="DisplayName"
+              name="name"
               value={name}
               onChange={this.handleChange}
             />
@@ -128,7 +125,7 @@ class SettingsA extends Component {
               label="Re-enter Password"
               type="password"
             />
-            <Button secondary type="submit" onClick={this.handleSubmit}>
+            <Button style={StyleSheet.button} type="submit" onClick={this.handleSubmit}>
               Save
             </Button>
           </Form>
@@ -137,6 +134,10 @@ class SettingsA extends Component {
     );
   }
 }
+
+const styles = {
+  color: 'blue',
+};
 
 const mapStateToProps = (state) => {
   console.log('this is maptoprops in admin settings -->', state);

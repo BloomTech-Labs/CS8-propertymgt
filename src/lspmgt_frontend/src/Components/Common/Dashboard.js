@@ -14,9 +14,9 @@ import {
   TenantSettings,
 } from './Components';
 import { connect } from 'react-redux';
-import { signOUtUser } from '../Redux/Actions';
+import { signOUtUser, getUserSettings } from '../Redux/Actions';
 
-import Amplify from 'aws-amplify'; // { Auth } deleted
+import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 
 Amplify.configure(AmplifyConfig);
@@ -30,16 +30,27 @@ class Dashboard extends Component {
     };
   }
 
-  componentDidUpdate() {
-    // this.props.getUser();
-    console.log('did update in dashboard -> ', this.props);
+  componentDidMount() {
+    Auth.currentSession()
+      .then((data) => {
+        // const { email } = data.idToken.payload;
+        const user = data.idToken.payload['custom:access_level'];
+
+        const sendEvent = {
+          user,
+          action: 'getusersettings',
+          payload: data.idToken.payload,
+        };
+        this.props.getUserSettings(sendEvent);
+      })
+      .catch((err) => console.log('there was an erro -> ', err));
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
     let display = this.props.isAdmin === 'admin';
-    console.log('dashboard check -->  ', this.props);
+    // console.log('dashboard check -->  ', this.props);
     return (
       <Container fluid>
         {display ? (
@@ -200,6 +211,6 @@ const mapStateToProps = (state) => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { signOUtUser }
+    { getUserSettings }
   )(Dashboard)
 );

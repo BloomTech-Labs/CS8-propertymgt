@@ -9,9 +9,9 @@ import {
 const InitialState = {
   isAdmin: '',
   isLoggedIn: false,
-  userToken: {},
-  userData: {},
-  event: {},
+  // userToken: {},
+  // userData: {},
+  // event: {},
 };
 
 const rootReducer = (state = InitialState, action) => {

@@ -36,8 +36,9 @@ export const signOUtUser = () => (dispatch) => {
 // export const
 
 export const getUserSettings = (event) => (dispatch) => {
-  // console.log('ACTION GET USER SETTINGS -> ', event.payload.email);
-  const url = event.payload.user === 'admin' ? AdminUrl : TenantUrl;
+  console.log('ACTION GET USER SETTINGS -> ', event);
+  const url = event.user === 'admin' ? AdminUrl : TenantUrl;
+
   axios
     .get(`${url}${event.action}/${event.payload.email}`) // /api/xxxx/getusersettings
     .then((response) => {

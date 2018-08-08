@@ -24,7 +24,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    console.log('checking for user auth -> ', this.props);
+    // console.log('checking for user auth -> ', this.props);
     this.props.getUserStatus();
     this.setState({
       allow: this.props.isLoggedIn,
@@ -32,7 +32,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log('this is home checking user ->  ', this.props);
+    // console.log('this is home checking user ->  ', this.props);
     if (this.props.isLoggedIn) {
       return <Dashboard isAdmin={this.props} />;
     }
