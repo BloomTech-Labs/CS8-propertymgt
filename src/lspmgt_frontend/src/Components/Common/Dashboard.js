@@ -50,7 +50,7 @@ class Dashboard extends Component {
         ) : (
           <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
         )}
-        {/* <FooterAdmin style={styles.fullNav} /> */}
+        <FooterAdmin style={styles.footer} />
       </Container>
     );
   }
@@ -59,7 +59,7 @@ class Dashboard extends Component {
 const SideBarAdmin = (props) => {
   return (
     <Grid columns={2} relaxed>
-      <Grid.Column mobile={16} computer={4} tablet={4} style={styles.fullNav}>
+      <Grid.Column mobile={16} computer={4} tablet={4}>
         <Menu style={styles.sidebar} fluid vertical>
           <Link to="/properties">
             <Menu.Item
@@ -195,9 +195,12 @@ const SideBarTenant = (props) => {
 
 const FooterAdmin = () => {
   return (
-    <Segment inverted vertical style={{ margin: '5em -em -em', padding: '5em 0em' }}>
+    <Segment inverted vertical style={{ position: 'fixed', bottom: 0 }}>
       <Container textAlign="center">
-        <Grid.Row />
+        <Grid.Row columns={2}>
+          <Grid.Column>PropertyMaxx</Grid.Column>
+          <Grid.Column>Created by: Anderson L. - Bonn W. - Erik A. - Shaun K.</Grid.Column>
+        </Grid.Row>
       </Container>
     </Segment>
   );
@@ -223,8 +226,14 @@ const styles = {
   fullNav: {
     backgroundColor: '#093F6B',
   },
+  footer: {
+    backgroundColor: '#093F6B',
+    position: 'fixed',
+    bottom: 0,
+  },
   sidebar: {
     backgroundColor: '#093F6B',
+    height: '50vh',
   },
   text: {
     color: '#F2F2F0',
