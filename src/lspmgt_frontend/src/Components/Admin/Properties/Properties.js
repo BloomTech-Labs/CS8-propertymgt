@@ -58,7 +58,6 @@ class Properties extends Component {
       .catch((err) => {
         console.log(err);
       });
-
   };
 
   addr = () => {
@@ -172,8 +171,6 @@ class Properties extends Component {
               <Feed.Content>{this.checkForContract(contract)}</Feed.Content>
             </Feed.Event>
           </Feed>
-<<<<<<< HEAD
-=======
           <Feed>
             <Feed.Event>
               <Feed.Label>
@@ -182,7 +179,6 @@ class Properties extends Component {
               <Feed.Content>Rent: ${rentAmount}</Feed.Content>
             </Feed.Event>
           </Feed>
->>>>>>> b5787c85829ab9ff3be88ff47ed3a050fb994c56
         </Card.Content>
       </Card>
     );
@@ -218,7 +214,6 @@ class Properties extends Component {
   //   }
   //   return `${arr[0].NameT}, ${arr[1].NameT}`;
   // };
-
 
   render() {
     const { list } = this.state;

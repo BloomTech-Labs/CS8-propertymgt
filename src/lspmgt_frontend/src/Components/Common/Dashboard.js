@@ -208,7 +208,6 @@ export default withRouter(
 
 // export default Dashboard;
 
-<<<<<<< HEAD
 const styles = {
   sidebar: {
     backgroundColor: '#093F6B',
@@ -216,12 +215,8 @@ const styles = {
   text: {
     color: '#F2F2F0',
   },
-=======
-// const textStyles = {
-//   color: 'whitesmoke',
-// };
-
-Dashboard.propTypes = {
-  isAdmin: PropTypes.bool.isRequired,
->>>>>>> b5787c85829ab9ff3be88ff47ed3a050fb994c56
 };
+
+// Dashboard.propTypes = {
+//   isAdmin: PropTypes.bool.isRequired,
+// };

@@ -447,7 +447,6 @@ class AddTenant extends Component {
   }
 }
 
-<<<<<<< HEAD
 const styles = {
   fields: {
     backgroundColor: 'rgb(242, 242, 240)',
@@ -461,10 +460,9 @@ const styles = {
     backgroundColor: '#327E96',
     color: '#F2F2F0',
   },
-=======
-AddTenant.propTypes = {
-  stripe: PropTypes.node.isRequired,
->>>>>>> b5787c85829ab9ff3be88ff47ed3a050fb994c56
 };
+// AddTenant.propTypes = {
+//   stripe: PropTypes.node.isRequired,
+// };
 
 export default injectStripe(AddTenant);
