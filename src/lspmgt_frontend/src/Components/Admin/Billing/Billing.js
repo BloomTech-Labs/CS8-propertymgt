@@ -116,20 +116,22 @@ class Billing extends React.Component {
     //   }
     // }
 
-    axios
-      .get(`http://localhost:5000/api/billing/get/${Selected.TenantId}`)
-      .then((res) => {
-        // Store CC in state to display
-        // console.log('response success ==>', res.data.charges.data);
-        // console.log('tenant last four ==>', res.data.customer.sources.data[0].last4);
-        this.setState({
-          SelectedLast4: res.data.customer.sources.data[0].last4,
-          PaymentHistory: res.data.charges.data,
+    if (Selected.TenantId) {
+      axios
+        .get(`http://localhost:5000/api/billing/get/${Selected.TenantId}`)
+        .then((res) => {
+          // Store CC in state to display
+          // console.log('response success ==>', res.data.charges.data);
+          // console.log('tenant last four ==>', res.data.customer.sources.data[0].last4);
+          this.setState({
+            SelectedLast4: res.data.customer.sources.data[0].last4,
+            PaymentHistory: res.data.charges.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }
 
     // Get CC information
   };
