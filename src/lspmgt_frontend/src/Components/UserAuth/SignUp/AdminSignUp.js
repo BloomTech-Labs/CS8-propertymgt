@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Checkout from './Checkout';
 
 // *************************
-// TO BE PHASED OUT -- DEPRECIATED
+// TO BE PHASED OUT -- DEPRECATED
 // *************************
 
 class AdminSignUp extends Component {

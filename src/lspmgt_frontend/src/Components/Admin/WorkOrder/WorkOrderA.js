@@ -67,7 +67,7 @@ class WorkOrderA extends Component {
     return (
       <Container>
         <Header as="h1">Work Orders</Header>
-        <Card.Group style={styles.cardGroup}>{WorkOrderCards}</Card.Group>;
+        <Card.Group style={styles.cardGroup}>{WorkOrderCards}</Card.Group>
       </Container>
     );
   }

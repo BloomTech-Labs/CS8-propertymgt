@@ -32,7 +32,7 @@ class EditProperty extends Component {
       <Modal
         trigger={
           <a>
-            <Icon name="pencil" />
+            <Icon style={{ color: '#327E96' }} name="pencil" />
           </a>
         }
         basic

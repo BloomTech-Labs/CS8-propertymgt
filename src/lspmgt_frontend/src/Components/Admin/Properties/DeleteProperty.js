@@ -29,7 +29,7 @@ class DeleteProperty extends Component {
       <Modal
         trigger={
           <a>
-            <Icon name="trash alternate outline" />
+            <Icon style={{ color: '#327E96' }} name="trash alternate outline" />
           </a>
         }
         basic
