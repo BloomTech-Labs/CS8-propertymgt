@@ -18,7 +18,6 @@ import AdminSignup from '../UserAuth/SignUp/AdminSignUp';
 import AdminCheckout from '../UserAuth/SignUp/Checkout';
 import AdminSignupForm from '../UserAuth/SignUp/AdminSignUpForm';
 import Loader from './Loader';
-
 export {
   Home,
   NavBar,

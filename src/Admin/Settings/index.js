@@ -6,5 +6,6 @@ const router = express.Router();
 const { settingsUpdate } = require('./settingsRouter');
 
 router.patch('/update/:id', settingsUpdate);
+// router.get('/getusersettings', getAdmin);
 
 module.exports = router;

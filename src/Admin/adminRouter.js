@@ -205,8 +205,38 @@ const workorder = (req, res) => {
 //   });
 // });
 
+const getAdminSettings = (req, res) => {
+  const { email } = req.params;
+  const params = {
+    TableName: 'Admins',
+    IndexName: 'email-index',
+    KeyConditionExpression: 'email = :e',
+    ExpressionAttributeValues: {
+      ':e': email,
+    },
+  };
+
+  dd.query(params, (error, data) => {
+    if (error) {
+      console.log('getAdminSettings returns this error -->', error);
+      res.status(400).json({ error });
+    } else {
+      const userData = {
+        adminId: data.Items[0].adminId,
+        email: data.Items[0].email,
+        phone: data.Items[0].phone,
+        name: data.Items[0].name,
+      };
+
+      console.log('success with getAdminSettings -->', userData);
+      res.status(200).json({ msg: 'success', userData });
+    }
+  });
+};
+
 module.exports = {
   propertyId,
   workorder,
+  getAdminSettings,
   // addTenant,
 };

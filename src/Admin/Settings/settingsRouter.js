@@ -1,5 +1,16 @@
 const dd = require('../../Config/AwsConfig');
 
+// const getAdmin = (req, res) => {
+//   const { email } = req.params
+//   const params => {
+//     TableName: 'Admins',
+//     Key: {
+
+//     }
+//   }
+
+// }
+
 // TODO: Need to hass in passwords and update them
 // Update admin settings
 const settingsUpdate = (req, res) => {
@@ -23,8 +34,10 @@ const settingsUpdate = (req, res) => {
   };
 
   dd.update(params, (error, data) => {
-    if (error) res.status(400).json({ error });
-    else res.status(200);
+    if (error) {
+      res.status(400).json({ msg: 'Error', error });
+      console.log('Admin settings update error ==>', error);
+    } else res.status(200);
   });
 };
 

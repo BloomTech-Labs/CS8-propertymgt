@@ -1,10 +1,17 @@
+import axios from 'axios';
+
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../../Config/Auth';
 
 export const GET_USER_STATUS = 'GET_USER_STATUS';
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
+export const UPDATE_USER_SETTINGS = 'UPDATE_USER_SETTINGS';
+export const GET_USER_SETTINGS = 'GET_USER_SETTINGS';
 Amplify.configure(AmplifyConfig);
+
+const AdminUrl = '/api/admin/';
+const TenantUrl = '/api/tenant/';
 
 export const getUserStatus = () => (dispatch) => {
   Auth.currentSession()
@@ -24,4 +31,35 @@ export const signOUtUser = () => (dispatch) => {
   Auth.signOut().then(() => {
     dispatch({ type: SIGN_OUT_USER, payload: { isAdmin: '', isLoggedIn: false } });
   });
+};
+
+// export const
+
+export const getUserSettings = (event) => (dispatch) => {
+  // console.log('ACTION GET USER SETTINGS -> ', event.payload.email);
+  const url = event.payload.user == 'admin' ? AdminUrl : TenantUrl;
+  axios
+    .get(`${url}${event.action}/${event.payload.email}`) // /api/xxxx/getusersettings
+    .then((response) => {
+      console.log('Response in ACTION AXIOS -->', response);
+      dispatch({ type: GET_USER_SETTINGS, payload: response.data.userData });
+    })
+    .catch((error) => {
+      console.log('Error while retrieving adminId -->', error);
+    });
+};
+
+export const updateUserSettings = (dispatch, event) => {
+  console.log('ACTION UPDATE USER SETTINGS');
+  const url = event.user == 'admin' ? AdminUrl : TenantUrl;
+  axios
+    .patch(`${url}${event.payload.userId}`, event.payload)
+    .then((res) => {
+      console.log('Admin settings patched from actions -->', res);
+
+      dispatch({ type: UPDATE_USER_SETTINGS, payload: event.payload });
+    })
+    .catch((err) => {
+      console.log('Error patching admin -->', err);
+    });
 };
