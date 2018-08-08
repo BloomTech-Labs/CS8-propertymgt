@@ -18,6 +18,7 @@ import { signOUtUser } from '../Redux/Actions';
 
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
+import PropTypes from 'prop-types';
 
 Amplify.configure(AmplifyConfig);
 
@@ -38,17 +39,16 @@ class Dashboard extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    let display = this.props.isAdmin == 'admin';
+    const { isAdmin } = this.props;
+    const { activeItem } = this.state;
+    const display = isAdmin == 'admin';
     console.log('dashboard check -->  ', this.props);
     return (
       <Container fluid>
         {display ? (
-          <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={this.state.activeItem} />
+          <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
         ) : (
-          <SideBarTenant
-            handleItemClick={this.handleItemClick}
-            activeItem={this.state.activeItem}
-          />
+          <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
         )}
       </Container>
     );
@@ -119,6 +119,7 @@ const SideBarAdmin = (props) => {
       <Grid.Column mobile={16} computer={12} tablet={12}>
         <Container>
           <Switch>
+            <Route path="/addproperty" component={AdminAddProperty} />
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />
@@ -207,6 +208,7 @@ export default withRouter(
 
 // export default Dashboard;
 
+<<<<<<< HEAD
 const styles = {
   sidebar: {
     backgroundColor: '#093F6B',
@@ -214,4 +216,12 @@ const styles = {
   text: {
     color: '#F2F2F0',
   },
+=======
+// const textStyles = {
+//   color: 'whitesmoke',
+// };
+
+Dashboard.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+>>>>>>> b5787c85829ab9ff3be88ff47ed3a050fb994c56
 };

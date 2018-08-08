@@ -7,11 +7,11 @@ class WorkOrders extends Component {
     super(props);
 
     this.state = {
-      PropertyAddr: '',
-      Issue: '',
+      Address: '',
+      WODesc: '',
       PhotoIssue: '',
       Permission: true,
-      TenantPhone: '',
+      Phone: '',
       Status: true,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -36,10 +36,16 @@ class WorkOrders extends Component {
       .catch((err) => {
         console('Error under tenants workorder', err);
       });
+
+    this.setState({
+      Address: '',
+      WODesc: '',
+      Phone: '',
+    });
   };
 
   render() {
-    const { PropertyAddr, Issue, TenantPhone } = this.state;
+    const { Address, WODesc, Phone } = this.state;
     return (
       <Grid>
         <Grid.Row>
@@ -60,22 +66,22 @@ class WorkOrders extends Component {
                 iconPosition="left"
                 label="Address"
                 placeholder="1234 Cherry St"
-                name="PropertyAddr"
-                value={PropertyAddr}
+                name="Address"
+                value={Address}
                 onChange={this.handleChange}
               />
               <Form.TextArea
                 label="Work Order Description"
-                name="Issue"
-                value={Issue}
+                name="WODesc"
+                value={WODesc}
                 onChange={this.handleChange}
               />
               <Form.Input
                 icon="phone"
                 iconPosition="left"
                 label="Phone Number"
-                name="TenantPhone"
-                value={TenantPhone}
+                name="Phone"
+                value={Phone}
                 onChange={this.handleChange}
               />
             </Form>

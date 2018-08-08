@@ -22,6 +22,7 @@ class AddProperty extends Component {
       Bedrooms: '',
       Bathrooms: '',
       YearBuilt: '',
+      PropertyRent: '',
       Contract: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,6 +60,7 @@ class AddProperty extends Component {
       Bedrooms: '',
       Bathrooms: '',
       YearBuilt: '',
+      PropertyRent: '',
       Contract: false,
     });
   };
@@ -75,6 +77,7 @@ class AddProperty extends Component {
       Bathrooms,
       SqFootage,
       YearBuilt,
+      PropertyRent,
     } = this.state;
 
     return (
@@ -162,6 +165,12 @@ class AddProperty extends Component {
                       placeholder="Enter Year Property was Built"
                     />
                   </Form.Group>
+                  <Form.Input
+                    name="PropertyRent"
+                    value={PropertyRent}
+                    onChange={this.handleChange}
+                    placeholder="Enter Rent Amount"
+                  />
                 </Form>
               </Message>
             </Grid.Column>
