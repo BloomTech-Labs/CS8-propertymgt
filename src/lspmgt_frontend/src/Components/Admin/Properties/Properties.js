@@ -50,6 +50,7 @@ class Properties extends Component {
       .get(`http://localhost:5000/api/property/tenant/${propertyId}/${123}`)
       .then((res) => {
         // console.log('res is here -->', res.data.data.Items[0]);
+
         this.setState({
           test: res.data.data.Items[0],
         });
@@ -57,6 +58,18 @@ class Properties extends Component {
       .catch((err) => {
         console.log(err);
       });
+
+  };
+
+  addr = () => {
+    return (
+      <div>
+        <h4> Add a new Property </h4>
+        <Link to="/addproperty">
+          <Icon name="plus circle" size="massive" link />
+        </Link>
+      </div>
+    );
   };
 
   // Populates each listOfProperties element with proper data field from database properties list,
@@ -202,6 +215,7 @@ class Properties extends Component {
   //   }
   //   return `${arr[0].NameT}, ${arr[1].NameT}`;
   // };
+
 
   render() {
     const { list } = this.state;

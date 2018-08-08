@@ -47,7 +47,8 @@ class Billing extends React.Component {
   getCustomer = () => {};
 
   getPropList = () => {
-    const myArr = this.state.PropertyList.map((property, index) => {
+    const { PropertyList } = this.state;
+    const myArr = PropertyList.map((property, index) => {
       const constructingTheObject = {
         key: index,
         value: property.PropertyAddr,
@@ -125,6 +126,7 @@ class Billing extends React.Component {
     }
 
     // Get CC information
+
   };
 
   render() {
