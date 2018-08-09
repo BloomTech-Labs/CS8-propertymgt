@@ -5,7 +5,7 @@ const log = require('./src/Common/Show');
 const app = express();
 const UserRouter = require('./src/Users');
 const AdminRouter = require('./src/Admin'); // TODO MOVE MY CODE
-// const TenantRouter = require('./src/Tenant/tenantRouter'); // TODO REFACTOR
+const TenantRouter = require('./src/Tenant/');
 const PropertyRouter = require('./src/Admin/Properties');
 const WorkOrderRouter = require('./src/Admin/WorkOrder');
 const AddTenantRouter = require('./src/Admin/AddTenant');
@@ -25,7 +25,7 @@ app.use(cors());
 
 app.use('/', home);
 app.use('/api/admin', AdminRouter);
-// app.use('/api/tenant', TenantRouter);
+app.use('/api/tenant', TenantRouter);
 app.use('/api/users', UserRouter); // /admin/xxxx /tenant/xxxx
 app.use('/api/property', PropertyRouter);
 app.use('/api/workorder', WorkOrderRouter);
