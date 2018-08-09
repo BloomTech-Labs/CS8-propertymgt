@@ -45,7 +45,7 @@ class Dashboard extends Component {
 
         this.props.getUserSettings(sendEvent);
       })
-      .catch((err) => console.log('there was an erro -> ', err));
+      .catch((err) => console.log('there was an error -> ', err));
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
