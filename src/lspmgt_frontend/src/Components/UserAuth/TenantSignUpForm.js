@@ -24,7 +24,7 @@ export default class SignUp extends Component {
     const temp = { User: this.state };
 
     axios
-      .post('http://localhost:5000/users/tenant/signup', temp)
+      .post('/users/tenant/signup', temp)
       .then((res) => {
         console.log('Posted user..', res);
       })
