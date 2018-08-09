@@ -240,24 +240,19 @@ const getAdminSettings = (req, res) => {
 
 const updateSettings = (req, res) => {
   console.log('UPDATE ADMIN SETTINGS API ---> ', req.params);
-  const { name, phone } = req.body;
+  const { name, phone, email } = req.body;
   const { id } = req.params;
   console.log('id is here....', id);
   const params = {
     TableName: 'Admins',
-    Key: {
-      adminId: req.params.id,
+    Item: {
+      adminId: id,
+      name,
+      phone,
+      email,
     },
-    ExpressionAttributeNames: { '#a': 'name', '#b': 'phone' },
-    ExpressionAttributeValues: {
-      ':name': name,
-      ':phone': phone,
-    },
-    UpdateExpression: 'set #a = :name, #b = :phone',
-    // ConditionExpression: '#a <> :name OR #b <> :phone',
-    ReturnValues: 'UPDATED_NEW',
   };
-  dd.update(params, (error, data) => {
+  dd.put(params, (error, data) => {
     if (error) {
       console.log('Admin settings update error ==>', error);
       res.status(400).json({ status: 'Error', error });
@@ -266,7 +261,7 @@ const updateSettings = (req, res) => {
 };
 
 module.exports = {
-  propertyId,
+  // propertyId,
   workorder,
   getAdminSettings,
   updateSettings,
