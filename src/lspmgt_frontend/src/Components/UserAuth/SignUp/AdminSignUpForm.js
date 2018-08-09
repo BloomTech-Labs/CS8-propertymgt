@@ -6,7 +6,6 @@ import { CardElement, injectStripe } from 'react-stripe-elements';
 // import { connect } from 'react-redux';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../../Config/Auth';
-import { Elements } from 'react-stripe-elements';
 
 Amplify.configure(AmplifyConfig);
 class AdminSignUp extends Component {
