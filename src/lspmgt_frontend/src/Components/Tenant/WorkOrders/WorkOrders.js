@@ -27,9 +27,10 @@ class WorkOrders extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log(this.state);
 
     axios
-      .post('http://localhost:5000/api/tenant/workorder', this.state)
+      .post('http://localhost:5000/api/tenant/addWO', this.state)
       .then((res) => {
         console.log('Post under tenants workorder successfull', res);
       })

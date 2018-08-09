@@ -76,7 +76,7 @@ const getTenantSettings = (req, res) => {
 //   });
 // });
 
-router.post('/workorder', (req, res) => {
+const addWorkOrder = (req, res) => {
   const { Address, WODesc, Phone } = req.body;
   const params = {
     TableName: 'Work_Orders',
@@ -88,17 +88,19 @@ router.post('/workorder', (req, res) => {
     },
   };
 
-  dd.put(params, (err, d) => {
+  dd.put(params, (err, data) => {
     if (err) {
-      res.status(200).json({ status: 'error', error: err });
+      res.status(500).json({ status: 'add WorkOrder Error' });
+      console.log(err);
     } else {
-      console.log('work order posted');
-      res.status(200).json({ status: 'success', data: d });
+      console.log('work order created');
+      res.status(200).json({ status: 'work order created', data });
     }
   });
-});
+};
 
 module.exports = {
   getTenantSettings,
+  addWorkOrder,
   // updateSettings,
 };
