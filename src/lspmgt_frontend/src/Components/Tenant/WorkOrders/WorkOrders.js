@@ -30,7 +30,7 @@ class WorkOrders extends Component {
     console.log(this.state);
 
     axios
-      .post('http://localhost:5000/api/tenant/addWO', this.state)
+      .post('/api/tenant/workorder', this.state)
       .then((res) => {
         console.log('Post under tenants workorder successfull', res);
       })

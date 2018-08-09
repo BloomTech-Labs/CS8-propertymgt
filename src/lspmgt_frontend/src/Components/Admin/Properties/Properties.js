@@ -23,7 +23,7 @@ class Properties extends Component {
   // Gets data from server and adds it to state
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/property/all')
+      .get('/api/property/all')
       .then((response) => {
         this.setState({
           list: response.data.data.Items,
@@ -34,7 +34,7 @@ class Properties extends Component {
       });
 
     axios
-      .get('http://localhost:5000/api/property/alltenants')
+      .get('api/property/alltenants')
       .then((response) => {
         this.setState({
           tenantList: response.data.data.Items,
@@ -47,7 +47,7 @@ class Properties extends Component {
 
   getTenant = (propertyId) => {
     axios
-      .get(`http://localhost:5000/api/property/tenant/${propertyId}/${123}`)
+      .get(`/api/property/tenant/${propertyId}/${123}`)
       .then((res) => {
         // console.log('res is here -->', res.data.data.Items[0]);
 

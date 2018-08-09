@@ -54,7 +54,7 @@ class AddTenant extends Component {
   // Populates LoP
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/property/all')
+      .get('/api/property/all')
       .then((res) => {
         this.setState({
           LoP: res.data.data.Items,
@@ -183,7 +183,7 @@ class AddTenant extends Component {
         console.log('user signed up -> ', data);
 
         axios
-          .post('http://localhost:5000/api/addtenant/add', toTenants)
+          .post('/api/addtenant/add', toTenants)
           .then(
             // axios.get(`http://localhost:5000/api/property/get/${id}`).then((res) => {
             //   console.log(res);
@@ -432,7 +432,8 @@ class AddTenant extends Component {
           <Grid.Column mobile={16} tablet={16} computer={3}>
             <Header as="h3"> Contract </Header>
             <Button fluid type="submit" onClick={this.sendContract} style={styles.buttons}>
-              <Icon name="paper plane outline" />Send
+              <Icon name="paper plane outline" />
+              Send
             </Button>
           </Grid.Column>
         </Grid.Row>
