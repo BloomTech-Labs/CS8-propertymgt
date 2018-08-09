@@ -24,13 +24,15 @@ class NavBar extends Component {
       <Menu.Menu position="right">
         <Link to="/signup">
           <Menu.Item style={styles.text}>
-            <Icon name="add user" />Sign Up
+            <Icon name="add user" />
+            Sign Up
           </Menu.Item>
         </Link>
 
         <Link to="/login">
           <Menu.Item style={styles.text}>
-            <Icon name="sign out" />Sign In
+            <Icon name="sign out" />
+            Sign In
           </Menu.Item>
         </Link>
       </Menu.Menu>
@@ -51,6 +53,7 @@ class NavBar extends Component {
               });
             }}
           >
+            <Icon name="sign out" />
             Sign Out
           </Menu.Item>
         </Link>
