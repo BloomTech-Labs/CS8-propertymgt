@@ -1,7 +1,8 @@
 /*eslint-disable import/first*/
 import React, { Component } from 'react';
-import { Card, Icon, Image, Header, Container } from 'semantic-ui-react';
+import { Card, Icon, Image, Message, Header, Container } from 'semantic-ui-react';
 import axios from 'axios';
+import DeleteWorkOrder from './DeleteWorkOrder';
 
 class WorkOrderA extends Component {
   constructor() {
@@ -72,23 +73,30 @@ class WorkOrderA extends Component {
     );
   }
 }
+// ID #{props.workorder.workorderId}
 
 const DisplayWorkOrders = (props) => {
   return (
     <Card style={styles.card}>
       <Card.Content extra>
-        <Card.Header>ID #{props.workorder.workorderId}</Card.Header>
-        <Image>{props.workorder.PhotoIssue}</Image>
+        <Card.Header>
+          <Icon name="home" />
+          {props.workorder.Address}
+        </Card.Header>
+        {/* <Image>{props.workorder.PhotoIssue}</Image> */}
+        <Message>
+          <Message.Header>
+            <Icon name="wrench" />Description
+          </Message.Header>
+          <Message.Content>{props.workorder.WODesc}</Message.Content>
+        </Message>
         <Card.Description>
-          <Icon name="home"> {props.workorder.Address} </Icon> <br />
-          <Icon name="wrench"> {props.workorder.WODesc} </Icon> <br />
-          <Icon name="check circle outline">
-            <br />
-            {props.workorder.Permission ? 'AccessGranted' : 'PropertyInaccessible'}
-          </Icon>
+          <Icon name="check circle outline" />
+          {props.workorder.Permission ? 'AccessGranted' : 'Knock First'}
           <br />
-          <Icon name="phone"> {props.workorder.Phone} </Icon>
+          <Icon name="phone" /> {props.workorder.Phone}
         </Card.Description>
+        <DeleteWorkOrder id={props.workorder.workorderId} />
       </Card.Content>
     </Card>
   );
