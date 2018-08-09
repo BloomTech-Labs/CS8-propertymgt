@@ -1,12 +1,39 @@
 import React, { Component } from 'react';
-import { Segment, Container, Grid } from 'semantic-ui-react';
+import { Segment, Container, Grid, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const FooterAdmin = () => {
   return (
     <Segment fluid inverted vertical style={styles.footer}>
       {/* <Container fluid inverted textAlign="center" style={styles.footer}> */}
       <Grid textAlign="center">
-        <Grid.Row>Property Maxx</Grid.Row>
+        <h4>Created By</h4>
+        <Grid.Row>
+          <Segment size="small">
+            Anderson L.
+            <a href="https://github.com/codercodingthecode">
+              <Icon size="small" name="github" />
+            </a>
+          </Segment>
+          <Segment size="small">
+            Bonn W.
+            <a href="https://github.com/BonnW">
+              <Icon size="small" name="github" />
+            </a>
+          </Segment>
+          <Segment size="small">
+            Erik A.
+            <a href="https://github.com/erikAlon">
+              <Icon size="small" name="github" />
+            </a>
+          </Segment>
+          <Segment size="small">
+            Shaun K.
+            <a href="https://github.com/RedSkelly">
+              <Icon size="small" name="github" />
+            </a>
+          </Segment>
+        </Grid.Row>
       </Grid>
       {/* </Container> */}
     </Segment>
