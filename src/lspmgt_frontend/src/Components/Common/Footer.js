@@ -10,21 +10,21 @@ const FooterAdmin = () => {
         <Grid.Row style={styles.footerHeader}>Created By</Grid.Row>
         <Grid.Row style={styles.githubRow}>
           <List divided horizontal>
-            <List.Item href="https://github.com/codercodingthecode" style={styles.githubLink}>
-              <List.Icon name="github" size="large" style={styles.githubIcon} />
-              <List.Content>Andy L.</List.Content>
+            <List.Item href="https://github.com/codercodingthecode">
+              <List.Icon name="github" size="large" style={styles.githubColor} />
+              <List.Content style={styles.githubColor}>Andy L.</List.Content>
             </List.Item>
-            <List.Item href="https://github.com/BonnW" style={styles.githubLink}>
-              <List.Icon name="github" size="large" style={styles.githubIcon} />
-              <List.Content>Bonn W.</List.Content>
+            <List.Item href="https://github.com/BonnW">
+              <List.Icon name="github" size="large" style={styles.githubColor} />
+              <List.Content style={styles.githubColor}>Bonn W.</List.Content>
             </List.Item>
-            <List.Item href="https://github.com/erikAlon" style={styles.githubLink}>
-              <List.Icon name="github" size="large" style={styles.githubIcon} />
-              <List.Content>Erik A.</List.Content>
+            <List.Item href="https://github.com/erikAlon">
+              <List.Icon name="github" size="large" style={styles.githubColor} />
+              <List.Content style={styles.githubColor}>Erik A.</List.Content>
             </List.Item>
-            <List.Item href="https://github.com/RedSkelly" style={styles.githubLink}>
-              <List.Icon name="github" size="large" style={styles.githubIcon} />
-              <List.Content>Shaun K.</List.Content>
+            <List.Item href="https://github.com/RedSkelly">
+              <List.Icon name="github" size="large" style={styles.githubColor} />
+              <List.Content style={styles.githubColor}>Shaun K.</List.Content>
             </List.Item>
           </List>
         </Grid.Row>
@@ -55,10 +55,7 @@ const styles = {
   githubRow: {
     padding: '.5rem 0',
   },
-  githubLink: {
-    color: '#093F6B',
-  },
-  githubIcon: {
+  githubColor: {
     color: '#093F6B',
   },
 };
