@@ -24,7 +24,7 @@ class Billing extends React.Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/property/all')
+      .get('/api/property/all')
       .then((res) => {
         this.setState({
           PropertyList: res.data.data.Items,
@@ -110,7 +110,7 @@ class Billing extends React.Component {
 
     if (Selected.TenantId) {
       axios
-        .get(`http://localhost:5000/api/billing/get/${Selected.TenantId}`)
+        .get(`/api/billing/get/${Selected.TenantId}`)
         .then((res) => {
           // Store CC in state to display
           // console.log('response success ==>', res.data.charges.data);

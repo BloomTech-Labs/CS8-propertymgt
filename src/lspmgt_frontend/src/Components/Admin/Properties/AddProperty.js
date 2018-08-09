@@ -42,7 +42,7 @@ class AddProperty extends Component {
     // event.preventDefault();
     this.setState({ Contract: true });
     axios
-      .post('http://localhost:5000/api/property/add', this.state)
+      .post('/api/property/add', this.state)
       .then((res) => {
         console.log('Added property..', res);
       })
