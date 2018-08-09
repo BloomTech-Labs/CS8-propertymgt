@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Container, Grid, Header } from 'semantic-ui-react';
+import { Form, Input, Button, Container, Grid, Header, Message } from 'semantic-ui-react';
 // import axios from 'axios';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 // import { withRouter } from 'react-router-dom';
 // import { connect } from 'react-redux';
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../../Config/Auth';
+import { Elements } from 'react-stripe-elements';
 
 Amplify.configure(AmplifyConfig);
 class AdminSignUp extends Component {
@@ -68,12 +69,10 @@ class AdminSignUp extends Component {
     const { Name, Email, Phone, Password, RetypePassword } = this.state;
 
     return (
-      <Container style={{ marginTop: '5rem' }}>
+      <Container style={{ marginTop: '9rem' }}>
         <Grid textAlign="center">
           <Grid.Column style={{ maxWidth: '550px' }}>
-            <Header as="h1" style={styles.title}>
-              PropertyMaxx
-            </Header>
+            <Header style={styles.title}>PropertyMaxx</Header>
             <Form size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
               <Form.Input
                 // label="Name"
@@ -130,7 +129,9 @@ class AdminSignUp extends Component {
                 value={RetypePassword}
                 onChange={this.handleInput}
               />
-              <CardElement color="white" />
+              <Message>
+                <CardElement />
+              </Message>
               <Button
                 fluid
                 size="large"
@@ -158,6 +159,7 @@ const styles = {
   title: {
     color: '#093F6B',
     textAlign: 'center',
+    fontSize: '3rem',
   },
 };
 

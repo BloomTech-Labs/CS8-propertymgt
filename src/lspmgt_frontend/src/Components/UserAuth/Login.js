@@ -62,13 +62,11 @@ class Login extends Component {
 
   render() {
     return (
-      <Container style={{ marginTop: '5rem' }}>
+      <Container style={{ marginTop: '9rem' }}>
         <Loader stat={this.state.loader} />
         <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: '550px' }}>
-            <Header as="h1" style={styles.title}>
-              PropertyMaxx
-            </Header>
+            <Header style={styles.title}>PropertyMaxx</Header>
             <Form size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
               {/* <Segment raised style={{ maxWidth: '100%' }}> */}
               <Form.Input
@@ -83,7 +81,7 @@ class Login extends Component {
               />
               <Tooltip
                 title="Password must contain at least one special character, one upper case, and one lower case with a minimum length of 8"
-                position="bottom"
+                position="top"
                 trigger="click"
                 style={{ 'background-color': 'blue' }}
               >
@@ -135,6 +133,7 @@ const styles = {
   title: {
     color: '#093F6B',
     textAlign: 'center',
+    fontSize: '3rem',
   },
 };
 
