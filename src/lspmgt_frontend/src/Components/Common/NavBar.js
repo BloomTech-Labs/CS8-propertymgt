@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Container } from 'semantic-ui-react';
+import { Menu, List, Container } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 
 import Amplify, { Auth } from 'aws-amplify';
@@ -34,6 +34,11 @@ class NavBar extends Component {
 
     let logged = (
       <Menu.Menu position="right">
+        <List>
+          <List.Item>
+            <List.Header>Test placeholder</List.Header>
+          </List.Item>
+        </List>
         <Link to="/">
           <Menu.Item
             style={styles.text}
@@ -52,6 +57,7 @@ class NavBar extends Component {
         </Link>
       </Menu.Menu>
     );
+
     // console.log('state of the props isadmin -> ', this.props);
     return (
       <Container fluid>
@@ -60,13 +66,13 @@ class NavBar extends Component {
           <Menu.Item as="h4" header style={styles.text}>
             PROPERTY MAXX
           </Menu.Item>
-
           <Menu.Menu position="right">{this.props.isAdmin ? logged : notLogged}</Menu.Menu>
         </Menu>
       </Container>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     getUser: state,

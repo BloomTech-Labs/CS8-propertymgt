@@ -26,11 +26,12 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: 'home',
+      activeItem: '',
       isAdmin: false,
     };
   }
 
+  // Action used to retrieve user data
   componentDidMount() {
     Auth.currentSession()
       .then((data) => {
@@ -58,7 +59,7 @@ class Dashboard extends Component {
     return (
       <Container>
         {display ? (
-          <SideBarAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
+          <NavMenuAdmin handleItemClick={this.handleItemClick} activeItem={activeItem} />
         ) : (
           <SideBarTenant handleItemClick={this.handleItemClick} activeItem={activeItem} />
         )}
@@ -68,10 +69,11 @@ class Dashboard extends Component {
   }
 }
 
-const SideBarAdmin = (props) => {
+const NavMenuAdmin = (props) => {
   return (
-    <Grid columns={2} relaxed>
-      <Grid.Column mobile={16} computer={4} tablet={4}>
+    <div>
+      <Grid columns={1} relaxed>
+        {/* <Grid.Column mobile={16} computer={4} tablet={4}>
         <Menu style={styles.sidebar} fluid vertical>
           <Link to="/properties">
             <Menu.Item
@@ -128,21 +130,23 @@ const SideBarAdmin = (props) => {
             </Menu.Item>
           </Link>
         </Menu>
-      </Grid.Column>
-      <Grid.Column mobile={16} computer={12} tablet={12}>
-        <Container>
-          <Switch>
-            <Route path="/addproperty" component={AdminAddProperty} />
-            <Route path="/workorders" component={AdminWorkOrders} />
-            <Route path="/addtenant" component={AdminAddTenant} />
-            <Route path="/billing" component={AdminBilling} />
-            <Route path="/settings" component={AdminSettings} />
-            <Route component={AdminProperties} />
-          </Switch>
-        </Container>
-      </Grid.Column>
-      {/* <FooterAdmin style={styles.footer} /> */}
-    </Grid>
+      </Grid.Column> */}
+
+        <Grid.Column mobile={16} computer={12} tablet={12}>
+          <Container>
+            <Switch>
+              <Route path="/addproperty" component={AdminAddProperty} />
+              <Route path="/workorders" component={AdminWorkOrders} />
+              <Route path="/addtenant" component={AdminAddTenant} />
+              <Route path="/billing" component={AdminBilling} />
+              <Route path="/settings" component={AdminSettings} />
+              <Route component={AdminProperties} />
+            </Switch>
+          </Container>
+        </Grid.Column>
+        {/* <FooterAdmin style={styles.footer} /> */}
+      </Grid>
+    </div>
   );
 };
 
@@ -240,8 +244,6 @@ export default withRouter(
   )(Dashboard)
 );
 
-// export default Dashboard;
-
 const styles = {
   // footer: {
   //   backgroundColor: '#093F6B',
@@ -265,6 +267,6 @@ const styles = {
   },
 };
 
-// Dashboard.propTypes = {
-//   isAdmin: PropTypes.bool.isRequired,
-// };
+Dashboard.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+};
