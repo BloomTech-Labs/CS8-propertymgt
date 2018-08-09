@@ -90,7 +90,7 @@ const styles = {
     color: '#F2F2F0',
   },
   topbar: {
-    marginTop: '0',
+    margin: '0 0 1.5rem',
     backgroundColor: '#327E96',
     // backgroundColor: '#093F6B',
     borderRadius: '0',

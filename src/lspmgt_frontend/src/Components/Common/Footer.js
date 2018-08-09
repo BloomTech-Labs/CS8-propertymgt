@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
-import { Segment, Container, Grid } from 'semantic-ui-react';
+import { Segment, Container, Grid, Icon, List, Header } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const FooterAdmin = () => {
   return (
     <Segment fluid inverted vertical style={styles.footer}>
       {/* <Container fluid inverted textAlign="center" style={styles.footer}> */}
       <Grid textAlign="center">
-        <Grid.Row>Property Maxx</Grid.Row>
+        <Grid.Row style={styles.footerHeader}>Created By</Grid.Row>
+        <Grid.Row style={styles.githubRow}>
+          <List divided horizontal>
+            <List.Item href="https://github.com/codercodingthecode">
+              <List.Icon name="github" size="large" style={styles.githubColor} />
+              <List.Content style={styles.githubColor}>Andy L.</List.Content>
+            </List.Item>
+            <List.Item href="https://github.com/BonnW">
+              <List.Icon name="github" size="large" style={styles.githubColor} />
+              <List.Content style={styles.githubColor}>Bonn W.</List.Content>
+            </List.Item>
+            <List.Item href="https://github.com/erikAlon">
+              <List.Icon name="github" size="large" style={styles.githubColor} />
+              <List.Content style={styles.githubColor}>Erik A.</List.Content>
+            </List.Item>
+            <List.Item href="https://github.com/RedSkelly">
+              <List.Icon name="github" size="large" style={styles.githubColor} />
+              <List.Content style={styles.githubColor}>Shaun K.</List.Content>
+            </List.Item>
+          </List>
+        </Grid.Row>
       </Grid>
-      {/* </Container> */}
     </Segment>
   );
 };
@@ -26,5 +46,16 @@ const styles = {
     backgroundColor: '#327E96',
     margin: '10em 0em 0em',
     // padding: '2em 0em',
+  },
+  footerHeader: {
+    margin: '0',
+    padding: '.6rem 0 0',
+    color: '#093F6B',
+  },
+  githubRow: {
+    padding: '.5rem 0',
+  },
+  githubColor: {
+    color: '#093F6B',
   },
 };

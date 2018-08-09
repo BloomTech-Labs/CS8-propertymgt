@@ -18,7 +18,7 @@ class EditProperty extends Component {
     e.preventDefault();
     const { propertyId } = this.props;
     axios
-      .patch(`http://localhost:5000/api/admin/updateproperty/${propertyId}`, this.state)
+      .patch(`/api/admin/updateproperty/${propertyId}`, this.state)
       .then((res) => {
         console.log('Updated property card..', res);
       })
