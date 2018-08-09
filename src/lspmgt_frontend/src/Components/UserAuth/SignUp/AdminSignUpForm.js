@@ -68,7 +68,7 @@ class AdminSignUp extends Component {
     const { Name, Email, Phone, Password, RetypePassword } = this.state;
 
     return (
-      <Container style={{ marginTop: '9rem' }}>
+      <Container style={{ marginTop: '7rem' }}>
         <Grid textAlign="center">
           <Grid.Column style={{ maxWidth: '550px' }}>
             <Header style={styles.title}>PropertyMaxx</Header>

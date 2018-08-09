@@ -62,7 +62,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Container style={{ marginTop: '9rem' }}>
+      <Container style={{ marginTop: '7rem' }}>
         <Loader stat={this.state.loader} />
         <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: '550px' }}>
