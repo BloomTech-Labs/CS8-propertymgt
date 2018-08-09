@@ -3,7 +3,7 @@ import { Container, Grid, Menu, Segment } from 'semantic-ui-react';
 import { Link, Route, Switch, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
-  // AdminAddProperty,
+  AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,
@@ -53,7 +53,7 @@ class Dashboard extends Component {
   render() {
     const { isAdmin } = this.props;
     const { activeItem } = this.state;
-    const display = !isAdmin === 'admin';
+    const display = isAdmin === 'admin';
     // console.log('dashboard check -->  ', this.props);
     return (
       <Container>
@@ -132,7 +132,7 @@ const SideBarAdmin = (props) => {
       <Grid.Column mobile={16} computer={12} tablet={12}>
         <Container>
           <Switch>
-            {/* <Route path="/addproperty" component={AdminAddProperty} /> */}
+            <Route path="/addproperty" component={AdminAddProperty} />
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />

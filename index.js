@@ -16,11 +16,12 @@ const home = require('./src/Home/HomeRouter');
 
 // const bodyParser = require('body-parser');
 const cors = require('cors');
-var path = require('path');
+const path = require('path');
 
 app.use(express.static(path.join(__dirname, 'src/lspmgt_frontend/build')));
 app.use(express.json());
 app.use(require('body-parser').text());
+
 app.use(cors());
 
 app.use('/', home);
