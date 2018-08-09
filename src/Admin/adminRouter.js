@@ -1,11 +1,11 @@
 // const express = require('express');
 // const router = express.Router();
 const dd = require('../Config/AwsConfig');
-const dbModel = require('../Config/DbModel');
-const hashingId = require('../Common/HashingId');
-const { Admins } = require('../Config/DynamoDbTables');
+// const dbModel = require('../Config/DbModel');
+// const hashingId = require('../Common/HashingId');
+// const { Admins } = require('../Config/DynamoDbTables');
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 // // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {
@@ -22,24 +22,24 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET);
 // });
 
 // return a single property using the id parameter
-const propertyId = (req, res) => {
-  const params = {
-    TableName: 'Properties',
-    Key: {
-      propertyId: req.params.id,
-    },
-  };
+// const propertyId = (req, res) => {
+//   const params = {
+//     TableName: 'Properties',
+//     Key: {
+//       propertyId: req.params.id,
+//     },
+//   };
 
-  dd.get(params, (err, data) => {
-    console.log(data);
-    if (err) {
-      res.status(200).json({ status: 'error', error: err });
-    } else {
-      console.log(typeof params.Key.propertyId);
-      res.status(200).json({ status: 'success', data });
-    }
-  });
-};
+//   dd.get(params, (err, data) => {
+//     console.log(data);
+//     if (err) {
+//       res.status(200).json({ status: 'error', error: err });
+//     } else {
+//       console.log(typeof params.Key.propertyId);
+//       res.status(200).json({ status: 'success', data });
+//     }
+//   });
+// };
 
 // // Add a new property to dynamoDB
 // router.post('/addproperty', (req, res) => {
@@ -240,24 +240,19 @@ const getAdminSettings = (req, res) => {
 
 const updateSettings = (req, res) => {
   console.log('UPDATE ADMIN SETTINGS API ---> ', req.params);
-  const { name, phone } = req.body;
+  const { name, phone, email } = req.body;
   const { id } = req.params;
   console.log('id is here....', id);
   const params = {
     TableName: 'Admins',
-    Key: {
-      adminId: req.params.id,
+    Item: {
+      adminId: id,
+      name,
+      phone,
+      email,
     },
-    ExpressionAttributeNames: { '#a': 'name', '#b': 'phone' },
-    ExpressionAttributeValues: {
-      ':name': name,
-      ':phone': phone,
-    },
-    UpdateExpression: 'set #a = :name, #b = :phone',
-    // ConditionExpression: '#a <> :name OR #b <> :phone',
-    ReturnValues: 'UPDATED_NEW',
   };
-  dd.update(params, (error, data) => {
+  dd.put(params, (error, data) => {
     if (error) {
       console.log('Admin settings update error ==>', error);
       res.status(400).json({ status: 'Error', error });
@@ -266,7 +261,7 @@ const updateSettings = (req, res) => {
 };
 
 module.exports = {
-  propertyId,
+  // propertyId,
   workorder,
   getAdminSettings,
   updateSettings,

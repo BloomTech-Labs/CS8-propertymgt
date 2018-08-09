@@ -4,8 +4,8 @@ const log = require('./src/Common/Show');
 
 const app = express();
 const UserRouter = require('./src/Users');
-const AdminRouter = require('./src/Admin'); // TODO MOVE MY CODE
-const TenantRouter = require('./src/Tenant/');
+const AdminRouter = require('./src/Admin');
+const TenantRouter = require('./src/Tenant');
 const PropertyRouter = require('./src/Admin/Properties');
 const WorkOrderRouter = require('./src/Admin/WorkOrder');
 const AddTenantRouter = require('./src/Admin/AddTenant');
@@ -35,6 +35,7 @@ app.use('/api/billing', BillingRouter);
 app.use('/api/settings', SettingsRouter);
 
 const port = process.env.PORT || 5000;
+
 app.listen(port, () => {
   log('app running on port:', port);
 });

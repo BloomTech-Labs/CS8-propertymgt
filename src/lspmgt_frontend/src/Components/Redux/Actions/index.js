@@ -42,7 +42,7 @@ export const getUserSettings = (event) => (dispatch) => {
   axios
     .get(`${url}${event.action}/${event.payload.email}`) // /api/xxxx/getusersettings
     .then((response) => {
-      // console.log('Response in ACTION AXIOS -->', response.data.data);
+      console.log('Response in ACTION AXIOS -->', response.data.data);
 
       dispatch({ type: GET_USER_SETTINGS, payload: response.data.data });
     })
