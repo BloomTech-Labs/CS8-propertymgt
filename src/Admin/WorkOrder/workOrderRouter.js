@@ -14,6 +14,26 @@ const getWorkOrders = (req, res) => {
   });
 };
 
+const deleteWorkOrder = (req, res) => {
+  const { id } = req.params;
+  const params = {
+    TableName: 'Work_Orders',
+    Key: {
+      workorderId: id,
+    },
+  };
+
+  dd.delete(params, (error, data) => {
+    if (error) {
+      res.status(500).json({ status: 'Workorder Delete Error' });
+      console.log(error);
+    } else {
+      res.status(200).json({ status: 'Workorder Deleted', data });
+    }
+  });
+};
+
 module.exports = {
   getWorkOrders,
+  deleteWorkOrder,
 };

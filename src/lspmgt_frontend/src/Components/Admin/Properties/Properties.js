@@ -190,7 +190,7 @@ class Properties extends Component {
       <div>
         <h4> Add a new Property </h4>
         <Link to="/addproperty">
-          <Icon name="plus circle" size="massive" link />
+          <Icon style={{ color: '#093F6B' }} name="plus circle" size="massive" link />
         </Link>
       </div>
     );

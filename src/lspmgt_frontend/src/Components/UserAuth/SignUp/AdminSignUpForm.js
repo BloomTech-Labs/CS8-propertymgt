@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'semantic-ui-react';
+import { Form, Input, Button, Container, Grid, Header } from 'semantic-ui-react';
 // import axios from 'axios';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 // import { withRouter } from 'react-router-dom';
@@ -68,59 +68,97 @@ class AdminSignUp extends Component {
     const { Name, Email, Phone, Password, RetypePassword } = this.state;
 
     return (
-      <Form>
-        <Form.Field
-          label="Name"
-          placeholder="Admin name.."
-          control={Input}
-          type="text"
-          name="Name"
-          value={Name}
-          onChange={this.handleInput}
-        />
-        <Form.Field
-          label="Email"
-          placeholder="Tenant email.."
-          control={Input}
-          type="text"
-          name="Email"
-          value={Email}
-          onChange={this.handleInput}
-        />
-        <Form.Field
-          label="Phone"
-          placeholder="Admin phone.."
-          control={Input}
-          type="text"
-          name="Phone"
-          value={Phone}
-          onChange={this.handleInput}
-        />
-        <Form.Field
-          label="Password"
-          placeholder="Enter Password"
-          control={Input}
-          type="text"
-          name="Password"
-          value={Password}
-          onChange={this.handleInput}
-        />
-        <Form.Field
-          label="RetypePassword"
-          placeholder="Confirm your Password"
-          control={Input}
-          type="text"
-          name="RetypePassword"
-          value={RetypePassword}
-          onChange={this.handleInput}
-        />
-        <CardElement color="white" />
-        <Button disabled={!this.canBeDisplayed()} type="Submit" onClick={this.handleSubmit}>
-          Submit
-        </Button>
-      </Form>
+      <Container style={{ marginTop: '5rem' }}>
+        <Grid textAlign="center">
+          <Grid.Column style={{ maxWidth: '550px' }}>
+            <Header as="h1" style={styles.title}>
+              PropertyMaxx
+            </Header>
+            <Form size="large" style={{ maxWidth: '100%' }} onSubmit={this.handleSubmit}>
+              <Form.Input
+                // label="Name"
+                icon="user"
+                iconPosition="left"
+                placeholder="Name"
+                control={Input}
+                type="email"
+                name="Name"
+                value={Name}
+                onChange={this.handleInput}
+              />
+              <Form.Input
+                // label="Email"
+                icon="at"
+                iconPosition="left"
+                placeholder="Email"
+                control={Input}
+                type="text"
+                name="Email"
+                value={Email}
+                onChange={this.handleInput}
+              />
+              <Form.Input
+                // label="Phone"
+                icon="phone"
+                iconPosition="left"
+                placeholder="Phone"
+                control={Input}
+                type="text"
+                name="Phone"
+                value={Phone}
+                onChange={this.handleInput}
+              />
+              <Form.Input
+                // label="Password"
+                icon="lock"
+                iconPosition="left"
+                placeholder="Enter Password"
+                control={Input}
+                type="text"
+                name="Password"
+                value={Password}
+                onChange={this.handleInput}
+              />
+              <Form.Input
+                // label="RetypePassword"
+                icon="lock"
+                iconPosition="left"
+                placeholder="Confirm Password"
+                control={Input}
+                type="text"
+                name="RetypePassword"
+                value={RetypePassword}
+                onChange={this.handleInput}
+              />
+              <CardElement color="white" />
+              <Button
+                fluid
+                size="large"
+                // disabled={!this.canBeDisplayed()}
+                type="Submit"
+                onClick={this.handleSubmit}
+                style={styles.button}
+              >
+                Sign Up
+              </Button>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </Container>
     );
   }
 }
+
+const styles = {
+  button: {
+    backgroundColor: '#093F6B',
+    color: '#F2F2F0',
+    margin: '1rem 0',
+  },
+  title: {
+    color: '#093F6B',
+    textAlign: 'center',
+  },
+};
 
 export default injectStripe(AdminSignUp);

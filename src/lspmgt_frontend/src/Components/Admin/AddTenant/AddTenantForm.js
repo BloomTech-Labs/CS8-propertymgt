@@ -471,7 +471,7 @@ const styles = {
     paddingBottom: '1rem',
   },
   buttons: {
-    backgroundColor: '#327E96',
+    backgroundColor: '#093F6B',
     color: '#F2F2F0',
   },
 };
