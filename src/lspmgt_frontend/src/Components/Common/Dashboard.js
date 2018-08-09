@@ -53,7 +53,7 @@ class Dashboard extends Component {
   render() {
     const { isAdmin } = this.props;
     const { activeItem } = this.state;
-    const display = !isAdmin === 'admin';
+    const display = isAdmin === 'admin';
     // console.log('dashboard check -->  ', this.props);
     return (
       <Container>

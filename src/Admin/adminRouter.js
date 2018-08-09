@@ -1,11 +1,11 @@
 // const express = require('express');
 // const router = express.Router();
 const dd = require('../Config/AwsConfig');
-const dbModel = require('../Config/DbModel');
-const hashingId = require('../Common/HashingId');
-const { Admins } = require('../Config/DynamoDbTables');
+// const dbModel = require('../Config/DbModel');
+// const hashingId = require('../Common/HashingId');
+// const { Admins } = require('../Config/DynamoDbTables');
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 // // Returns all the properties for property cards screen
 // router.get('/properties', (req, res) => {

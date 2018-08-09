@@ -34,7 +34,7 @@ class WorkOrders extends Component {
         console.log('Post under tenants workorder successfull', res);
       })
       .catch((err) => {
-        console('Error under tenants workorder', err);
+        console.log('Error under tenants workorder', err);
       });
 
     this.setState({
