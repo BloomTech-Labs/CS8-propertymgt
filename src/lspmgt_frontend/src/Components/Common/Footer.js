@@ -7,9 +7,12 @@ const FooterAdmin = () => {
     <Segment fluid inverted vertical style={styles.footer}>
       {/* <Container fluid inverted textAlign="center" style={styles.footer}> */}
       <Grid textAlign="center">
-        <Grid.Row style={styles.footerHeader}>Created By</Grid.Row>
+        {/* <Grid.Row style={styles.footerHeader}>Created By</Grid.Row> */}
         <Grid.Row style={styles.githubRow}>
           <List divided horizontal>
+            {/* <List.Item>
+              <List.Content style={styles.githubColor}>Created By</List.Content>
+            </List.Item> */}
             <List.Item href="https://github.com/codercodingthecode">
               <List.Icon name="github" size="large" style={styles.githubColor} />
               <List.Content style={styles.githubColor}>Andy L.</List.Content>
@@ -50,12 +53,12 @@ const styles = {
   footerHeader: {
     margin: '0',
     padding: '.6rem 0 0',
-    color: '#093F6B',
+    color: '#F2F2F0',
   },
   githubRow: {
     padding: '.5rem 0',
   },
   githubColor: {
-    color: '#093F6B',
+    color: '#F2F2F0',
   },
 };
