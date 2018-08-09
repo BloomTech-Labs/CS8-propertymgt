@@ -5,6 +5,7 @@ const dd = require('../Config/AwsConfig');
 // const { Admins } = require('../Config/DynamoDbTables');
 const hashingId = require('../Common/HashingId');
 // const hashingId2 = require('../Common/HashingId2');
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 const router = express.Router();
 
@@ -38,6 +39,48 @@ const getTenantSettings = (req, res) => {
       res.status(200).json({ status: 'success', data: userData });
     }
   });
+};
+
+// GET method for tenant invoice and rent balance
+const getTenantCustomer = (req, res) => {
+  const { id } = req.params;
+  stripe.customers.retrieve(id, (custErr, customer) => {
+    if (custErr) {
+      console.log(custErr);
+      res.status(500).json({ status: 'error retrieving customer' });
+    } else {
+      console.log(customer);
+      stripe.invoices.retrieveUpcoming(id, (invoiceErr, invoice) => {
+        if (invoiceErr) {
+          console.log(invoiceErr);
+          res.status(500).json({ status: 'failed to get tenant invoice' });
+        } else {
+          console.log(invoice);
+          res.status(200).json({ status: 'customer retrieved', customer, invoice });
+        }
+      });
+    }
+  });
+};
+
+const makePayment = (req, res) => {
+  const { PaymentAmount, id } = req.body;
+  stripe.invoiceItems.create(
+    {
+      customer: id,
+      amount: `-${PaymentAmount}`,
+      currency: 'usd',
+    },
+    (err, invoiceItem) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({ status: 'payment error' });
+      } else {
+        console.log(invoiceItem);
+        res.status(200).json({ status: 'payment success', invoiceItem });
+      }
+    }
+  );
 };
 
 // // Gets all tenants
@@ -102,5 +145,7 @@ const addWorkOrder = (req, res) => {
 module.exports = {
   getTenantSettings,
   addWorkOrder,
+  getTenantCustomer,
+  makePayment,
   // updateSettings,
 };

@@ -28,6 +28,7 @@ const deleteWorkOrder = (req, res) => {
       res.status(500).json({ status: 'Workorder Delete Error' });
       console.log(error);
     } else {
+      console.log('deleted WO ==>', data);
       res.status(200).json({ status: 'Workorder Deleted', data });
     }
   });

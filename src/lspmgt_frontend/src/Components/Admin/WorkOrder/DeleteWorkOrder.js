@@ -41,7 +41,8 @@ class DeleteWorkOrder extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button color="blue" type="submit" inverted onClick={this.handleSubmit}>
-            <Icon name="checkmark" />Delete
+            <Icon name="checkmark" />
+            Delete
           </Button>
         </Modal.Actions>
       </Modal>

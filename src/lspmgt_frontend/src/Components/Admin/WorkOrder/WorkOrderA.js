@@ -16,7 +16,7 @@ class WorkOrderA extends Component {
 
   componentDidMount() {
     axios
-      .get('/api/admin/workorder')
+      .get('/api/workorder/all')
       .then((res) => {
         // const allTenants = res.data.data.Items;
         this.setState({
@@ -86,13 +86,14 @@ const DisplayWorkOrders = (props) => {
         {/* <Image>{props.workorder.PhotoIssue}</Image> */}
         <Message>
           <Message.Header>
-            <Icon name="wrench" />Description
+            <Icon name="wrench" />
+            Description
           </Message.Header>
           <Message.Content>{props.workorder.WODesc}</Message.Content>
         </Message>
         <Card.Description>
           <Icon name="check circle outline" />
-          {props.workorder.Permission ? 'AccessGranted' : 'Knock First'}
+          {props.workorder.Permission ? 'Access Granted' : 'Knock First'}
           <br />
           <Icon name="phone" /> {props.workorder.Phone}
         </Card.Description>

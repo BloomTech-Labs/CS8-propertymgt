@@ -4,6 +4,18 @@ const hashingId = require('../../Common/HashingId');
 // TODO: Do not push stripe key to github
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
+const getStripeCustomer = (req, res) => {
+  stripe.customers.retrieve(req.params.id, (err, customer) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ status: 'stripe error' });
+    } else {
+      console.log(customer);
+      res.status(200).json({ status: 'customer retrieved', customer });
+    }
+  });
+};
+
 // Add a new tenant and creates a LS_DB item with property, contract, and tenant info
 // Tenant should have tenantId, propertyId, (stripe customer id)
 const addTenant = (req, res) => {
@@ -225,4 +237,4 @@ const getTenant = (req, res) => {
   });
 };
 
-module.exports = { addTenant, getTenant, lsdb };
+module.exports = { addTenant, getTenant, lsdb, getStripeCustomer };
