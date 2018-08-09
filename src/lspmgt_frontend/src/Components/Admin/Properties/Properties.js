@@ -126,19 +126,15 @@ class Properties extends Component {
 
     return (
       <Card style={styles.card}>
-        <Card.Content textAlign="right">
+        <Card.Content>
+          <Card.Header>
+            <Icon name="home" />
+            {address}
+          </Card.Header>
+          {/* <Card.Content textAlign="right">
           <EditProperty property={property} />
           <DeleteProperty id={idIndex} />
-        </Card.Content>
-        <Card.Content>
-          <Feed>
-            <Feed.Event>
-              <Feed.Label>
-                <Icon name="home" />
-              </Feed.Label>
-              <Feed.Content>{address}</Feed.Content>
-            </Feed.Event>
-          </Feed>
+        </Card.Content> */}
           <Feed>
             <Feed.Event>
               <Feed.Label>

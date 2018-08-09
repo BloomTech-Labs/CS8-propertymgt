@@ -16,7 +16,7 @@ class WorkOrderA extends Component {
 
   componentDidMount() {
     axios
-      .get('/api/admin/workorder')
+      .get('/api/workorder/all')
       .then((res) => {
         // const allTenants = res.data.data.Items;
         this.setState({
@@ -93,7 +93,7 @@ const DisplayWorkOrders = (props) => {
         </Message>
         <Card.Description>
           <Icon name="check circle outline" />
-          {props.workorder.Permission ? 'AccessGranted' : 'Knock First'}
+          {props.workorder.Permission ? 'Access Granted' : 'Knock First'}
           <br />
           <Icon name="phone" /> {props.workorder.Phone}
         </Card.Description>
