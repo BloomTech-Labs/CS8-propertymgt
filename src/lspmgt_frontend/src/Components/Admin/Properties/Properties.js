@@ -148,15 +148,13 @@ class Properties extends Component {
               <Feed.Label>
                 <Icon name="calendar alternate outline" />
               </Feed.Label>
-              <Feed.Content>Start Date:</Feed.Content>
-              <Feed.Content>{startDate}</Feed.Content>
+              <Feed.Content>Start Date: {startDate}</Feed.Content>
             </Feed.Event>
             <Feed.Event>
               <Feed.Label>
                 <Icon name="calendar alternate outline" />
               </Feed.Label>
-              <Feed.Content>End Date:</Feed.Content>
-              <Feed.Content>{endDate}</Feed.Content>
+              <Feed.Content>End Date: {endDate}</Feed.Content>
             </Feed.Event>
           </Feed>
           <Feed>
