@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
 import { Grid, Form, Header, Message, Input, Button, Select } from 'semantic-ui-react'; // Segment deleted from here
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Payments extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       BalanceDue: '$400.00',
       // PaymentAmount: '',
       // PaymentType: '',
+      id: '', // stripeId is saved to redux store when tenant visits dashboard. Set to state using component did mount
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      id: this.props.userHandle.stripeId,
+    });
   }
 
   render() {
     const { BalanceDue } = this.state;
+    // console.log('THIS IS SPAAARDAAAA', this.props.userHandle.stripeId, this.state);
     return (
       <Grid>
         <Grid.Row>
           <Grid.Column mobile={16}>
             <Header as="h1">Payments</Header>
             <Header as="h2" style={styles.balanceHeader}>
-              Outstanding Balance
+              Outstanding Balance for:
+              <span style={{ color: 'red' }}>{this.state.id}</span>
             </Header>
             <Message style={styles.balanceDue}>
               <Message.Header>{BalanceDue}</Message.Header>
@@ -175,4 +186,15 @@ const styles = {
   },
 };
 
-export default Payments;
+const mapStateToProps = (state) => {
+  return {
+    userHandle: state,
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    {}
+  )(Payments)
+);

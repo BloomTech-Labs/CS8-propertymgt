@@ -3,7 +3,7 @@ import { Container, Grid, Menu, Segment } from 'semantic-ui-react';
 import { Link, Route, Switch, withRouter } from 'react-router-dom';
 import {
   AdminProperties,
-  // AdminAddProperty,
+  AdminAddProperty,
   AdminWorkOrders,
   AdminAddTenant,
   AdminBilling,
@@ -45,7 +45,7 @@ class Dashboard extends Component {
 
         this.props.getUserSettings(sendEvent);
       })
-      .catch((err) => console.log('there was an erro -> ', err));
+      .catch((err) => console.log('there was an error -> ', err));
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -132,7 +132,7 @@ const SideBarAdmin = (props) => {
       <Grid.Column mobile={16} computer={12} tablet={12}>
         <Container>
           <Switch>
-            {/* <Route path="/addproperty" component={AdminAddProperty} /> */}
+            <Route path="/addproperty" component={AdminAddProperty} />
             <Route path="/workorders" component={AdminWorkOrders} />
             <Route path="/addtenant" component={AdminAddTenant} />
             <Route path="/billing" component={AdminBilling} />

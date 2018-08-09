@@ -83,39 +83,35 @@ class AddProperty extends Component {
     return (
       <div className="add-property">
         <Grid textAlign="center">
-          <Grid.Row columns={2} stretched>
-            <Grid.Column stretched>
+          <Grid.Row columns={2}>
+            <Grid.Column>
               <Message>
                 <Message.Header>Owner Info</Message.Header>
                 <Form>
-                  <Form.Group inline>
-                    <Form.Input
-                      name="NameOwner"
-                      value={NameOwner}
-                      onChange={this.handleChange}
-                      placeholder="Enter Name"
-                    />
-                    <Form.Input
-                      name="MobileOwner"
-                      value={MobileOwner}
-                      onChange={this.handleChange}
-                      placeholder="Enter Phone Number"
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Input
-                      name="EmailOwner"
-                      value={EmailOwner}
-                      onChange={this.handleChange}
-                      placeholder="Enter Email"
-                    />
-                    <Form.Input
-                      name="HomeOwnerAddr"
-                      value={HomeOwnerAddr}
-                      onChange={this.handleChange}
-                      placeholder="Enter Owner Address"
-                    />
-                  </Form.Group>
+                  <Form.Input
+                    name="NameOwner"
+                    value={NameOwner}
+                    onChange={this.handleChange}
+                    placeholder="Enter Name"
+                  />
+                  <Form.Input
+                    name="MobileOwner"
+                    value={MobileOwner}
+                    onChange={this.handleChange}
+                    placeholder="Enter Phone Number"
+                  />
+                  <Form.Input
+                    name="EmailOwner"
+                    value={EmailOwner}
+                    onChange={this.handleChange}
+                    placeholder="Enter Email"
+                  />
+                  <Form.Input
+                    name="HomeOwnerAddr"
+                    value={HomeOwnerAddr}
+                    onChange={this.handleChange}
+                    placeholder="Enter Owner Address"
+                  />
                 </Form>
               </Message>
             </Grid.Column>
@@ -123,7 +119,7 @@ class AddProperty extends Component {
               <Message>
                 <Message.Header>Property Info</Message.Header>
                 <Form>
-                  <Form.Group inline>
+                  <Form.Group grouped>
                     <Form.Input
                       name="PropertyAddr"
                       value={PropertyAddr}
@@ -137,7 +133,7 @@ class AddProperty extends Component {
                       placeholder="Enter Number of Bedrooms"
                     />
                   </Form.Group>
-                  <Form.Group inline>
+                  <Form.Group grouped>
                     <Form.Input
                       name="MaxOccupants"
                       value={MaxOccupants}
@@ -151,7 +147,7 @@ class AddProperty extends Component {
                       placeholder="Enter Number of Bathrooms"
                     />
                   </Form.Group>
-                  <Form.Group inline>
+                  <Form.Group grouped>
                     <Form.Input
                       name="SqFootage"
                       value={SqFootage}

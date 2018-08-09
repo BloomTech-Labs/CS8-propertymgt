@@ -88,7 +88,7 @@ const DisplayWorkOrders = (props) => {
           <Message.Header>
             <Icon name="wrench" />Description
           </Message.Header>
-          {props.workorder.WODesc}
+          <Message.Content>{props.workorder.WODesc}</Message.Content>
         </Message>
         <Card.Description>
           <Icon name="check circle outline" />
