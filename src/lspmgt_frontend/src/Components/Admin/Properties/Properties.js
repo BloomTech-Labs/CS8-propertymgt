@@ -34,7 +34,7 @@ class Properties extends Component {
       });
 
     axios
-      .get('http://localhost:5000/api/property/alltenants')
+      .get('api/property/alltenants')
       .then((response) => {
         this.setState({
           tenantList: response.data.data.Items,
