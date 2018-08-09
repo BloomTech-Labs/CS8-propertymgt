@@ -2,27 +2,68 @@ import React, { Component } from 'react';
 import { Grid, Form, Header, Message, Input, Button, Select } from 'semantic-ui-react'; // Segment deleted from here
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Payments extends Component {
   constructor() {
     super();
 
     this.state = {
-      BalanceDue: '$400.00',
-      // PaymentAmount: '',
+      BalanceDue: '',
+      PaymentAmount: '',
       // PaymentType: '',
+      last4: '',
       id: '', // stripeId is saved to redux store when tenant visits dashboard. Set to state using component did mount
     };
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    this.setState({
-      id: this.props.userHandle.stripeId,
-    });
+    // this.setState({
+    //   id: this.props.userHandle.stripeId,
+    // });
+
+    axios
+      .get(`/api/tenant/getcustomer/${this.props.userHandle.stripeId}`)
+      .then((res) => {
+        console.log(res);
+        // this.state.BalanceDue = res.data.upcoming.amount_due;
+        this.setState({
+          id: this.props.userHandle.stripeId,
+          BalanceDue: res.data.invoice.amount_remaining,
+          last4: res.data.customer.sources.data[0].last4,
+        });
+      })
+      .catch((error) => {
+        console.log('error getting invoice ==>', error);
+      });
   }
 
+  handleInput = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    // const { id, amount } = this.state;
+
+    axios
+      .post('/api/tenant/makepayment', this.state)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log('error submitting payment ==>', error);
+      });
+  };
+
   render() {
-    const { BalanceDue } = this.state;
+    console.log(this.state);
+    const { BalanceDue, PaymentAmount, last4 } = this.state;
     // console.log('THIS IS SPAAARDAAAA', this.props.userHandle.stripeId, this.state);
     return (
       <Grid>
@@ -34,7 +75,7 @@ class Payments extends Component {
               <span style={{ color: 'red' }}>{this.state.id}</span>
             </Header>
             <Message style={styles.balanceDue}>
-              <Message.Header>{BalanceDue}</Message.Header>
+              <Message.Header>${BalanceDue}</Message.Header>
             </Message>
           </Grid.Column>
         </Grid.Row>
@@ -53,87 +94,19 @@ class Payments extends Component {
                 control={Input}
                 placeholder="Payment Amount"
                 style={styles.paymentField}
+                name="PaymentAmount"
+                value={PaymentAmount}
+                onChange={this.handleInput}
               />
-              <Form.Group>
-                <Form.Field
-                  control={Select}
-                  label="Payment Method"
-                  options={fields}
-                  placeholder="Select Method"
-                  style={{ marginBottom: '1rem' }}
-                />
-                {/* <Form.Field label="Visa" control="input" type="radio" name="paymentType" />
-              <Form.Field label="MasterCard" control="input" type="radio" name="paymentType" /> */}
-              </Form.Group>
             </Form>
-          </Grid.Column>
-          <Grid.Column mobile={16} computer={8} tablet={8}>
-            <Form>
-              <Form.Field
-                id="CCName"
-                icon="user"
-                iconPosition="left"
-                control={Input}
-                label="Cardholder's Name"
-                placeholder="John Doe"
-              />
-
-              <Form.Field
-                id="CCNumber"
-                icon="credit card"
-                iconPosition="left"
-                control={Input}
-                label="Card Number"
-                // placeholder=""
-              />
-
-              <Form.Group widths="2">
-                <Form.Field
-                  id="CCExpiration"
-                  icon="calendar alternate"
-                  iconPosition="left"
-                  control={Input}
-                  label="Expiration Date"
-                  placeholder="MM/YY"
-                />
-                <Form.Field
-                  id="CCCVV"
-                  icon="protect"
-                  iconPosition="left"
-                  control={Input}
-                  label="CVV"
-                />
-              </Form.Group>
-
-              <Form.Field
-                id="CCAcountType"
-                control={Input}
-                label="Account Type"
-                placeholder="Checking, Savings, etc"
-              />
-
-              <Form.Field
-                id="CCRoutingNumber"
-                icon="hashtag"
-                iconPosition="left"
-                control={Input}
-                placeholder="Routing Number"
-              />
-
-              <Form.Field
-                id="CCAccountNumber"
-                icon="hashtag"
-                iconPosition="left"
-                control={Input}
-                placeholder="Account Number"
-              />
-
-              <Button secondary style={styles.button}>
-                Submit
-              </Button>
-            </Form>
+            <Message>
+              <p>Card on File: {last4}</p>
+            </Message>
           </Grid.Column>
         </Grid.Row>
+        <Button secondary onClick={this.handleSubmit} style={styles.button}>
+          Make Payment
+        </Button>
       </Grid>
     );
   }
@@ -198,3 +171,80 @@ export default withRouter(
     {}
   )(Payments)
 );
+
+// COMMENTED OUT CODE FOR REFACTOR
+
+/* <Grid.Column mobile={16} computer={8} tablet={8}>
+            <Form>
+              <Form.Field
+                id="CCName"
+                icon="user"
+                iconPosition="left"
+                control={Input}
+                label="Cardholder's Name"
+                placeholder="John Doe"
+              />
+
+              <Form.Field
+                id="CCNumber"
+                icon="credit card"
+                iconPosition="left"
+                control={Input}
+                label="Card Number"
+                // placeholder=""
+              />
+
+              <Form.Group widths="2">
+                <Form.Field
+                  id="CCExpiration"
+                  icon="calendar alternate"
+                  iconPosition="left"
+                  control={Input}
+                  label="Expiration Date"
+                  placeholder="MM/YY"
+                />
+                <Form.Field
+                  id="CCCVV"
+                  icon="protect"
+                  iconPosition="left"
+                  control={Input}
+                  label="CVV"
+                />
+              </Form.Group>
+
+              <Form.Field
+                id="CCAcountType"
+                control={Input}
+                label="Account Type"
+                placeholder="Checking, Savings, etc"
+              />
+
+              <Form.Field
+                id="CCRoutingNumber"
+                icon="hashtag"
+                iconPosition="left"
+                control={Input}
+                placeholder="Routing Number"
+              />
+
+              <Form.Field
+                id="CCAccountNumber"
+                icon="hashtag"
+                iconPosition="left"
+                control={Input}
+                placeholder="Account Number"
+              />
+              <Form.Group>
+                <Form.Field
+                  control={Select}
+                  label="Payment Method"
+                  options={fields}
+                  placeholder="Select Method"
+                  style={{ marginBottom: '1rem' }}
+                />
+
+              <Button secondary style={styles.button}>
+                Submit
+              </Button>
+            </Form>
+          </Grid.Column> */

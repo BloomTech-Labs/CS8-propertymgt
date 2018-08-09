@@ -169,7 +169,7 @@ const SideBarTenant = (props) => {
               onClick={props.handleItemClick}
               style={styles.text}
             >
-              Billing
+              Payments
             </Menu.Item>
           </Link>
 

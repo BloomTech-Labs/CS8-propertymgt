@@ -16,7 +16,7 @@ class WorkOrderA extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/admin/workorder')
+      .get('/api/admin/workorder')
       .then((res) => {
         // const allTenants = res.data.data.Items;
         this.setState({
@@ -86,7 +86,8 @@ const DisplayWorkOrders = (props) => {
         {/* <Image>{props.workorder.PhotoIssue}</Image> */}
         <Message>
           <Message.Header>
-            <Icon name="wrench" />Description
+            <Icon name="wrench" />
+            Description
           </Message.Header>
           <Message.Content>{props.workorder.WODesc}</Message.Content>
         </Message>
