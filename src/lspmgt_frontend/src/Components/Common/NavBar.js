@@ -34,11 +34,36 @@ class NavBar extends Component {
 
     let logged = (
       <Menu.Menu position="right">
-        <List>
-          <List.Item>
-            <List.Header>Test placeholder</List.Header>
-          </List.Item>
-        </List>
+        <Link to="/properties">
+          <Menu.Item name="Properties" style={styles.text}>
+            Properties
+          </Menu.Item>
+        </Link>
+
+        <Link to="/workorders">
+          <Menu.Item name="friends" style={styles.text}>
+            Work Orders
+          </Menu.Item>
+        </Link>
+
+        <Link to="/addtenant">
+          <Menu.Item name="friends" style={styles.text}>
+            Add Tenant
+          </Menu.Item>
+        </Link>
+
+        <Link to="/billing">
+          <Menu.Item name="friends" style={styles.text}>
+            Billing
+          </Menu.Item>
+        </Link>
+
+        <Link to="/settings">
+          <Menu.Item name="friends" style={styles.text}>
+            Settings
+          </Menu.Item>
+        </Link>
+
         <Link to="/">
           <Menu.Item
             style={styles.text}
