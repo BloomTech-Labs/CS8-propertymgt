@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Container } from 'semantic-ui-react';
+import { Menu, Container, Icon } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 
 import Amplify, { Auth } from 'aws-amplify';
@@ -23,11 +23,17 @@ class NavBar extends Component {
     let notLogged = (
       <Menu.Menu position="right">
         <Link to="/signup">
-          <Menu.Item style={styles.text}>Sign Up</Menu.Item>
+          <Menu.Item style={styles.text}>
+            <Icon name="add user" />
+            Sign Up
+          </Menu.Item>
         </Link>
 
         <Link to="/login">
-          <Menu.Item style={styles.text}>Sign In</Menu.Item>
+          <Menu.Item style={styles.text}>
+            <Icon name="sign out" />
+            Sign In
+          </Menu.Item>
         </Link>
       </Menu.Menu>
     );
@@ -47,6 +53,7 @@ class NavBar extends Component {
               });
             }}
           >
+            <Icon name="sign out" />
             Sign Out
           </Menu.Item>
         </Link>
