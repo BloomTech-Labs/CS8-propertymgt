@@ -103,7 +103,7 @@ class Login extends Component {
                 style={styles.button}
                 onClick={this.handleSubmit}
               >
-                Login
+                Sign In
               </Button>
               {/* <Link to="/">
                   <Button size='large'>Back</Button>
