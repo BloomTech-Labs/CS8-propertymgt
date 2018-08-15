@@ -71,7 +71,7 @@ class Login extends Component {
               {/* <Segment raised style={{ maxWidth: '100%' }}> */}
               <Form.Input
                 fluid
-                icon="user"
+                icon="at"
                 iconPosition="left"
                 type="email"
                 name="username"
