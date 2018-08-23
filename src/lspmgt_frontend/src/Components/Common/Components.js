@@ -19,6 +19,7 @@ import AdminSignup from '../UserAuth/SignUp/AdminSignUp';
 import AdminCheckout from '../UserAuth/SignUp/Checkout';
 import AdminSignupForm from '../UserAuth/SignUp/AdminSignUpForm';
 import Loader from './Loader';
+import IntroText from './IntroText';
 
 export {
   Home,
@@ -42,4 +43,5 @@ export {
   AdminCheckout,
   AdminSignupForm,
   Loader,
+  IntroText,
 };

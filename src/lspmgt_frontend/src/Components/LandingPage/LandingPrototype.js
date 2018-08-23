@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import { Link, Redirect, withRouter, Switch, Route } from 'react-router-dom';
 import {
   // Button,
-  // Container,
+  Container,
   // Divider,
   // Grid,
   // Header,
@@ -35,21 +35,22 @@ export default class LandingProto extends Component {
     // const { fixed } = this.state;
 
     return (
-      <Responsive>
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-          <div className="video-container fuild">
-            <video autoPlay="true" loop="true">
-              <source src={video} type="video/mp4" /> Your browser does not support the video.
-            </video>
-          </div>
-        </Visibility>
-
-        {children}
-      </Responsive>
+      <Container>
+        <Responsive>
+          <Visibility
+            once={false}
+            onBottomPassed={this.showFixedMenu}
+            onBottomPassedReverse={this.hideFixedMenu}
+          >
+            <div className="video-container fuild">
+              <video autoPlay="true" loop="true">
+                <source src={video} type="video/mp4" /> Your browser does not support the video.
+              </video>
+            </div>
+          </Visibility>
+          {children}
+        </Responsive>
+      </Container>
     );
   }
 }

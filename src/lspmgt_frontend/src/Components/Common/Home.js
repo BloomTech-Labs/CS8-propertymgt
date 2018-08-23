@@ -5,15 +5,7 @@ import Amplify from 'aws-amplify'; // { Auth } deleted
 import AmplifyConfig from '../../Config/Auth';
 import { connect } from 'react-redux';
 import { getUserStatus } from '../Redux/Actions';
-import {
-  LandingPage,
-  Dashboard,
-  LoginForm,
-  // AdminSignup,
-  // AdminSignupForm,
-  AdminCheckout,
-  Loader,
-} from './Components';
+import { LandingPage, Dashboard, LoginForm, AdminCheckout, Loader, IntroText } from './Components';
 
 Amplify.configure(AmplifyConfig);
 
@@ -40,6 +32,7 @@ class Home extends Component {
       <Container fluid>
         <Loader stat={false} />
         <LandingPage />
+        <Route path="/about" component={IntroText} />
         <Route path="/signup" component={AdminCheckout} />
         <Route path="/login" component={LoginForm} />
       </Container>

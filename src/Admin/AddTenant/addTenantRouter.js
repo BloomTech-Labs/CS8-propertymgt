@@ -16,6 +16,10 @@ const getStripeCustomer = (req, res) => {
   });
 };
 
+//1 Take in request body from front end
+//2 Create params object
+//3 Use DynamoDB provided api's to write to database
+
 // Add a new tenant and creates a LS_DB item with property, contract, and tenant info
 // Tenant should have tenantId, propertyId, (stripe customer id)
 const addTenant = (req, res) => {
@@ -91,6 +95,7 @@ const addTenant = (req, res) => {
                   Admin: '123',
                 },
               };
+
               dd.put(params, (dbError) => {
                 if (dbError) {
                   console.log('this is params -->', params, '\nthis is dbError -->', dbError);

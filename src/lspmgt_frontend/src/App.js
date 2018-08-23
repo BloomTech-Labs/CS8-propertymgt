@@ -3,6 +3,7 @@ import './App.css';
 import { NavBar, Home, Footer } from './Components/Common/Components';
 import { Container } from 'semantic-ui-react';
 import { Route, withRouter } from 'react-router-dom';
+import { IntroText } from './Components/Common/Components';
 
 class App extends Component {
   render() {
@@ -12,7 +13,7 @@ class App extends Component {
           <NavBar />
           <br />
           <Home />
-          <Route exact path="/" />
+          <Route exact path="/about" />
           <br />
           <br />
           <br />

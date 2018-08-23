@@ -11,8 +11,16 @@ import { signOUtUser } from '../Redux/Actions';
 Amplify.configure(AmplifyConfig);
 
 class NavBar extends Component {
-  state = {
-    loader: false,
+  constructor() {
+    super();
+    this.state = {
+      loader: false,
+    };
+    this.testFunction = this.testFunction.bind(this);
+  }
+
+  testFunction = () => {
+    console.log('testFunction fired in NavBar.js');
   };
 
   handleSignout = () => {
@@ -64,10 +72,11 @@ class NavBar extends Component {
       <Container fluid>
         <Loader stat={this.state.loader} />
         <Menu style={styles.topbar} fluid>
-          <Menu.Item as="h4" header style={styles.text}>
-            PROPERTY MAXX
-          </Menu.Item>
-
+          <Link to="/about">
+            <Menu.Item as="h4" header style={styles.text} onClick={this.testFunction()}>
+              PROPERTY MAXX
+            </Menu.Item>
+          </Link>
           <Menu.Menu position="right">{this.props.isAdmin ? logged : notLogged}</Menu.Menu>
         </Menu>
       </Container>

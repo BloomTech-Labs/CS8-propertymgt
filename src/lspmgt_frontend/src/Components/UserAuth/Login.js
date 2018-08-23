@@ -5,9 +5,7 @@ import { Link, withRouter } from 'react-router-dom'; // Redirect deleted from he
 import Amplify, { Auth } from 'aws-amplify';
 import AmplifyConfig from '../../Config/Auth';
 import { Loader } from '../Common/Components';
-
 import { Tooltip } from 'react-tippy';
-
 import { connect } from 'react-redux';
 import { signInUser } from '../Redux/Actions';
 
